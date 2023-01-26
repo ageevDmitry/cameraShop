@@ -1,5 +1,6 @@
+import {LogoType} from '../../const';
 import Logo from '../logo/logo';
-import Navigation from '../navigation/navigation';
+import NavigationMain from '../navigation-main/navigation-main';
 import Search from '../search/search';
 import Basket from '../basket/basket';
 
@@ -8,8 +9,8 @@ function Header (): JSX.Element {
   return (
     <header className="header" id="header">
       <div className="container">
-        <Logo/>
-        <Navigation/>
+        <Logo typeComponent = {LogoType.Header}/>
+        <NavigationMain/>
         <Search/>
         <Basket/>
       </div>
