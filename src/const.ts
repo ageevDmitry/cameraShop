@@ -78,3 +78,12 @@ export const SOCIAL_LINKS = [
     label: 'Переход на страницу reddit'
   },
 ];
+
+export enum NameSpace {
+  ProductsData = 'PRODUCTS-DATA',
+}
+
+export enum APIRoute {
+  Products = 'cameras',
+
+}
