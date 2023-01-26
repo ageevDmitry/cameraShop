@@ -7,7 +7,7 @@ type CardProps = {
 
 function Card ({product}: CardProps): JSX.Element {
 
-  const {name, price, reviewCount, rating} = product;
+  const {name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
 
   const cardRating: boolean[] = [...Array<number>(PRODUCT_RATING_COUNT)].map((_, i) => i < rating);
 
@@ -15,7 +15,7 @@ function Card ({product}: CardProps): JSX.Element {
     <div className="product-card">
       <div className="product-card__img">
         <picture>
-          <source type="image/webp" srcSet="img/content/img1.webp, img/content/img1@2x.webp 2x" /><img src="img/content/img1.jpg" srcSet="img/content/img1@2x.jpg 2x" alt="Ретрокамера «Das Auge IV»" width={280} height={240} />
+          <source type="image/webp" srcSet={`${previewImgWebp}, ${previewImgWebp2x}`} /><img src={previewImg} srcSet={previewImg2x} alt="Ретрокамера «Das Auge IV»" width={280} height={240} />
         </picture>
       </div>
       <div className="product-card__info">
