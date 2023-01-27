@@ -81,6 +81,7 @@ export const SOCIAL_LINKS = [
 
 export enum NameSpace {
   ProductsData = 'PRODUCTS-DATA',
+  ProductsUI = 'PRODUCTS-UI',
 }
 
 export enum APIRoute {
@@ -89,3 +90,8 @@ export enum APIRoute {
 }
 
 export const PRODUCT_RATING_COUNT = 5;
+
+export const enum PaginationUI {
+  ProductsView = 9,
+  DefaultCatalogPage = 1
+}

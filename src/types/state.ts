@@ -7,6 +7,10 @@ export type ProductsData = {
     productsDetail?: Product;
 };
 
+export type ProductsUI = {
+    currentCatalogPage: number;
+};
+
 export type State = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
