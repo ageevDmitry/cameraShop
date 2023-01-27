@@ -7,17 +7,18 @@ import Cards from '../../components/card/card';
 import Pagination from '../../components/pagination/pagination';
 import Footer from '../../components/footer/footer';
 import {useAppSelector} from '../../hooks';
-import {getProducts} from '../../store/products-data/selectors';
+import {getProducts, getPromo} from '../../store/products-data/selectors';
 
 function Catalog (): JSX.Element {
 
   const products = useAppSelector(getProducts);
+  const promo = useAppSelector(getPromo);
 
   return (
     <div className="wrapper">
       <Header/>
       <main>
-        <Banner/>
+        <Banner promo = {promo}/>
         <div className="page-content">
           <Breadcrumbs/>
           <section className="catalog">
