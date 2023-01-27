@@ -8,16 +8,17 @@ import Pagination from '../../components/pagination/pagination';
 import Footer from '../../components/footer/footer';
 import {useAppSelector} from '../../hooks';
 import {getProducts, getPromo} from '../../store/products-data/selectors';
+import {getCurrentCatalogPage} from '../../store/products-ui/selectors';
 import {getCurrentProducts} from '../../utils';
+import {PaginationUI} from '../../const';
 
 function Catalog (): JSX.Element {
 
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
-  const count = 9;
-  const page = 1;
-
-  const currentProducts = getCurrentProducts(products, count, page);
+  const currentCatalogPage = useAppSelector(getCurrentCatalogPage);
+  const currentProducts = getCurrentProducts(products, PaginationUI.ProductsView, currentCatalogPage);
+  const paginationCount = Math.ceil(products.length / PaginationUI.ProductsView);
 
   return (
     <div className="wrapper">
@@ -45,7 +46,10 @@ function Catalog (): JSX.Element {
                           />))
                     }
                   </div>
-                  <Pagination/>
+                  <Pagination
+                    paginationCount = {paginationCount}
+                    currentCatalogPage = {currentCatalogPage}
+                  />
                 </div>
               </div>
             </div>
