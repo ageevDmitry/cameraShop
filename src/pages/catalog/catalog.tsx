@@ -8,11 +8,16 @@ import Pagination from '../../components/pagination/pagination';
 import Footer from '../../components/footer/footer';
 import {useAppSelector} from '../../hooks';
 import {getProducts, getPromo} from '../../store/products-data/selectors';
+import {getCurrentProducts} from '../../utils';
 
 function Catalog (): JSX.Element {
 
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
+  const count = 9;
+  const page = 1;
+
+  const currentProducts = getCurrentProducts(products, count, page);
 
   return (
     <div className="wrapper">
@@ -32,7 +37,7 @@ function Catalog (): JSX.Element {
                   <SortCatalog/>
                   <div className="cards catalog__cards">
                     {
-                      products
+                      currentProducts
                         .map((product) => (
                           <Cards
                             key = {product.id}
