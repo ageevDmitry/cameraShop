@@ -1,5 +1,6 @@
 import {NameSpace} from '../../const';
 import {State} from '../../types/state';
-import {Product} from '../../types/product';
+import {Product, Promo} from '../../types/product';
 
 export const getProducts = (state: State): Product[] => state[NameSpace.ProductsData].products;
+export const getPromo = (state: State): Promo | undefined => state[NameSpace.ProductsData].promo;

@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const';
 import {ProductsData} from '../../types/state';
 import {fetchProductsAction,
+  fetchPromoAction,
 } from '../api-action';
 
 const initialState: ProductsData = {
@@ -19,6 +20,9 @@ export const productsData = createSlice({
       })
       .addCase(fetchProductsAction.rejected, (state) => {
         state.products = [];
+      })
+      .addCase(fetchPromoAction.fulfilled, (state, action) => {
+        state.promo = action.payload;
       });
   }
 });

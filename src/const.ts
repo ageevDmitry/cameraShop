@@ -85,6 +85,7 @@ export enum NameSpace {
 
 export enum APIRoute {
   Products = 'cameras',
+  Promo = 'promo'
 }
 
 export const PRODUCT_RATING_COUNT = 5;
