@@ -27,3 +27,15 @@ export const fetchPromoAction = createAsyncThunk<Promo, undefined, {
       return data;
     },
   );
+
+export const fetchProductDetailAction = createAsyncThunk<Product, string, {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }>(
+    'data/fetchProductDetail',
+    async (id, {extra: api}) => {
+      const {data} = await api.get<Product>(`${APIRoute.Products}/${id}`);
+      return data;
+    },
+  );

@@ -3,6 +3,7 @@ import {NameSpace} from '../../const';
 import {ProductsData} from '../../types/state';
 import {fetchProductsAction,
   fetchPromoAction,
+  fetchProductDetailAction,
 } from '../api-action';
 
 const initialState: ProductsData = {
@@ -22,6 +23,9 @@ export const productsData = createSlice({
         state.products = [];
       })
       .addCase(fetchPromoAction.fulfilled, (state, action) => {
+        state.promo = action.payload;
+      })
+      .addCase(fetchProductDetailAction.fulfilled, (state, action) => {
         state.promo = action.payload;
       });
   }
