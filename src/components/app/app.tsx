@@ -2,8 +2,8 @@ import HistoryRouter from '../../pages/history-route/history-route';
 import {Route, Routes, Navigate} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import browserHistory from '../../browser-history';
-// import Main from '../../pages/main/main';
 import Catalog from '../../pages/catalog/catalog';
+import Product from '../../pages/product/product';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
 function App(): JSX.Element {
@@ -17,6 +17,10 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Catalog}
           element={<Catalog />}
+        />
+        <Route
+          path={AppRoute.Product}
+          element={<Product />}
         />
         <Route
           path={AppRoute.NotFound}
