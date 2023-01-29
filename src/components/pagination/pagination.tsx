@@ -1,7 +1,7 @@
 import {useAppDispatch} from '../../hooks';
 import {changeCurrentCatalogPage} from '../../store/products-ui/products-ui';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+// import {AppRoute} from '../../const';
 
 type PaginationProps = {
   paginationCount: number;
@@ -18,7 +18,7 @@ function Pagination ({paginationCount, currentCatalogPage}: PaginationProps): JS
       <ul className="pagination__list">
         {paginationItems.map((item) => (
           <li key={item} className="pagination__item">
-            <Link to = {AppRoute.Catalog} className={`pagination__link ${(item === currentCatalogPage) ? 'pagination__link pagination__link--active' : ''}`}
+            <Link to = {'/page_2'} className={`pagination__link ${(item === currentCatalogPage) ? 'pagination__link pagination__link--active' : ''}`}
               onClick={() => {
                 dispatch(changeCurrentCatalogPage({page: item}));
               }}
