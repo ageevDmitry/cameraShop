@@ -2,6 +2,7 @@ import HistoryRouter from '../../pages/history-route/history-route';
 import {Route, Routes, Navigate} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import browserHistory from '../../browser-history';
+import Main from '../../pages/main/main';
 import Catalog from '../../pages/catalog/catalog';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
@@ -10,9 +11,14 @@ function App(): JSX.Element {
     <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
-          path={AppRoute.Catalog}
-          element={<Catalog/>}
-        />
+          path={'/'}
+          element={<Main/>}
+        >
+          <Route
+            path={AppRoute.Catalog}
+            element={<Catalog/>}
+          />
+        </Route>
         <Route
           path={AppRoute.NotFound}
           element={<NotFoundScreen />}
