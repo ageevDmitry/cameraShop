@@ -18,14 +18,14 @@ import {PaginationUI} from '../../const';
 function Catalog (): JSX.Element {
 
   const dispatch = useAppDispatch();
+  const currentCatalogPage = useAppSelector(getCurrentCatalogPage);
 
   useEffect(() => () => {
-    dispatch(redirectToRoute('/catalog/page_1'));
-  }, [dispatch]);
+    dispatch(redirectToRoute(`/catalog/page_${currentCatalogPage}`));
+  }, [currentCatalogPage, dispatch]);
 
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
-  const currentCatalogPage = useAppSelector(getCurrentCatalogPage);
   const currentProducts = getCurrentProducts(products, PaginationUI.ProductsView, currentCatalogPage);
   const paginationCount = Math.ceil(products.length / PaginationUI.ProductsView);
 
