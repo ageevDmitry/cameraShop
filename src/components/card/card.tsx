@@ -7,7 +7,7 @@ type CardProps = {
 
 function Card ({product}: CardProps): JSX.Element {
 
-  const {name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
+  const {name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, type} = product;
 
   const cardRating: boolean[] = [...Array<number>(PRODUCT_RATING_COUNT)].map((_, i) => i < rating);
 
@@ -32,8 +32,8 @@ function Card ({product}: CardProps): JSX.Element {
           <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
         </div>
         <p className="product-card__title">{name}</p>
-        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{`${price} ₽`}
-        </p>
+        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{`${price} ₽`}</p>
+        <p className="product-card__type">{type}</p>
       </div>
       <div className="product-card__buttons">
         <button className="btn btn--purple product-card__btn" type="button">Купить
