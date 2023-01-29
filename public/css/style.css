@@ -2511,6 +2511,7 @@ button,
   -webkit-transition: background-color 0.3s ease;
   -o-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 .pagination__link--active {

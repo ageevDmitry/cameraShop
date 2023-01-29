@@ -14,6 +14,18 @@ function Pagination ({paginationCount, currentCatalogPage}: PaginationProps): JS
   return (
     <div className="pagination">
       <ul className="pagination__list">
+        <li className="pagination__item">
+          {
+            (currentCatalogPage !== paginationItems[0]) ?
+              <span className='pagination__link pagination__link--text'
+                onClick={() => {
+                  dispatch(changeCurrentCatalogPage({page: currentCatalogPage - 1}));
+                }}
+              >Назад
+              </span>
+              : ''
+          }
+        </li>
         {paginationItems.map((item) => (
           <li key={item} className="pagination__item">
             <span className={`pagination__link ${(item === currentCatalogPage) ? 'pagination__link pagination__link--active' : ''}`}
@@ -24,6 +36,16 @@ function Pagination ({paginationCount, currentCatalogPage}: PaginationProps): JS
             </span>
           </li>
         ))}
+        <li className="pagination__item">
+          {(currentCatalogPage !== paginationItems[paginationItems.length - 1]) ?
+            <span className='pagination__link pagination__link--text'
+              onClick={() => {
+                dispatch(changeCurrentCatalogPage({page: currentCatalogPage + 1}));
+              }}
+            >Далее
+            </span>
+            : ''}
+        </li>
       </ul>
     </div>
   );

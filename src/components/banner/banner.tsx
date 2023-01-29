@@ -19,7 +19,7 @@ function Banner ({promo}: PromoProps): JSX.Element {
     <div className="banner">
       <picture>
         <source type="image/webp" srcSet={`../${previewImgWebp}, ../${previewImgWebp2x}`} />
-        <img src={previewImg} srcSet={previewImg2x} alt="баннер" width={1280} height={280} />
+        <img src={`../${previewImg}`} srcSet={`../${previewImg2x}`} alt="баннер" width={1280} height={280} />
       </picture>
       <p className="banner__info">
         <span className="banner__message">Новинка!</span>
