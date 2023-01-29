@@ -17,7 +17,7 @@ export const LOGO_CLASS_NAME = {
 export const NAV_PAGES = [
   {
     title: 'Каталог',
-    href: AppRoute.Catalog,
+    href: AppRoute.Main,
   },
   {
     title: 'Гарантии',
