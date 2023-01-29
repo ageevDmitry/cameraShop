@@ -20,7 +20,7 @@ function Catalog (): JSX.Element {
   const dispatch = useAppDispatch();
   const currentCatalogPage = useAppSelector(getCurrentCatalogPage);
 
-  useEffect(() => () => {
+  useEffect(() => {
     dispatch(redirectToRoute(`/catalog/page_${currentCatalogPage}`));
   }, [currentCatalogPage, dispatch]);
 
