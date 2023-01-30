@@ -107,3 +107,8 @@ export const enum PaginationUI {
   ProductsView = 9,
   DefaultCatalogPage = 1
 }
+
+export const enum ProductTab {
+  Characteristics = 'Characteristics',
+  Description = 'Description'
+}

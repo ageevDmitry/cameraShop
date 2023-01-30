@@ -2,12 +2,15 @@ import {Product} from '../../types/product';
 import Rating from '../rating/rating';
 import ProductCharacteristics from '../product-characteristics/product-characteristics';
 import ProductDescription from '../product-description/product-description';
+import {ProductTab} from '../../const';
 
 type ProductProps = {
   product: Product;
+  currentTabControl: string;
+  onClickCurrentTabControl: (tabControl: ProductTab) => void;
 }
 
-function ProductInfo ({product}: ProductProps): JSX.Element {
+function ProductInfo ({product, currentTabControl, onClickCurrentTabControl}: ProductProps): JSX.Element {
 
   const {name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, vendorCode, category, type, level, description} = product;
 
@@ -34,17 +37,25 @@ function ProductInfo ({product}: ProductProps): JSX.Element {
             </button>
             <div className="tabs product__tabs">
               <div className="tabs__controls product__tabs-controls">
-                <button className="tabs__control is-active" type="button">Характеристики</button>
-                <button className="tabs__control" type="button">Описание</button>
+                <button className={`tabs__control ${(currentTabControl === ProductTab.Characteristics) ? 'is-active' : ''}`} type="button"
+                  onClick = {() => onClickCurrentTabControl(ProductTab.Characteristics)}
+                >Характеристики
+                </button>
+                <button className={`tabs__control ${(currentTabControl === ProductTab.Description) ? 'is-active' : ''}`} type="button"
+                  onClick = {() => onClickCurrentTabControl(ProductTab.Description)}
+                >Описание
+                </button>
               </div>
               <div className="tabs__content">
                 <ProductCharacteristics
+                  currentTabControl = {currentTabControl}
                   vendorCode = {vendorCode}
                   category = {category}
                   type = {type}
                   level = {level}
                 />
                 <ProductDescription
+                  currentTabControl = {currentTabControl}
                   description = {description}
                 />
               </div>

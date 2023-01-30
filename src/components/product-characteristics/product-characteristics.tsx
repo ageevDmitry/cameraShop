@@ -1,14 +1,17 @@
+import {ProductTab} from '../../const';
+
 type ProductCharacteristicsType = {
+  currentTabControl: string;
   vendorCode: string;
   category: string;
   type: string;
   level: string;
 }
 
-function ProductCharacteristics ({vendorCode, category, type, level}: ProductCharacteristicsType): JSX.Element {
+function ProductCharacteristics ({currentTabControl, vendorCode, category, type, level}: ProductCharacteristicsType): JSX.Element {
 
   return (
-    <div className="tabs__element">
+    <div className={`tabs__element ${(currentTabControl === ProductTab.Characteristics) ? 'is-active' : ''}`}>
       <ul className="product__tabs-list">
         <li className="item-list"><span className="item-list__title">Артикул:</span>
           <p className="item-list__text">{vendorCode}</p>

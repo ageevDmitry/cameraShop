@@ -8,10 +8,10 @@ import Footer from '../../components/footer/footer';
 import {fetchProductDetailAction} from '../../store/api-action';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import {getProductDetail} from '../../store/products-data/selectors';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../../hooks';
-import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG} from '../../const';
+import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG, ProductTab} from '../../const';
 
 function Product (): JSX.Element {
 
@@ -19,6 +19,7 @@ function Product (): JSX.Element {
   const dispatch = useAppDispatch();
   const product = useAppSelector(getProductDetail);
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG];
+  const [currentTabControl, setCurrentTabControl] = useState(ProductTab.Characteristics);
 
   useEffect(() => {
     if (id) {
@@ -43,6 +44,8 @@ function Product (): JSX.Element {
           />
           <ProductInfo
             product = {product}
+            currentTabControl = {currentTabControl}
+            onClickCurrentTabControl = {setCurrentTabControl}
           />
           <ProductSimilar/>
           <ReviewBlock/>
