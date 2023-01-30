@@ -3,7 +3,7 @@ import {AppRoute} from '../../const';
 
 function NotFoundScreen(): JSX.Element {
   return (
-    <Link to={AppRoute.Catalog}>
+    <Link to={AppRoute.Main}>
       <div className="page-content">404. Страница Отсутсвует. На главную страницу</div>
     </Link>
   );

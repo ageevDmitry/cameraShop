@@ -1,5 +1,6 @@
 import {Product} from '../../types/product';
 import {PRODUCT_RATING_COUNT} from '../../const';
+import {Link} from 'react-router-dom';
 
 type CardProps = {
   product: Product;
@@ -7,8 +8,9 @@ type CardProps = {
 
 function Card ({product}: CardProps): JSX.Element {
 
-  const {name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, type} = product;
+  const {id, name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, type} = product;
 
+  const productId = `/product/${id}`;
   const cardRating: boolean[] = [...Array<number>(PRODUCT_RATING_COUNT)].map((_, i) => i < rating);
 
   return (
@@ -38,8 +40,8 @@ function Card ({product}: CardProps): JSX.Element {
       <div className="product-card__buttons">
         <button className="btn btn--purple product-card__btn" type="button">Купить
         </button>
-        <a className="btn btn--transparent" href="/">Подробнее
-        </a>
+        <Link to={productId} className="btn btn--transparent">Подробнее
+        </Link>
       </div>
     </div>
   );
