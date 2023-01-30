@@ -15,6 +15,16 @@ export const LOGO_CLASS_NAME = {
   [LogoType.Footer]: 'footer',
 };
 
+export const NAV_BREADCRUMB_MAIN = {
+  title: 'Главная',
+  href: AppRoute.Main,
+};
+
+export const NAV_BREADCRUMB_CATALOG = {
+  title: 'Каталог',
+  href: AppRoute.Main,
+};
+
 export const NAV_PAGES = [
   {
     title: 'Каталог',

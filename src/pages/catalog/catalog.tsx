@@ -14,11 +14,13 @@ import {getProducts, getPromo} from '../../store/products-data/selectors';
 import {getCurrentCatalogPage} from '../../store/products-ui/selectors';
 import {getCurrentProducts} from '../../utils';
 import {PaginationUI} from '../../const';
+import {NAV_BREADCRUMB_MAIN} from '../../const';
 
 function Catalog (): JSX.Element {
 
   const dispatch = useAppDispatch();
   const currentCatalogPage = useAppSelector(getCurrentCatalogPage);
+  const navBreadcrumbs = [NAV_BREADCRUMB_MAIN];
 
   useEffect(() => {
     dispatch(redirectToRoute(`/catalog/page_${currentCatalogPage}`));
@@ -35,7 +37,10 @@ function Catalog (): JSX.Element {
       <main>
         <Banner promo = {promo}/>
         <div className="page-content">
-          <Breadcrumbs/>
+          <Breadcrumbs
+            navBreadcrumbs = {navBreadcrumbs}
+            currentBreadCrumb = {'Каталог'}
+          />
           <section className="catalog">
             <div className="container">
               <h1 className="title title--h2">Каталог фото- и видеотехники</h1>

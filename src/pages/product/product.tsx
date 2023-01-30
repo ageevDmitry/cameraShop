@@ -11,12 +11,14 @@ import {getProductDetail} from '../../store/products-data/selectors';
 import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../../hooks';
+import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG} from '../../const';
 
 function Product (): JSX.Element {
 
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const product = useAppSelector(getProductDetail);
+  const navBreadcrumbs = [NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG];
 
   useEffect(() => {
     if (id) {
@@ -35,7 +37,10 @@ function Product (): JSX.Element {
       <Header/>
       <main>
         <div className="page-content">
-          <Breadcrumbs/>
+          <Breadcrumbs
+            navBreadcrumbs = {navBreadcrumbs}
+            currentBreadCrumb = {product.name}
+          />
           <ProductInfo/>
           <ProductSimilar/>
           <ReviewBlock/>
