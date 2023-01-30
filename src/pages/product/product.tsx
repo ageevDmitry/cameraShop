@@ -41,7 +41,9 @@ function Product (): JSX.Element {
             navBreadcrumbs = {navBreadcrumbs}
             currentBreadCrumb = {product.name}
           />
-          <ProductInfo/>
+          <ProductInfo
+            product = {product}
+          />
           <ProductSimilar/>
           <ReviewBlock/>
         </div>

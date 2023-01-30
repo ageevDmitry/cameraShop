@@ -4,7 +4,7 @@ import {store} from '../store';
 export type ProductsData = {
     products: Product[];
     promo?: Promo;
-    productsDetail?: Product;
+    productDetail?: Product;
 };
 
 export type ProductsUI = {

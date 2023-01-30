@@ -26,7 +26,7 @@ export const productsData = createSlice({
         state.promo = action.payload;
       })
       .addCase(fetchProductDetailAction.fulfilled, (state, action) => {
-        state.productsDetail = action.payload;
+        state.productDetail = action.payload;
       });
   }
 });
