@@ -5,6 +5,7 @@ export type ProductsData = {
     products: Product[];
     promo?: Promo;
     productDetail?: Product;
+    productsSimilar?: Product[];
 };
 
 export type ProductsUI = {

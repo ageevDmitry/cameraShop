@@ -1,4 +1,6 @@
-function ProductSimilar (): JSX.Element {
+import Card from '../card/card';
+
+function ProductsSimilar (): JSX.Element {
 
   return (
     <div className="page-content__section">
@@ -247,4 +249,4 @@ function ProductSimilar (): JSX.Element {
   );
 }
 
-export default ProductSimilar;
+export default ProductsSimilar;

@@ -1,11 +1,11 @@
 import Header from '../../components/header/header';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import ProductInfo from '../../components/product-info/product-info';
-import ProductSimilar from '../../components/product-similar/product-similar';
+import ProductSimilar from '../../components/products-similar/products-similar';
 import ReviewBlock from '../../components/review-block/review-block';
 import UpButton from '../../components/up-button/up-button';
 import Footer from '../../components/footer/footer';
-import {fetchProductDetailAction} from '../../store/api-action';
+import {fetchProductDetailAction, fetchProductsSimilarAction} from '../../store/api-action';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import {getProductDetail} from '../../store/products-data/selectors';
 import {useEffect, useState} from 'react';
@@ -24,6 +24,7 @@ function Product (): JSX.Element {
   useEffect(() => {
     if (id) {
       dispatch(fetchProductDetailAction(id));
+      dispatch(fetchProductsSimilarAction(id));
     }
   }, [id, dispatch]);
 
