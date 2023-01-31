@@ -9,7 +9,7 @@ type ProductsSimilarType = {
 
 function ProductsSimilar ({productsSimilar}: ProductsSimilarType): JSX.Element {
 
-  const [currentProductsSimilar, setCurrentProductsSimilar] = useState([DefaultCurrentProductsSimilar.StartItem, DefaultCurrentProductsSimilar.EndItem]);
+  const [currentProductsSimilar, setCurrentProductsSimilar] = useState<[number, number]>([DefaultCurrentProductsSimilar.StartItem, DefaultCurrentProductsSimilar.EndItem]);
   const products = productsSimilar.slice(currentProductsSimilar[0], currentProductsSimilar[1]);
 
   return (
@@ -29,12 +29,22 @@ function ProductsSimilar ({productsSimilar}: ProductsSimilarType): JSX.Element {
                     /> ))
               }
             </div>
-            <button className="slider-controls slider-controls--prev" type="button" aria-label="Предыдущий слайд" disabled>
+            <button className="slider-controls slider-controls--prev" type="button" aria-label="Предыдущий слайд"
+              // disabled = {(currentProductsSimilar[0] === 0)}
+              onClick={() => {
+                setCurrentProductsSimilar([currentProductsSimilar[0] - 1, currentProductsSimilar[1] - 1]);
+              }}
+            >
               <svg width={7} height={12} aria-hidden="true">
                 <use xlinkHref="#icon-arrow" />
               </svg>
             </button>
-            <button className="slider-controls slider-controls--next" type="button" aria-label="Следующий слайд">
+            <button className="slider-controls slider-controls--next" type="button" aria-label="Следующий слайд"
+              // disabled = {(currentProductsSimilar[0] === products.length)}
+              onClick={() => {
+                setCurrentProductsSimilar([currentProductsSimilar[0] + 1, currentProductsSimilar[1] + 1]);
+              }}
+            >
               <svg width={7} height={12} aria-hidden="true">
                 <use xlinkHref="#icon-arrow" />
               </svg>
