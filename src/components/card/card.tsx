@@ -1,19 +1,21 @@
 import {Product} from '../../types/product';
 import {Link} from 'react-router-dom';
 import Rating from '../rating/rating';
+import {ComponentType} from '../../const';
 
 type CardProps = {
   product: Product;
+  componentType?: ComponentType;
 }
 
-function Card ({product}: CardProps): JSX.Element {
+function Card ({product, componentType}: CardProps): JSX.Element {
 
   const {id, name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, type} = product;
 
   const productId = `/product/${id}`;
 
   return (
-    <div className="product-card">
+    <div className={`product-card ${(componentType === ComponentType.ProductsSimilar) ? 'is-active' : ''}`}>
       <div className="product-card__img">
         <picture>
           <source type="image/webp" srcSet={`../${previewImgWebp}, ../${previewImgWebp2x}`} /><img src={`../${previewImg}`} srcSet={`../${previewImg2x}`} alt={name} width={280} height={240} />

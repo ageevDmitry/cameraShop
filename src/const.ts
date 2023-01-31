@@ -113,3 +113,12 @@ export const enum ProductTab {
   Characteristics = 'characteristics',
   Description = 'description'
 }
+
+export const enum ComponentType {
+  ProductsSimilar = 'productsSimilar',
+}
+
+export const enum DefaultCurrentProductsSimilar {
+  StartItem = 0,
+  EndItem = 3
+}
