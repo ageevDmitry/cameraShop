@@ -2,7 +2,7 @@ import {Product} from '../../types/product';
 import Rating from '../rating/rating';
 import ProductCharacteristics from '../product-characteristics/product-characteristics';
 import ProductDescription from '../product-description/product-description';
-import {ProductTab} from '../../const';
+import {ProductTab, ComponentType} from '../../const';
 
 type ProductProps = {
   product: Product;
@@ -28,6 +28,8 @@ function ProductInfo ({product, currentTabControl, onClickCurrentTabControl}: Pr
             <Rating
               rating = {rating}
               reviewCount = {reviewCount}
+              componentType = {ComponentType.ProductCardRating}
+
             />
             <p className="product__price"><span className="visually-hidden">Цена:</span>{price}</p>
             <button className="btn btn--purple" type="button">

@@ -57,7 +57,12 @@ function Product (): JSX.Element {
               productsSimilar = {productsSimilar}
             />
           }
-          <ReviewBlock/>
+          {
+            reviews &&
+            <ReviewBlock
+              reviews = {reviews}
+            />
+          }
         </div>
       </main>
       <UpButton/>

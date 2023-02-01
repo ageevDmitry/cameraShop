@@ -1,4 +1,4 @@
-import Card from '../card/card';
+import ProductCard from '../product-card/product-card';
 import {Product} from '../../types/product';
 import {ComponentType, DefaultCurrentProductsSimilar} from '../../const';
 import {useState} from 'react';
@@ -22,7 +22,7 @@ function ProductsSimilar ({productsSimilar}: ProductsSimilarType): JSX.Element {
               {
                 products
                   .map((product) => (
-                    <Card
+                    <ProductCard
                       key = {product.id}
                       product={product}
                       componentType={ComponentType.ProductsSimilar}

@@ -116,6 +116,8 @@ export const enum ProductTab {
 
 export const enum ComponentType {
   ProductsSimilar = 'productsSimilar',
+  ProductCardRating = 'product',
+  ReviewCardRating = 'review',
 }
 
 export const enum DefaultCurrentProductsSimilar {

@@ -3,7 +3,7 @@ import Banner from '../../components/banner/banner';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import FilterCatalog from '../../components/filter-catalog/filter-catalog';
 import SortCatalog from '../../components/sort-catalog/sort-catalog';
-import Cards from '../../components/card/card';
+import ProductCards from '../../components/product-card/product-card';
 import Pagination from '../../components/pagination/pagination';
 import Footer from '../../components/footer/footer';
 import {useEffect} from 'react';
@@ -54,7 +54,7 @@ function Catalog (): JSX.Element {
                     {
                       currentProducts
                         .map((product) => (
-                          <Cards
+                          <ProductCards
                             key = {product.id}
                             product = {product}
                           />))

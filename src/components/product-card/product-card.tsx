@@ -3,12 +3,12 @@ import {Link} from 'react-router-dom';
 import Rating from '../rating/rating';
 import {ComponentType} from '../../const';
 
-type CardProps = {
+type ProductCardProps = {
   product: Product;
   componentType?: ComponentType;
 }
 
-function Card ({product, componentType}: CardProps): JSX.Element {
+function ProductCard ({product, componentType}: ProductCardProps): JSX.Element {
 
   const {id, name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, type} = product;
 
@@ -25,6 +25,7 @@ function Card ({product, componentType}: CardProps): JSX.Element {
         <Rating
           rating = {rating}
           reviewCount = {reviewCount}
+          componentType = {ComponentType.ProductCardRating}
         />
         <p className="product-card__title">{name}</p>
         <p className="product-card__price"><span className="visually-hidden">Цена:</span>{`${price} ₽`}</p>
@@ -40,4 +41,4 @@ function Card ({product, componentType}: CardProps): JSX.Element {
   );
 }
 
-export default Card;
+export default ProductCard;
