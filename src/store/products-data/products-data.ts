@@ -5,6 +5,7 @@ import {fetchProductsAction,
   fetchPromoAction,
   fetchProductDetailAction,
   fetchProductsSimilarAction,
+  fetchReviewsAction,
 } from '../api-action';
 
 const initialState: ProductsData = {
@@ -31,6 +32,9 @@ export const productsData = createSlice({
       })
       .addCase(fetchProductsSimilarAction.fulfilled, (state, action) => {
         state.productsSimilar = action.payload;
+      })
+      .addCase(fetchReviewsAction.fulfilled, (state, action) => {
+        state.reviews = action.payload;
       });
   }
 });

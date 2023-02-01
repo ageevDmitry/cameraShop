@@ -1,4 +1,5 @@
 import {Product, Promo} from './product';
+import {Review} from './review';
 import {store} from '../store';
 
 export type ProductsData = {
@@ -6,6 +7,7 @@ export type ProductsData = {
     promo?: Promo;
     productDetail?: Product;
     productsSimilar?: Product[];
+    reviews?: Review[];
 };
 
 export type ProductsUI = {

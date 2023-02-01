@@ -5,9 +5,9 @@ import ProductSimilar from '../../components/products-similar/products-similar';
 import ReviewBlock from '../../components/review-block/review-block';
 import UpButton from '../../components/up-button/up-button';
 import Footer from '../../components/footer/footer';
-import {fetchProductDetailAction, fetchProductsSimilarAction} from '../../store/api-action';
+import {fetchProductDetailAction, fetchProductsSimilarAction, fetchReviewsAction} from '../../store/api-action';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
-import {getProductDetail, getProductsSimilar} from '../../store/products-data/selectors';
+import {getProductDetail, getProductsSimilar, getReviews} from '../../store/products-data/selectors';
 import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../../hooks';
@@ -19,6 +19,7 @@ function Product (): JSX.Element {
   const dispatch = useAppDispatch();
   const product = useAppSelector(getProductDetail);
   const productsSimilar = useAppSelector(getProductsSimilar);
+  const reviews = useAppSelector(getReviews);
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG];
   const [currentTabControl, setCurrentTabControl] = useState(ProductTab.Characteristics);
 
@@ -26,6 +27,7 @@ function Product (): JSX.Element {
     if (id) {
       dispatch(fetchProductDetailAction(id));
       dispatch(fetchProductsSimilarAction(id));
+      dispatch(fetchReviewsAction(id));
     }
   }, [id, dispatch]);
 
