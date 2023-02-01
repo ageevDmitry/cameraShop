@@ -120,7 +120,14 @@ export const enum ComponentType {
   ReviewCardRating = 'review',
 }
 
-export const enum DefaultCurrentProductsSimilar {
+export const enum DefaultProductsSimilarView {
   StartItem = 0,
   EndItem = 3
 }
+
+export const enum DefaultReviewsView {
+  StartItem = 0,
+  EndItem = 3
+}
+
+export const STEP_REVIEWS_VIEW = 3;

@@ -1,6 +1,6 @@
 import ProductCard from '../product-card/product-card';
 import {Product} from '../../types/product';
-import {ComponentType, DefaultCurrentProductsSimilar} from '../../const';
+import {ComponentType, DefaultProductsSimilarView} from '../../const';
 import {useState} from 'react';
 
 type ProductsSimilarType = {
@@ -9,7 +9,7 @@ type ProductsSimilarType = {
 
 function ProductsSimilar ({productsSimilar}: ProductsSimilarType): JSX.Element {
 
-  const [currentProductsSimilar, setCurrentProductsSimilar] = useState<[number, number]>([DefaultCurrentProductsSimilar.StartItem, DefaultCurrentProductsSimilar.EndItem]);
+  const [currentProductsSimilar, setCurrentProductsSimilar] = useState<[number, number]>([DefaultProductsSimilarView.StartItem, DefaultProductsSimilarView.EndItem]);
   const products = productsSimilar.slice(currentProductsSimilar[0], currentProductsSimilar[1]);
 
   return (

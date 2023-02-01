@@ -1,6 +1,8 @@
 import {Review} from '../../types/review';
 import ReviewCard from '../review-card/review-card';
 import {getSortReviews} from '../../utils';
+import {useState} from 'react';
+import {DefaultReviewsView, STEP_REVIEWS_VIEW} from '../../const';
 
 type ReviewBlockType = {
   reviews: Review[];
@@ -8,7 +10,8 @@ type ReviewBlockType = {
 
 function ReviewBlock ({reviews}: ReviewBlockType): JSX.Element {
 
-  const currentReviews = getSortReviews(reviews.slice(0, 3));
+  const [currentReviewsView, setCurrentReviewsView] = useState<[number, number]>([DefaultReviewsView.StartItem, DefaultReviewsView.EndItem]);
+  const currentReviews = getSortReviews(reviews.slice(currentReviewsView[0], currentReviewsView[1]));
 
   return (
     <div className="page-content__section">
@@ -29,8 +32,15 @@ function ReviewBlock ({reviews}: ReviewBlockType): JSX.Element {
             }
           </ul>
           <div className="review-block__buttons">
-            <button className="btn btn--purple" type="button">Показать больше отзывов
-            </button>
+            {
+              (currentReviewsView[1] < reviews.length) &&
+              <button className="btn btn--purple" type="button"
+                onClick={() => {
+                  setCurrentReviewsView([DefaultReviewsView.StartItem, currentReviewsView[1] + STEP_REVIEWS_VIEW]);
+                }}
+              >Показать больше отзывов
+              </button>
+            }
           </div>
         </div>
       </section>
