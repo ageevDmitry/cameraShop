@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 import Rating from '../../components/rating/rating';
 import {Review} from '../../types/review';
 import {ComponentType} from '../../const';
@@ -14,7 +16,7 @@ function ReviewCard ({survey}: ReviewCardType): JSX.Element {
     <li className="review-card">
       <div className="review-card__head">
         <p className="title title--h4">{userName}</p>
-        <time className="review-card__data" dateTime={createAt}>{createAt}</time>
+        <time className="review-card__data" dateTime={createAt}>{dayjs(createAt).locale('ru').format('D MMMM')}</time>
       </div>
       <Rating
         rating={rating}

@@ -1,5 +1,6 @@
 import {Review} from '../../types/review';
 import ReviewCard from '../review-card/review-card';
+import {getSortReviews} from '../../utils';
 
 type ReviewBlockType = {
   reviews: Review[];
@@ -7,7 +8,7 @@ type ReviewBlockType = {
 
 function ReviewBlock ({reviews}: ReviewBlockType): JSX.Element {
 
-  const currentReviews = reviews.slice(0, 3);
+  const currentReviews = getSortReviews(reviews.slice(0, 3));
 
   return (
     <div className="page-content__section">
