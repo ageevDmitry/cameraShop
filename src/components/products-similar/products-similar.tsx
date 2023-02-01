@@ -29,8 +29,7 @@ function ProductsSimilar ({productsSimilar}: ProductsSimilarType): JSX.Element {
                     /> ))
               }
             </div>
-            {/* <button className="slider-controls slider-controls--prev" type="button" aria-label="Предыдущий слайд" */}
-            <button className="slider-controls--prev" type="button" aria-label="Предыдущий слайд"
+            <button className="slider-controls slider-controls--prev" type="button" aria-label="Предыдущий слайд"
               disabled = {(currentProductsSimilar[0] === 0)}
               onClick={() => {
                 setCurrentProductsSimilar([currentProductsSimilar[0] - 1, currentProductsSimilar[1] - 1]);
@@ -40,8 +39,7 @@ function ProductsSimilar ({productsSimilar}: ProductsSimilarType): JSX.Element {
                 <use xlinkHref="#icon-arrow" />
               </svg>
             </button>
-            {/* <button className="slider-controls slider-controls--next" type="button" aria-label="Следующий слайд" */}
-            <button className="slider-controls--next" type="button" aria-label="Следующий слайд"
+            <button className="slider-controls slider-controls--next" type="button" aria-label="Следующий слайд"
               disabled = {(currentProductsSimilar[1] === productsSimilar.length)}
               onClick={() => {
                 setCurrentProductsSimilar([currentProductsSimilar[0] + 1, currentProductsSimilar[1] + 1]);

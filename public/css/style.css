@@ -3630,7 +3630,7 @@ button,
   .slider-controls:active {
     color: #7575e2;
     background-color: #a2a2ff;
-    pointer-events: none;
+    pointer-events: auto;
   }
 
   .link:hover,
