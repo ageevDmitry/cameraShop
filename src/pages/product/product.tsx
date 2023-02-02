@@ -5,6 +5,7 @@ import ProductSimilar from '../../components/products-similar/products-similar';
 import ReviewBlock from '../../components/review-block/review-block';
 import UpButton from '../../components/up-button/up-button';
 import Footer from '../../components/footer/footer';
+import ModalReview from '../../components/modal-review/modal-review';
 import {fetchProductDetailAction, fetchProductsSimilarAction, fetchReviewsAction} from '../../store/api-action';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import {getProductDetail, getProductsSimilar, getReviews} from '../../store/products-data/selectors';
@@ -64,6 +65,7 @@ function Product (): JSX.Element {
             />
           }
         </div>
+        <ModalReview/>
       </main>
       <UpButton/>
       <Footer/>
