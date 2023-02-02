@@ -132,3 +132,26 @@ export const enum DefaultReviewsView {
 }
 
 export const STEP_REVIEWS_VIEW = 3;
+
+export const REVIEW_FORM_STATUSES = [
+  {
+    starNumber: 5,
+    title: 'Отлично'
+  },
+  {
+    starNumber: 4,
+    title: 'Хорошо'
+  },
+  {
+    starNumber: 3,
+    title: 'Нормально'
+  },
+  {
+    starNumber: 2,
+    title: 'Плохо'
+  },
+  {
+    starNumber: 1,
+    title: 'Ужасно'
+  },
+];

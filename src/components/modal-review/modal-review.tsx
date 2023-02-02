@@ -1,4 +1,33 @@
+import {useForm} from 'react-hook-form';
+import {ReviewPost} from '../../types/review';
+// import {REVIEW_FORM_STATUSES} from '../../const';
+// import {useAppDispatch, useAppSelector} from '../../hooks';
+// import {sendNewReviewAction} from '../../store/api-action';
+// import {getProductDetail} from '../../store/products-data/selectors';
+
 function ModalReview (): JSX.Element {
+
+  const {register, handleSubmit, formState: {errors}} = useForm<ReviewPost>();
+  // const dispatch = useAppDispatch();
+  // const productDetail = useAppSelector(getProductDetail);
+  // const id = productDetail?.id;
+
+  const onSubmit = (data: ReviewPost) => {
+
+    console.log(data);
+
+    // if (id) {
+    //   dispatch(sendNewReviewAction({
+    //     cameraId: id,
+    //     userName: data.userName,
+    //     advantage: data.advantage,
+    //     disadvantage: data.disadvantage,
+    //     review: data.review,
+    //     rating: data.rating,
+    //   }
+    //   ));
+    // }
+  };
 
   return (
     <div className="modal is-active">
@@ -7,7 +36,7 @@ function ModalReview (): JSX.Element {
         <div className="modal__content">
           <p className="title title--h4">Оставить отзыв</p>
           <div className="form-review">
-            <form method="post">
+            <form onSubmit={(...args) => void handleSubmit(onSubmit)(...args)} method="post">
               <div className="form-review__rate">
                 <fieldset className="rate form-review__item">
                   <legend className="rate__caption">Рейтинг
@@ -40,9 +69,11 @@ function ModalReview (): JSX.Element {
                         <use xlinkHref="#icon-snowflake" />
                       </svg>
                     </span>
-                    <input type="text" name="user-name" placeholder="Введите ваше имя" required />
+                    <input type="text" placeholder="Введите ваше имя" {...register('userName', {required: true})}
+                      aria-invalid={errors.userName ? 'true' : 'false'}
+                    />
+                    {errors.userName?.type === 'required' && <p className="custom-input__error" style={{opacity: 100}}>Нужно указать имя</p>}
                   </label>
-                  <p className="custom-input__error">Нужно указать имя</p>
                 </div>
                 <div className="custom-input form-review__item">
                   <label>
@@ -51,9 +82,11 @@ function ModalReview (): JSX.Element {
                         <use xlinkHref="#icon-snowflake" />
                       </svg>
                     </span>
-                    <input type="text" name="user-plus" placeholder="Основные преимущества товара" required />
+                    <input type="text" placeholder="Основные преимущества товара" {...register('advantage', {required: true})}
+                      aria-invalid={errors.advantage ? 'true' : 'false'}
+                    />
+                    {errors.advantage?.type === 'required' && <p className="custom-input__error" style={{opacity: 100}}>Нужно указать достоинства</p>}
                   </label>
-                  <p className="custom-input__error">Нужно указать достоинства</p>
                 </div>
                 <div className="custom-input form-review__item">
                   <label>
@@ -62,9 +95,11 @@ function ModalReview (): JSX.Element {
                         <use xlinkHref="#icon-snowflake" />
                       </svg>
                     </span>
-                    <input type="text" name="user-minus" placeholder="Главные недостатки товара" required />
+                    <input type="text" placeholder="Главные недостатки товара" {...register('disadvantage', {required: true})}
+                      aria-invalid={errors.disadvantage ? 'true' : 'false'}
+                    />
+                    {errors.disadvantage?.type === 'required' && <p className="custom-input__error" style={{opacity: 100}}>Нужно указать недостатки</p>}
                   </label>
-                  <p className="custom-input__error">Нужно указать недостатки</p>
                 </div>
                 <div className="custom-textarea form-review__item">
                   <label>
@@ -73,9 +108,12 @@ function ModalReview (): JSX.Element {
                         <use xlinkHref="#icon-snowflake" />
                       </svg>
                     </span>
-                    <textarea name="user-comment" minLength={5} placeholder="Поделитесь своим опытом покупки" defaultValue={''} />
+                    <textarea placeholder="Поделитесь своим опытом покупки" defaultValue={''} {...register('review', {required: true, minLength: 5})}
+                      aria-invalid={errors.review ? 'true' : 'false'}
+                    />
+                    {errors.review?.type === 'required' && <div className="custom-textarea__error" style={{opacity: 100}}>Нужно добавить комментарий</div>}
+                    {errors.review?.type === 'minLength' && <div className="custom-textarea__error" style={{opacity: 100}}>Более 5 символов</div>}
                   </label>
-                  <div className="custom-textarea__error">Нужно добавить комментарий</div>
                 </div>
               </div>
               <button className="btn btn--purple form-review__btn" type="submit">Отправить отзыв</button>
