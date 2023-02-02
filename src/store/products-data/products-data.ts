@@ -6,10 +6,13 @@ import {fetchProductsAction,
   fetchProductDetailAction,
   fetchProductsSimilarAction,
   fetchReviewsAction,
+  sendNewReviewAction,
 } from '../api-action';
 
 const initialState: ProductsData = {
   products: [],
+  isDataLoading: false,
+  isSuccess: false,
 };
 
 export const productsData = createSlice({
@@ -35,6 +38,19 @@ export const productsData = createSlice({
       })
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
+      })
+      .addCase(sendNewReviewAction.pending, (state) => {
+        state.isDataLoading = true;
+        state.isSuccess = false;
+
+      })
+      .addCase(sendNewReviewAction.fulfilled, (state) => {
+        state.isDataLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(sendNewReviewAction.rejected, (state) => {
+        state.isDataLoading = false;
+        state.isSuccess = false;
       });
   }
 });

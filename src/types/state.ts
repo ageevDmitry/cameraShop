@@ -8,6 +8,8 @@ export type ProductsData = {
     productDetail?: Product;
     productsSimilar?: Product[];
     reviews?: Review[];
+    isDataLoading: boolean;
+    isSuccess: boolean;
 };
 
 export type ProductsUI = {
