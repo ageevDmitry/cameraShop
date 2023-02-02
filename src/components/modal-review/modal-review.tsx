@@ -1,12 +1,15 @@
 import {useForm} from 'react-hook-form';
+import {useState} from 'react';
 import {ReviewPost} from '../../types/review';
-// import {REVIEW_FORM_STATUSES} from '../../const';
+import {REVIEW_FORM_STATUSES} from '../../const';
 // import {useAppDispatch, useAppSelector} from '../../hooks';
 // import {sendNewReviewAction} from '../../store/api-action';
 // import {getProductDetail} from '../../store/products-data/selectors';
+import {Fragment} from 'react';
 
 function ModalReview (): JSX.Element {
 
+  const [currentRating, setCurrentRating] = useState <number>(0);
   const {register, handleSubmit, formState: {errors}} = useForm<ReviewPost>();
   // const dispatch = useAppDispatch();
   // const productDetail = useAppSelector(getProductDetail);
@@ -46,21 +49,21 @@ function ModalReview (): JSX.Element {
                   </legend>
                   <div className="rate__bar">
                     <div className="rate__group">
-                      <input className="visually-hidden" id="star-5" name="rate" type="radio" defaultValue={5} />
-                      <label className="rate__label" htmlFor="star-5" title="Отлично" />
-                      <input className="visually-hidden" id="star-4" name="rate" type="radio" defaultValue={4} />
-                      <label className="rate__label" htmlFor="star-4" title="Хорошо" />
-                      <input className="visually-hidden" id="star-3" name="rate" type="radio" defaultValue={3} />
-                      <label className="rate__label" htmlFor="star-3" title="Нормально" />
-                      <input className="visually-hidden" id="star-2" name="rate" type="radio" defaultValue={2} />
-                      <label className="rate__label" htmlFor="star-2" title="Плохо" />
-                      <input className="visually-hidden" id="star-1" name="rate" type="radio" defaultValue={1} />
-                      <label className="rate__label" htmlFor="star-1" title="Ужасно" />
+                      {REVIEW_FORM_STATUSES.map((item) => (
+                        <Fragment key = {item.starNumber}>
+                          <input className="visually-hidden" id={`star-${item.starNumber}`} type="radio" value={item.starNumber} {...register('rating', {required: true})}
+                            onClick={() => {
+                              setCurrentRating(item.starNumber);
+                            }}
+                          />
+                          <label className="rate__label" htmlFor={`star-${item.starNumber}`} title={item.title} />
+                        </Fragment>
+                      ))}
                     </div>
-                    <div className="rate__progress"><span className="rate__stars">0</span> <span>/</span> <span className="rate__all-stars">5</span>
+                    {errors.rating?.type === 'required' && <p className="rate__message" style={{opacity: 100}}>Нужно оценить товар</p>}
+                    <div className="rate__progress"><span className="rate__stars"></span>{currentRating}<span>/</span> <span className="rate__all-stars">5</span>
                     </div>
                   </div>
-                  <p className="rate__message">Нужно оценить товар</p>
                 </fieldset>
                 <div className="custom-input form-review__item">
                   <label>
