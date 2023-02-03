@@ -1,7 +1,7 @@
 import {useForm} from 'react-hook-form';
 import {useState, useEffect} from 'react';
 import {ReviewPost} from '../../types/review';
-import {REVIEW_FORM_STATUSES} from '../../const';
+import {REVIEW_FORM_STATUSES, DEFAULT_RATING_REVIEW} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {sendNewReviewAction} from '../../store/api-action';
 import {getProductDetail} from '../../store/products-data/selectors';
@@ -30,7 +30,7 @@ function ModalReview ({onClickCloseModalReview}: ModalReviewType): JSX.Element {
     };
   });
 
-  const [currentRating, setCurrentRating] = useState <number>(0);
+  const [currentRating, setCurrentRating] = useState <number>(DEFAULT_RATING_REVIEW);
   const {register, handleSubmit, formState: {errors}} = useForm<ReviewPost>();
   const dispatch = useAppDispatch();
   const productDetail = useAppSelector(getProductDetail);
@@ -89,7 +89,7 @@ function ModalReview ({onClickCloseModalReview}: ModalReviewType): JSX.Element {
                       </div>
                     </div>
                   </fieldset>
-                  <div className="custom-input form-review__item">
+                  <div className={`custom-input form-review__item ${(errors.userName?.type === 'required') ? 'is-invalid' : ''}`}>
                     <label>
                       <span className="custom-input__label">Ваше имя
                         <svg width={9} height={9} aria-hidden="true">
@@ -102,7 +102,7 @@ function ModalReview ({onClickCloseModalReview}: ModalReviewType): JSX.Element {
                       {errors.userName?.type === 'required' && <p className="custom-input__error" style={{opacity: 100}}>Нужно указать имя</p>}
                     </label>
                   </div>
-                  <div className="custom-input form-review__item">
+                  <div className={`custom-input form-review__item ${(errors.advantage?.type === 'required') ? 'is-invalid' : ''}`}>
                     <label>
                       <span className="custom-input__label">Достоинства
                         <svg width={9} height={9} aria-hidden="true">
@@ -115,7 +115,7 @@ function ModalReview ({onClickCloseModalReview}: ModalReviewType): JSX.Element {
                       {errors.advantage?.type === 'required' && <p className="custom-input__error" style={{opacity: 100}}>Нужно указать достоинства</p>}
                     </label>
                   </div>
-                  <div className="custom-input form-review__item">
+                  <div className={`custom-input form-review__item ${(errors.disadvantage?.type === 'required') ? 'is-invalid' : ''}`}>
                     <label>
                       <span className="custom-input__label">Недостатки
                         <svg width={9} height={9} aria-hidden="true">
@@ -128,7 +128,7 @@ function ModalReview ({onClickCloseModalReview}: ModalReviewType): JSX.Element {
                       {errors.disadvantage?.type === 'required' && <p className="custom-input__error" style={{opacity: 100}}>Нужно указать недостатки</p>}
                     </label>
                   </div>
-                  <div className="custom-textarea form-review__item">
+                  <div className={`custom-textarea form-review__item ${(errors.disadvantage?.type === 'required' || errors.review?.type === 'minLength') ? 'is-invalid' : ''}`}>
                     <label>
                       <span className="custom-textarea__label">Комментарий
                         <svg width={9} height={9} aria-hidden="true">
