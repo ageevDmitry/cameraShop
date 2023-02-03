@@ -6,9 +6,10 @@ import {DefaultReviewsView, STEP_REVIEWS_VIEW} from '../../const';
 
 type ReviewBlockType = {
   reviews: Review[];
+  onClickOpenModalReview: (isModalReview: boolean) => void;
 }
 
-function ReviewBlock ({reviews}: ReviewBlockType): JSX.Element {
+function ReviewBlock ({reviews, onClickOpenModalReview}: ReviewBlockType): JSX.Element {
 
   const [currentReviewsView, setCurrentReviewsView] = useState<[number, number]>([DefaultReviewsView.StartItem, DefaultReviewsView.EndItem]);
   const currentReviews = getSortReviews(reviews.slice(currentReviewsView[0], currentReviewsView[1]));
@@ -19,7 +20,12 @@ function ReviewBlock ({reviews}: ReviewBlockType): JSX.Element {
         <div className="container">
           <div className="page-content__headed">
             <h2 className="title title--h3">Отзывы</h2>
-            <button className="btn" type="button">Оставить свой отзыв</button>
+            <button className="btn" type="button"
+              onClick={() => {
+                onClickOpenModalReview(true);
+              }}
+            >Оставить свой отзыв
+            </button>
           </div>
           <ul className="review-block__list">
             {

@@ -8,7 +8,11 @@ import {getProductDetail} from '../../store/products-data/selectors';
 import {Fragment} from 'react';
 import FocusTrap from 'focus-trap-react';
 
-function ModalReview (): JSX.Element {
+type ModalReviewType = {
+  onClickCloseModalReview: (isModalReview: boolean) => void;
+}
+
+function ModalReview ({onClickCloseModalReview}: ModalReviewType): JSX.Element {
 
   const [currentRating, setCurrentRating] = useState <number>(0);
   const {register, handleSubmit, formState: {errors}} = useForm<ReviewPost>();
@@ -122,7 +126,11 @@ function ModalReview (): JSX.Element {
                 <button className="btn btn--purple form-review__btn" type="submit">Отправить отзыв</button>
               </form>
             </div>
-            <button className="cross-btn" type="button" aria-label="Закрыть попап">
+            <button className="cross-btn" type="button" aria-label="Закрыть попап"
+              onClick={() => {
+                onClickCloseModalReview(false);
+              }}
+            >
               <svg width={10} height={10} aria-hidden="true">
                 <use xlinkHref="#icon-close" />
               </svg>

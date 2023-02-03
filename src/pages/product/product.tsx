@@ -23,6 +23,7 @@ function Product (): JSX.Element {
   const reviews = useAppSelector(getReviews);
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG];
   const [currentTabControl, setCurrentTabControl] = useState(ProductTab.Characteristics);
+  const [isModalReview, setStateModalReview] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -62,10 +63,16 @@ function Product (): JSX.Element {
             reviews &&
             <ReviewBlock
               reviews = {reviews}
+              onClickOpenModalReview = {setStateModalReview}
             />
           }
         </div>
-        <ModalReview/>
+        {
+          isModalReview &&
+          <ModalReview
+            onClickCloseModalReview = {setStateModalReview}
+          />
+        }
       </main>
       <UpButton/>
       <Footer/>
