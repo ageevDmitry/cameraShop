@@ -1,5 +1,5 @@
 import {useForm} from 'react-hook-form';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {ReviewPost} from '../../types/review';
 import {REVIEW_FORM_STATUSES} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
@@ -13,6 +13,22 @@ type ModalReviewType = {
 }
 
 function ModalReview ({onClickCloseModalReview}: ModalReviewType): JSX.Element {
+
+  useEffect(() => {
+    function handleKeyDown(evt: KeyboardEvent) {
+      if (evt.key === 'Escape') {
+        onClickCloseModalReview(false);
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
+    };
+  });
 
   const [currentRating, setCurrentRating] = useState <number>(0);
   const {register, handleSubmit, formState: {errors}} = useForm<ReviewPost>();
@@ -39,7 +55,11 @@ function ModalReview ({onClickCloseModalReview}: ModalReviewType): JSX.Element {
     <FocusTrap>
       <div className="modal is-active">
         <div className="modal__wrapper">
-          <div className="modal__overlay" />
+          <div className="modal__overlay"
+            onClick={() => {
+              onClickCloseModalReview(false);
+            }}
+          />
           <div className="modal__content">
             <p className="title title--h4">Оставить отзыв</p>
             <div className="form-review">
