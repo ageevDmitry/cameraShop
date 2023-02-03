@@ -72,7 +72,7 @@ export const sendNewReviewAction = createAsyncThunk<ReviewPost, ReviewPost, {
   }>(
     'data/sendReview',
     async (userReview, {extra: api}) => {
-      const {data} = await api.post<ReviewPost>(APIRoute.Products, userReview);
+      const {data} = await api.post<ReviewPost>(APIRoute.Reviews, userReview);
       return data;
     },
   );
