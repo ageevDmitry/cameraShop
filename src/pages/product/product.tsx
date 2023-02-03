@@ -6,8 +6,9 @@ import ReviewBlock from '../../components/review-block/review-block';
 import UpButton from '../../components/up-button/up-button';
 import Footer from '../../components/footer/footer';
 import ModalReview from '../../components/modal-review/modal-review';
-import {fetchProductDetailAction, fetchProductsSimilarAction, fetchReviewsAction} from '../../store/api-action';
+import ModalReviewSuccess from '../../components/modal-review-success/modal-review-success';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
+import {fetchProductDetailAction, fetchProductsSimilarAction, fetchReviewsAction} from '../../store/api-action';
 import {getProductDetail, getProductsSimilar, getReviews} from '../../store/products-data/selectors';
 import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
@@ -24,6 +25,7 @@ function Product (): JSX.Element {
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG];
   const [currentTabControl, setCurrentTabControl] = useState(ProductTab.Characteristics);
   const [isModalReview, setStateModalReview] = useState(false);
+  const [isModalReviewSuccess, setStateModalReviewSuccess] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -71,6 +73,14 @@ function Product (): JSX.Element {
           isModalReview &&
           <ModalReview
             onClickCloseModalReview = {setStateModalReview}
+            onClickOpenModalReviewSuccess = {setStateModalReviewSuccess}
+          />
+        }
+        {
+          isModalReviewSuccess &&
+          <ModalReviewSuccess
+            product = {product}
+            onClickCloseModalReviewSuccess = {setStateModalReviewSuccess}
           />
         }
       </main>

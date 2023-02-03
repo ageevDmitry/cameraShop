@@ -12,5 +12,5 @@ export function getSortReviews(items: Review[]) {
 
   const sortItems = items.slice();
 
-  return sortItems.sort((a, b) => dayjs(a.createAt).diff(dayjs(b.createAt)));
+  return sortItems.sort((a, b) => dayjs(b.createAt).diff(dayjs(a.createAt)));
 }

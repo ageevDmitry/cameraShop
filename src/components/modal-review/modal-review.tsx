@@ -3,16 +3,17 @@ import {useState, useEffect} from 'react';
 import {ReviewPost} from '../../types/review';
 import {REVIEW_FORM_STATUSES, DEFAULT_RATING_REVIEW} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {sendNewReviewAction} from '../../store/api-action';
+import {sendNewReviewAction, fetchReviewsAction} from '../../store/api-action';
 import {getProductDetail} from '../../store/products-data/selectors';
 import {Fragment} from 'react';
 import FocusTrap from 'focus-trap-react';
 
 type ModalReviewType = {
   onClickCloseModalReview: (isModalReview: boolean) => void;
+  onClickOpenModalReviewSuccess: (isModalReviewSuccess: boolean) => void;
 }
 
-function ModalReview ({onClickCloseModalReview}: ModalReviewType): JSX.Element {
+function ModalReview ({onClickCloseModalReview, onClickOpenModalReviewSuccess}: ModalReviewType): JSX.Element {
 
   useEffect(() => {
     function handleKeyDown(evt: KeyboardEvent) {
@@ -48,7 +49,10 @@ function ModalReview ({onClickCloseModalReview}: ModalReviewType): JSX.Element {
         rating: Number(data.rating),
       }
       ));
+      dispatch(fetchReviewsAction(String(id)));
     }
+    onClickCloseModalReview(false);
+    onClickOpenModalReviewSuccess(true);
   };
 
   return (
