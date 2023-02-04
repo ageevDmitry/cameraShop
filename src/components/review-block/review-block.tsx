@@ -12,7 +12,8 @@ type ReviewBlockType = {
 function ReviewBlock ({reviews, onClickOpenModalReview}: ReviewBlockType): JSX.Element {
 
   const [currentReviewsView, setCurrentReviewsView] = useState<[number, number]>([DefaultReviewsView.StartItem, DefaultReviewsView.EndItem]);
-  const currentReviews = getSortReviews(reviews.slice(currentReviewsView[0], currentReviewsView[1]));
+  const sortedReviews = getSortReviews(reviews);
+  const currentReviews = sortedReviews.slice(currentReviewsView[0], currentReviewsView[1]);
 
   return (
     <div className="page-content__section">

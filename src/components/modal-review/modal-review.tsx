@@ -41,12 +41,12 @@ function ModalReview ({onClickCloseModalReview, onClickOpenModalReviewSuccess}: 
 
     if (id) {
       dispatch(sendNewReviewAction({
-        cameraId: id,
         userName: data.userName,
         advantage: data.advantage,
         disadvantage: data.disadvantage,
         review: data.review,
         rating: Number(data.rating),
+        cameraId: id,
       }
       ));
       dispatch(fetchReviewsAction(String(id)));

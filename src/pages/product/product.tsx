@@ -9,7 +9,7 @@ import ModalReview from '../../components/modal-review/modal-review';
 import ModalReviewSuccess from '../../components/modal-review-success/modal-review-success';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
 import {fetchProductDetailAction, fetchProductsSimilarAction, fetchReviewsAction} from '../../store/api-action';
-import {getProductDetail, getProductsSimilar, getReviews} from '../../store/products-data/selectors';
+import {getProductDetail, getProductsSimilar, getReviews, getIsSuccess} from '../../store/products-data/selectors';
 import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../../hooks';
@@ -17,6 +17,7 @@ import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG, ProductTab} from '../../con
 
 function Product (): JSX.Element {
 
+  const isSuccess = useAppSelector(getIsSuccess);
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const product = useAppSelector(getProductDetail);
@@ -33,7 +34,7 @@ function Product (): JSX.Element {
       dispatch(fetchProductsSimilarAction(id));
       dispatch(fetchReviewsAction(id));
     }
-  }, [id, dispatch]);
+  }, [id, dispatch, isSuccess]);
 
   if (!product) {
     return (
