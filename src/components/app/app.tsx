@@ -5,6 +5,7 @@ import browserHistory from '../../browser-history';
 import Catalog from '../../pages/catalog/catalog';
 import Product from '../../pages/product/product';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import Main from '../../pages/main/main';
 
 function App(): JSX.Element {
   return (
@@ -12,19 +13,19 @@ function App(): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<Catalog />}
+          element={<Main/>}
         />
         <Route
           path={AppRoute.Catalog}
-          element={<Catalog />}
+          element={<Catalog/>}
         />
         <Route
           path={AppRoute.Product}
-          element={<Product />}
+          element={<Product/>}
         />
         <Route
           path={AppRoute.NotFound}
-          element={<NotFoundScreen />}
+          element={<NotFoundScreen/>}
         />
         <Route
           path={'*'}
