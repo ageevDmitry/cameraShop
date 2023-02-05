@@ -8,36 +8,41 @@ import Footer from '../../components/footer/footer';
 import ModalReview from '../../components/modal-review/modal-review';
 import ModalReviewSuccess from '../../components/modal-review-success/modal-review-success';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
-import {fetchProductDetailAction, fetchProductsSimilarAction, fetchReviewsAction} from '../../store/api-action';
-import {getProductDetail, getProductsSimilar, getReviews, getIsSuccess} from '../../store/products-data/selectors';
-import {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
-import {useAppSelector, useAppDispatch} from '../../hooks';
-import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG, ProductTab} from '../../const';
-import {redirectToRoute} from '../../store/action';
+import { fetchProductDetailAction, fetchProductsSimilarAction, fetchReviewsAction } from '../../store/api-action';
+import { getProductDetail, getProductsSimilar, getReviews, getIsSuccess } from '../../store/products-data/selectors';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG, ProductTab } from '../../const';
+import { redirectToRoute } from '../../store/action';
+import { cleanUpProductDetail } from '../../store/products-data/products-data';
 
-function Product (): JSX.Element {
+function Product(): JSX.Element {
 
   const isSuccess = useAppSelector(getIsSuccess);
-  const {id} = useParams();
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const product = useAppSelector(getProductDetail);
   const productsSimilar = useAppSelector(getProductsSimilar);
   const reviews = useAppSelector(getReviews);
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG];
-  const [currentTabControl, setCurrentTabControl] = useState(ProductTab.Characteristics);
+  const [currentTabControl, setCurrentTabControl] = useState(ProductTab.Description);
   const [isModalReview, setStateModalReview] = useState(false);
   const [isModalReviewSuccess, setStateModalReviewSuccess] = useState(false);
 
   useEffect(() => {
     if (id) {
       // dispatch(redirectToRoute(`/product/${id}_${currentTabControl}`));
-      dispatch(redirectToRoute(`/product/${id}_1`));
+      dispatch(redirectToRoute(`/product/${id}`));
       dispatch(fetchProductDetailAction(id));
       dispatch(fetchProductsSimilarAction(id));
       dispatch(fetchReviewsAction(id));
     }
   }, [id, dispatch, isSuccess, currentTabControl]);
+
+  useEffect(() => () => {
+    dispatch(cleanUpProductDetail());
+  }, [dispatch]);
 
   if (!product) {
     return (
@@ -47,49 +52,49 @@ function Product (): JSX.Element {
 
   return (
     <div className="wrapper">
-      <Header/>
+      <Header />
       <main>
         <div className="page-content">
           <Breadcrumbs
-            navBreadcrumbs = {navBreadcrumbs}
-            currentBreadCrumb = {product.name}
+            navBreadcrumbs={navBreadcrumbs}
+            currentBreadCrumb={product.name}
           />
           <ProductInfo
-            product = {product}
-            currentTabControl = {currentTabControl}
-            onClickCurrentTabControl = {setCurrentTabControl}
+            product={product}
+            currentTabControl={currentTabControl}
+            onClickCurrentTabControl={setCurrentTabControl}
           />
           {
             productsSimilar &&
             <ProductSimilar
-              productsSimilar = {productsSimilar}
+              productsSimilar={productsSimilar}
             />
           }
           {
             reviews &&
             <ReviewBlock
-              reviews = {reviews}
-              onClickOpenModalReview = {setStateModalReview}
+              reviews={reviews}
+              onClickOpenModalReview={setStateModalReview}
             />
           }
         </div>
         {
           isModalReview &&
           <ModalReview
-            onClickCloseModalReview = {setStateModalReview}
-            onClickOpenModalReviewSuccess = {setStateModalReviewSuccess}
+            onClickCloseModalReview={setStateModalReview}
+            onClickOpenModalReviewSuccess={setStateModalReviewSuccess}
           />
         }
         {
           isModalReviewSuccess &&
           <ModalReviewSuccess
-            product = {product}
-            onClickCloseModalReviewSuccess = {setStateModalReviewSuccess}
+            product={product}
+            onClickCloseModalReviewSuccess={setStateModalReviewSuccess}
           />
         }
       </main>
-      <UpButton/>
-      <Footer/>
+      <UpButton />
+      <Footer />
     </div>
   );
 }

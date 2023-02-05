@@ -18,7 +18,11 @@ const initialState: ProductsData = {
 export const productsData = createSlice({
   name: NameSpace.ProductsData,
   initialState,
-  reducers: {},
+  reducers: {
+    cleanUpProductDetail: (state) => {
+      state.productDetail = undefined;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchProductsAction.fulfilled, (state, action) => {
@@ -54,3 +58,5 @@ export const productsData = createSlice({
       });
   }
 });
+
+export const {cleanUpProductDetail} = productsData.actions;
