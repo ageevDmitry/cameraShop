@@ -14,6 +14,7 @@ import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {useAppSelector, useAppDispatch} from '../../hooks';
 import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG, ProductTab} from '../../const';
+import {redirectToRoute} from '../../store/action';
 
 function Product (): JSX.Element {
 
@@ -30,11 +31,13 @@ function Product (): JSX.Element {
 
   useEffect(() => {
     if (id) {
+      // dispatch(redirectToRoute(`/product/${id}_${currentTabControl}`));
+      dispatch(redirectToRoute(`/product/${id}_1`));
       dispatch(fetchProductDetailAction(id));
       dispatch(fetchProductsSimilarAction(id));
       dispatch(fetchReviewsAction(id));
     }
-  }, [id, dispatch, isSuccess]);
+  }, [id, dispatch, isSuccess, currentTabControl]);
 
   if (!product) {
     return (
