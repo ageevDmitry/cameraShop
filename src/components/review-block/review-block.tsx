@@ -1,8 +1,8 @@
 import {Review} from '../../types/review';
 import ReviewCard from '../review-card/review-card';
-import {getSortReviews} from '../../utils';
 import {useState} from 'react';
 import {DefaultReviewsView, STEP_REVIEWS_VIEW} from '../../const';
+import dayjs from 'dayjs';
 
 type ReviewBlockType = {
   reviews: Review[];
@@ -12,7 +12,7 @@ type ReviewBlockType = {
 function ReviewBlock ({reviews, onClickOpenModalReview}: ReviewBlockType): JSX.Element {
 
   const [currentReviewsView, setCurrentReviewsView] = useState<[number, number]>([DefaultReviewsView.StartItem, DefaultReviewsView.EndItem]);
-  const sortedReviews = getSortReviews(reviews);
+  const sortedReviews = reviews.slice().sort((a, b) => dayjs(b.createAt).diff(dayjs(a.createAt)));
   const currentReviews = sortedReviews.slice(currentReviewsView[0], currentReviewsView[1]);
 
   return (

@@ -11,7 +11,6 @@ import {redirectToRoute} from '../../store/action';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {getProducts, getPromo} from '../../store/products-data/selectors';
 import {getCurrentCatalogPage} from '../../store/products-ui/selectors';
-import {getCurrentProducts} from '../../utils';
 import {PaginationUI} from '../../const';
 import {NAV_BREADCRUMB_MAIN} from '../../const';
 
@@ -27,7 +26,7 @@ function Catalog (): JSX.Element {
 
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
-  const currentProducts = getCurrentProducts(products, PaginationUI.ProductsView, currentCatalogPage);
+  const currentProducts = products.slice(PaginationUI.ProductsView * currentCatalogPage - PaginationUI.ProductsView, PaginationUI.ProductsView * currentCatalogPage);
   const paginationCount = Math.ceil(products.length / PaginationUI.ProductsView);
 
   return (
