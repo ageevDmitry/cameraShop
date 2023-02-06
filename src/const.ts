@@ -99,7 +99,6 @@ export enum NameSpace {
 export enum APIRoute {
   Products = 'cameras',
   Promo = 'promo',
-  ProductsSimilar = 'similar',
   Reviews = 'reviews',
 }
 

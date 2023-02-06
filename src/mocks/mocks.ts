@@ -1,5 +1,5 @@
 import {Product, Promo} from '../../src/types/product';
-import {Review} from '../../src/types/review';
+import {Review, ReviewPost} from '../../src/types/review';
 
 export const product: Product = {
   id: 1,
@@ -50,3 +50,13 @@ export const reviews: Review[] = [
   review,
   review,
 ];
+
+export const reviewPost: ReviewPost = {
+  userName: 'Семен',
+  advantage: 'С объективом',
+  disadvantage: 'Железная',
+  review: 'Клевая',
+  rating: 5,
+  cameraId: 1,
+};
+
