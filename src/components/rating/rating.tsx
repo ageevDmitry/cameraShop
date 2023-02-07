@@ -28,7 +28,7 @@ function Rating ({rating, reviewCount, componentType}: CardProps): JSX.Element {
   const ratingDescription = getRatingDescription(componentType);
 
   return (
-    <div className={`rate ${componentType}-card__rate`}>
+    <div className={`rate ${componentType}-card__rate`} data-testid="rating">
       {
         productRating
           .map((item, index) => (
