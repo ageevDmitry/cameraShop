@@ -7,7 +7,7 @@ import Basket from '../basket/basket';
 function Header (): JSX.Element {
 
   return (
-    <header className="header" id="header">
+    <header className="header" id="header" data-testid="header">
       <div className="container">
         <Logo typeComponent = {LogoType.Header}/>
         <NavigationMain/>
