@@ -5,7 +5,7 @@ import FilterCatalog from './filter-catalog';
 
 const history = createMemoryHistory();
 
-describe('Component: Breadcrumbs', () => {
+describe('Component: FilterCatalog', () => {
   it('should render correctly', () => {
     render(
       <HistoryRouter history={history}>
