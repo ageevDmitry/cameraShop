@@ -7,7 +7,7 @@ import {ProductTab} from '../../const';
 
 const history = createMemoryHistory();
 
-describe('Component: ProductDescription', () => {
+describe('Component: ProductInfo', () => {
 
   const setCurrentTabControl = jest.fn();
   it('should render correctly', () => {
