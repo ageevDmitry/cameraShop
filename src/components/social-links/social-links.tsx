@@ -3,7 +3,7 @@ import {SOCIAL_LINKS} from '../../const';
 function SocialLinks (): JSX.Element {
 
   return (
-    <ul className="social">
+    <ul className="social" data-testid="socialLinks">
       {SOCIAL_LINKS.map((item) => (
         <li key={item.type} className="social__item">
           <a className="link" href={item.href} aria-label={item.label}>
