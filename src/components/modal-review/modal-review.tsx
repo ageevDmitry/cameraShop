@@ -101,7 +101,7 @@ function ModalReview ({onClickCloseModalReview, onClickOpenModalReviewSuccess}: 
                         </svg>
                       </span>
                       <input type="text" placeholder="Введите ваше имя" {...register('userName', {required: true})}
-                        aria-invalid={errors.userName ? 'true' : 'false'}
+                        aria-invalid={errors.userName ? 'true' : 'false'} data-testid="userName"
                       />
                       {errors.userName?.type === 'required' && <p className="custom-input__error" style={{opacity: 100}}>Нужно указать имя</p>}
                     </label>
@@ -114,7 +114,7 @@ function ModalReview ({onClickCloseModalReview, onClickOpenModalReviewSuccess}: 
                         </svg>
                       </span>
                       <input type="text" placeholder="Основные преимущества товара" {...register('advantage', {required: true})}
-                        aria-invalid={errors.advantage ? 'true' : 'false'}
+                        aria-invalid={errors.advantage ? 'true' : 'false'} data-testid="advantage"
                       />
                       {errors.advantage?.type === 'required' && <p className="custom-input__error" style={{opacity: 100}}>Нужно указать достоинства</p>}
                     </label>
@@ -127,7 +127,7 @@ function ModalReview ({onClickCloseModalReview, onClickOpenModalReviewSuccess}: 
                         </svg>
                       </span>
                       <input type="text" placeholder="Главные недостатки товара" {...register('disadvantage', {required: true})}
-                        aria-invalid={errors.disadvantage ? 'true' : 'false'}
+                        aria-invalid={errors.disadvantage ? 'true' : 'false'} data-testid="disadvantage"
                       />
                       {errors.disadvantage?.type === 'required' && <p className="custom-input__error" style={{opacity: 100}}>Нужно указать недостатки</p>}
                     </label>
@@ -140,7 +140,7 @@ function ModalReview ({onClickCloseModalReview, onClickOpenModalReviewSuccess}: 
                         </svg>
                       </span>
                       <textarea placeholder="Поделитесь своим опытом покупки" defaultValue={''} {...register('review', {required: true, minLength: 5})}
-                        aria-invalid={errors.review ? 'true' : 'false'}
+                        aria-invalid={errors.review ? 'true' : 'false'} data-testid="review"
                       />
                       {errors.review?.type === 'required' && <div className="custom-textarea__error" style={{opacity: 100}}>Нужно добавить комментарий</div>}
                       {errors.review?.type === 'minLength' && <div className="custom-textarea__error" style={{opacity: 100}}>Более 5 символов</div>}

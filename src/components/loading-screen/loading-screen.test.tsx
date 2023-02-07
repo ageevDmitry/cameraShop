@@ -1,18 +1,18 @@
 import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
 import HistoryRouter from '../../pages/history-route/history-route';
-import Header from './header';
+import LoadingScreen from './loading-screen';
 
 const history = createMemoryHistory();
 
-describe('Component: Header', () => {
+describe('Component: LoadingScreen', () => {
   it('should render correctly', () => {
     render(
       <HistoryRouter history={history}>
-        <Header/>
+        <LoadingScreen/>
       </HistoryRouter>
     );
 
-    expect(screen.getByTestId('header')).toBeInTheDocument();
+    expect(screen.getByText(/Loading .../i)).toBeInTheDocument();
   });
 });
