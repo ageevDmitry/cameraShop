@@ -33,7 +33,7 @@ describe('Component: ModalReviewSuccess', () => {
         <Routes>
           <Route
             path={`/product/${product.id}`}
-            element={<h1>This is main page</h1>}
+            element={<h1>This is product page</h1>}
           />
           <Route
             path='*'
@@ -47,10 +47,10 @@ describe('Component: ModalReviewSuccess', () => {
         </Routes>
       </HistoryRouter>);
 
-    expect(screen.queryByText(/This is main page/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/This is product page/i)).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('link'));
 
-    expect(screen.getByText(/This is main page/i)).toBeInTheDocument();
+    expect(screen.getByText(/This is product page/i)).toBeInTheDocument();
   });
 });
