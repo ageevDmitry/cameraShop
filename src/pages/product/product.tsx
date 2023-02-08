@@ -31,14 +31,12 @@ function Product(): JSX.Element {
 
   useEffect(() => {
     if (id) {
-      // dispatch(redirectToRoute(`/product/${id}_${currentTabControl}`));
-      dispatch(redirectToRoute(`/product/${id}`));
+      dispatch(redirectToRoute(`/product/${id}#${currentTabControl}`));
       dispatch(fetchProductDetailAction(id));
       dispatch(fetchProductsSimilarAction(id));
       dispatch(fetchReviewsAction(id));
     }
-  // }, [id, dispatch, currentTabControl]);
-  }, [id, dispatch, reviews]);
+  }, [id, dispatch, currentTabControl]);
 
   useEffect(() => () => {
     dispatch(cleanUpProductDetail());
