@@ -1,3 +1,11 @@
+import {fetchProductDetailAction, fetchProductsSimilarAction, fetchReviewsAction} from '../../store/api-action';
+import {getProductDetail, getProductsSimilar, getReviews} from '../../store/products-data/selectors';
+import {useEffect, useState} from 'react';
+import { useParams} from 'react-router-dom';
+import {useAppSelector, useAppDispatch} from '../../hooks';
+import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG, ProductTab} from '../../const';
+import {redirectToRoute} from '../../store/action';
+import {cleanUpProductDetail} from '../../store/products-data/products-data';
 import Header from '../../components/header/header';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import ProductInfo from '../../components/product-info/product-info';
@@ -8,18 +16,10 @@ import Footer from '../../components/footer/footer';
 import ModalReview from '../../components/modal-review/modal-review';
 import ModalReviewSuccess from '../../components/modal-review-success/modal-review-success';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
-import { fetchProductDetailAction, fetchProductsSimilarAction, fetchReviewsAction } from '../../store/api-action';
-import { getProductDetail, getProductsSimilar, getReviews} from '../../store/products-data/selectors';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG, ProductTab } from '../../const';
-import { redirectToRoute } from '../../store/action';
-import { cleanUpProductDetail } from '../../store/products-data/products-data';
 
 function Product(): JSX.Element {
 
-  const { id } = useParams();
+  const {id} = useParams();
   const dispatch = useAppDispatch();
   const product = useAppSelector(getProductDetail);
   const productsSimilar = useAppSelector(getProductsSimilar);
