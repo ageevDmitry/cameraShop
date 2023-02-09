@@ -83,7 +83,7 @@ function ModalReview ({onClickCloseModalReview, onClickOpenModalReviewSuccess}: 
                                 setCurrentRating(item.starNumber);
                               }}
                             />
-                            <label className="rate__label" htmlFor={`star-${item.starNumber}`} title={item.title} />
+                            <label className={`${(currentRating >= item.starNumber) ? 'rate__label__hover' : 'rate__label'}`} htmlFor={`star-${item.starNumber}`} title={item.title} />
                           </Fragment>
                         ))}
                       </div>
