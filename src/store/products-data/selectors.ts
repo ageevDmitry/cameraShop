@@ -9,3 +9,4 @@ export const getProductDetail = (state: State): Product | undefined => state[Nam
 export const getProductsSimilar = (state: State): Product[] | undefined => state[NameSpace.ProductsData].productsSimilar;
 export const getReviews = (state: State): Review[] | undefined => state[NameSpace.ProductsData].reviews;
 export const getIsSuccess = (state: State): boolean => state[NameSpace.ProductsData].isSuccess;
+export const getIsDataLoading = (state: State): boolean => state[NameSpace.ProductsData].isDataLoading;

@@ -20,7 +20,7 @@ describe('Async actions', () => {
 
   const mockStore = configureMockStore<
       State,
-      Action,
+      Action<string>,
       ThunkDispatch<State, typeof api, Action>
     >(middlewares);
 
@@ -135,6 +135,7 @@ describe('Async actions', () => {
 
     expect(actions).toEqual([
       sendNewReviewAction.pending.type,
+      fetchReviewsAction.pending.type,
       sendNewReviewAction.fulfilled.type
     ]);
   });

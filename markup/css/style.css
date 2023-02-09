@@ -2313,7 +2313,7 @@ button,
 }
 
 .rate__group:not(:checked) > label {
-  float: right;
+  float: left;
   width: 51px;
   height: 48px;
   overflow: hidden;

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable */
 const lib = jest.requireActual('tabbable');
 
 const tabbable = {

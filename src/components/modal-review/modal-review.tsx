@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import {ReviewPost} from '../../types/review';
 import {REVIEW_FORM_STATUSES, DEFAULT_RATING_REVIEW} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {sendNewReviewAction, fetchReviewsAction} from '../../store/api-action';
+import {sendNewReviewAction} from '../../store/api-action';
 import {getProductDetail} from '../../store/products-data/selectors';
 import {Fragment} from 'react';
 import FocusTrap from 'focus-trap-react';
@@ -49,7 +49,6 @@ function ModalReview ({onClickCloseModalReview, onClickOpenModalReviewSuccess}: 
         cameraId: id,
       }
       ));
-      dispatch(fetchReviewsAction(String(id)));
     }
     onClickCloseModalReview(false);
     onClickOpenModalReviewSuccess(true);
