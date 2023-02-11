@@ -6,8 +6,19 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import Catalog from './catalog';
 import {NameSpace} from '../../const';
 import {products, promo} from '../../mocks/mocks';
+import {State} from '../../types/state';
+import {Action} from 'redux';
+import thunk, {ThunkDispatch} from 'redux-thunk';
+import {createAPI} from '../../services/api';
 
-const mockStore = configureMockStore();
+const api = createAPI();
+const middlewares = [thunk.withExtraArgument(api)];
+
+const mockStore = configureMockStore<
+State,
+Action<string>,
+ThunkDispatch<State, typeof api, Action>
+>(middlewares);
 
 const store = mockStore({
   [NameSpace.ProductsData]: {
