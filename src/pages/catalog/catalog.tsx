@@ -13,6 +13,7 @@ import {getProducts, getPromo} from '../../store/products-data/selectors';
 import {getCurrentCatalogPage} from '../../store/products-ui/selectors';
 import {PaginationUI} from '../../const';
 import {NAV_BREADCRUMB_MAIN} from '../../const';
+import {fetchProductsAction, fetchPromoAction} from '../../store/api-action';
 
 function Catalog (): JSX.Element {
 
@@ -21,6 +22,8 @@ function Catalog (): JSX.Element {
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN];
 
   useEffect(() => {
+    dispatch(fetchProductsAction());
+    dispatch(fetchPromoAction());
     dispatch(redirectToRoute(`/catalog/page_${currentCatalogPage}`));
   }, [currentCatalogPage, dispatch]);
 
