@@ -10,6 +10,7 @@ import {State} from '../../types/state';
 import {Action} from 'redux';
 import {NameSpace} from '../../const';
 import {product, products, reviews} from '../../mocks/mocks';
+import userEvent from '@testing-library/user-event';
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -46,6 +47,24 @@ describe('Component: Product', () => {
       </Provider>
     );
 
+    expect(screen.getByText(/Похожие товары/i)).toBeInTheDocument();
+    expect(screen.getByText(/Отзывы/i)).toBeInTheDocument();
     expect(screen.getByText(/Оставить свой отзыв/i)).toBeInTheDocument();
+    expect(screen.getByText(/Показать больше отзывов/i)).toBeInTheDocument();
+  });
+
+  it('should open ModalReview and ModalReviewSuccess', async () => {
+
+    render(
+      <Provider store={store}>
+        <HistoryRouter history={history}>
+          <Product/>
+        </HistoryRouter>
+      </Provider>
+    );
+
+    await userEvent.click(screen.getByTestId('modalReview'));
+
+    expect(screen.getByText(/Оставить отзыв/i)).toBeInTheDocument();
   });
 });

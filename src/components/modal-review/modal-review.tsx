@@ -146,7 +146,7 @@ function ModalReview ({onClickCloseModalReview, onClickOpenModalReviewSuccess}: 
                     </label>
                   </div>
                 </div>
-                <button className="btn btn--purple form-review__btn" type="submit">Отправить отзыв</button>
+                <button className="btn btn--purple form-review__btn" type="submit" data-testid="modalReviewSuccess">Отправить отзыв</button>
               </form>
             </div>
             <button className="cross-btn" type="button" aria-label="Закрыть попап"

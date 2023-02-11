@@ -21,7 +21,7 @@ function ReviewBlock ({reviews, onClickOpenModalReview}: ReviewBlockType): JSX.E
         <div className="container">
           <div className="page-content__headed">
             <h2 className="title title--h3">Отзывы</h2>
-            <button className="btn" type="button"
+            <button className="btn" type="button" data-testid="modalReview"
               onClick={() => {
                 onClickOpenModalReview(true);
               }}

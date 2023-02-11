@@ -12,8 +12,8 @@ export const fetchProductsAction = createAsyncThunk<Product[], undefined, {
   }>(
     'data/fetchProducts',
     async (_arg, {extra: api}) => {
-      // const {data} = await api.get<Product[]>(`${APIRoute.Products}?_start=${10}_end=${20}`);
-      const {data} = await api.get<Product[]>(APIRoute.Products);
+      // const {data} = await api.get<Product[]>(`${APIRoute.Products}?_start=${0}&_end=${9}`);
+      const {data} = await api.get<Product[]>(`${APIRoute.Products}`);
       return data;
     },
   );
