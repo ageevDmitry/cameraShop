@@ -2273,9 +2273,9 @@ button,
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  -webkit-box-direction: reverse;
+  -ms-flex-direction: row-reverse;
+  flex-direction: row-reverse;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: flex-end;
@@ -2325,7 +2325,7 @@ button,
   background-size: 51px 48px;
 }
 
-.rate__label__hover {
+/* .rate__label__hover {
   float: right;
   width: 51px;
   height: 48px;
@@ -2336,7 +2336,7 @@ button,
   cursor: pointer;
   background: url("../img/svg/star-hover.svg") no-repeat top 0 left 0;
   background-size: 51px 48px;
-}
+} */
 
 .product-card {
   display: -webkit-box;

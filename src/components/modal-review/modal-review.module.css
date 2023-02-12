@@ -1,0 +1,18 @@
+.rate__group__reverse {
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+.rate__label__hover {
+    float: right;
+    width: 51px;
+    height: 48px;
+    overflow: hidden;
+    font-size: 30px;
+    color: #ffffff;
+    white-space: nowrap;
+    cursor: pointer;
+    background: url("../../../public/img/svg/star-hover.svg") no-repeat top 0 left 0;
+    background-size: 51px 48px;
+  }

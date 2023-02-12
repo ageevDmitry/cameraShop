@@ -8,6 +8,7 @@ import {sendNewReviewAction} from '../../store/api-action';
 import {getProductDetail} from '../../store/products-data/selectors';
 import {Fragment} from 'react';
 import FocusTrap from 'focus-trap-react';
+import styles from './modal-review.module.css';
 
 type ModalReviewType = {
   onClickCloseModalReview: (isModalReview: boolean) => void;
@@ -62,7 +63,7 @@ function ModalReview ({onClickCloseModalReview, onClickOpenModalReviewSuccess}: 
                       </svg>
                     </legend>
                     <div className="rate__bar">
-                      <div className="rate__group">
+                      <div className={`rate__group ${styles.rate__group__reverse}`}>
                         {REVIEW_FORM_STATUSES.map((item) => (
                           <Fragment key = {item.starNumber}>
                             <input className="visually-hidden" id={`star-${item.starNumber}`} type="radio" value={item.starNumber} {...register('rating', {required: true})}
@@ -70,7 +71,7 @@ function ModalReview ({onClickCloseModalReview, onClickOpenModalReviewSuccess}: 
                                 setCurrentRating(item.starNumber);
                               }}
                             />
-                            <label className={`${(currentRating >= item.starNumber) ? 'rate__label__hover' : 'rate__label'}`} htmlFor={`star-${item.starNumber}`} title={item.title} />
+                            <label className={`${(currentRating >= item.starNumber) ? `${styles.rate__label__hover}` : 'rate__label'}`} htmlFor={`star-${item.starNumber}`} title={item.title} />
                           </Fragment>
                         ))}
                       </div>
