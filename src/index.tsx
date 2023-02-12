@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 import {store} from './store';
 import App from './components/app/app';
 import browserHistory from './browser-history';
-import HistoryRouter from './pages/history-route/history-route';
+import HistoryRouter from './components/history-route/history-route';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

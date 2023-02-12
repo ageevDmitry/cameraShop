@@ -2,7 +2,7 @@ import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
 import {Routes, Route} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
-import HistoryRouter from '../../pages/history-route/history-route';
+import HistoryRouter from '../history-route/history-route';
 import ModalReviewSuccess from './modal-review-success';
 import {product} from '../../mocks/mocks';
 

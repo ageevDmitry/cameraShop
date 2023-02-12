@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
-import HistoryRouter from '../../pages/history-route/history-route';
+import HistoryRouter from '../history-route/history-route';
 import NavigationFooter from './navigation-footer';
 
 const history = createMemoryHistory();

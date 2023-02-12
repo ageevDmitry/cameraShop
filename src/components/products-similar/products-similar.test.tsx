@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
-import HistoryRouter from '../../pages/history-route/history-route';
+import HistoryRouter from '../history-route/history-route';
 import {products} from '../../mocks/mocks';
 import ProductSimilar from './products-similar';
 

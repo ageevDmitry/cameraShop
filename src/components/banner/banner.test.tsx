@@ -3,7 +3,7 @@ import {createMemoryHistory} from 'history';
 import {Routes, Route} from 'react-router-dom';
 import {promo} from '../../mocks/mocks';
 import userEvent from '@testing-library/user-event';
-import HistoryRouter from '../../pages/history-route/history-route';
+import HistoryRouter from '../history-route/history-route';
 import Banner from './banner';
 
 const history = createMemoryHistory();
