@@ -1,4 +1,4 @@
-import {useAppDispatch} from '../../hooks';
+import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {changeCurrentCatalogPage} from '../../store/products-ui/products-ui';
 
 type PaginationProps = {

@@ -3,7 +3,7 @@ import {PaginationUI} from '../../const';
 import {changeCurrentCatalogPage} from '../../store/products-ui/products-ui';
 import {redirectToRoute} from '../../store/action';
 import {useEffect} from 'react';
-import {useAppDispatch} from '../../hooks';
+import {useAppDispatch} from '../../hooks/useAppDispatch';
 
 function Main (): JSX.Element {
 

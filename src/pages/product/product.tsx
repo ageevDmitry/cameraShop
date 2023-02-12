@@ -2,7 +2,8 @@ import {fetchProductDetailAction, fetchProductsSimilarAction, fetchReviewsAction
 import {getProductDetail, getProductsSimilar, getReviews} from '../../store/products-data/selectors';
 import {useEffect, useState} from 'react';
 import { useParams} from 'react-router-dom';
-import {useAppSelector, useAppDispatch} from '../../hooks';
+import {useAppSelector} from '../../hooks/useAppSelector';
+import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG, ProductTab} from '../../const';
 import {redirectToRoute} from '../../store/action';
 import {cleanUpProductDetail} from '../../store/products-data/products-data';
