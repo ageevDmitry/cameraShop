@@ -3127,13 +3127,11 @@ button,
 .slider-controls:disabled {
   color: #dddddd;
   background-color: #f8f8f8;
-  pointer-events: none;
 }
 
 .slider-controls.disabled {
   color: #dddddd;
   background-color: #f8f8f8;
-  pointer-events: none;
 }
 
 .slider-controls--prev {
@@ -3610,7 +3608,6 @@ button,
   .slider-controls:active {
     color: #7575e2;
     background-color: #a2a2ff;
-    pointer-events: none;
   }
 
   .link:hover,
