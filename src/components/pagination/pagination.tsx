@@ -1,5 +1,6 @@
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {changeCurrentCatalogPage} from '../../store/products-ui/products-ui';
+import styles from './pagination.module.css';
 
 type PaginationProps = {
   paginationCount: number;
@@ -17,7 +18,7 @@ function Pagination ({paginationCount, currentCatalogPage}: PaginationProps): JS
         {
           (currentCatalogPage !== paginationItems[0]) ?
             <li className="pagination__item">
-              <span className='pagination__link pagination__link--text'
+              <span className={`pagination__link pagination__link--text ${styles.pointer}`}
                 onClick={() => {
                   dispatch(changeCurrentCatalogPage({page: currentCatalogPage - 1}));
                 }}
@@ -28,7 +29,7 @@ function Pagination ({paginationCount, currentCatalogPage}: PaginationProps): JS
         }
         {paginationItems.map((item) => (
           <li key={item} className="pagination__item">
-            <span className={`pagination__link ${(item === currentCatalogPage) ? 'pagination__link pagination__link--active' : ''}`}
+            <span className={`pagination__link ${styles.pointer} ${(item === currentCatalogPage) ? 'pagination__link pagination__link--active' : ''}`}
               onClick={() => {
                 dispatch(changeCurrentCatalogPage({page: item}));
               }}
@@ -38,7 +39,7 @@ function Pagination ({paginationCount, currentCatalogPage}: PaginationProps): JS
         ))}
         {(currentCatalogPage !== paginationItems[paginationItems.length - 1]) ?
           <li className="pagination__item">
-            <span className='pagination__link pagination__link--text'
+            <span className={`pagination__link pagination__link--text ${styles.pointer}`}
               onClick={() => {
                 dispatch(changeCurrentCatalogPage({page: currentCatalogPage + 1}));
               }}
