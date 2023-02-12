@@ -4,6 +4,7 @@ import {Product, Promo} from '../../types/product';
 import {Review} from '../../types/review';
 
 export const getProducts = (state: State): Product[] => state[NameSpace.ProductsData].products;
+export const getProductsTotalCount = (state: State): number => state[NameSpace.ProductsData].productsTotalCount;
 export const getPromo = (state: State): Promo | undefined => state[NameSpace.ProductsData].promo;
 export const getProductDetail = (state: State): Product | undefined => state[NameSpace.ProductsData].productDetail;
 export const getProductsSimilar = (state: State): Product[] | undefined => state[NameSpace.ProductsData].productsSimilar;

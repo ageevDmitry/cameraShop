@@ -1,20 +1,22 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
-import {Product, Promo} from '../types/product';
+import {Product, Promo, ProductsReturnedData, ProductsRange} from '../types/product';
 import {Review, ReviewPost} from '../types/review';
 import {APIRoute} from '../const';
 
-export const fetchProductsAction = createAsyncThunk<Product[], undefined, {
+export const fetchProductsAction = createAsyncThunk<ProductsReturnedData, ProductsRange,{
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }>(
     'data/fetchProducts',
-    async (_arg, {extra: api}) => {
-      // const {data} = await api.get<Product[]>(`${APIRoute.Products}?_start=${0}&_end=${9}`);
-      const {data} = await api.get<Product[]>(`${APIRoute.Products}`);
-      return data;
+    async (productRange, {extra: api}) => {
+      const response = await api.get<Product[]>(`${APIRoute.Products}?_start=${productRange.startItem}&_end=${productRange.endItem}`);
+      return {
+        data: response.data,
+        dataTotalCount: Number(response.headers['x-total-count'])
+      };
     },
   );
 

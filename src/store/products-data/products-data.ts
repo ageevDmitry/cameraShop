@@ -11,6 +11,7 @@ import {fetchProductsAction,
 
 const initialState: ProductsData = {
   products: [],
+  productsTotalCount: 0,
   isDataLoading: false,
   isSuccess: false,
 };
@@ -30,7 +31,8 @@ export const productsData = createSlice({
         state.isSuccess = false;
       })
       .addCase(fetchProductsAction.fulfilled, (state, action) => {
-        state.products = action.payload;
+        state.products = action.payload.data;
+        state.productsTotalCount = action.payload.dataTotalCount;
         state.isDataLoading = false;
         state.isSuccess = true;
       })

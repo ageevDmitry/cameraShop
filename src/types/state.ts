@@ -4,6 +4,7 @@ import {store} from '../store';
 
 export type ProductsData = {
     products: Product[];
+    productsTotalCount: number;
     promo?: Promo;
     productDetail?: Product;
     productsSimilar?: Product[];

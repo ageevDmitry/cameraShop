@@ -9,7 +9,7 @@ import Footer from '../../components/footer/footer';
 import {useEffect} from 'react';
 import {redirectToRoute} from '../../store/action';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {getProducts, getPromo} from '../../store/products-data/selectors';
+import {getProducts, getProductsTotalCount, getPromo} from '../../store/products-data/selectors';
 import {getCurrentCatalogPage} from '../../store/products-ui/selectors';
 import {PaginationUI} from '../../const';
 import {NAV_BREADCRUMB_MAIN} from '../../const';
@@ -19,18 +19,21 @@ function Catalog (): JSX.Element {
 
   const dispatch = useAppDispatch();
   const currentCatalogPage = useAppSelector(getCurrentCatalogPage);
+  const productsTotalCount = useAppSelector(getProductsTotalCount);
+  const paginationCount = Math.ceil(productsTotalCount / PaginationUI.ProductsView);
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN];
 
   useEffect(() => {
-    dispatch(fetchProductsAction());
+    dispatch(fetchProductsAction({
+      startItem: PaginationUI.ProductsView * currentCatalogPage - PaginationUI.ProductsView,
+      endItem: PaginationUI.ProductsView * currentCatalogPage,
+    }));
     dispatch(fetchPromoAction());
     dispatch(redirectToRoute(`/catalog/page_${currentCatalogPage}`));
   }, [currentCatalogPage, dispatch]);
 
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
-  const currentProducts = products.slice(PaginationUI.ProductsView * currentCatalogPage - PaginationUI.ProductsView, PaginationUI.ProductsView * currentCatalogPage);
-  const paginationCount = Math.ceil(products.length / PaginationUI.ProductsView);
 
   return (
     <div className="wrapper">
@@ -53,7 +56,7 @@ function Catalog (): JSX.Element {
                   <SortCatalog/>
                   <div className="cards catalog__cards">
                     {
-                      currentProducts
+                      products
                         .map((product) => (
                           <ProductCards
                             key = {product.id}

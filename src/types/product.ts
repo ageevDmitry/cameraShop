@@ -23,3 +23,13 @@ export type Promo = {
     previewImgWebp: string;
     previewImgWebp2x: string;
 }
+
+export type ProductsReturnedData = {
+    data: Product[];
+    dataTotalCount: number;
+}
+
+export type ProductsRange = {
+    startItem: number;
+    endItem: number;
+}

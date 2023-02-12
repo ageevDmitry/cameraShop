@@ -1,4 +1,4 @@
-import {Product, Promo} from '../../src/types/product';
+import {Product, Promo, ProductsReturnedData} from '../../src/types/product';
 import {Review, ReviewPost} from '../../src/types/review';
 
 export const product: Product = {
@@ -84,6 +84,16 @@ export const products: Product[] = [
     reviewCount: 6,
   },
 ];
+
+export const productsReturnedData: ProductsReturnedData = {
+  data: products,
+  dataTotalCount: 40,
+};
+
+export const productRange = {
+  startItem: 0,
+  endItem: 9,
+};
 
 export const promo: Promo = {
   id: 1,
