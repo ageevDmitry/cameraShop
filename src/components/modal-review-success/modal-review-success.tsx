@@ -1,6 +1,6 @@
-import {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {Product} from '../../types/product';
+import {useModalClose} from '../../hooks/useModalClose';
 
 type ModalReviewSuccessType = {
     product: Product;
@@ -12,21 +12,7 @@ function ModalReviewSuccess ({product, onClickCloseModalReviewSuccess}: ModalRev
   const {id} = product;
   const productId = `/product/${id}`;
 
-  useEffect(() => {
-    function handleKeyDown(evt: KeyboardEvent) {
-      if (evt.key === 'Escape') {
-        onClickCloseModalReviewSuccess(false);
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown);
-    document.body.style.overflow = 'hidden';
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
-    };
-  });
+  useModalClose(onClickCloseModalReviewSuccess);
 
   return (
     <div className="modal is-active modal--narrow">

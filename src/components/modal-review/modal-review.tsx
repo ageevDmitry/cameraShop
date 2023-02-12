@@ -1,5 +1,6 @@
 import {useForm} from 'react-hook-form';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
+import {useModalClose} from '../../hooks/useModalClose';
 import {ReviewPost} from '../../types/review';
 import {REVIEW_FORM_STATUSES, DEFAULT_RATING_REVIEW} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
@@ -15,21 +16,7 @@ type ModalReviewType = {
 
 function ModalReview ({onClickCloseModalReview, onClickOpenModalReviewSuccess}: ModalReviewType): JSX.Element {
 
-  useEffect(() => {
-    function handleKeyDown(evt: KeyboardEvent) {
-      if (evt.key === 'Escape') {
-        onClickCloseModalReview(false);
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown);
-    document.body.style.overflow = 'hidden';
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
-    };
-  });
+  useModalClose(onClickCloseModalReview);
 
   const [currentRating, setCurrentRating] = useState <number>(DEFAULT_RATING_REVIEW);
   const {register, handleSubmit, formState: {errors}} = useForm<ReviewPost>();
