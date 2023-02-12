@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
 import {Product} from '../../types/product';
 import {useModalClose} from '../../hooks/useModalClose';
+import FocusTrap from 'focus-trap-react';
 
 type ModalReviewSuccessType = {
     product: Product;
@@ -15,38 +16,40 @@ function ModalReviewSuccess ({product, onClickCloseModalReviewSuccess}: ModalRev
   useModalClose(onClickCloseModalReviewSuccess);
 
   return (
-    <div className="modal is-active modal--narrow">
-      <div className="modal__wrapper">
-        <div className="modal__overlay"
-          onClick={() => {
-            onClickCloseModalReviewSuccess(false);
-          }}
-        />
-        <div className="modal__content">
-          <p className="title title--h4">Спасибо за отзыв</p>
-          <svg className="modal__icon" width={80} height={78} aria-hidden="true">
-            <use xlinkHref="#icon-review-success" />
-          </svg>
-          <div className="modal__buttons">
-            <Link to={productId} className="btn btn--purple modal__btn modal__btn--fit-width" type="button"
-              onClick={() => {
-                onClickCloseModalReviewSuccess(false);
-              }}
-            >Вернуться к покупкам
-            </Link>
-          </div>
-          <button className="cross-btn" type="button" aria-label="Закрыть попап"
+    <FocusTrap>
+      <div className="modal is-active modal--narrow">
+        <div className="modal__wrapper">
+          <div className="modal__overlay"
             onClick={() => {
               onClickCloseModalReviewSuccess(false);
             }}
-          >
-            <svg width={10} height={10} aria-hidden="true">
-              <use xlinkHref="#icon-close" />
+          />
+          <div className="modal__content">
+            <p className="title title--h4">Спасибо за отзыв</p>
+            <svg className="modal__icon" width={80} height={78} aria-hidden="true">
+              <use xlinkHref="#icon-review-success" />
             </svg>
-          </button>
+            <div className="modal__buttons">
+              <Link to={productId} className="btn btn--purple modal__btn modal__btn--fit-width" type="button"
+                onClick={() => {
+                  onClickCloseModalReviewSuccess(false);
+                }}
+              >Вернуться к покупкам
+              </Link>
+            </div>
+            <button className="cross-btn" type="button" aria-label="Закрыть попап"
+              onClick={() => {
+                onClickCloseModalReviewSuccess(false);
+              }}
+            >
+              <svg width={10} height={10} aria-hidden="true">
+                <use xlinkHref="#icon-close" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </FocusTrap>
   );
 }
 
