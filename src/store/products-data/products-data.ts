@@ -60,6 +60,7 @@ export const productsData = createSlice({
       })
       .addCase(fetchProductDetailAction.fulfilled, (state, action) => {
         state.productDetail = action.payload;
+        state.reviews = action.payload.reviews;
         state.isDataLoading = false;
         state.isSuccess = true;
       })

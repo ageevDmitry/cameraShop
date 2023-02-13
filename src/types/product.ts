@@ -1,3 +1,5 @@
+import {Review} from './review';
+
 export type Product = {
     id: number;
     name: string;
@@ -13,6 +15,7 @@ export type Product = {
     previewImgWebp: string;
     previewImgWebp2x: string;
     reviewCount: number;
+    reviews: Review[];
 }
 
 export type Promo = {

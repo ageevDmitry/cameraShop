@@ -1,7 +1,7 @@
-import {fetchProductDetailAction, fetchProductsSimilarAction, fetchReviewsAction} from '../../store/api-action';
+import {fetchProductDetailAction, fetchProductsSimilarAction} from '../../store/api-action';
 import {getProductDetail, getProductsSimilar, getReviews} from '../../store/products-data/selectors';
 import {useEffect, useState} from 'react';
-import { useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG, ProductTab} from '../../const';
@@ -23,8 +23,8 @@ function Product(): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
   const product = useAppSelector(getProductDetail);
-  const productsSimilar = useAppSelector(getProductsSimilar);
   const reviews = useAppSelector(getReviews);
+  const productsSimilar = useAppSelector(getProductsSimilar);
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG];
   const [currentTabControl, setCurrentTabControl] = useState(ProductTab.Description);
   const [isModalReview, setStateModalReview] = useState(false);
@@ -35,7 +35,6 @@ function Product(): JSX.Element {
       dispatch(redirectToRoute(`/product/${id}#${currentTabControl}`));
       dispatch(fetchProductDetailAction(id));
       dispatch(fetchProductsSimilarAction(id));
-      dispatch(fetchReviewsAction(id));
     }
   }, [id, dispatch, currentTabControl]);
 
