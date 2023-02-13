@@ -123,6 +123,7 @@ describe('Reducer:productsData', () => {
     expect(productsData.reducer(state, {type: fetchProductDetailAction.fulfilled.type, payload: product}))
       .toEqual({
         products: [],
+        reviews: reviews,
         productsTotalCount: 0,
         productDetail: product,
         isDataLoading: false,

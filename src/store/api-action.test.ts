@@ -11,7 +11,7 @@ import {fetchProductsAction,
   sendNewReviewAction} from './api-action';
 import {APIRoute} from '../const';
 import {State} from '../types/state';
-import {product, products, promo, reviews, reviewPost, productsReturnedData, productRange} from '../mocks/mocks';
+import {product, products, promo, reviews, reviewPost, productRange} from '../mocks/mocks';
 
 describe('Async actions', () => {
   const api = createAPI();
@@ -67,7 +67,7 @@ describe('Async actions', () => {
     const id = '1';
 
     mockAPI
-      .onGet(`${APIRoute.Products}/${id}`)
+      .onGet(`${APIRoute.Products}/${id}?_embed=reviews`)
       .reply(200, mockProduct);
 
     const store = mockStore();

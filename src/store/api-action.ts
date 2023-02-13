@@ -40,7 +40,6 @@ export const fetchProductDetailAction = createAsyncThunk<Product, string, {
     'data/fetchProductDetail',
     async (id, {extra: api}) => {
       const {data} = await api.get<Product>(`${APIRoute.Products}/${id}?_embed=reviews`);
-      // const {data} = await api.get<Product>(`${APIRoute.Products}/${id}`);
       return data;
     },
   );
