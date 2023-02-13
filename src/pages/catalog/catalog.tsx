@@ -29,9 +29,12 @@ function Catalog (): JSX.Element {
       startItem: PaginationUI.ProductsView * currentCatalogPage - PaginationUI.ProductsView,
       endItem: PaginationUI.ProductsView * currentCatalogPage,
     }));
-    dispatch(fetchPromoAction());
     dispatch(redirectToRoute(`/catalog/page_${currentCatalogPage}`));
   }, [currentCatalogPage, dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchPromoAction());
+  }, [dispatch]);
 
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
