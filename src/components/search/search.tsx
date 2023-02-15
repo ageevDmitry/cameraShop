@@ -1,4 +1,11 @@
+import {useAppDispatch} from '../../hooks/useAppDispatch';
+// import {useAppSelector} from '../../hooks/useAppSelector';
+import {fetchProductsSearchAction} from '../../store/api-action';
+// import {getProductsSearch} from '../../store/products-data/selectors';
+
 function Search (): JSX.Element {
+
+  const dispatch = useAppDispatch();
 
   return (
     <div className="form-search">
@@ -17,7 +24,12 @@ function Search (): JSX.Element {
           <li className="form-search__select-item" tabIndex={0}>Cannonball Pro MX 4i</li>
         </ul>
       </form>
-      <button className="form-search__reset" type="reset">
+      {/* <button className="form-search__reset" type="reset" */}
+      <button type="reset"
+        onClick={() => {
+          dispatch(fetchProductsSearchAction('Pro'));
+        }}
+      >
         <svg width={10} height={10} aria-hidden="true">
           <use xlinkHref="#icon-close" />
         </svg><span className="visually-hidden">Сбросить поиск</span>

@@ -3,7 +3,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
 import {Product, Promo, ProductsReturnedData, ProductsRange} from '../types/product';
 import {Review, ReviewPost} from '../types/review';
-import {APIRoute} from '../const';
+import {APIRoute, QueryParam} from '../const';
 
 export const fetchProductsAction = createAsyncThunk<ProductsReturnedData, ProductsRange,{
     dispatch: AppDispatch;
@@ -55,6 +55,22 @@ export const fetchProductsSimilarAction = createAsyncThunk<Product[], string, {
       return data;
     },
   );
+
+export const fetchProductsSearchAction = createAsyncThunk<Product[], string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'cameras/fetchProductsSearch',
+  async (input, {extra: api}) => {
+    const {data} = await api.get<Product[]>(APIRoute.Products, {
+      params: {
+        [QueryParam.NameLike]: input
+      }
+    });
+    return data;
+  }
+);
 
 export const fetchReviewsAction = createAsyncThunk<Review[], string, {
     dispatch: AppDispatch;

@@ -5,6 +5,7 @@ import {fetchProductsAction,
   fetchPromoAction,
   fetchProductDetailAction,
   fetchProductsSimilarAction,
+  fetchProductsSearchAction,
   fetchReviewsAction,
   sendNewReviewAction,
 } from '../api-action';
@@ -78,6 +79,19 @@ export const productsData = createSlice({
         state.isSuccess = true;
       })
       .addCase(fetchProductsSimilarAction.rejected, (state) => {
+        state.isDataLoading = false;
+        state.isSuccess = false;
+      })
+      .addCase(fetchProductsSearchAction.pending, (state) => {
+        state.isDataLoading = true;
+        state.isSuccess = false;
+      })
+      .addCase(fetchProductsSearchAction.fulfilled, (state, action) => {
+        state.productsSearch = action.payload;
+        state.isDataLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(fetchProductsSearchAction.rejected, (state) => {
         state.isDataLoading = false;
         state.isSuccess = false;
       })

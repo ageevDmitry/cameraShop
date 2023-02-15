@@ -8,6 +8,7 @@ export const getProductsTotalCount = (state: State): number => state[NameSpace.P
 export const getPromo = (state: State): Promo | undefined => state[NameSpace.ProductsData].promo;
 export const getProductDetail = (state: State): Product | undefined => state[NameSpace.ProductsData].productDetail;
 export const getProductsSimilar = (state: State): Product[] | undefined => state[NameSpace.ProductsData].productsSimilar;
+export const getProductsSearch = (state: State): Product[] | undefined => state[NameSpace.ProductsData].productsSearch;
 export const getReviews = (state: State): Review[] | undefined => state[NameSpace.ProductsData].reviews;
 export const getIsSuccess = (state: State): boolean => state[NameSpace.ProductsData].isSuccess;
 export const getIsDataLoading = (state: State): boolean => state[NameSpace.ProductsData].isDataLoading;

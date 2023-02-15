@@ -8,6 +8,7 @@ export type ProductsData = {
     promo?: Promo;
     productDetail?: Product;
     productsSimilar?: Product[];
+    productsSearch?: Product[];
     reviews?: Review[];
     isDataLoading: boolean;
     isSuccess: boolean;

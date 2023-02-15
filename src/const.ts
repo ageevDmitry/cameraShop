@@ -156,3 +156,7 @@ export const REVIEW_FORM_STATUSES = [
 ];
 
 export const DEFAULT_RATING_REVIEW = 0;
+
+export enum QueryParam {
+  NameLike = 'name_like',
+}
