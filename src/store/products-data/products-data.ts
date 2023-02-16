@@ -24,6 +24,9 @@ export const productsData = createSlice({
     cleanUpProductDetail: (state) => {
       state.productDetail = undefined;
     },
+    cleanUpProductsSearch: (state) => {
+      state.productsSearch = undefined;
+    }
   },
   extraReducers(builder) {
     builder
@@ -123,4 +126,4 @@ export const productsData = createSlice({
   }
 });
 
-export const {cleanUpProductDetail} = productsData.actions;
+export const {cleanUpProductDetail, cleanUpProductsSearch} = productsData.actions;

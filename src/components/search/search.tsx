@@ -1,11 +1,24 @@
 import {useAppDispatch} from '../../hooks/useAppDispatch';
-// import {useAppSelector} from '../../hooks/useAppSelector';
+import {useAppSelector} from '../../hooks/useAppSelector';
 import {fetchProductsSearchAction} from '../../store/api-action';
-// import {getProductsSearch} from '../../store/products-data/selectors';
+import {getProductsSearch} from '../../store/products-data/selectors';
+import {useState, ChangeEvent} from 'react';
+import {nanoid} from 'nanoid';
+import styles from './search.module.css';
+import {DEFAULT_SEARCH_VALUE} from '../../const';
+import {cleanUpProductsSearch} from '../../store/products-data/products-data';
 
 function Search (): JSX.Element {
 
   const dispatch = useAppDispatch();
+  const productsSearch = useAppSelector(getProductsSearch);
+  const [searchData, setSearchData] = useState(DEFAULT_SEARCH_VALUE);
+
+  const handleFormChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const {value} = evt.target;
+    setSearchData(value);
+    dispatch(fetchProductsSearchAction(value));
+  };
 
   return (
     <div className="form-search">
@@ -14,20 +27,19 @@ function Search (): JSX.Element {
           <svg className="form-search__icon" width={16} height={16} aria-hidden="true">
             <use xlinkHref="#icon-lens" />
           </svg>
-          <input className="form-search__input" type="text" autoComplete="off" placeholder="Поиск по сайту" />
+          <input onChange={handleFormChange} className="form-search__input" type="text" autoComplete="off" value={searchData} placeholder="Поиск по сайту" />
         </label>
-        <ul className="form-search__select-list">
-          <li className="form-search__select-item" tabIndex={0}>Cannonball Pro MX 8i</li>
-          <li className="form-search__select-item" tabIndex={0}>Cannonball Pro MX 7i</li>
-          <li className="form-search__select-item" tabIndex={0}>Cannonball Pro MX 6i</li>
-          <li className="form-search__select-item" tabIndex={0}>Cannonball Pro MX 5i</li>
-          <li className="form-search__select-item" tabIndex={0}>Cannonball Pro MX 4i</li>
-        </ul>
+        {(searchData !== DEFAULT_SEARCH_VALUE) &&
+          <ul className={`${styles.selectList}`}>
+            {productsSearch?.map((item) => (
+              <li key={nanoid()} className="form-search__select-item" tabIndex={0}>{item.name}</li>
+            ))}
+          </ul>}
       </form>
-      {/* <button className="form-search__reset" type="reset" */}
-      <button type="reset"
+      <button className={(searchData === DEFAULT_SEARCH_VALUE) ? 'form-search__reset' : `${styles.resetButton}`} type="reset"
         onClick={() => {
-          dispatch(fetchProductsSearchAction('Pro'));
+          setSearchData(DEFAULT_SEARCH_VALUE);
+          dispatch(cleanUpProductsSearch());
         }}
       >
         <svg width={10} height={10} aria-hidden="true">

@@ -160,3 +160,5 @@ export const DEFAULT_RATING_REVIEW = 0;
 export enum QueryParam {
   NameLike = 'name_like',
 }
+
+export const DEFAULT_SEARCH_VALUE = '';
