@@ -7,6 +7,7 @@ import {nanoid} from 'nanoid';
 import styles from './search.module.css';
 import {DEFAULT_SEARCH_VALUE} from '../../const';
 import {cleanUpProductsSearch} from '../../store/products-data/products-data';
+import {redirectToRoute} from '../../store/action';
 
 function Search (): JSX.Element {
 
@@ -30,9 +31,21 @@ function Search (): JSX.Element {
           <input onChange={handleFormChange} className="form-search__input" type="text" autoComplete="off" value={searchData} placeholder="Поиск по сайту" />
         </label>
         {(searchData !== DEFAULT_SEARCH_VALUE) &&
-          <ul className={`${styles.selectList}`}>
+          <ul className={`${styles.selectList} ${styles.scroller}`}>
             {productsSearch?.map((item) => (
-              <li key={nanoid()} className="form-search__select-item" tabIndex={0}>{item.name}</li>
+              <li key={nanoid()} className="form-search__select-item" tabIndex={0}
+                onClick={() => {
+                  setSearchData(DEFAULT_SEARCH_VALUE);
+                  dispatch(redirectToRoute(`/product/${item.id}`));
+                }}
+                onKeyDown={(evt) => {
+                  if (evt.key === 'Enter' || evt.key === ' ') {
+                    setSearchData(DEFAULT_SEARCH_VALUE);
+                    dispatch(redirectToRoute(`/product/${item.id}`));
+                  }
+                }}
+              >{item.name}
+              </li>
             ))}
           </ul>}
       </form>

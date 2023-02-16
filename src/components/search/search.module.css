@@ -43,3 +43,17 @@
   -o-transition: color 0.3s ease;
   transition: color 0.3s ease;
 }
+
+.resetButton:hover {
+  color: #ed6041;
+}
+
+.resetButton:focus {
+  color: #ed6041;
+}
+
+.scroller {
+  border-radius: 8px;
+  scrollbar-color: #b4b4d7 #fff;
+  scrollbar-width: thin;
+}
