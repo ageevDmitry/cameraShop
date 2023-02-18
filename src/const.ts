@@ -166,3 +166,10 @@ export enum QueryParam {
 }
 
 export const DEFAULT_SEARCH_VALUE = '';
+
+export enum SortCatalogType {
+  Price = 'price',
+  Rating = 'rating',
+  Asc = 'asc',
+  Desc = 'desc',
+}

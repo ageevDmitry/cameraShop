@@ -1,9 +1,14 @@
 import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {useAppSelector} from '../../hooks/useAppSelector';
 import {changeCurrentSortType, changeCurrentOrderType} from '../../store/products-ui/products-ui';
+import {SortCatalogType} from '../../const';
+import {getCurrentSortType, getCurrentOrderType} from '../../store/products-ui/selectors';
 
 function SortCatalog (): JSX.Element {
 
   const dispatch = useAppDispatch();
+  const currentSortType = useAppSelector(getCurrentSortType);
+  const currentOrderType = useAppSelector(getCurrentOrderType);
 
   return (
     <div className="catalog-sort">
@@ -12,17 +17,33 @@ function SortCatalog (): JSX.Element {
           <p className="title title--h5">Сортировать:</p>
           <div className="catalog-sort__type">
             <div className="catalog-sort__btn-text">
-              <input type="radio" id="sortPrice" name="sort"
+              <input type="radio"
+                id="sortPrice"
+                name="sort"
+                checked={(currentSortType === SortCatalogType.Price)}
                 onClick={() => {
-                  dispatch(changeCurrentSortType({type: 'price'}));
+                  if (currentSortType === null) {
+                    dispatch(changeCurrentSortType({type: SortCatalogType.Price}));
+                    dispatch(changeCurrentOrderType({type: SortCatalogType.Asc}));
+                  } else if (currentSortType !== SortCatalogType.Price) {
+                    dispatch(changeCurrentSortType({type: SortCatalogType.Price}));
+                  }
                 }}
               />
               <label htmlFor="sortPrice">по цене</label>
             </div>
             <div className="catalog-sort__btn-text">
-              <input type="radio" id="sortPopular" name="sort"
+              <input type="radio"
+                id="sortPopular"
+                name="sort"
+                checked={(currentSortType === SortCatalogType.Rating)}
                 onClick={() => {
-                  dispatch(changeCurrentSortType({type: 'rating'}));
+                  if (currentSortType === null) {
+                    dispatch(changeCurrentSortType({type: SortCatalogType.Rating}));
+                    dispatch(changeCurrentOrderType({type: SortCatalogType.Asc}));
+                  } else if (currentSortType !== SortCatalogType.Rating) {
+                    dispatch(changeCurrentSortType({type: SortCatalogType.Rating}));
+                  }
                 }}
               />
               <label htmlFor="sortPopular">по популярности</label>
@@ -30,9 +51,18 @@ function SortCatalog (): JSX.Element {
           </div>
           <div className="catalog-sort__order">
             <div className="catalog-sort__btn catalog-sort__btn--up">
-              <input type="radio" id="up" name="sort-icon" aria-label="По возрастанию"
+              <input type="radio"
+                id="up"
+                name="sort-icon"
+                aria-label="По возрастанию"
+                checked={(currentOrderType === SortCatalogType.Asc)}
                 onClick={() => {
-                  dispatch(changeCurrentOrderType({type: 'asc'}));
+                  if (currentOrderType === null) {
+                    dispatch(changeCurrentOrderType({type: SortCatalogType.Asc}));
+                    dispatch(changeCurrentSortType({type: SortCatalogType.Price}));
+                  } else if (currentSortType !== SortCatalogType.Asc) {
+                    dispatch(changeCurrentOrderType({type: SortCatalogType.Asc}));
+                  }
                 }}
               />
               <label htmlFor="up">
@@ -42,9 +72,18 @@ function SortCatalog (): JSX.Element {
               </label>
             </div>
             <div className="catalog-sort__btn catalog-sort__btn--down">
-              <input type="radio" id="down" name="sort-icon" aria-label="По убыванию"
+              <input type="radio"
+                id="down"
+                name="sort-icon"
+                aria-label="По убыванию"
+                checked={(currentOrderType === SortCatalogType.Desc)}
                 onClick={() => {
-                  dispatch(changeCurrentOrderType({type: 'desc'}));
+                  if (currentOrderType === null) {
+                    dispatch(changeCurrentOrderType({type: SortCatalogType.Desc}));
+                    dispatch(changeCurrentSortType({type: SortCatalogType.Price}));
+                  } else if (currentSortType !== SortCatalogType.Desc) {
+                    dispatch(changeCurrentOrderType({type: SortCatalogType.Desc}));
+                  }
                 }}
               />
               <label htmlFor="down">
