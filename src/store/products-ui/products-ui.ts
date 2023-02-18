@@ -20,7 +20,7 @@ export const productsUI = createSlice({
       state.currentSortType = action.payload.type;
     },
     changeCurrentOrderType: (state, action: PayloadAction<{type: string}>) => {
-      state.currentSortType = action.payload.type;
+      state.currentOrderType = action.payload.type;
     },
   },
 
