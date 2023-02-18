@@ -32,7 +32,9 @@ export type ProductsReturnedData = {
     dataTotalCount: number;
 }
 
-export type ProductsRange = {
+export type ProductsFetchParams = {
     startItem: number;
     endItem: number;
+    sortType: string | null;
+    orderType: string | null;
 }

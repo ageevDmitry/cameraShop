@@ -11,7 +11,7 @@ import {redirectToRoute} from '../../store/action';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {getProducts, getProductsTotalCount, getPromo} from '../../store/products-data/selectors';
-import {getCurrentCatalogPage} from '../../store/products-ui/selectors';
+import {getCurrentCatalogPage, getCurrentSortType, getCurrentOrderType} from '../../store/products-ui/selectors';
 import {PaginationUI} from '../../const';
 import {NAV_BREADCRUMB_MAIN} from '../../const';
 import {fetchProductsAction, fetchPromoAction} from '../../store/api-action';
@@ -20,6 +20,8 @@ function Catalog (): JSX.Element {
 
   const dispatch = useAppDispatch();
   const currentCatalogPage = useAppSelector(getCurrentCatalogPage);
+  const currentSortType = useAppSelector(getCurrentSortType);
+  const currentOrderType = useAppSelector(getCurrentOrderType);
   const productsTotalCount = useAppSelector(getProductsTotalCount);
   const paginationCount = Math.ceil(productsTotalCount / PaginationUI.ProductsView);
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN];
@@ -28,9 +30,11 @@ function Catalog (): JSX.Element {
     dispatch(fetchProductsAction({
       startItem: PaginationUI.ProductsView * currentCatalogPage - PaginationUI.ProductsView,
       endItem: PaginationUI.ProductsView * currentCatalogPage,
+      sortType: currentSortType,
+      orderType: currentOrderType,
     }));
     dispatch(redirectToRoute(`/catalog/page_${currentCatalogPage}`));
-  }, [currentCatalogPage, dispatch]);
+  }, [currentCatalogPage, currentSortType, currentOrderType, dispatch]);
 
   useEffect(() => {
     dispatch(fetchPromoAction());

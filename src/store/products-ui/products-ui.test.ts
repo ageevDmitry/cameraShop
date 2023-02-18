@@ -1,7 +1,7 @@
 import {productsUI, changeCurrentCatalogPage} from './products-ui';
 import {PaginationUI} from '../../const';
 
-const newCUrrentCatalogPage = 2;
+const newCurrentCatalogPage = 2;
 
 describe('Reducer:productsUI', () => {
   it('without additional parameters should return initial state', () => {
@@ -14,11 +14,15 @@ describe('Reducer:productsUI', () => {
   it('should changeCurrentCatalogPage', () => {
     const state = {
       currentCatalogPage: PaginationUI.DefaultCatalogPage,
+      currentSortType: null,
+      currentOrderType: null,
     };
 
-    expect(productsUI.reducer(state, changeCurrentCatalogPage({page: newCUrrentCatalogPage})))
+    expect(productsUI.reducer(state, changeCurrentCatalogPage({page: newCurrentCatalogPage})))
       .toEqual({
-        currentCatalogPage: newCUrrentCatalogPage,
+        currentCatalogPage: newCurrentCatalogPage,
+        currentSortType: null,
+        currentOrderType: null,
       });
   });
 });

@@ -150,9 +150,11 @@ export const productsReturnedData: ProductsReturnedData = {
   dataTotalCount: 40,
 };
 
-export const productRange = {
+export const productsFetchParams = {
   startItem: 0,
   endItem: 9,
+  sortType: null,
+  orderType: null,
 };
 
 export const promo: Promo = {

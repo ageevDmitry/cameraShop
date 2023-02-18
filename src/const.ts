@@ -158,7 +158,11 @@ export const REVIEW_FORM_STATUSES = [
 export const DEFAULT_RATING_REVIEW = 0;
 
 export enum QueryParam {
+  StartItem = '_start',
+  EndItem = '_end',
   NameLike = 'name_like',
+  SortType = '_sort',
+  OrderType = '_order',
 }
 
 export const DEFAULT_SEARCH_VALUE = '';
