@@ -21,7 +21,7 @@ function SortCatalog (): JSX.Element {
                 id="sortPrice"
                 name="sort"
                 checked={(currentSortType === SortCatalogType.Price)}
-                onClick={() => {
+                onChange={() => {
                   if (currentSortType === null) {
                     dispatch(changeCurrentSortType({type: SortCatalogType.Price}));
                     dispatch(changeCurrentOrderType({type: SortCatalogType.Asc}));
@@ -36,8 +36,7 @@ function SortCatalog (): JSX.Element {
               <input type="radio"
                 id="sortPopular"
                 name="sort"
-                checked={(currentSortType === SortCatalogType.Rating)}
-                onClick={() => {
+                onChange={() => {
                   if (currentSortType === null) {
                     dispatch(changeCurrentSortType({type: SortCatalogType.Rating}));
                     dispatch(changeCurrentOrderType({type: SortCatalogType.Asc}));
@@ -56,7 +55,7 @@ function SortCatalog (): JSX.Element {
                 name="sort-icon"
                 aria-label="По возрастанию"
                 checked={(currentOrderType === SortCatalogType.Asc)}
-                onClick={() => {
+                onChange={() => {
                   if (currentOrderType === null) {
                     dispatch(changeCurrentOrderType({type: SortCatalogType.Asc}));
                     dispatch(changeCurrentSortType({type: SortCatalogType.Price}));
@@ -76,8 +75,7 @@ function SortCatalog (): JSX.Element {
                 id="down"
                 name="sort-icon"
                 aria-label="По убыванию"
-                checked={(currentOrderType === SortCatalogType.Desc)}
-                onClick={() => {
+                onChange={() => {
                   if (currentOrderType === null) {
                     dispatch(changeCurrentOrderType({type: SortCatalogType.Desc}));
                     dispatch(changeCurrentSortType({type: SortCatalogType.Price}));
