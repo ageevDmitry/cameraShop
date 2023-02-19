@@ -1,14 +1,14 @@
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
-import {changeCurrentSortType, changeCurrentOrderType} from '../../store/products-ui/products-ui';
+import {changeCurrentSort, changeCurrentOrder} from '../../store/products-ui/products-ui';
 import {SortCatalogType} from '../../const';
-import {getCurrentSortType, getCurrentOrderType} from '../../store/products-ui/selectors';
+import {getCurrentSort, getCurrentOrder} from '../../store/products-ui/selectors';
 
 function SortCatalog (): JSX.Element {
 
   const dispatch = useAppDispatch();
-  const currentSortType = useAppSelector(getCurrentSortType);
-  const currentOrderType = useAppSelector(getCurrentOrderType);
+  const currentSortType = useAppSelector(getCurrentSort);
+  const currentOrderType = useAppSelector(getCurrentOrder);
 
   return (
     <div className="catalog-sort">
@@ -23,10 +23,10 @@ function SortCatalog (): JSX.Element {
                 checked={(currentSortType === SortCatalogType.Price)}
                 onChange={() => {
                   if (currentSortType === null) {
-                    dispatch(changeCurrentSortType({type: SortCatalogType.Price}));
-                    dispatch(changeCurrentOrderType({type: SortCatalogType.Asc}));
+                    dispatch(changeCurrentSort({type: SortCatalogType.Price}));
+                    dispatch(changeCurrentOrder({type: SortCatalogType.Asc}));
                   } else if (currentSortType !== SortCatalogType.Price) {
-                    dispatch(changeCurrentSortType({type: SortCatalogType.Price}));
+                    dispatch(changeCurrentSort({type: SortCatalogType.Price}));
                   }
                 }}
               />
@@ -38,10 +38,10 @@ function SortCatalog (): JSX.Element {
                 name="sort"
                 onChange={() => {
                   if (currentSortType === null) {
-                    dispatch(changeCurrentSortType({type: SortCatalogType.Rating}));
-                    dispatch(changeCurrentOrderType({type: SortCatalogType.Asc}));
+                    dispatch(changeCurrentSort({type: SortCatalogType.Rating}));
+                    dispatch(changeCurrentOrder({type: SortCatalogType.Asc}));
                   } else if (currentSortType !== SortCatalogType.Rating) {
-                    dispatch(changeCurrentSortType({type: SortCatalogType.Rating}));
+                    dispatch(changeCurrentSort({type: SortCatalogType.Rating}));
                   }
                 }}
               />
@@ -57,10 +57,10 @@ function SortCatalog (): JSX.Element {
                 checked={(currentOrderType === SortCatalogType.Asc)}
                 onChange={() => {
                   if (currentOrderType === null) {
-                    dispatch(changeCurrentOrderType({type: SortCatalogType.Asc}));
-                    dispatch(changeCurrentSortType({type: SortCatalogType.Price}));
+                    dispatch(changeCurrentOrder({type: SortCatalogType.Asc}));
+                    dispatch(changeCurrentSort({type: SortCatalogType.Price}));
                   } else if (currentSortType !== SortCatalogType.Asc) {
-                    dispatch(changeCurrentOrderType({type: SortCatalogType.Asc}));
+                    dispatch(changeCurrentOrder({type: SortCatalogType.Asc}));
                   }
                 }}
               />
@@ -77,10 +77,10 @@ function SortCatalog (): JSX.Element {
                 aria-label="По убыванию"
                 onChange={() => {
                   if (currentOrderType === null) {
-                    dispatch(changeCurrentOrderType({type: SortCatalogType.Desc}));
-                    dispatch(changeCurrentSortType({type: SortCatalogType.Price}));
+                    dispatch(changeCurrentOrder({type: SortCatalogType.Desc}));
+                    dispatch(changeCurrentSort({type: SortCatalogType.Price}));
                   } else if (currentSortType !== SortCatalogType.Desc) {
-                    dispatch(changeCurrentOrderType({type: SortCatalogType.Desc}));
+                    dispatch(changeCurrentOrder({type: SortCatalogType.Desc}));
                   }
                 }}
               />

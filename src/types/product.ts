@@ -35,6 +35,11 @@ export type ProductsReturnedData = {
 export type ProductsFetchParams = {
     startItem: number;
     endItem: number;
-    sortType: string | null;
-    orderType: string | null;
+    sort: string | null;
+    order: string | null;
+    type: string | null;
+    category: string | null;
+    level: string | null;
+    minPrice: number | null;
+    maxPrice: number | null;
 }

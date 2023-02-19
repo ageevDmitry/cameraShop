@@ -16,8 +16,13 @@ export type ProductsData = {
 
 export type ProductsUI = {
     currentCatalogPage: number;
-    currentSortType: string | null;
-    currentOrderType: string | null;
+    currentSort: string | null;
+    currentOrder: string | null;
+    currentType: string | null;
+    currentCategory: string | null;
+    currentLevel: string | null;
+    currentMinPrice: number | null;
+    currentMaxPrice: number | null;
 };
 
 export type State = ReturnType<typeof store.getState>;

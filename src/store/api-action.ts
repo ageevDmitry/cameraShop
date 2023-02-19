@@ -11,18 +11,26 @@ export const fetchProductsAction = createAsyncThunk<ProductsReturnedData, Produc
     extra: AxiosInstance;
   }>(
     'data/fetchProducts',
-    async (productFetchParams, {extra: api}) => {
+    async ({startItem,
+      endItem,
+      sort,
+      order,
+      type,
+      category,
+      level,
+      minPrice,
+      maxPrice}, {extra: api}) => {
       const response = await api.get<Product[]>(APIRoute.Products, {
         params: {
-          [QueryParam.StartItem]: productFetchParams.startItem,
-          [QueryParam.EndItem]: productFetchParams.endItem,
-          [QueryParam.Sort]: productFetchParams.sortType,
-          [QueryParam.Order]: productFetchParams.orderType,
-          [QueryParam.Type]: 'Коллекционная',
-          [QueryParam.Category]: 'Видеокамера',
-          [QueryParam.Level]: null,
-          [QueryParam.MinPrice]: 50000,
-          [QueryParam.MaxPrice]: 100000,
+          [QueryParam.StartItem]: startItem,
+          [QueryParam.EndItem]: endItem,
+          [QueryParam.Sort]: sort,
+          [QueryParam.Order]: order,
+          [QueryParam.Type]: type,
+          [QueryParam.Category]: category,
+          [QueryParam.Level]: level,
+          [QueryParam.MinPrice]: minPrice,
+          [QueryParam.MaxPrice]: maxPrice,
         }
       });
       return {

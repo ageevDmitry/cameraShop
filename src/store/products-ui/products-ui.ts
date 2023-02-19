@@ -5,8 +5,13 @@ import type {PayloadAction} from '@reduxjs/toolkit';
 
 const initialState: ProductsUI = {
   currentCatalogPage: PaginationUI.DefaultCatalogPage,
-  currentSortType: null,
-  currentOrderType: null,
+  currentSort: null,
+  currentOrder: null,
+  currentType: null,
+  currentCategory: null,
+  currentLevel: null,
+  currentMinPrice: null,
+  currentMaxPrice: null,
 };
 
 export const productsUI = createSlice({
@@ -16,14 +21,44 @@ export const productsUI = createSlice({
     changeCurrentCatalogPage: (state, action: PayloadAction<{page: number}>) => {
       state.currentCatalogPage = action.payload.page;
     },
-    changeCurrentSortType: (state, action: PayloadAction<{type: string}>) => {
-      state.currentSortType = action.payload.type;
+    changeCurrentSort: (state, action: PayloadAction<{type: string}>) => {
+      state.currentSort = action.payload.type;
     },
-    changeCurrentOrderType: (state, action: PayloadAction<{type: string}>) => {
-      state.currentOrderType = action.payload.type;
+    changeCurrentOrder: (state, action: PayloadAction<{type: string}>) => {
+      state.currentOrder = action.payload.type;
+    },
+    changeCurrentType: (state, action: PayloadAction<{type: string}>) => {
+      state.currentType = action.payload.type;
+    },
+    changeCurrentCategory: (state, action: PayloadAction<{type: string}>) => {
+      state.currentCategory = action.payload.type;
+    },
+    changeCurrentLevel: (state, action: PayloadAction<{type: string}>) => {
+      state.currentLevel = action.payload.type;
+    },
+    changeMinPrice: (state, action: PayloadAction<{type: number}>) => {
+      state.currentMinPrice = action.payload.type;
+    },
+    changeMaxPrice: (state, action: PayloadAction<{type: number}>) => {
+      state.currentMaxPrice = action.payload.type;
+    },
+    cleanUpFilter: (state) => {
+      state.currentOrder = null;
+      state.currentType = null;
+      state.currentCategory = null;
+      state.currentLevel = null;
+      state.currentMinPrice = null;
+      state.currentMaxPrice = null;
     },
   },
-
 });
 
-export const {changeCurrentCatalogPage, changeCurrentSortType, changeCurrentOrderType} = productsUI.actions;
+export const {changeCurrentCatalogPage,
+  changeCurrentSort,
+  changeCurrentOrder,
+  changeCurrentType,
+  changeCurrentCategory,
+  changeCurrentLevel,
+  changeMinPrice,
+  changeMaxPrice,
+  cleanUpFilter} = productsUI.actions;

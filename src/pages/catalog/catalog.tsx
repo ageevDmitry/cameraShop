@@ -10,8 +10,17 @@ import {useEffect} from 'react';
 import {redirectToRoute} from '../../store/action';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
-import {getProducts, getProductsTotalCount, getPromo} from '../../store/products-data/selectors';
-import {getCurrentCatalogPage, getCurrentSortType, getCurrentOrderType} from '../../store/products-ui/selectors';
+import {getProducts,
+  getProductsTotalCount,
+  getPromo} from '../../store/products-data/selectors';
+import {getCurrentCatalogPage,
+  getCurrentSort,
+  getCurrentOrder,
+  getCurrentType,
+  getCurrentCategory,
+  getCurrentLevel,
+  getCurrentMinPrice,
+  getCurrentMaxPrice} from '../../store/products-ui/selectors';
 import {PaginationUI} from '../../const';
 import {NAV_BREADCRUMB_MAIN} from '../../const';
 import {fetchProductsAction, fetchPromoAction} from '../../store/api-action';
@@ -20,28 +29,45 @@ function Catalog (): JSX.Element {
 
   const dispatch = useAppDispatch();
   const currentCatalogPage = useAppSelector(getCurrentCatalogPage);
-  const currentSortType = useAppSelector(getCurrentSortType);
-  const currentOrderType = useAppSelector(getCurrentOrderType);
+  const currentSort = useAppSelector(getCurrentSort);
+  const currentOrder = useAppSelector(getCurrentOrder);
+  const currentType = useAppSelector(getCurrentType);
+  const currentCategory = useAppSelector(getCurrentCategory);
+  const currentLevel = useAppSelector(getCurrentLevel);
+  const currentMinPrice = useAppSelector(getCurrentMinPrice);
+  const currentMaxPrice = useAppSelector(getCurrentMaxPrice);
   const productsTotalCount = useAppSelector(getProductsTotalCount);
   const paginationCount = Math.ceil(productsTotalCount / PaginationUI.ProductsView);
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN];
+  const products = useAppSelector(getProducts);
+  const promo = useAppSelector(getPromo);
 
   useEffect(() => {
     dispatch(fetchProductsAction({
       startItem: PaginationUI.ProductsView * currentCatalogPage - PaginationUI.ProductsView,
       endItem: PaginationUI.ProductsView * currentCatalogPage,
-      sortType: currentSortType,
-      orderType: currentOrderType,
+      sort: currentSort,
+      order: currentOrder,
+      type: currentType,
+      category: currentCategory,
+      level: currentLevel,
+      minPrice: currentMinPrice,
+      maxPrice: currentMaxPrice,
     }));
     dispatch(redirectToRoute(`/catalog/page_${currentCatalogPage}`));
-  }, [currentCatalogPage, currentSortType, currentOrderType, dispatch]);
+  }, [currentCatalogPage,
+    currentSort,
+    currentOrder,
+    currentType,
+    currentCategory,
+    currentLevel,
+    currentMinPrice,
+    currentMaxPrice,
+    dispatch]);
 
   useEffect(() => {
     dispatch(fetchPromoAction());
   }, [dispatch]);
-
-  const products = useAppSelector(getProducts);
-  const promo = useAppSelector(getPromo);
 
   return (
     <div className="wrapper">
