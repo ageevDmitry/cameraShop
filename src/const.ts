@@ -161,8 +161,13 @@ export enum QueryParam {
   StartItem = '_start',
   EndItem = '_end',
   NameLike = 'name_like',
-  SortType = '_sort',
-  OrderType = '_order',
+  Sort = '_sort',
+  Order = '_order',
+  Type = 'type',
+  Category = 'category',
+  Level = 'level',
+  MinPrice = 'price_gte',
+  MaxPrice = 'price_lte',
 }
 
 export const DEFAULT_SEARCH_VALUE = '';

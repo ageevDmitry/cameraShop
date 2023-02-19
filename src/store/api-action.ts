@@ -16,8 +16,13 @@ export const fetchProductsAction = createAsyncThunk<ProductsReturnedData, Produc
         params: {
           [QueryParam.StartItem]: productFetchParams.startItem,
           [QueryParam.EndItem]: productFetchParams.endItem,
-          [QueryParam.SortType]: productFetchParams.sortType,
-          [QueryParam.OrderType]: productFetchParams.orderType,
+          [QueryParam.Sort]: productFetchParams.sortType,
+          [QueryParam.Order]: productFetchParams.orderType,
+          [QueryParam.Type]: 'Коллекционная',
+          [QueryParam.Category]: 'Видеокамера',
+          [QueryParam.Level]: null,
+          [QueryParam.MinPrice]: 50000,
+          [QueryParam.MaxPrice]: 100000,
         }
       });
       return {
