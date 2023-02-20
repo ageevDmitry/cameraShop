@@ -27,11 +27,11 @@ export const productsUI = createSlice({
     changeCurrentOrder: (state, action: PayloadAction<{type: string}>) => {
       state.currentOrder = action.payload.type;
     },
+    changeCurrentCategory: (state, action: PayloadAction<{type: string | null}>) => {
+      state.currentCategory = action.payload.type;
+    },
     changeCurrentType: (state, action: PayloadAction<{type: string}>) => {
       state.currentType = action.payload.type;
-    },
-    changeCurrentCategory: (state, action: PayloadAction<{type: string}>) => {
-      state.currentCategory = action.payload.type;
     },
     changeCurrentLevel: (state, action: PayloadAction<{type: string}>) => {
       state.currentLevel = action.payload.type;

@@ -178,3 +178,15 @@ export enum SortCatalogType {
   Asc = 'asc',
   Desc = 'desc',
 }
+
+export enum FilterCatalogType {
+  Photo = 'Фотоаппарат',
+  Video = 'Видеокамера',
+  Digital = 'Цифровая',
+  Film = 'Плёночная',
+  Instant = 'Моментальная',
+  Collection = 'Коллекционная',
+  Elementary = 'Начальный',
+  Amateur = 'Средний',
+  Professional = 'Профессиональный',
+}

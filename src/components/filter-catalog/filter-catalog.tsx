@@ -1,12 +1,20 @@
-// import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {getProducts} from '../../store/products-data/selectors';
 import {getMinMaxPriceProducts} from '../../utils';
+import {getCurrentCategory} from '../../store/products-ui/selectors';
+import {changeCurrentCategory,
+  changeCurrentType,
+  changeCurrentLevel,
+  cleanUpFilter} from '../../store/products-ui/products-ui';
+import {FilterCatalogType} from '../../const';
+
 
 function FilterCatalog (): JSX.Element {
 
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const products = useAppSelector(getProducts);
+  const currentCategory = useAppSelector(getCurrentCategory);
   const minMaxPrice = getMinMaxPriceProducts(products);
 
   return (
@@ -32,12 +40,28 @@ function FilterCatalog (): JSX.Element {
           <legend className="title title--h5">Категория</legend>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="photocamera" defaultChecked /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Фотокамера</span>
+              <input type="checkbox"
+                name="photocamera"
+                onChange={() => {
+                  (currentCategory === null)
+                    ? dispatch(changeCurrentCategory({type: FilterCatalogType.Photo}))
+                    : dispatch(changeCurrentCategory({type: null}));
+                }}
+                disabled={(currentCategory === FilterCatalogType.Video)}
+              /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Фотокамера</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="videocamera" /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Видеокамера</span>
+              <input type="checkbox"
+                name="videocamera"
+                onChange={() => {
+                  (currentCategory === null)
+                    ? dispatch(changeCurrentCategory({type: FilterCatalogType.Video}))
+                    : dispatch(changeCurrentCategory({type: null}));
+                }}
+                disabled={(currentCategory === FilterCatalogType.Photo)}
+              /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Видеокамера</span>
             </label>
           </div>
         </fieldset>
@@ -45,22 +69,44 @@ function FilterCatalog (): JSX.Element {
           <legend className="title title--h5">Тип камеры</legend>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="digital" defaultChecked /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Цифровая</span>
+              <input type="checkbox"
+                name="digital"
+                onChange={() => {
+                  dispatch(changeCurrentType({type: FilterCatalogType.Digital}));
+                }}
+              /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Цифровая</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="film" disabled /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Плёночная</span>
+              <input type="checkbox"
+                name="film"
+                onChange={() => {
+                  dispatch(changeCurrentType({type: FilterCatalogType.Film}));
+                }}
+                disabled={(currentCategory === FilterCatalogType.Video)}
+              /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Плёночная</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="snapshot" /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Моментальная</span>
+              <input type="checkbox"
+                name="snapshot"
+                onChange={() => {
+                  dispatch(changeCurrentType({type: FilterCatalogType.Instant}));
+                }}
+                disabled={(currentCategory === FilterCatalogType.Video)}
+              /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Моментальная</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="collection" defaultChecked disabled /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Коллекционная</span>
+              <input type="checkbox"
+                name="collection"
+                onChange={() => {
+                  dispatch(changeCurrentType({type: FilterCatalogType.Collection}));
+                }}
+              /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Коллекционная</span>
             </label>
           </div>
         </fieldset>
@@ -68,21 +114,40 @@ function FilterCatalog (): JSX.Element {
           <legend className="title title--h5">Уровень</legend>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="zero" defaultChecked /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Нулевой</span>
+              <input type="checkbox"
+                name="zero"
+                onChange={() => {
+                  dispatch(changeCurrentLevel({type: FilterCatalogType.Elementary}));
+                }}
+              /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Нулевой</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="non-professional" /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Любительский</span>
+              <input type="checkbox"
+                name="non-professional"
+                onChange={() => {
+                  dispatch(changeCurrentLevel({type: FilterCatalogType.Amateur}));
+                }}
+              /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Любительский</span>
             </label>
           </div>
           <div className="custom-checkbox catalog-filter__item">
             <label>
-              <input type="checkbox" name="professional" /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Профессиональный</span>
+              <input type="checkbox"
+                name="professional"
+                onChange={() => {
+                  dispatch(changeCurrentLevel({type: FilterCatalogType.Professional}));
+                }}
+              /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Профессиональный</span>
             </label>
           </div>
         </fieldset>
-        <button className="btn catalog-filter__reset-btn" type="reset">Сбросить фильтры
+        <button className="btn catalog-filter__reset-btn" type="reset"
+          onClick={() => {
+            dispatch(cleanUpFilter());
+          }}
+        >Сбросить фильтры
         </button>
       </form>
     </div>

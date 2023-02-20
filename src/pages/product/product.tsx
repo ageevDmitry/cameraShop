@@ -17,6 +17,7 @@ import Footer from '../../components/footer/footer';
 import ModalReview from '../../components/modal-review/modal-review';
 import ModalReviewSuccess from '../../components/modal-review-success/modal-review-success';
 import LoadingScreen from '../../components/loading-screen/loading-screen';
+import {cleanUpFilter} from '../../store/products-ui/products-ui';
 
 function Product(): JSX.Element {
 
@@ -38,7 +39,8 @@ function Product(): JSX.Element {
     }
   }, [id, dispatch, currentTabControl]);
 
-  useEffect(() => () => {
+  useEffect(() => {
+    dispatch(cleanUpFilter());
     dispatch(cleanUpProductDetail());
   }, [dispatch]);
 
