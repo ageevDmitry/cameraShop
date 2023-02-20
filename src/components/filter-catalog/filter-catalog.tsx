@@ -3,7 +3,9 @@ import {useAppSelector} from '../../hooks/useAppSelector';
 import {getProducts} from '../../store/products-data/selectors';
 import {getMinMaxPriceProducts, getFilterTypeArray} from '../../utils';
 import {getCurrentCategory,
-  getCurrentType} from '../../store/products-ui/selectors';
+  getCurrentType,
+  getCurrentLevel,
+} from '../../store/products-ui/selectors';
 import {changeCurrentCategory,
   changeCurrentType,
   changeCurrentLevel,
@@ -16,6 +18,7 @@ function FilterCatalog (): JSX.Element {
   const products = useAppSelector(getProducts);
   const currentCategory = useAppSelector(getCurrentCategory);
   const currentType = useAppSelector(getCurrentType);
+  const currentLevel = useAppSelector(getCurrentLevel);
   const minMaxPrice = getMinMaxPriceProducts(products);
 
   return (
@@ -118,7 +121,7 @@ function FilterCatalog (): JSX.Element {
               <input type="checkbox"
                 name="zero"
                 onChange={() => {
-                  dispatch(changeCurrentLevel({type: getFilterTypeArray(currentType, FilterCatalogType.Elementary)}));
+                  dispatch(changeCurrentLevel({type: getFilterTypeArray(currentLevel, FilterCatalogType.Elementary)}));
                 }}
               /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Нулевой</span>
             </label>
@@ -128,7 +131,7 @@ function FilterCatalog (): JSX.Element {
               <input type="checkbox"
                 name="non-professional"
                 onChange={() => {
-                  dispatch(changeCurrentLevel({type: getFilterTypeArray(currentType, FilterCatalogType.Amateur)}));
+                  dispatch(changeCurrentLevel({type: getFilterTypeArray(currentLevel, FilterCatalogType.Amateur)}));
                 }}
               /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Любительский</span>
             </label>
@@ -138,7 +141,7 @@ function FilterCatalog (): JSX.Element {
               <input type="checkbox"
                 name="professional"
                 onChange={() => {
-                  dispatch(changeCurrentLevel({type: getFilterTypeArray(currentType, FilterCatalogType.Professional)}));
+                  dispatch(changeCurrentLevel({type: getFilterTypeArray(currentLevel, FilterCatalogType.Professional)}));
                 }}
               /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Профессиональный</span>
             </label>

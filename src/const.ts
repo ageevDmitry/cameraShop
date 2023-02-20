@@ -186,7 +186,7 @@ export enum FilterCatalogType {
   Film = 'Плёночная',
   Instant = 'Моментальная',
   Collection = 'Коллекционная',
-  Elementary = 'Начальный',
-  Amateur = 'Средний',
+  Elementary = 'Нулевой',
+  Amateur = 'Любительский',
   Professional = 'Профессиональный',
 }
