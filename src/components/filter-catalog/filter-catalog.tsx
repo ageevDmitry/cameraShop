@@ -1,7 +1,7 @@
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {getProducts} from '../../store/products-data/selectors';
-import {getMinMaxPriceProducts} from '../../utils';
+import {getMinMaxPriceProducts, getFilterTypeArray} from '../../utils';
 import {getCurrentCategory,
   getCurrentType} from '../../store/products-ui/selectors';
 import {changeCurrentCategory,
@@ -17,23 +17,6 @@ function FilterCatalog (): JSX.Element {
   const currentCategory = useAppSelector(getCurrentCategory);
   const currentType = useAppSelector(getCurrentType);
   const minMaxPrice = getMinMaxPriceProducts(products);
-
-  const foo = () => {
-    if (currentType === null) {
-      dispatch(changeCurrentType({type: [FilterCatalogType.Digital]}));
-    } else if (currentType?.includes(FilterCatalogType.Digital)) {
-      const index = currentType.indexOf(FilterCatalogType.Digital);
-      if (index === 0 ) {
-        dispatch(changeCurrentType({type: null}));
-      } else {
-        currentType.splice(index, 1);
-        dispatch(changeCurrentType({type: currentType}));
-      }
-    } else {
-      currentType.push(FilterCatalogType.Digital);
-      dispatch(changeCurrentType({type: currentType}));
-    }
-  };
 
   return (
     <div className="catalog-filter">
@@ -89,7 +72,9 @@ function FilterCatalog (): JSX.Element {
             <label>
               <input type="checkbox"
                 name="digital"
-                onChange={foo}
+                onChange={() => {
+                  dispatch(changeCurrentType({type: getFilterTypeArray(currentType, FilterCatalogType.Digital)}));
+                }}
               /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Цифровая</span>
             </label>
           </div>
@@ -98,7 +83,7 @@ function FilterCatalog (): JSX.Element {
               <input type="checkbox"
                 name="film"
                 onChange={() => {
-                  dispatch(changeCurrentType({type: [FilterCatalogType.Film]}));
+                  dispatch(changeCurrentType({type: getFilterTypeArray(currentType, FilterCatalogType.Film)}));
                 }}
                 disabled={(currentCategory === FilterCatalogType.Video)}
               /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Плёночная</span>
@@ -109,7 +94,7 @@ function FilterCatalog (): JSX.Element {
               <input type="checkbox"
                 name="snapshot"
                 onChange={() => {
-                  dispatch(changeCurrentType({type: [FilterCatalogType.Instant]}));
+                  dispatch(changeCurrentType({type: getFilterTypeArray(currentType, FilterCatalogType.Instant)}));
                 }}
                 disabled={(currentCategory === FilterCatalogType.Video)}
               /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Моментальная</span>
@@ -120,7 +105,7 @@ function FilterCatalog (): JSX.Element {
               <input type="checkbox"
                 name="collection"
                 onChange={() => {
-                  dispatch(changeCurrentType({type: [FilterCatalogType.Collection]}));
+                  dispatch(changeCurrentType({type: getFilterTypeArray(currentType, FilterCatalogType.Collection)}));
                 }}
               /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Коллекционная</span>
             </label>
@@ -133,7 +118,7 @@ function FilterCatalog (): JSX.Element {
               <input type="checkbox"
                 name="zero"
                 onChange={() => {
-                  dispatch(changeCurrentLevel({type: FilterCatalogType.Elementary}));
+                  dispatch(changeCurrentLevel({type: getFilterTypeArray(currentType, FilterCatalogType.Elementary)}));
                 }}
               /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Нулевой</span>
             </label>
@@ -143,7 +128,7 @@ function FilterCatalog (): JSX.Element {
               <input type="checkbox"
                 name="non-professional"
                 onChange={() => {
-                  dispatch(changeCurrentLevel({type: FilterCatalogType.Amateur}));
+                  dispatch(changeCurrentLevel({type: getFilterTypeArray(currentType, FilterCatalogType.Amateur)}));
                 }}
               /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Любительский</span>
             </label>
@@ -153,7 +138,7 @@ function FilterCatalog (): JSX.Element {
               <input type="checkbox"
                 name="professional"
                 onChange={() => {
-                  dispatch(changeCurrentLevel({type: FilterCatalogType.Professional}));
+                  dispatch(changeCurrentLevel({type: getFilterTypeArray(currentType, FilterCatalogType.Professional)}));
                 }}
               /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">Профессиональный</span>
             </label>

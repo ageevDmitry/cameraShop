@@ -18,9 +18,9 @@ export type ProductsUI = {
     currentCatalogPage: number;
     currentSort: string | null;
     currentOrder: string | null;
-    currentType: string[] | null;
     currentCategory: string | null;
-    currentLevel: string | null;
+    currentType: string[] | null;
+    currentLevel: string[] | null;
     currentMinPrice: number | null;
     currentMaxPrice: number | null;
 };
