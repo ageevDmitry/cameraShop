@@ -179,7 +179,7 @@ export enum SortCatalogType {
   Desc = 'desc',
 }
 
-export enum FilterCatalogType {
+export enum FilterCatalogType1 {
   Photo = 'Фотоаппарат',
   Video = 'Видеокамера',
   Digital = 'Цифровая',
@@ -190,3 +190,56 @@ export enum FilterCatalogType {
   Amateur = 'Любительский',
   Professional = 'Профессиональный',
 }
+
+export const FilterCatalogLevel = [
+  {
+    title: 'Нулевой',
+    name: 'zero',
+  },
+  {
+    title: 'Любительский',
+    name: 'non-professional',
+  },
+  {
+    title: 'Профессиональный',
+    name: 'professional',
+  },
+];
+
+export const FilterCatalogCategory = [
+  {
+    title: 'Фотокамера',
+    name: 'photocamera',
+    type: 'Фотоаппарат',
+    disable: 'Видеокамера',
+  },
+  {
+    title: 'Видеокамера',
+    name: 'videocamera',
+    type: 'Видеокамера',
+    disable: 'Фотоаппарат',
+  },
+];
+
+export const FilterCatalogType = [
+  {
+    title: 'Цифровая',
+    name: 'digital',
+    disable: '#',
+  },
+  {
+    title: 'Плёночная',
+    name: 'film',
+    disable: 'Видеокамера',
+  },
+  {
+    title: 'Моментальная',
+    name: 'snapshot',
+    disable: 'Видеокамера',
+  },
+  {
+    title: 'Коллекционная',
+    name: 'collection',
+    disable: '#',
+  },
+];
