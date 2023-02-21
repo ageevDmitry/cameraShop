@@ -21,6 +21,8 @@ describe('Reducer:productsData', () => {
   it('should cleanup productDetail', () => {
     const state = {
       products: [],
+      minPrice: 0,
+      maxPrice: 1000,
       productsTotalCount: 0,
       isDataLoading: false,
       isSuccess: false,
@@ -40,6 +42,8 @@ describe('Reducer:productsData', () => {
   it('should fetch products', () => {
     const state = {
       products: [],
+      minPrice: 0,
+      maxPrice: 1000,
       productsTotalCount: productsReturnedData.dataTotalCount,
       isDataLoading: false,
       isSuccess: false,
@@ -73,6 +77,8 @@ describe('Reducer:productsData', () => {
   it('should fetch promo', () => {
     const state = {
       products: [],
+      minPrice: 0,
+      maxPrice: 1000,
       productsTotalCount: 0,
       isDataLoading: false,
       isSuccess: false,
@@ -107,6 +113,8 @@ describe('Reducer:productsData', () => {
   it('should fetch productDetail', () => {
     const state = {
       products: [],
+      minPrice: 0,
+      maxPrice: 1000,
       productsTotalCount: 0,
       isDataLoading: false,
       isSuccess: false,
@@ -142,6 +150,8 @@ describe('Reducer:productsData', () => {
   it('should fetch productSimilar', () => {
     const state = {
       products: [],
+      minPrice: 0,
+      maxPrice: 1000,
       productsTotalCount: 0,
       isDataLoading: false,
       isSuccess: false,
@@ -176,6 +186,8 @@ describe('Reducer:productsData', () => {
   it('should fetch reviews', () => {
     const state = {
       products: [],
+      minPrice: 0,
+      maxPrice: 1000,
       productsTotalCount: 0,
       isDataLoading: false,
       isSuccess: false,
@@ -210,6 +222,8 @@ describe('Reducer:productsData', () => {
   it('should send new review', () => {
     const state = {
       products: [],
+      minPrice: 0,
+      maxPrice: 1000,
       productsTotalCount: 0,
       isDataLoading: false,
       isSuccess: false,

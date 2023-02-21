@@ -1,11 +1,10 @@
 import {useAppSelector} from '../../hooks/useAppSelector';
-import {getProducts} from '../../store/products-data/selectors';
-import {getMinMaxPriceProducts} from '../../utils';
+import {getMinProductsPrice, getMaxProductsPrice} from '../../store/products-data/selectors';
 
 function FilterPrice (): JSX.Element {
 
-  const products = useAppSelector(getProducts);
-  const minMaxPrice = getMinMaxPriceProducts(products);
+  const minPrice = useAppSelector(getMinProductsPrice);
+  const maxPrice = useAppSelector(getMaxProductsPrice);
 
   return (
     <fieldset className="catalog-filter__block">
@@ -13,12 +12,18 @@ function FilterPrice (): JSX.Element {
       <div className="catalog-filter__price-range">
         <div className="custom-input">
           <label>
-            <input type="number" name="price" placeholder={String(minMaxPrice[0])} />
+            <input type="number"
+              name="price"
+              placeholder={`${(minPrice === null) ? 'от' : String(minPrice)}`}
+            />
           </label>
         </div>
         <div className="custom-input">
           <label>
-            <input type="number" name="priceUp" placeholder={String(minMaxPrice[1])} />
+            <input type="number"
+              name="priceUp"
+              placeholder={`${(maxPrice === null) ? 'до' : String(maxPrice)}`}
+            />
           </label>
         </div>
       </div>

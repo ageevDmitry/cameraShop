@@ -23,7 +23,11 @@ import {getCurrentCatalogPage,
   getCurrentMaxPrice} from '../../store/products-ui/selectors';
 import {PaginationUI} from '../../const';
 import {NAV_BREADCRUMB_MAIN} from '../../const';
-import {fetchProductsAction, fetchPromoAction} from '../../store/api-action';
+import {fetchProductsAction,
+  fetchPromoAction,
+  fetchMinPriceProductsAction,
+  fetchMaxPriceProductsAction
+} from '../../store/api-action';
 
 function Catalog (): JSX.Element {
 
@@ -63,6 +67,22 @@ function Catalog (): JSX.Element {
     currentLevel,
     currentMinPrice,
     currentMaxPrice,
+    dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchMinPriceProductsAction({
+      type: currentType,
+      category: currentCategory,
+      level: currentLevel,
+    }));
+    dispatch(fetchMaxPriceProductsAction({
+      type: currentType,
+      category: currentCategory,
+      level: currentLevel,
+    }));
+  }, [currentType,
+    currentCategory,
+    currentLevel,
     dispatch]);
 
   useEffect(() => {

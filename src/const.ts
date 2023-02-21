@@ -130,6 +130,10 @@ export const enum DefaultReviewsView {
   EndItem = 3
 }
 
+export const enum DefaultMinMaxPriceItem {
+  StartItem = 0,
+  EndItem = 1
+}
 export const STEP_REVIEWS_VIEW = 3;
 
 export const REVIEW_FORM_STATUSES = [
@@ -177,18 +181,6 @@ export enum SortCatalogType {
   Rating = 'rating',
   Asc = 'asc',
   Desc = 'desc',
-}
-
-export enum FilterCatalogType1 {
-  Photo = 'Фотоаппарат',
-  Video = 'Видеокамера',
-  Digital = 'Цифровая',
-  Film = 'Плёночная',
-  Instant = 'Моментальная',
-  Collection = 'Коллекционная',
-  Elementary = 'Нулевой',
-  Amateur = 'Любительский',
-  Professional = 'Профессиональный',
 }
 
 export const FilterCatalogLevel = [

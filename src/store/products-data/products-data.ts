@@ -2,6 +2,8 @@ import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../const';
 import {ProductsData} from '../../types/state';
 import {fetchProductsAction,
+  fetchMinPriceProductsAction,
+  fetchMaxPriceProductsAction,
   fetchPromoAction,
   fetchProductDetailAction,
   fetchProductsSimilarAction,
@@ -12,6 +14,8 @@ import {fetchProductsAction,
 
 const initialState: ProductsData = {
   products: [],
+  minPrice: null,
+  maxPrice: null,
   productsTotalCount: 0,
   isDataLoading: false,
   isSuccess: false,
@@ -42,6 +46,34 @@ export const productsData = createSlice({
       })
       .addCase(fetchProductsAction.rejected, (state) => {
         state.products = [];
+        state.isDataLoading = false;
+        state.isSuccess = false;
+      })
+      .addCase(fetchMinPriceProductsAction.pending, (state) => {
+        state.isDataLoading = true;
+        state.isSuccess = false;
+      })
+      .addCase(fetchMinPriceProductsAction.fulfilled, (state, action) => {
+        state.minPrice = action.payload;
+        state.isDataLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(fetchMinPriceProductsAction.rejected, (state) => {
+        state.minPrice = null;
+        state.isDataLoading = false;
+        state.isSuccess = false;
+      })
+      .addCase(fetchMaxPriceProductsAction.pending, (state) => {
+        state.isDataLoading = true;
+        state.isSuccess = false;
+      })
+      .addCase(fetchMaxPriceProductsAction.fulfilled, (state, action) => {
+        state.maxPrice = action.payload;
+        state.isDataLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(fetchMaxPriceProductsAction.rejected, (state) => {
+        state.maxPrice = null;
         state.isDataLoading = false;
         state.isSuccess = false;
       })

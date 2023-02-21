@@ -4,6 +4,8 @@ import {store} from '../store';
 
 export type ProductsData = {
     products: Product[];
+    minPrice: number | null;
+    maxPrice: number | null;
     productsTotalCount: number;
     promo?: Promo;
     productDetail?: Product;

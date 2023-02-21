@@ -43,3 +43,9 @@ export type ProductsFetchParams = {
     minPrice: number | null;
     maxPrice: number | null;
 }
+
+export type ProductsMinPriceFetchParams = {
+    category: string | null;
+    type: string[] | null;
+    level: string[] | null;
+}

@@ -1,9 +1,17 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
-import {Product, Promo, ProductsReturnedData, ProductsFetchParams} from '../types/product';
+import {Product,
+  Promo,
+  ProductsReturnedData,
+  ProductsFetchParams,
+  ProductsMinPriceFetchParams} from '../types/product';
 import {Review, ReviewPost} from '../types/review';
-import {APIRoute, QueryParam} from '../const';
+import {APIRoute,
+  QueryParam,
+  SortCatalogType,
+  DefaultMinMaxPriceItem
+} from '../const';
 
 export const fetchProductsAction = createAsyncThunk<ProductsReturnedData, ProductsFetchParams,{
     dispatch: AppDispatch;
@@ -37,6 +45,56 @@ export const fetchProductsAction = createAsyncThunk<ProductsReturnedData, Produc
         data: response.data,
         dataTotalCount: Number(response.headers['x-total-count'])
       };
+    }
+  );
+
+export const fetchMinPriceProductsAction = createAsyncThunk<number, ProductsMinPriceFetchParams,{
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }>(
+    'data/fetchMinPriceProducts',
+    async ({category,
+      type,
+      level,
+    }, {extra: api}) => {
+      const response = await api.get<Product[]>(APIRoute.Products, {
+        params: {
+          [QueryParam.StartItem]: DefaultMinMaxPriceItem.StartItem,
+          [QueryParam.EndItem]: DefaultMinMaxPriceItem.EndItem,
+          [QueryParam.Sort]: SortCatalogType.Price,
+          [QueryParam.Order]: SortCatalogType.Asc,
+          [QueryParam.Category]: category,
+          [QueryParam.Type]: type,
+          [QueryParam.Level]: level,
+        }
+      });
+      return response.data[0].price;
+    }
+  );
+
+export const fetchMaxPriceProductsAction = createAsyncThunk<number, ProductsMinPriceFetchParams,{
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }>(
+    'data/fetchMaxPriceProducts',
+    async ({category,
+      type,
+      level,
+    }, {extra: api}) => {
+      const response = await api.get<Product[]>(APIRoute.Products, {
+        params: {
+          [QueryParam.StartItem]: DefaultMinMaxPriceItem.StartItem,
+          [QueryParam.EndItem]: DefaultMinMaxPriceItem.EndItem,
+          [QueryParam.Sort]: SortCatalogType.Price,
+          [QueryParam.Order]: SortCatalogType.Desc,
+          [QueryParam.Category]: category,
+          [QueryParam.Type]: type,
+          [QueryParam.Level]: level,
+        }
+      });
+      return response.data[0].price;
     }
   );
 
