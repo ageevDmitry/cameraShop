@@ -1,49 +1,71 @@
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {getMinProductsPrice, getMaxProductsPrice} from '../../store/products-data/selectors';
-import {useState, ChangeEvent} from 'react';
+import {useState, useEffect, ChangeEvent} from 'react';
 import {changeMinPrice, changeMaxPrice} from '../../store/products-ui/products-ui';
 import {getValidateMinCurrentPrice,
-  getValidateMaxCurrentPrice
+  getValidateMaxCurrentPrice,
+  getStringCurrentPrice,
 } from '../../utils';
+import {getCurrentMinPrice, getCurrentMaxPrice} from '../../store/products-ui/selectors';
 
 function FilterPrice (): JSX.Element {
 
   const dispatch = useAppDispatch();
   const minProductsPrice = useAppSelector(getMinProductsPrice);
   const maxProductsPrice = useAppSelector(getMaxProductsPrice);
+  const minFilterPrice = useAppSelector(getCurrentMinPrice);
+  const maxFilterPrice = useAppSelector(getCurrentMaxPrice);
 
   const [minCurrentPrice, setMinCurrentPrice] = useState<string>('');
   const [maxCurrentPrice, setMaxCurrentPrice] = useState<string>('');
 
   const handleChangeMinCurrentPrice = (evt: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = parseFloat(evt.target.value);
-    if (inputValue < 0) {
-      setMinCurrentPrice(String(0));
+
+    if (evt.target.value !== '') {
+      const inputValue = parseFloat(evt.target.value);
+      if (inputValue < 0) {
+        setMinCurrentPrice('');
+      } else {
+        setMinCurrentPrice(String(inputValue));
+      }
     } else {
-      setMinCurrentPrice(String(inputValue));
+      setMinCurrentPrice('');
     }
   };
 
   const handleChangeMaxCurrentPrice = (evt: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = parseFloat(evt.target.value);
-    if (inputValue < 0) {
-      setMaxCurrentPrice(String(0));
+
+    if (evt.target.value !== '') {
+      const inputValue = parseFloat(evt.target.value);
+      if (inputValue < 0) {
+        setMaxCurrentPrice('');
+      } else {
+        setMaxCurrentPrice(String(inputValue));
+      }
     } else {
-      setMaxCurrentPrice(String(inputValue));
+      setMaxCurrentPrice('');
     }
   };
 
-  const handleSendMinMaxCurrentPrice = () => {
-    const outputMinCurrentPrice = getValidateMinCurrentPrice(minCurrentPrice, minProductsPrice);
-    const outputMaxCurrentPrice = getValidateMaxCurrentPrice(maxCurrentPrice, maxProductsPrice);
-
-    dispatch(changeMinPrice({type: outputMinCurrentPrice}));
-    dispatch(changeMaxPrice({type: outputMaxCurrentPrice}));
-
-    setMinCurrentPrice(String(outputMinCurrentPrice));
-    setMaxCurrentPrice(String(outputMaxCurrentPrice));
+  const handleSendMinCurrentPrice = () => {
+    if (minCurrentPrice !== '') {
+      const outputMinCurrentPrice = getValidateMinCurrentPrice(minCurrentPrice, minProductsPrice);
+      dispatch(changeMinPrice({type: outputMinCurrentPrice}));
+    }
   };
+
+  const handleSendMaxCurrentPrice = () => {
+    if (maxCurrentPrice !== '') {
+      const outputMaxCurrentPrice = getValidateMaxCurrentPrice(maxCurrentPrice, maxProductsPrice);
+      dispatch(changeMaxPrice({type: outputMaxCurrentPrice}));
+    }
+  };
+
+  useEffect(() => {
+    setMinCurrentPrice(getStringCurrentPrice(minFilterPrice));
+    setMaxCurrentPrice(getStringCurrentPrice(maxFilterPrice));
+  }, [minFilterPrice, maxFilterPrice]);
 
   return (
     <fieldset className="catalog-filter__block">
@@ -61,7 +83,7 @@ function FilterPrice (): JSX.Element {
               onChange={handleChangeMinCurrentPrice}
               onKeyDown={(evt) => {
                 if (evt.key === 'Enter') {
-                  handleSendMinMaxCurrentPrice();
+                  handleSendMinCurrentPrice();
                 }
               }}
             />
@@ -77,7 +99,7 @@ function FilterPrice (): JSX.Element {
               onChange={handleChangeMaxCurrentPrice}
               onKeyDown={(evt) => {
                 if (evt.key === 'Enter') {
-                  handleSendMinMaxCurrentPrice();
+                  handleSendMaxCurrentPrice();
                 }
               }}
             />

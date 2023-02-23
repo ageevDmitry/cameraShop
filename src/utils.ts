@@ -44,3 +44,12 @@ export const getValidateMaxCurrentPrice = (currentPrice: string,
     return inputCurrentPrice;
   }
 };
+
+export const getStringCurrentPrice = (currentPrice: number | null) => {
+
+  if (currentPrice === null) {
+    return '';
+  } else {
+    return String(currentPrice);
+  }
+};
