@@ -1,12 +1,3 @@
-// export const getValidatePrice = (validatePrice: number) => {
-
-//   const prices = products
-//     .map((item) => (item.price))
-//     .sort((a, b) => a - b);
-
-//   return [prices[0], prices[prices.length - 1]];
-// };
-
 export const getFilterTypeArray = (array: string[] | null, type: string) => {
 
   if (array === null) {
@@ -23,5 +14,33 @@ export const getFilterTypeArray = (array: string[] | null, type: string) => {
     const newArray = array?.slice();
     newArray.push(type);
     return newArray;
+  }
+};
+
+export const getValidateMinCurrentPrice = (currentPrice: string,
+  minProductsPrice: number | null) => {
+
+  const inputCurrentPrice = parseFloat(currentPrice);
+
+  if (minProductsPrice === null) {
+    return inputCurrentPrice;
+  } else if (inputCurrentPrice < minProductsPrice) {
+    return minProductsPrice;
+  } else {
+    return inputCurrentPrice;
+  }
+};
+
+export const getValidateMaxCurrentPrice = (currentPrice: string,
+  maxProductsPrice: number | null) => {
+
+  const inputCurrentPrice = parseFloat(currentPrice);
+
+  if (maxProductsPrice === null) {
+    return inputCurrentPrice;
+  } else if (inputCurrentPrice > maxProductsPrice) {
+    return maxProductsPrice;
+  } else {
+    return inputCurrentPrice;
   }
 };

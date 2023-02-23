@@ -3,6 +3,9 @@ import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {getMinProductsPrice, getMaxProductsPrice} from '../../store/products-data/selectors';
 import {useState, ChangeEvent} from 'react';
 import {changeMinPrice, changeMaxPrice} from '../../store/products-ui/products-ui';
+import {getValidateMinCurrentPrice,
+  getValidateMaxCurrentPrice
+} from '../../utils';
 
 function FilterPrice (): JSX.Element {
 
@@ -32,14 +35,18 @@ function FilterPrice (): JSX.Element {
   };
 
   const handleSendMinMaxCurrentPrice = () => {
-    dispatch(changeMinPrice({type: minCurrentPrice}));
-    dispatch(changeMaxPrice({type: maxCurrentPrice}));
+    const outputMinCurrentPrice = getValidateMinCurrentPrice(minCurrentPrice, minProductsPrice);
+    const outputMaxCurrentPrice = getValidateMaxCurrentPrice(maxCurrentPrice, maxProductsPrice);
+
+    dispatch(changeMinPrice({type: outputMinCurrentPrice}));
+    dispatch(changeMaxPrice({type: outputMaxCurrentPrice}));
+
+    setMinCurrentPrice(String(outputMinCurrentPrice));
+    setMaxCurrentPrice(String(outputMaxCurrentPrice));
   };
 
   return (
-    <fieldset className="catalog-filter__block"
-      onClick={handleSendMinMaxCurrentPrice}
-    >
+    <fieldset className="catalog-filter__block">
       <legend className="title title--h5">Цена, ₽
       </legend>
       <div className="catalog-filter__price-range">
