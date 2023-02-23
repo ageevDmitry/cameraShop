@@ -1,13 +1,11 @@
-import {Product} from '../src/types/product';
+// export const getValidatePrice = (validatePrice: number) => {
 
-export const getMinMaxPriceProducts = (products: Product[]) => {
+//   const prices = products
+//     .map((item) => (item.price))
+//     .sort((a, b) => a - b);
 
-  const prices = products
-    .map((item) => (item.price))
-    .sort((a, b) => a - b);
-
-  return [prices[0], prices[prices.length - 1]];
-};
+//   return [prices[0], prices[prices.length - 1]];
+// };
 
 export const getFilterTypeArray = (array: string[] | null, type: string) => {
 

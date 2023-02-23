@@ -7,47 +7,54 @@ import {changeMinPrice, changeMaxPrice} from '../../store/products-ui/products-u
 function FilterPrice (): JSX.Element {
 
   const dispatch = useAppDispatch();
-  const minPriceProducts = useAppSelector(getMinProductsPrice);
-  const maxPriceProducts = useAppSelector(getMaxProductsPrice);
+  const minProductsPrice = useAppSelector(getMinProductsPrice);
+  const maxProductsPrice = useAppSelector(getMaxProductsPrice);
 
-  const [minCurrentPrice, setMinCurrentPrice] = useState<number | null>(null);
-  const [maxCurrentPrice, setMaxCurrentPrice] = useState<number | null>(null);
+  const [minCurrentPrice, setMinCurrentPrice] = useState<string>('');
+  const [maxCurrentPrice, setMaxCurrentPrice] = useState<string>('');
 
-  const handleInputMinChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const {value} = evt.target;
-    setMinCurrentPrice(Number(value));
-  };
-
-  const handleInputMaxChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const {value} = evt.target;
-    setMaxCurrentPrice(Number(value));
-  };
-
-  const handleSendMinMaxPrice = () => {
-    if (minCurrentPrice !== null && maxCurrentPrice !== null) {
-      dispatch(changeMinPrice({type: minCurrentPrice}));
-      dispatch(changeMaxPrice({type: maxCurrentPrice}));
+  const handleChangeMinCurrentPrice = (evt: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = parseFloat(evt.target.value);
+    if (inputValue < 0) {
+      setMinCurrentPrice(String(0));
+    } else {
+      setMinCurrentPrice(String(inputValue));
     }
+  };
+
+  const handleChangeMaxCurrentPrice = (evt: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = parseFloat(evt.target.value);
+    if (inputValue < 0) {
+      setMaxCurrentPrice(String(0));
+    } else {
+      setMaxCurrentPrice(String(inputValue));
+    }
+  };
+
+  const handleSendMinMaxCurrentPrice = () => {
+    dispatch(changeMinPrice({type: minCurrentPrice}));
+    dispatch(changeMaxPrice({type: maxCurrentPrice}));
   };
 
   return (
     <fieldset className="catalog-filter__block"
-      onClick={() => {
-        handleSendMinMaxPrice();
-      }}
+      onClick={handleSendMinMaxCurrentPrice}
     >
       <legend className="title title--h5">Цена, ₽
       </legend>
       <div className="catalog-filter__price-range">
         <div className="custom-input">
           <label>
-            <input type="number"
+            <input
+              type="number"
+              min="0"
               name="price"
-              placeholder={`${(minPriceProducts === null) ? 'от' : String(minPriceProducts)}`}
-              onChange={handleInputMinChange}
+              value={minCurrentPrice}
+              placeholder={`${(minProductsPrice === null) ? 'от' : String(minProductsPrice)}`}
+              onChange={handleChangeMinCurrentPrice}
               onKeyDown={(evt) => {
                 if (evt.key === 'Enter') {
-                  handleSendMinMaxPrice();
+                  handleSendMinMaxCurrentPrice();
                 }
               }}
             />
@@ -55,13 +62,15 @@ function FilterPrice (): JSX.Element {
         </div>
         <div className="custom-input">
           <label>
-            <input type="number"
+            <input
+              type="number"
               name="priceUp"
-              placeholder={`${(maxPriceProducts === null) ? 'до' : String(maxPriceProducts)}`}
-              onChange={handleInputMaxChange}
+              value={maxCurrentPrice}
+              placeholder={`${(maxProductsPrice === null) ? 'до' : String(maxProductsPrice)}`}
+              onChange={handleChangeMaxCurrentPrice}
               onKeyDown={(evt) => {
                 if (evt.key === 'Enter') {
-                  handleSendMinMaxPrice();
+                  handleSendMinMaxCurrentPrice();
                 }
               }}
             />
