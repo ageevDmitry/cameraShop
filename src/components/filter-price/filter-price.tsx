@@ -60,8 +60,34 @@ function FilterPrice (): JSX.Element {
     setMaxCurrentPrice(getStringCurrentPrice(maxFilterPrice));
   }, [minFilterPrice, maxFilterPrice]);
 
+  useEffect(() => {
+    function handleKeyDown(evt: KeyboardEvent) {
+      if (evt.key === 'Enter') {
+        handleSendCurrentPrice();
+      }
+    }
+
+    // function handleClick() {
+    //   handleSendCurrentPrice();
+    // }
+
+    document.addEventListener('keydown', handleKeyDown);
+    // document.addEventListener('click', handleClick);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      // document.removeEventListener('click', handleClick);
+    };
+  });
+
   return (
-    <fieldset className="catalog-filter__block">
+    <fieldset className="catalog-filter__block"
+      onClick={() => {
+
+        handleSendCurrentPrice();
+
+      }}
+    >
       <legend className="title title--h5">Цена, ₽
       </legend>
       <div className="catalog-filter__price-range">
@@ -74,11 +100,6 @@ function FilterPrice (): JSX.Element {
               value={minCurrentPrice}
               placeholder={`${(minProductsPrice === null) ? 'от' : String(minProductsPrice)}`}
               onChange={handleChangeMinCurrentPrice}
-              onKeyDown={(evt) => {
-                if (evt.key === 'Enter') {
-                  handleSendCurrentPrice();
-                }
-              }}
             />
           </label>
         </div>
@@ -90,11 +111,6 @@ function FilterPrice (): JSX.Element {
               value={maxCurrentPrice}
               placeholder={`${(maxProductsPrice === null) ? 'до' : String(maxProductsPrice)}`}
               onChange={handleChangeMaxCurrentPrice}
-              onKeyDown={(evt) => {
-                if (evt.key === 'Enter') {
-                  handleSendCurrentPrice();
-                }
-              }}
             />
           </label>
         </div>
