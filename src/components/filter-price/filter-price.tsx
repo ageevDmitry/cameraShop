@@ -48,18 +48,11 @@ function FilterPrice (): JSX.Element {
     }
   };
 
-  const handleSendMinCurrentPrice = () => {
-    if (minCurrentPrice !== '') {
-      const outputMinCurrentPrice = getValidateMinCurrentPrice(minCurrentPrice, minProductsPrice);
-      dispatch(changeMinPrice({type: outputMinCurrentPrice}));
-    }
-  };
-
-  const handleSendMaxCurrentPrice = () => {
-    if (maxCurrentPrice !== '') {
-      const outputMaxCurrentPrice = getValidateMaxCurrentPrice(maxCurrentPrice, maxProductsPrice);
-      dispatch(changeMaxPrice({type: outputMaxCurrentPrice}));
-    }
+  const handleSendCurrentPrice = () => {
+    const outputMinCurrentPrice = getValidateMinCurrentPrice(minCurrentPrice, minProductsPrice);
+    const outputMaxCurrentPrice = getValidateMaxCurrentPrice(maxCurrentPrice, maxProductsPrice);
+    dispatch(changeMinPrice({type: outputMinCurrentPrice}));
+    dispatch(changeMaxPrice({type: outputMaxCurrentPrice}));
   };
 
   useEffect(() => {
@@ -83,7 +76,7 @@ function FilterPrice (): JSX.Element {
               onChange={handleChangeMinCurrentPrice}
               onKeyDown={(evt) => {
                 if (evt.key === 'Enter') {
-                  handleSendMinCurrentPrice();
+                  handleSendCurrentPrice();
                 }
               }}
             />
@@ -99,7 +92,7 @@ function FilterPrice (): JSX.Element {
               onChange={handleChangeMaxCurrentPrice}
               onKeyDown={(evt) => {
                 if (evt.key === 'Enter') {
-                  handleSendMaxCurrentPrice();
+                  handleSendCurrentPrice();
                 }
               }}
             />
