@@ -23,11 +23,11 @@ function FilterPrice (): JSX.Element {
   const handleChangeMinCurrentPrice = (evt: ChangeEvent<HTMLInputElement>) => {
 
     if (evt.target.value !== '') {
-      const inputValue = parseFloat(evt.target.value);
-      if (inputValue < 0) {
+      const inputMinValue = parseFloat(evt.target.value);
+      if (inputMinValue < 0) {
         setMinCurrentPrice('');
       } else {
-        setMinCurrentPrice(String(inputValue));
+        setMinCurrentPrice(String(inputMinValue));
       }
     } else {
       setMinCurrentPrice('');
@@ -37,11 +37,11 @@ function FilterPrice (): JSX.Element {
   const handleChangeMaxCurrentPrice = (evt: ChangeEvent<HTMLInputElement>) => {
 
     if (evt.target.value !== '') {
-      const inputValue = parseFloat(evt.target.value);
-      if (inputValue < 0) {
+      const inputMaxValue = parseFloat(evt.target.value);
+      if (inputMaxValue < 0) {
         setMaxCurrentPrice('');
       } else {
-        setMaxCurrentPrice(String(inputValue));
+        setMaxCurrentPrice(String(inputMaxValue));
       }
     } else {
       setMaxCurrentPrice('');
@@ -49,10 +49,10 @@ function FilterPrice (): JSX.Element {
   };
 
   const handleSendCurrentPrice = () => {
-    const outputMinCurrentPrice = getValidateMinCurrentPrice(minCurrentPrice, minProductsPrice);
-    const outputMaxCurrentPrice = getValidateMaxCurrentPrice(maxCurrentPrice, maxProductsPrice);
-    dispatch(changeMinPrice({type: outputMinCurrentPrice}));
-    dispatch(changeMaxPrice({type: outputMaxCurrentPrice}));
+    dispatch(changeMinPrice({type: getValidateMinCurrentPrice(minCurrentPrice, minProductsPrice)}));
+    dispatch(changeMaxPrice({type: getValidateMaxCurrentPrice(maxCurrentPrice, maxProductsPrice, minCurrentPrice)}));
+    setMinCurrentPrice(getStringCurrentPrice(minFilterPrice));
+    setMaxCurrentPrice(getStringCurrentPrice(maxFilterPrice));
   };
 
   useEffect(() => {

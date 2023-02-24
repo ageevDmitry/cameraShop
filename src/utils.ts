@@ -36,17 +36,21 @@ export const getValidateMinCurrentPrice = (currentPrice: string,
 };
 
 export const getValidateMaxCurrentPrice = (currentPrice: string,
-  maxProductsPrice: number | null) => {
+  maxProductsPrice: number | null,
+  minCurrentPrice: string) => {
 
   if (currentPrice === '') {
     return null;
   } else {
     const inputCurrentPrice = parseFloat(currentPrice);
+    const minCurrentPriceNumber = Number(minCurrentPrice);
 
     if (maxProductsPrice === null) {
       return inputCurrentPrice;
     } else if (inputCurrentPrice > maxProductsPrice) {
       return maxProductsPrice;
+    } else if (inputCurrentPrice < minCurrentPriceNumber) {
+      return minCurrentPriceNumber;
     } else {
       return inputCurrentPrice;
     }
