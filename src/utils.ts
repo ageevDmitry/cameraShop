@@ -57,6 +57,23 @@ export const getValidateMaxCurrentPrice = (currentPrice: string,
   }
 };
 
+export const getValidateMaxStatePrice = (currentPrice: string,
+  minCurrentPrice: string) => {
+
+  if (currentPrice === '') {
+    return '';
+  } else {
+    const inputCurrentPrice = parseFloat(currentPrice);
+    const minCurrentPriceNumber = Number(minCurrentPrice);
+
+    if (inputCurrentPrice < minCurrentPriceNumber) {
+      return String(minCurrentPriceNumber);
+    } else {
+      return String(inputCurrentPrice);
+    }
+  }
+};
+
 export const getStringCurrentPrice = (currentPrice: number | null) => {
 
   if (currentPrice === null) {

@@ -6,6 +6,7 @@ import {changeMinPrice, changeMaxPrice} from '../../store/products-ui/products-u
 import {getValidateMinCurrentPrice,
   getValidateMaxCurrentPrice,
   getStringCurrentPrice,
+  getValidateMaxStatePrice
 } from '../../utils';
 import {getCurrentMinPrice, getCurrentMaxPrice} from '../../store/products-ui/selectors';
 
@@ -51,8 +52,7 @@ function FilterPrice (): JSX.Element {
   const handleSendCurrentPrice = () => {
     dispatch(changeMinPrice({type: getValidateMinCurrentPrice(minCurrentPrice, minProductsPrice)}));
     dispatch(changeMaxPrice({type: getValidateMaxCurrentPrice(maxCurrentPrice, maxProductsPrice, minCurrentPrice)}));
-    setMinCurrentPrice(getStringCurrentPrice(minFilterPrice));
-    setMaxCurrentPrice(getStringCurrentPrice(maxFilterPrice));
+    setMaxCurrentPrice(getValidateMaxStatePrice(maxCurrentPrice, minCurrentPrice));
   };
 
   useEffect(() => {
@@ -83,9 +83,7 @@ function FilterPrice (): JSX.Element {
   return (
     <fieldset className="catalog-filter__block"
       onClick={() => {
-
         handleSendCurrentPrice();
-
       }}
     >
       <legend className="title title--h5">Цена, ₽
