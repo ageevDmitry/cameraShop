@@ -1,10 +1,10 @@
+/* eslint-disable no-mixed-operators */
 import Header from '../../components/header/header';
 import Banner from '../../components/banner/banner';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import FilterCatalog from '../../components/filter-catalog/filter-catalog';
 import SortCatalog from '../../components/sort-catalog/sort-catalog';
-import ProductCards from '../../components/product-card/product-card';
-import Pagination from '../../components/pagination/pagination';
+import ProductCardList from '../../components/product-card-list/product-card-list';
 import Footer from '../../components/footer/footer';
 import {useEffect} from 'react';
 import {redirectToRoute} from '../../store/action';
@@ -28,6 +28,7 @@ import {fetchProductsAction,
   fetchMinPriceProductsAction,
   fetchMaxPriceProductsAction
 } from '../../store/api-action';
+import styles from './catalog.module.css';
 
 function Catalog (): JSX.Element {
 
@@ -108,20 +109,23 @@ function Catalog (): JSX.Element {
                 </div>
                 <div className="catalog__content">
                   <SortCatalog/>
-                  <div className="cards catalog__cards">
-                    {
-                      products
-                        .map((product) => (
-                          <ProductCards
-                            key = {product.id}
-                            product = {product}
-                          />))
-                    }
-                  </div>
-                  <Pagination
-                    paginationCount = {paginationCount}
-                    currentCatalogPage = {currentCatalogPage}
-                  />
+                  {
+                    (products.length === 0 && currentType ||
+                      products.length === 0 && currentCategory ||
+                      products.length === 0 && currentLevel ||
+                      products.length === 0 && currentMinPrice ||
+                      products.length === 0 && currentMaxPrice)
+                      ?
+                      <div className ={styles.notFoundCard}>
+                        по вашему запросу ничего не найдено
+                      </div>
+                      :
+                      <ProductCardList
+                        products = {products}
+                        paginationCount = {paginationCount}
+                        currentCatalogPage = {currentCatalogPage}
+                      />
+                  }
                 </div>
               </div>
             </div>
