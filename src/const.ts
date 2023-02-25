@@ -209,7 +209,7 @@ export const FilterCatalogCategory = [
     title: 'Видеокамера',
     name: 'videocamera',
     type: 'Видеокамера',
-    disable: ['Фотоаппарат'],
+    disable: ['Фотоаппарат', 'Плёночная', 'Моментальная'],
   },
 ];
 

@@ -10,7 +10,7 @@ function FilterCategory (): JSX.Element {
 
   const dispatch = useAppDispatch();
   const currentCategory = useAppSelector(getCurrentCategory);
-  // const currentType = useAppSelector(getCurrentType);
+  const currentType = useAppSelector(getCurrentType);
 
   return (
     <fieldset className="catalog-filter__block">
@@ -25,7 +25,7 @@ function FilterCategory (): JSX.Element {
                   ? dispatch(changeCurrentCategory({type: item.type}))
                   : dispatch(changeCurrentCategory({type: null}));
               }}
-              disabled={checkDisable(currentCategory, item.disable)}
+              disabled={checkDisable(currentCategory, currentType, item.disable)}
             /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">{item.title}</span>
           </label>
         </div>

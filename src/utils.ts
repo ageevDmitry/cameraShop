@@ -1,8 +1,15 @@
 
-export const checkDisable = (currentCategory: string | null, itemDisable: string[]) => {
+export const checkDisable = (currentCategory: string | null, currentType: string[] | null, itemDisable: string[]) => {
 
-  if (currentCategory !== null) {
-    return itemDisable.includes(currentCategory);
+  if (currentType !== null) {
+    for (const value of itemDisable) {
+      const foo = currentType.includes(value);
+      if (foo) {
+        return true;
+      }
+    }
+  } else if (currentCategory !== null && (itemDisable.includes(currentCategory))) {
+    return true;
   } else {
     return false;
   }
@@ -15,7 +22,7 @@ export const getFilterTypeArray = (array: string[] | null, type: string) => {
     return newArray;
   } else if (array.includes(type)) {
     const newArray = array.filter((item) => item !== type);
-    if (newArray === undefined) {
+    if (newArray.length === 0) {
       return null;
     } else {
       return newArray;
