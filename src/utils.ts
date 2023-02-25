@@ -1,3 +1,13 @@
+
+export const checkDisable = (currentCategory: string | null, itemDisable: string[]) => {
+
+  if (currentCategory !== null) {
+    return itemDisable.includes(currentCategory);
+  } else {
+    return false;
+  }
+};
+
 export const getFilterTypeArray = (array: string[] | null, type: string) => {
 
   if (array === null) {
