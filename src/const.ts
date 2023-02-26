@@ -240,7 +240,12 @@ export enum FilterCatalogName {
   digital = 'Цифровая' ,
   film = 'Плёночная',
   snapshot = 'Моментальная',
-  collection = 'Коллекционная'
+  collection = 'Коллекционная',
+  zero = 'Нулевой',
+  nonProfessional = 'Любительский',
+  professional = 'Профессиональный',
 }
 
 export const FILTER_CATALOG_TYPE_DEFAULT = [false, false, false, false];
+
+export const FILTER_CATALOG_LEVEL_DEFAULT = [false, false, false];

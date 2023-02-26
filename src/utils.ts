@@ -1,5 +1,7 @@
 
-import {FilterCatalogName, FILTER_CATALOG_TYPE_DEFAULT} from './const';
+import {FilterCatalogName,
+  FILTER_CATALOG_TYPE_DEFAULT,
+  FILTER_CATALOG_LEVEL_DEFAULT} from './const';
 
 export const checkDisable = (currentCategory: string | null, currentType: string[] | null, itemDisable: string[]) => {
 
@@ -125,4 +127,19 @@ export const getCurrentTypeState = (currentType: string[] | null) => {
   (currentType.includes(FilterCatalogName.collection)) ? currentTypeState[3] = true : currentTypeState[3] = false;
 
   return currentTypeState;
+};
+
+export const getCurrentLevelState = (currentLevel: string[] | null) => {
+
+  const currentLevelState = FILTER_CATALOG_LEVEL_DEFAULT;
+
+  if (currentLevel === null) {
+    return currentLevelState;
+  }
+
+  (currentLevel.includes(FilterCatalogName.zero)) ? currentLevelState[0] = true : currentLevelState[0] = false;
+  (currentLevel.includes(FilterCatalogName.nonProfessional)) ? currentLevelState[1] = true : currentLevelState[1] = false;
+  (currentLevel.includes(FilterCatalogName.professional)) ? currentLevelState[2] = true : currentLevelState[2] = false;
+
+  return currentLevelState;
 };
