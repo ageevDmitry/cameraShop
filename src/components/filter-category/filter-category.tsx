@@ -26,6 +26,7 @@ function FilterCategory (): JSX.Element {
                   : dispatch(changeCurrentCategory({type: null}));
               }}
               disabled={checkDisable(currentCategory, currentType, item.disable)}
+              checked={currentCategory === item.type}
             /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">{item.title}</span>
           </label>
         </div>
