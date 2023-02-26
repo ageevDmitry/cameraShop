@@ -1,11 +1,12 @@
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
-import {getFilterTypeArray,
-  getFilterTypeState} from '../../utils';
+import {getFilterArray,
+  getCurrentTypeState} from '../../utils';
 import {getCurrentCategory,
   getCurrentType} from '../../store/products-ui/selectors';
 import {changeCurrentType} from '../../store/products-ui/products-ui';
-import {FilterCatalogType} from '../../const';
+import {FilterCatalogType,
+  FILTER_CATALOG_TYPE_DEFAULT} from '../../const';
 import {useState, useEffect} from 'react';
 
 function FilterType (): JSX.Element {
@@ -13,10 +14,10 @@ function FilterType (): JSX.Element {
   const dispatch = useAppDispatch();
   const currentCategory = useAppSelector(getCurrentCategory);
   const currentType = useAppSelector(getCurrentType);
-  const [flag, setFlag] = useState([false, false, false, false]);
+  const [currentTypeState, setCurrentTypeState] = useState(FILTER_CATALOG_TYPE_DEFAULT);
 
   useEffect(() => {
-    setFlag(getFilterTypeState(currentType));
+    setCurrentTypeState(getCurrentTypeState(currentType));
   }, [currentType]);
 
   return (
@@ -29,10 +30,10 @@ function FilterType (): JSX.Element {
               <input type="checkbox"
                 name={item.name}
                 onChange={() => {
-                  dispatch(changeCurrentType({type: getFilterTypeArray(currentType, item.title)}));
+                  dispatch(changeCurrentType({type: getFilterArray(currentType, item.title)}));
                 }}
                 disabled={(currentCategory === item.disable)}
-                checked={flag[i]}
+                checked={currentTypeState[i]}
               /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">{item.title}</span>
             </label>
           </div>

@@ -235,3 +235,12 @@ export const FilterCatalogType = [
     disable: '#',
   },
 ];
+
+export enum FilterCatalogName {
+  digital = 'Цифровая' ,
+  film = 'Плёночная',
+  snapshot = 'Моментальная',
+  collection = 'Коллекционная'
+}
+
+export const FILTER_CATALOG_TYPE_DEFAULT = [false, false, false, false];

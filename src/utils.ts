@@ -1,4 +1,6 @@
 
+import {FilterCatalogName, FILTER_CATALOG_TYPE_DEFAULT} from './const';
+
 export const checkDisable = (currentCategory: string | null, currentType: string[] | null, itemDisable: string[]) => {
 
   if (currentType !== null) {
@@ -24,7 +26,7 @@ export const checkCheckBox = (currentType: string[] | null, itemChecked: string)
   }
 };
 
-export const getFilterTypeArray = (array: string[] | null, type: string) => {
+export const getFilterArray = (array: string[] | null, type: string) => {
 
   if (array === null) {
     const newArray = new Array(type);
@@ -109,19 +111,18 @@ export const getStringCurrentPrice = (currentPrice: number | null) => {
   }
 };
 
-export const getFilterTypeState = (currentType: string[] | null) => {
+export const getCurrentTypeState = (currentType: string[] | null) => {
 
-  // const newCurrentState = currentState.slice();
-  const newCurrentState = [false, false, false, false];
+  const currentTypeState = FILTER_CATALOG_TYPE_DEFAULT;
 
   if (currentType === null) {
-    return newCurrentState;
+    return currentTypeState;
   }
 
-  (currentType.includes('Цифровая')) ? newCurrentState[0] = true : newCurrentState[0] = false;
-  (currentType.includes('Плёночная')) ? newCurrentState[1] = true : newCurrentState[1] = false;
-  (currentType.includes('Моментальная')) ? newCurrentState[2] = true : newCurrentState[2] = false;
-  (currentType.includes('Коллекционная')) ? newCurrentState[3] = true : newCurrentState[3] = false;
+  (currentType.includes(FilterCatalogName.digital)) ? currentTypeState[0] = true : currentTypeState[0] = false;
+  (currentType.includes(FilterCatalogName.film)) ? currentTypeState[1] = true : currentTypeState[1] = false;
+  (currentType.includes(FilterCatalogName.snapshot)) ? currentTypeState[2] = true : currentTypeState[2] = false;
+  (currentType.includes(FilterCatalogName.collection)) ? currentTypeState[3] = true : currentTypeState[3] = false;
 
-  return newCurrentState;
+  return currentTypeState;
 };

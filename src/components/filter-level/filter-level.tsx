@@ -1,6 +1,6 @@
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
-import {getFilterTypeArray} from '../../utils';
+import {getFilterArray} from '../../utils';
 import {getCurrentLevel} from '../../store/products-ui/selectors';
 import {changeCurrentLevel} from '../../store/products-ui/products-ui';
 import {FilterCatalogLevel} from '../../const';
@@ -19,7 +19,7 @@ function FilterLevel (): JSX.Element {
             <input type="checkbox"
               name={item.name}
               onChange={() => {
-                dispatch(changeCurrentLevel({type: getFilterTypeArray(currentLevel, item.title)}));
+                dispatch(changeCurrentLevel({type: getFilterArray(currentLevel, item.title)}));
               }}
             /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">{item.title}</span>
           </label>
