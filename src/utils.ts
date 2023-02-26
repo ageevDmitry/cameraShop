@@ -47,7 +47,7 @@ export const getFilterArray = (array: string[] | null, type: string) => {
   }
 };
 
-export const getValidateMinCurrentPrice = (currentPrice: string,
+export const getValidatedCurrentMinPrice = (currentPrice: string,
   minProductsPrice: number | null) => {
 
   if (currentPrice === '') {
@@ -65,7 +65,7 @@ export const getValidateMinCurrentPrice = (currentPrice: string,
   }
 };
 
-export const getValidateMaxCurrentPrice = (currentPrice: string,
+export const getValidatedCurrentMaxPrice = (currentPrice: string,
   maxProductsPrice: number | null,
   minCurrentPrice: string) => {
 
@@ -87,7 +87,7 @@ export const getValidateMaxCurrentPrice = (currentPrice: string,
   }
 };
 
-export const getValidateMaxStatePrice = (currentPrice: string,
+export const getValidatedCurrentMaxPriceState = (currentPrice: string,
   minCurrentPrice: string) => {
 
   if (currentPrice === '') {
@@ -104,7 +104,7 @@ export const getValidateMaxStatePrice = (currentPrice: string,
   }
 };
 
-export const getStringCurrentPrice = (currentPrice: number | null) => {
+export const getStringCurrentMinPriceState = (currentPrice: number | null) => {
 
   if (currentPrice === null) {
     return '';

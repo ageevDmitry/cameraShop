@@ -2,68 +2,69 @@ import {useAppSelector} from '../../hooks/useAppSelector';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {getMinProductsPrice, getMaxProductsPrice} from '../../store/products-data/selectors';
 import {useState, useEffect, ChangeEvent} from 'react';
-import {changeMinPrice, changeMaxPrice} from '../../store/products-ui/products-ui';
-import {getValidateMinCurrentPrice,
-  getValidateMaxCurrentPrice,
-  getStringCurrentPrice,
-  getValidateMaxStatePrice
+import {changeCurrentMinPrice, changeCurrentMaxPrice} from '../../store/products-ui/products-ui';
+import {getValidatedCurrentMinPrice,
+  getValidatedCurrentMaxPrice,
+  getValidatedCurrentMaxPriceState,
+  getStringCurrentMinPriceState,
 } from '../../utils';
-import {getCurrentMinPrice, getCurrentMaxPrice} from '../../store/products-ui/selectors';
+import {getCurrentMinPrice,
+  getCurrentMaxPrice} from '../../store/products-ui/selectors';
 
 function FilterPrice (): JSX.Element {
 
   const dispatch = useAppDispatch();
   const minProductsPrice = useAppSelector(getMinProductsPrice);
   const maxProductsPrice = useAppSelector(getMaxProductsPrice);
-  const minFilterPrice = useAppSelector(getCurrentMinPrice);
-  const maxFilterPrice = useAppSelector(getCurrentMaxPrice);
+  const currentMinPrice = useAppSelector(getCurrentMinPrice);
+  const currentMaxPrice = useAppSelector(getCurrentMaxPrice);
 
-  const [minCurrentPrice, setMinCurrentPrice] = useState<string>('');
-  const [maxCurrentPrice, setMaxCurrentPrice] = useState<string>('');
+  const [currentMinPriceState, setCurrentMinPriceState] = useState<string>('');
+  const [currentMaxPriceState, setCurrentMaxPriceState] = useState<string>('');
 
-  const handleChangeMinCurrentPrice = (evt: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCurrentMinPriceState = (evt: ChangeEvent<HTMLInputElement>) => {
 
     if (evt.target.value !== '') {
       const inputMinValue = parseFloat(evt.target.value);
       if (inputMinValue < 0) {
-        setMinCurrentPrice('');
+        setCurrentMinPriceState('');
       } else {
-        setMinCurrentPrice(String(inputMinValue));
+        setCurrentMinPriceState(String(inputMinValue));
       }
     } else {
-      setMinCurrentPrice('');
+      setCurrentMinPriceState('');
     }
   };
 
-  const handleChangeMaxCurrentPrice = (evt: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCurrentMaxPriceState = (evt: ChangeEvent<HTMLInputElement>) => {
 
     if (evt.target.value !== '') {
       const inputMaxValue = parseFloat(evt.target.value);
       if (inputMaxValue < 0) {
-        setMaxCurrentPrice('');
+        setCurrentMaxPriceState('');
       } else {
-        setMaxCurrentPrice(String(inputMaxValue));
+        setCurrentMaxPriceState(String(inputMaxValue));
       }
     } else {
-      setMaxCurrentPrice('');
+      setCurrentMaxPriceState('');
     }
   };
 
-  const handleSendCurrentPrice = () => {
-    dispatch(changeMinPrice({type: getValidateMinCurrentPrice(minCurrentPrice, minProductsPrice)}));
-    dispatch(changeMaxPrice({type: getValidateMaxCurrentPrice(maxCurrentPrice, maxProductsPrice, minCurrentPrice)}));
-    setMaxCurrentPrice(getValidateMaxStatePrice(maxCurrentPrice, minCurrentPrice));
+  const handleSendCurrentPrices = () => {
+    dispatch(changeCurrentMinPrice({type: getValidatedCurrentMinPrice(currentMinPriceState, minProductsPrice)}));
+    dispatch(changeCurrentMaxPrice({type: getValidatedCurrentMaxPrice(currentMaxPriceState, maxProductsPrice, currentMinPriceState)}));
+    setCurrentMaxPriceState(getValidatedCurrentMaxPriceState(currentMaxPriceState, currentMinPriceState));
   };
 
   useEffect(() => {
-    setMinCurrentPrice(getStringCurrentPrice(minFilterPrice));
-    setMaxCurrentPrice(getStringCurrentPrice(maxFilterPrice));
-  }, [minFilterPrice, maxFilterPrice]);
+    setCurrentMinPriceState(getStringCurrentMinPriceState(currentMinPrice));
+    setCurrentMaxPriceState(getStringCurrentMinPriceState(currentMaxPrice));
+  }, [currentMinPrice, currentMaxPrice]);
 
   useEffect(() => {
     function handleKeyDown(evt: KeyboardEvent) {
       if (evt.key === 'Enter') {
-        handleSendCurrentPrice();
+        handleSendCurrentPrices();
       }
     }
 
@@ -83,7 +84,7 @@ function FilterPrice (): JSX.Element {
   return (
     <fieldset className="catalog-filter__block"
       onClick={() => {
-        handleSendCurrentPrice();
+        handleSendCurrentPrices();
       }}
     >
       <legend className="title title--h5">Цена, ₽
@@ -95,9 +96,9 @@ function FilterPrice (): JSX.Element {
               type="number"
               min="0"
               name="price"
-              value={minCurrentPrice}
+              value={currentMinPriceState}
               placeholder={`${(minProductsPrice === null) ? 'от' : String(minProductsPrice)}`}
-              onChange={handleChangeMinCurrentPrice}
+              onChange={handleChangeCurrentMinPriceState}
             />
           </label>
         </div>
@@ -106,9 +107,9 @@ function FilterPrice (): JSX.Element {
             <input
               type="number"
               name="priceUp"
-              value={maxCurrentPrice}
+              value={currentMaxPriceState}
               placeholder={`${(maxProductsPrice === null) ? 'до' : String(maxProductsPrice)}`}
-              onChange={handleChangeMaxCurrentPrice}
+              onChange={handleChangeCurrentMaxPriceState}
             />
           </label>
         </div>

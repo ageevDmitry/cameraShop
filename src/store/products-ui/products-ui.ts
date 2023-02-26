@@ -36,10 +36,10 @@ export const productsUI = createSlice({
     changeCurrentLevel: (state, action: PayloadAction<{type: string[] | null}>) => {
       state.currentLevel = action.payload.type;
     },
-    changeMinPrice: (state, action: PayloadAction<{type: number | null}>) => {
+    changeCurrentMinPrice: (state, action: PayloadAction<{type: number | null}>) => {
       state.currentMinPrice = action.payload.type;
     },
-    changeMaxPrice: (state, action: PayloadAction<{type: number | null}>) => {
+    changeCurrentMaxPrice: (state, action: PayloadAction<{type: number | null}>) => {
       state.currentMaxPrice = action.payload.type;
     },
     cleanUpFilter: (state) => {
@@ -59,6 +59,6 @@ export const {changeCurrentCatalogPage,
   changeCurrentType,
   changeCurrentCategory,
   changeCurrentLevel,
-  changeMinPrice,
-  changeMaxPrice,
+  changeCurrentMinPrice,
+  changeCurrentMaxPrice,
   cleanUpFilter} = productsUI.actions;
