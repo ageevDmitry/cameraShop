@@ -12,6 +12,7 @@ import {getValidatedCurrentMinPrice,
 import {getCurrentMinPrice,
   getCurrentMaxPrice} from '../../store/products-ui/selectors';
 import {useKeyDownFilterPrice} from '../../hooks/useKeyDownFilterPrice';
+import {useClickFilterPrice} from '../../hooks/useClickFilterPrice';
 
 function FilterPrice (): JSX.Element {
 
@@ -24,25 +25,22 @@ function FilterPrice (): JSX.Element {
   const [currentMinPriceState, setCurrentMinPriceState] = useState<string>('');
   const [currentMaxPriceState, setCurrentMaxPriceState] = useState<string>('');
 
-  const handleKeyDownFilterPrice = () => {
-    dispatch(changeCurrentMinPrice({type: getValidatedCurrentMinPrice(currentMinPriceState, minProductsPrice)}));
-    dispatch(changeCurrentMaxPrice({type: getValidatedCurrentMaxPrice(currentMaxPriceState, maxProductsPrice, currentMinPriceState)}));
-    setCurrentMaxPriceState(getValidatedCurrentMaxPriceState(currentMaxPriceState, currentMinPriceState));
-  };
-
   useEffect(() => {
     setCurrentMinPriceState(getStringCurrentMinPriceState(currentMinPrice));
     setCurrentMaxPriceState(getStringCurrentMinPriceState(currentMaxPrice));
   }, [currentMinPrice, currentMaxPrice]);
 
-  useKeyDownFilterPrice(handleKeyDownFilterPrice);
+  const handleChangeFilterPrice = () => {
+    dispatch(changeCurrentMinPrice({type: getValidatedCurrentMinPrice(currentMinPriceState, minProductsPrice)}));
+    dispatch(changeCurrentMaxPrice({type: getValidatedCurrentMaxPrice(currentMaxPriceState, maxProductsPrice, currentMinPriceState)}));
+    setCurrentMaxPriceState(getValidatedCurrentMaxPriceState(currentMaxPriceState, currentMinPriceState));
+  };
+
+  useKeyDownFilterPrice(handleChangeFilterPrice);
+  useClickFilterPrice(handleChangeFilterPrice);
 
   return (
-    <fieldset className="catalog-filter__block"
-      onClick={() => {
-        handleKeyDownFilterPrice();
-      }}
-    >
+    <fieldset className="catalog-filter__block">
       <legend className="title title--h5">Цена, ₽
       </legend>
       <div className="catalog-filter__price-range">

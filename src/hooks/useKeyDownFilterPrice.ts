@@ -1,11 +1,14 @@
 import {useEffect} from 'react';
 
-export function useKeyDownFilterPrice(handleKeyDownFilterPrice: () => void) {
+export function useKeyDownFilterPrice(handleChangeFilterPrice: () => void) {
 
   useEffect(() => {
     function handleKeyDown(evt: KeyboardEvent) {
       if (evt.key === 'Enter') {
-        handleKeyDownFilterPrice();
+        const target = evt.target as HTMLElement;
+        if (!target.classList.contains('catalog-filter__reset-btn')) {
+          handleChangeFilterPrice();
+        }
       }
     }
 
@@ -14,5 +17,5 @@ export function useKeyDownFilterPrice(handleKeyDownFilterPrice: () => void) {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handleKeyDownFilterPrice]);
+  }, [handleChangeFilterPrice]);
 }
