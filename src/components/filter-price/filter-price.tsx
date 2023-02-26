@@ -11,6 +11,7 @@ import {getValidatedCurrentMinPrice,
 } from '../../utils';
 import {getCurrentMinPrice,
   getCurrentMaxPrice} from '../../store/products-ui/selectors';
+import {useKeyDownFilterPrice} from '../../hooks/useKeyDownFilterPrice';
 
 function FilterPrice (): JSX.Element {
 
@@ -23,7 +24,7 @@ function FilterPrice (): JSX.Element {
   const [currentMinPriceState, setCurrentMinPriceState] = useState<string>('');
   const [currentMaxPriceState, setCurrentMaxPriceState] = useState<string>('');
 
-  const handleSendCurrentPrices = () => {
+  const handleKeyDownFilterPrice = () => {
     dispatch(changeCurrentMinPrice({type: getValidatedCurrentMinPrice(currentMinPriceState, minProductsPrice)}));
     dispatch(changeCurrentMaxPrice({type: getValidatedCurrentMaxPrice(currentMaxPriceState, maxProductsPrice, currentMinPriceState)}));
     setCurrentMaxPriceState(getValidatedCurrentMaxPriceState(currentMaxPriceState, currentMinPriceState));
@@ -34,30 +35,12 @@ function FilterPrice (): JSX.Element {
     setCurrentMaxPriceState(getStringCurrentMinPriceState(currentMaxPrice));
   }, [currentMinPrice, currentMaxPrice]);
 
-  useEffect(() => {
-    function handleKeyDown(evt: KeyboardEvent) {
-      if (evt.key === 'Enter') {
-        handleSendCurrentPrices();
-      }
-    }
-
-    // function handleClick() {
-    //   handleSendCurrentPrice();
-    // }
-
-    document.addEventListener('keydown', handleKeyDown);
-    // document.addEventListener('click', handleClick);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      // document.removeEventListener('click', handleClick);
-    };
-  });
+  useKeyDownFilterPrice(handleKeyDownFilterPrice);
 
   return (
     <fieldset className="catalog-filter__block"
       onClick={() => {
-        handleSendCurrentPrices();
+        handleKeyDownFilterPrice();
       }}
     >
       <legend className="title title--h5">Цена, ₽
