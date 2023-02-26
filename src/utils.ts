@@ -115,7 +115,7 @@ export const getStringCurrentPrice = (currentPrice: number | null) => {
 
 export const getCurrentTypeState = (currentType: string[] | null) => {
 
-  const currentTypeState = FILTER_CATALOG_TYPE_DEFAULT;
+  const currentTypeState = FILTER_CATALOG_TYPE_DEFAULT.slice();
 
   if (currentType === null) {
     return currentTypeState;
@@ -131,7 +131,7 @@ export const getCurrentTypeState = (currentType: string[] | null) => {
 
 export const getCurrentLevelState = (currentLevel: string[] | null) => {
 
-  const currentLevelState = FILTER_CATALOG_LEVEL_DEFAULT;
+  const currentLevelState = FILTER_CATALOG_LEVEL_DEFAULT.slice();
 
   if (currentLevel === null) {
     return currentLevelState;
