@@ -95,6 +95,7 @@ export const getValidatedCurrentMaxPriceState = (currentPrice: string,
     }
   }
 };
+
 export const getValidatedCurrentPriceState = (evt: ChangeEvent<HTMLInputElement>,
   setCurrentMaxPriceState: (currentPriceState: string) => void) => {
 
@@ -108,7 +109,6 @@ export const getValidatedCurrentPriceState = (evt: ChangeEvent<HTMLInputElement>
   } else {
     setCurrentMaxPriceState('');
   }
-
 };
 
 export const getStringCurrentMinPriceState = (currentPrice: number | null) => {
