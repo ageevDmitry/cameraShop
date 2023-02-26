@@ -1,11 +1,12 @@
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {getMinProductsPrice, getMaxProductsPrice} from '../../store/products-data/selectors';
-import {useState, useEffect, ChangeEvent} from 'react';
+import {useState, useEffect} from 'react';
 import {changeCurrentMinPrice, changeCurrentMaxPrice} from '../../store/products-ui/products-ui';
 import {getValidatedCurrentMinPrice,
   getValidatedCurrentMaxPrice,
   getValidatedCurrentMaxPriceState,
+  getValidatedCurrentPriceState,
   getStringCurrentMinPriceState,
 } from '../../utils';
 import {getCurrentMinPrice,
@@ -21,34 +22,6 @@ function FilterPrice (): JSX.Element {
 
   const [currentMinPriceState, setCurrentMinPriceState] = useState<string>('');
   const [currentMaxPriceState, setCurrentMaxPriceState] = useState<string>('');
-
-  const handleChangeCurrentMinPriceState = (evt: ChangeEvent<HTMLInputElement>) => {
-
-    if (evt.target.value !== '') {
-      const inputMinValue = parseFloat(evt.target.value);
-      if (inputMinValue < 0) {
-        setCurrentMinPriceState('');
-      } else {
-        setCurrentMinPriceState(String(inputMinValue));
-      }
-    } else {
-      setCurrentMinPriceState('');
-    }
-  };
-
-  const handleChangeCurrentMaxPriceState = (evt: ChangeEvent<HTMLInputElement>) => {
-
-    if (evt.target.value !== '') {
-      const inputMaxValue = parseFloat(evt.target.value);
-      if (inputMaxValue < 0) {
-        setCurrentMaxPriceState('');
-      } else {
-        setCurrentMaxPriceState(String(inputMaxValue));
-      }
-    } else {
-      setCurrentMaxPriceState('');
-    }
-  };
 
   const handleSendCurrentPrices = () => {
     dispatch(changeCurrentMinPrice({type: getValidatedCurrentMinPrice(currentMinPriceState, minProductsPrice)}));
@@ -98,7 +71,9 @@ function FilterPrice (): JSX.Element {
               name="price"
               value={currentMinPriceState}
               placeholder={`${(minProductsPrice === null) ? 'от' : String(minProductsPrice)}`}
-              onChange={handleChangeCurrentMinPriceState}
+              onChange={(evt) => {
+                getValidatedCurrentPriceState(evt, setCurrentMinPriceState);
+              }}
             />
           </label>
         </div>
@@ -109,7 +84,9 @@ function FilterPrice (): JSX.Element {
               name="priceUp"
               value={currentMaxPriceState}
               placeholder={`${(maxProductsPrice === null) ? 'до' : String(maxProductsPrice)}`}
-              onChange={handleChangeCurrentMaxPriceState}
+              onChange={(evt) => {
+                getValidatedCurrentPriceState(evt, setCurrentMaxPriceState);
+              }}
             />
           </label>
         </div>

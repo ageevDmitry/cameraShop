@@ -2,6 +2,7 @@
 import {FilterCatalogName,
   FILTER_CATALOG_TYPE_DEFAULT,
   FILTER_CATALOG_LEVEL_DEFAULT} from './const';
+import {ChangeEvent} from 'react';
 
 export const checkDisable = (currentCategory: string | null, currentType: string[] | null, itemDisable: string[]) => {
 
@@ -14,15 +15,6 @@ export const checkDisable = (currentCategory: string | null, currentType: string
     }
   } else if (currentCategory !== null && (itemDisable.includes(currentCategory))) {
     return true;
-  } else {
-    return false;
-  }
-};
-
-export const checkCheckBox = (currentType: string[] | null, itemChecked: string) => {
-  if (currentType !== null) {
-    const flag = currentType.includes(itemChecked);
-    return flag;
   } else {
     return false;
   }
@@ -103,6 +95,21 @@ export const getValidatedCurrentMaxPriceState = (currentPrice: string,
     }
   }
 };
+export const getValidatedCurrentPriceState = (evt: ChangeEvent<HTMLInputElement>,
+  setCurrentMaxPriceState: (currentPriceState: string) => void) => {
+
+  if (evt.target.value !== '') {
+    const inputValue = parseFloat(evt.target.value);
+    if (inputValue < 0) {
+      setCurrentMaxPriceState('');
+    } else {
+      setCurrentMaxPriceState(String(inputValue));
+    }
+  } else {
+    setCurrentMaxPriceState('');
+  }
+
+};
 
 export const getStringCurrentMinPriceState = (currentPrice: number | null) => {
 
@@ -112,6 +119,7 @@ export const getStringCurrentMinPriceState = (currentPrice: number | null) => {
     return String(currentPrice);
   }
 };
+
 
 export const getCurrentTypeState = (currentType: string[] | null) => {
 
