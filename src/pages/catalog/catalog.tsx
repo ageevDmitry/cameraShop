@@ -7,13 +7,14 @@ import SortCatalog from '../../components/sort-catalog/sort-catalog';
 import ProductCardList from '../../components/product-card-list/product-card-list';
 import Footer from '../../components/footer/footer';
 import {useEffect} from 'react';
-import {redirectToRoute} from '../../store/action';
+// import {redirectToRoute} from '../../store/action';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {getProducts,
   getProductsTotalCount,
   getPromo} from '../../store/products-data/selectors';
-import {getCurrentCatalogPage,
+// import {getCurrentCatalogPage,
+import {
   getCurrentSort,
   getCurrentOrder,
   getCurrentType,
@@ -29,11 +30,15 @@ import {fetchProductsAction,
   fetchMaxPriceProductsAction
 } from '../../store/api-action';
 import styles from './catalog.module.css';
+import {useParams} from 'react-router-dom';
 
 function Catalog (): JSX.Element {
 
   const dispatch = useAppDispatch();
-  const currentCatalogPage = useAppSelector(getCurrentCatalogPage);
+  // const currentCatalogPage = useAppSelector(getCurrentCatalogPage);
+  const {pageNumber} = useParams();
+  console.log(pageNumber);
+  const currentCatalogPage = Number(pageNumber);
   const currentSort = useAppSelector(getCurrentSort);
   const currentOrder = useAppSelector(getCurrentOrder);
   const currentType = useAppSelector(getCurrentType);
@@ -59,7 +64,7 @@ function Catalog (): JSX.Element {
       minPrice: currentMinPrice,
       maxPrice: currentMaxPrice,
     }));
-    dispatch(redirectToRoute(`/catalog/page_${currentCatalogPage}`));
+    // dispatch(redirectToRoute(`/catalog/page_${currentCatalogPage}`));
   }, [currentCatalogPage,
     currentSort,
     currentOrder,
