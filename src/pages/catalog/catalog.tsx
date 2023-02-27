@@ -22,22 +22,21 @@ import {
   getCurrentLevel,
   getCurrentMinPrice,
   getCurrentMaxPrice} from '../../store/products-ui/selectors';
-import {PaginationUI} from '../../const';
-import {NAV_BREADCRUMB_MAIN} from '../../const';
+import {PaginationUI, NAV_BREADCRUMB_MAIN} from '../../const';
 import {fetchProductsAction,
   fetchPromoAction,
   fetchMinPriceProductsAction,
   fetchMaxPriceProductsAction
 } from '../../store/api-action';
+import {changeCurrentCatalogPagePath} from '../../store/products-ui/products-ui';
 import styles from './catalog.module.css';
-import {useParams} from 'react-router-dom';
+import {useParams, useSearchParams} from 'react-router-dom';
 
 function Catalog (): JSX.Element {
 
   const dispatch = useAppDispatch();
   // const currentCatalogPage = useAppSelector(getCurrentCatalogPage);
   const {pageNumber} = useParams();
-  console.log(pageNumber);
   const currentCatalogPage = Number(pageNumber);
   const currentSort = useAppSelector(getCurrentSort);
   const currentOrder = useAppSelector(getCurrentOrder);
@@ -51,21 +50,29 @@ function Catalog (): JSX.Element {
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN];
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
-    dispatch(fetchProductsAction({
-      startItem: PaginationUI.ProductsView * currentCatalogPage - PaginationUI.ProductsView,
-      endItem: PaginationUI.ProductsView * currentCatalogPage,
-      sort: currentSort,
-      order: currentOrder,
-      type: currentType,
-      category: currentCategory,
-      level: currentLevel,
-      minPrice: currentMinPrice,
-      maxPrice: currentMaxPrice,
-    }));
+    if(currentCatalogPage) {
+      dispatch(changeCurrentCatalogPagePath({
+        currentCatalogPage,
+        searchParams: decodeURI(searchParams.toString())
+      }));
+      dispatch(fetchProductsAction({
+        startItem: PaginationUI.ProductsView * currentCatalogPage - PaginationUI.ProductsView,
+        endItem: PaginationUI.ProductsView * currentCatalogPage,
+        sort: currentSort,
+        order: currentOrder,
+        type: currentType,
+        category: currentCategory,
+        level: currentLevel,
+        minPrice: currentMinPrice,
+        maxPrice: currentMaxPrice,
+      }));
+    }
     // dispatch(redirectToRoute(`/catalog/page_${currentCatalogPage}`));
   }, [currentCatalogPage,
+    searchParams,
     currentSort,
     currentOrder,
     currentType,

@@ -1,10 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {NameSpace, PaginationUI} from '../../const';
+import {NameSpace} from '../../const';
 import {ProductsUI} from '../../types/state';
+import {currentCatalogPagePath} from '../../types/ui';
+
 import type {PayloadAction} from '@reduxjs/toolkit';
 
 const initialState: ProductsUI = {
-  currentCatalogPage: PaginationUI.DefaultCatalogPage,
+  currentCatalogPagePath: {} as currentCatalogPagePath,
   currentSort: null,
   currentOrder: null,
   currentType: null,
@@ -18,8 +20,8 @@ export const productsUI = createSlice({
   name: NameSpace.ProductsUI,
   initialState,
   reducers: {
-    changeCurrentCatalogPage: (state, action: PayloadAction<{page: number}>) => {
-      state.currentCatalogPage = action.payload.page;
+    changeCurrentCatalogPagePath: (state, action: PayloadAction<currentCatalogPagePath>) => {
+      state.currentCatalogPagePath = action.payload;
     },
     changeCurrentSort: (state, action: PayloadAction<{type: string}>) => {
       state.currentSort = action.payload.type;
@@ -53,7 +55,7 @@ export const productsUI = createSlice({
   },
 });
 
-export const {changeCurrentCatalogPage,
+export const {changeCurrentCatalogPagePath,
   changeCurrentSort,
   changeCurrentOrder,
   changeCurrentType,

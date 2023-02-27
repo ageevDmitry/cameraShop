@@ -1,6 +1,7 @@
 import {Product, Promo} from './product';
 import {Review} from './review';
 import {store} from '../store';
+import {currentCatalogPagePath} from './ui';
 
 export type ProductsData = {
     products: Product[];
@@ -17,7 +18,7 @@ export type ProductsData = {
 };
 
 export type ProductsUI = {
-    currentCatalogPage: number;
+    currentCatalogPagePath: currentCatalogPagePath;
     currentSort: string | null;
     currentOrder: string | null;
     currentCategory: string | null;
