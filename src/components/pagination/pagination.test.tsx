@@ -12,7 +12,6 @@ const history = createMemoryHistory();
 describe('Component: Pagination', () => {
 
   const paginationCount = 5;
-  const currentCatalogPage = 1;
 
   it('should render correctly', () => {
 
@@ -21,7 +20,6 @@ describe('Component: Pagination', () => {
         <HistoryRouter history={history}>
           <Pagination
             paginationCount={paginationCount}
-            currentCatalogPage={currentCatalogPage}
           />
         </HistoryRouter>
       </Provider>

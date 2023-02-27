@@ -27,9 +27,6 @@ const store = mockStore({
     isDataLoading: false,
     isSuccess: false,
   },
-  [NameSpace.ProductsUI]: {
-    currentCatalogPage: 1
-  },
 });
 
 const history = createMemoryHistory();

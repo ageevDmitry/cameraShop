@@ -3,7 +3,7 @@ import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import HistoryRouter from '../history-route/history-route';
-import {AppRoute, PaginationUI, NameSpace} from '../../const';
+import {AppRoute, NameSpace} from '../../const';
 import App from './app';
 import {State} from '../../types/state';
 import {createAPI} from '../../services/api';
@@ -24,9 +24,6 @@ const store = mockStore({
     products: [],
     isDataLoading: false,
     isSuccess: false,
-  },
-  [NameSpace.ProductsUI]: {
-    currentCatalogPage: PaginationUI.DefaultCatalogPage,
   },
 });
 
