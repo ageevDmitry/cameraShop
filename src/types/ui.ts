@@ -5,5 +5,5 @@ export type NavBreadcrumb = {
 
 export type currentCatalogPagePath = {
     currentCatalogPage: number;
-    searchParams?: string;
+    search?: string;
 };

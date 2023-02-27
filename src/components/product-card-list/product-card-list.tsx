@@ -5,10 +5,9 @@ import {Product} from '../../types/product';
 type ProductCardListProps = {
     products: Product[];
     paginationCount: number;
-    currentCatalogPage: number;
   }
 
-function ProductCardList ({products, paginationCount, currentCatalogPage}: ProductCardListProps): JSX.Element {
+function ProductCardList ({products, paginationCount}: ProductCardListProps): JSX.Element {
 
   return (
     <>
@@ -24,7 +23,6 @@ function ProductCardList ({products, paginationCount, currentCatalogPage}: Produ
       </div>
       <Pagination
         paginationCount = {paginationCount}
-        currentCatalogPage = {currentCatalogPage}
       />
     </>
   );

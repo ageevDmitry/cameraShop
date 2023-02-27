@@ -56,7 +56,7 @@ function Catalog (): JSX.Element {
     if(currentCatalogPage) {
       dispatch(changeCurrentCatalogPagePath({
         currentCatalogPage,
-        searchParams: decodeURI(searchParams.toString())
+        search: decodeURI(searchParams.toString())
       }));
       dispatch(fetchProductsAction({
         startItem: PaginationUI.ProductsView * currentCatalogPage - PaginationUI.ProductsView,
@@ -135,7 +135,6 @@ function Catalog (): JSX.Element {
                       <ProductCardList
                         products = {products}
                         paginationCount = {paginationCount}
-                        currentCatalogPage = {currentCatalogPage}
                       />
                   }
                 </div>

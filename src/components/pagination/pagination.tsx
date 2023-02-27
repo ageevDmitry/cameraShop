@@ -1,15 +1,16 @@
-import {useAppDispatch} from '../../hooks/useAppDispatch';
-import {changeCurrentCatalogPage} from '../../store/products-ui/products-ui';
+import {Link, generatePath} from 'react-router-dom';
+import {useAppSelector} from '../../hooks/useAppSelector';
+import {getCurrentCatalogPagePath} from '../../store/products-ui/selectors';
 import styles from './pagination.module.css';
+import {AppRoute} from '../../const';
 
 type PaginationProps = {
   paginationCount: number;
-  currentCatalogPage: number;
 }
 
-function Pagination ({paginationCount, currentCatalogPage}: PaginationProps): JSX.Element {
+function Pagination ({paginationCount}: PaginationProps): JSX.Element {
 
-  const dispatch = useAppDispatch();
+  const {currentCatalogPage, search} = useAppSelector(getCurrentCatalogPagePath);
   const paginationItems = Array.from({length: paginationCount}, (_, index) => index + 1);
 
   return (
@@ -18,33 +19,36 @@ function Pagination ({paginationCount, currentCatalogPage}: PaginationProps): JS
         {
           (currentCatalogPage !== paginationItems[0]) ?
             <li className="pagination__item">
-              <span className={`pagination__link pagination__link--text ${styles.pointer}`}
-                onClick={() => {
-                  dispatch(changeCurrentCatalogPage({page: currentCatalogPage - 1}));
+              <Link className={`pagination__link pagination__link--text ${styles.pointer}`}
+                to={{
+                  pathname: generatePath(AppRoute.Catalog, {pageNumber: String(currentCatalogPage - 1)}),
+                  search
                 }}
               >Назад
-              </span>
+              </Link>
             </li>
             : ''
         }
         {paginationItems.map((item) => (
           <li key={item} className="pagination__item">
-            <span className={`pagination__link ${styles.pointer} ${(item === currentCatalogPage) ? 'pagination__link pagination__link--active' : ''}`}
-              onClick={() => {
-                dispatch(changeCurrentCatalogPage({page: item}));
+            <Link className={`pagination__link ${styles.pointer} ${(item === currentCatalogPage) ? 'pagination__link pagination__link--active' : ''}`}
+              to={{
+                pathname: generatePath(AppRoute.Catalog, {pageNumber: String(item)}),
+                search
               }}
             >{item}
-            </span>
+            </Link>
           </li>
         ))}
         {(currentCatalogPage !== paginationItems[paginationItems.length - 1]) ?
           <li className="pagination__item">
-            <span className={`pagination__link pagination__link--text ${styles.pointer}`}
-              onClick={() => {
-                dispatch(changeCurrentCatalogPage({page: currentCatalogPage + 1}));
+            <Link className={`pagination__link pagination__link--text ${styles.pointer}`}
+              to={{
+                pathname: generatePath(AppRoute.Catalog, {pageNumber: String(currentCatalogPage + 1)}),
+                search
               }}
             >Далее
-            </span>
+            </Link>
           </li>
           : ''}
       </ul>

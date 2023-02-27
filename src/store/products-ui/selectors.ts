@@ -1,7 +1,8 @@
 import {NameSpace} from '../../const';
 import {State} from '../../types/state';
+import {currentCatalogPagePath} from '../../types/ui';
 
-export const getCurrentCatalogPage = (state: State): number => state[NameSpace.ProductsUI].currentCatalogPage;
+export const getCurrentCatalogPagePath = (state: State): currentCatalogPagePath => state[NameSpace.ProductsUI].currentCatalogPagePath;
 export const getCurrentSort = (state: State): string | null => state[NameSpace.ProductsUI].currentSort;
 export const getCurrentOrder = (state: State): string | null => state[NameSpace.ProductsUI].currentOrder;
 export const getCurrentCategory = (state: State): string | null => state[NameSpace.ProductsUI].currentCategory;
