@@ -1,5 +1,5 @@
 import {Route, Routes, Navigate, generatePath} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, DEFAULT_CATALOG_PAGE} from '../../const';
 import {HelmetProvider} from 'react-helmet-async';
 import Catalog from '../../pages/catalog/catalog';
 import Product from '../../pages/product/product';
@@ -14,7 +14,7 @@ function App(): JSX.Element {
           element={
             <Navigate
               to={{
-                pathname: generatePath(AppRoute.Catalog, {pageNumber: '1'})
+                pathname: generatePath(AppRoute.Catalog, {pageNumber: DEFAULT_CATALOG_PAGE})
               }}
             />
           }

@@ -1,6 +1,5 @@
 export enum AppRoute {
     Main = '/',
-    // Catalog = 'catalog/:id',
     Catalog = '/catalog/page_:pageNumber/',
     Product = 'product/:id',
     NotFound = '/404',
@@ -107,7 +106,6 @@ export const PRODUCT_RATING_COUNT = 5;
 
 export const enum PaginationUI {
   ProductsView = 9,
-  DefaultCatalogPage = 1
 }
 
 export const enum ProductTab {
@@ -136,6 +134,7 @@ export const enum DefaultMinMaxPriceItem {
   EndItem = 1
 }
 export const STEP_REVIEWS_VIEW = 3;
+
 
 export const REVIEW_FORM_STATUSES = [
   {
@@ -250,3 +249,5 @@ export enum FilterCatalogName {
 export const FILTER_CATALOG_TYPE_DEFAULT = [false, false, false, false];
 
 export const FILTER_CATALOG_LEVEL_DEFAULT = [false, false, false];
+
+export const DEFAULT_CATALOG_PAGE = '1';

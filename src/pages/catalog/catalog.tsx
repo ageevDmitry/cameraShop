@@ -7,13 +7,11 @@ import SortCatalog from '../../components/sort-catalog/sort-catalog';
 import ProductCardList from '../../components/product-card-list/product-card-list';
 import Footer from '../../components/footer/footer';
 import {useEffect} from 'react';
-// import {redirectToRoute} from '../../store/action';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {getProducts,
   getProductsTotalCount,
   getPromo} from '../../store/products-data/selectors';
-// import {getCurrentCatalogPage,
 import {
   getCurrentSort,
   getCurrentOrder,
@@ -35,7 +33,6 @@ import {useParams, useSearchParams} from 'react-router-dom';
 function Catalog (): JSX.Element {
 
   const dispatch = useAppDispatch();
-  // const currentCatalogPage = useAppSelector(getCurrentCatalogPage);
   const {pageNumber} = useParams();
   const currentCatalogPage = Number(pageNumber);
   const currentSort = useAppSelector(getCurrentSort);
@@ -70,7 +67,6 @@ function Catalog (): JSX.Element {
         maxPrice: currentMaxPrice,
       }));
     }
-    // dispatch(redirectToRoute(`/catalog/page_${currentCatalogPage}`));
   }, [currentCatalogPage,
     searchParams,
     currentSort,
