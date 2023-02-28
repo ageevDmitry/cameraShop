@@ -22,13 +22,13 @@ export const NAV_BREADCRUMB_MAIN = {
 
 export const NAV_BREADCRUMB_CATALOG = {
   title: 'Каталог',
-  href: AppRoute.Main,
+  href: AppRoute.Catalog,
 };
 
 export const NAV_PAGES = [
   {
     title: 'Каталог',
-    href: AppRoute.Main,
+    href: AppRoute.Catalog,
   },
   {
     title: 'Гарантии',

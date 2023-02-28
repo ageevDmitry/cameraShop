@@ -1,5 +1,8 @@
-import {Link} from 'react-router-dom';
+import {Link, generatePath} from 'react-router-dom';
 import {NavBreadcrumb} from '../../types/ui';
+import {AppRoute, DEFAULT_CATALOG_PAGE} from '../../const';
+import {useAppSelector} from '../../hooks/useAppSelector';
+import {getCurrentCatalogPagePath} from '../../store/products-ui/selectors';
 
 type BreadcrumbsProps = {
   currentBreadCrumb?: string;
@@ -8,6 +11,9 @@ type BreadcrumbsProps = {
 
 function Breadcrumbs ({navBreadcrumbs, currentBreadCrumb}: BreadcrumbsProps): JSX.Element {
 
+  const currentCatalogPagePath = useAppSelector(getCurrentCatalogPagePath);
+  const search = currentCatalogPagePath.search;
+
   return (
     <div className="breadcrumbs">
       <div className="container">
@@ -15,7 +21,16 @@ function Breadcrumbs ({navBreadcrumbs, currentBreadCrumb}: BreadcrumbsProps): JS
           {
             navBreadcrumbs.map((item) => (
               <li key={item.title} className="breadcrumbs__item">
-                <Link to={item.href} className="breadcrumbs__link" >{item.title}
+                <Link to={{
+                  pathname: generatePath(
+                    AppRoute.Catalog,
+                    {pageNumber: (currentCatalogPagePath.currentCatalogPage)
+                      ? String(currentCatalogPagePath.currentCatalogPage) : DEFAULT_CATALOG_PAGE}
+                  ),
+                  search
+                }}
+                className="breadcrumbs__link"
+                >{item.title}
                   <svg width={5} height={8} aria-hidden="true">
                     <use xlinkHref="#icon-arrow-mini" />
                   </svg>
