@@ -1,20 +1,13 @@
-import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
-import {changeCurrentSort, changeCurrentOrder} from '../../store/products-ui/products-ui';
 import {SortCatalogType, QueryParam} from '../../const';
-import {getCurrentSort, getCurrentOrder} from '../../store/products-ui/selectors';
 import {getCurrentCatalogPagePath} from '../../store/products-ui/selectors';
 import {useSearchParams} from 'react-router-dom';
-import {ChangeEvent, useEffect} from 'react';
+import {ChangeEvent} from 'react';
 
 function SortCatalog (): JSX.Element {
 
   const {search} = useAppSelector(getCurrentCatalogPagePath);
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const dispatch = useAppDispatch();
-  const currentSortType = useAppSelector(getCurrentSort);
-  const currentOrderType = useAppSelector(getCurrentOrder);
 
   return (
     <div className="catalog-sort">
@@ -32,12 +25,6 @@ function SortCatalog (): JSX.Element {
                 onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                   const {value} = evt.target;
                   searchParams.set(QueryParam.Sort, value);
-                  //  if (currentSortType === null) {
-                  //   dispatch(changeCurrentSort({type: SortCatalogType.Price}));
-                  //   dispatch(changeCurrentOrder({type: SortCatalogType.Asc}));
-                  // } else if (currentSortType !== SortCatalogType.Price) {
-                  //   dispatch(changeCurrentSort({type: SortCatalogType.Price}));
-                  // }
                   setSearchParams(searchParams);
                 }}
               />
@@ -52,12 +39,6 @@ function SortCatalog (): JSX.Element {
                 onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                   const {value} = evt.target;
                   searchParams.set(QueryParam.Sort, value);
-                  // if (currentSortType === null) {
-                  //   dispatch(changeCurrentSort({type: SortCatalogType.Rating}));
-                  //   dispatch(changeCurrentOrder({type: SortCatalogType.Asc}));
-                  // } else if (currentSortType !== SortCatalogType.Rating) {
-                  //   dispatch(changeCurrentSort({type: SortCatalogType.Rating}));
-                  // }
                   setSearchParams(searchParams);
                 }}
               />
@@ -69,15 +50,13 @@ function SortCatalog (): JSX.Element {
               <input type="radio"
                 id="up"
                 name="sort-icon"
+                value="asc"
                 aria-label="По возрастанию"
-                checked={(currentOrderType === SortCatalogType.Asc)}
-                onChange={() => {
-                  if (currentOrderType === null) {
-                    dispatch(changeCurrentOrder({type: SortCatalogType.Asc}));
-                    dispatch(changeCurrentSort({type: SortCatalogType.Price}));
-                  } else if (currentSortType !== SortCatalogType.Asc) {
-                    dispatch(changeCurrentOrder({type: SortCatalogType.Asc}));
-                  }
+                checked={search?.includes(`${QueryParam.Order}=${SortCatalogType.Asc}`)}
+                onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+                  const {value} = evt.target;
+                  searchParams.set(QueryParam.Order, value);
+                  setSearchParams(searchParams);
                 }}
               />
               <label htmlFor="up">
@@ -90,14 +69,13 @@ function SortCatalog (): JSX.Element {
               <input type="radio"
                 id="down"
                 name="sort-icon"
+                value="desc"
                 aria-label="По убыванию"
-                onChange={() => {
-                  if (currentOrderType === null) {
-                    dispatch(changeCurrentOrder({type: SortCatalogType.Desc}));
-                    dispatch(changeCurrentSort({type: SortCatalogType.Price}));
-                  } else if (currentSortType !== SortCatalogType.Desc) {
-                    dispatch(changeCurrentOrder({type: SortCatalogType.Desc}));
-                  }
+                checked={search?.includes(`${QueryParam.Order}=${SortCatalogType.Desc}`)}
+                onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+                  const {value} = evt.target;
+                  searchParams.set(QueryParam.Order, value);
+                  setSearchParams(searchParams);
                 }}
               />
               <label htmlFor="down">
