@@ -27,10 +27,6 @@ export const NAV_BREADCRUMB_CATALOG = {
 
 export const NAV_PAGES = [
   {
-    title: 'Каталог',
-    href: AppRoute.Catalog,
-  },
-  {
     title: 'Гарантии',
     href: AppRoute.NotFound,
   },
