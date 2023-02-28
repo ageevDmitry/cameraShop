@@ -47,13 +47,18 @@ function SortCatalog (): JSX.Element {
               <input type="radio"
                 id="sortPopular"
                 name="sort"
-                onChange={() => {
-                  if (currentSortType === null) {
-                    dispatch(changeCurrentSort({type: SortCatalogType.Rating}));
-                    dispatch(changeCurrentOrder({type: SortCatalogType.Asc}));
-                  } else if (currentSortType !== SortCatalogType.Rating) {
-                    dispatch(changeCurrentSort({type: SortCatalogType.Rating}));
-                  }
+                value="rating"
+                checked={search?.includes(`${QueryParam.Sort}=${SortCatalogType.Rating}`)}
+                onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+                  const {value} = evt.target;
+                  searchParams.set(QueryParam.Sort, value);
+                  // if (currentSortType === null) {
+                  //   dispatch(changeCurrentSort({type: SortCatalogType.Rating}));
+                  //   dispatch(changeCurrentOrder({type: SortCatalogType.Asc}));
+                  // } else if (currentSortType !== SortCatalogType.Rating) {
+                  //   dispatch(changeCurrentSort({type: SortCatalogType.Rating}));
+                  // }
+                  setSearchParams(searchParams);
                 }}
               />
               <label htmlFor="sortPopular">по популярности</label>
