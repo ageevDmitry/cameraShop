@@ -1,10 +1,16 @@
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {changeCurrentSort, changeCurrentOrder} from '../../store/products-ui/products-ui';
-import {SortCatalogType} from '../../const';
+import {SortCatalogType, QueryParam} from '../../const';
 import {getCurrentSort, getCurrentOrder} from '../../store/products-ui/selectors';
+import {getCurrentCatalogPagePath} from '../../store/products-ui/selectors';
+import {useSearchParams} from 'react-router-dom';
+import {ChangeEvent, useEffect} from 'react';
 
 function SortCatalog (): JSX.Element {
+
+  const {search} = useAppSelector(getCurrentCatalogPagePath);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const dispatch = useAppDispatch();
   const currentSortType = useAppSelector(getCurrentSort);
@@ -17,17 +23,22 @@ function SortCatalog (): JSX.Element {
           <p className="title title--h5">Сортировать:</p>
           <div className="catalog-sort__type">
             <div className="catalog-sort__btn-text">
-              <input type="radio"
+              <input
+                type="radio"
                 id="sortPrice"
                 name="sort"
-                checked={(currentSortType === SortCatalogType.Price)}
-                onChange={() => {
-                  if (currentSortType === null) {
-                    dispatch(changeCurrentSort({type: SortCatalogType.Price}));
-                    dispatch(changeCurrentOrder({type: SortCatalogType.Asc}));
-                  } else if (currentSortType !== SortCatalogType.Price) {
-                    dispatch(changeCurrentSort({type: SortCatalogType.Price}));
-                  }
+                value="price"
+                checked={search?.includes(`${QueryParam.Sort}=${SortCatalogType.Price}`)}
+                onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+                  const {value} = evt.target;
+                  searchParams.set(QueryParam.Sort, value);
+                  //  if (currentSortType === null) {
+                  //   dispatch(changeCurrentSort({type: SortCatalogType.Price}));
+                  //   dispatch(changeCurrentOrder({type: SortCatalogType.Asc}));
+                  // } else if (currentSortType !== SortCatalogType.Price) {
+                  //   dispatch(changeCurrentSort({type: SortCatalogType.Price}));
+                  // }
+                  setSearchParams(searchParams);
                 }}
               />
               <label htmlFor="sortPrice">по цене</label>

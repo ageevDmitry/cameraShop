@@ -38,14 +38,14 @@ export type ProductsFetchParams = {
     sort: string | null;
     order: string | null;
     category: string | null;
-    type: string[] | null;
-    level: string[] | null;
-    minPrice: number | null;
-    maxPrice: number | null;
+    type: string |string[] | null;
+    level: string | string[] | null;
+    minPrice: string | null;
+    maxPrice: string | null;
 }
 
 export type ProductsMinPriceFetchParams = {
     category: string | null;
-    type: string[] | null;
-    level: string[] | null;
+    type: string | string[] | null;
+    level: string | string[] | null;
 }

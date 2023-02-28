@@ -12,15 +12,15 @@ import {useAppSelector} from '../../hooks/useAppSelector';
 import {getProducts,
   getProductsTotalCount,
   getPromo} from '../../store/products-data/selectors';
-import {
-  getCurrentSort,
-  getCurrentOrder,
-  getCurrentType,
-  getCurrentCategory,
-  getCurrentLevel,
-  getCurrentMinPrice,
-  getCurrentMaxPrice} from '../../store/products-ui/selectors';
-import {PaginationUI, NAV_BREADCRUMB_MAIN} from '../../const';
+// import {
+//   getCurrentSort,
+//   getCurrentOrder,
+//   getCurrentType,
+//   getCurrentCategory,
+//   getCurrentLevel,
+//   getCurrentMinPrice,
+//   getCurrentMaxPrice} from '../../store/products-ui/selectors';
+import {PaginationUI, NAV_BREADCRUMB_MAIN, QueryParam} from '../../const';
 import {fetchProductsAction,
   fetchPromoAction,
   fetchMinPriceProductsAction,
@@ -34,20 +34,20 @@ function Catalog (): JSX.Element {
 
   const dispatch = useAppDispatch();
   const {pageNumber} = useParams();
+  const [searchParams] = useSearchParams();
   const currentCatalogPage = Number(pageNumber);
-  const currentSort = useAppSelector(getCurrentSort);
-  const currentOrder = useAppSelector(getCurrentOrder);
-  const currentType = useAppSelector(getCurrentType);
-  const currentCategory = useAppSelector(getCurrentCategory);
-  const currentLevel = useAppSelector(getCurrentLevel);
-  const currentMinPrice = useAppSelector(getCurrentMinPrice);
-  const currentMaxPrice = useAppSelector(getCurrentMaxPrice);
+  const currentSort = searchParams.get(QueryParam.Sort);
+  const currentOrder = searchParams.get(QueryParam.Order);
+  const currentType = searchParams.get(QueryParam.Type);
+  const currentCategory = searchParams.get(QueryParam.Category);
+  const currentLevel = searchParams.get(QueryParam.Level);
+  const currentMinPrice = searchParams.get(QueryParam.MinPrice);
+  const currentMaxPrice = searchParams.get(QueryParam.MaxPrice);
   const productsTotalCount = useAppSelector(getProductsTotalCount);
   const paginationCount = Math.ceil(productsTotalCount / PaginationUI.ProductsView);
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN];
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
-  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     if(currentCatalogPage) {
