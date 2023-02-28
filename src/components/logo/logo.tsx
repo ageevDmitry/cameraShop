@@ -1,6 +1,7 @@
-import {LogoType, LOGO_CLASS_NAME, AppRoute} from '../../const';
-import {Link} from 'react-router-dom';
-import {useLocation} from 'react-router-dom';
+import {LogoType, LOGO_CLASS_NAME, AppRoute, DEFAULT_CATALOG_PAGE} from '../../const';
+import {Link, generatePath} from 'react-router-dom';
+import {useAppSelector} from '../../hooks/useAppSelector';
+import {getCurrentCatalogPagePath} from '../../store/products-ui/selectors';
 
 type LogoProps = {
   typeComponent: LogoType;
@@ -8,10 +9,20 @@ type LogoProps = {
 
 function Logo ({typeComponent}: LogoProps): JSX.Element {
 
-  const location = useLocation();
+  const currentCatalogPagePath = useAppSelector(getCurrentCatalogPagePath);
+  const search = currentCatalogPagePath.search;
 
   return (
-    <Link to={`${(location.pathname === AppRoute.Catalog) ? '' : AppRoute.Main}`} className={`${LOGO_CLASS_NAME[typeComponent]}__logo`} aria-label="Переход на главную">
+    <Link className={`${LOGO_CLASS_NAME[typeComponent]}__logo`} aria-label="Переход на главную"
+      to={{
+        pathname: generatePath(
+          AppRoute.Catalog,
+          {pageNumber: (currentCatalogPagePath.currentCatalogPage)
+            ? String(currentCatalogPagePath.currentCatalogPage) : DEFAULT_CATALOG_PAGE}
+        ),
+        search
+      }}
+    >
       <svg width={100} height={36} aria-hidden="true">
         <use xlinkHref={`#icon-logo${typeComponent}`}/>
       </svg>
