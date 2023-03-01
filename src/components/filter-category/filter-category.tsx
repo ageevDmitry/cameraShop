@@ -1,16 +1,10 @@
-import {useAppDispatch} from '../../hooks/useAppDispatch';
-import {useAppSelector} from '../../hooks/useAppSelector';
-import {getCurrentCategory,
-  getCurrentType} from '../../store/products-ui/selectors';
-import {changeCurrentCategory} from '../../store/products-ui/products-ui';
-import {FilterCatalogCategory} from '../../const';
-import {checkDisable} from '../../utils';
+import {FilterCatalogCategory, QueryParam} from '../../const';
+import {useSearchParams} from 'react-router-dom';
+// import {checkDisable} from '../../utils';
 
 function FilterCategory (): JSX.Element {
 
-  const dispatch = useAppDispatch();
-  const currentCategory = useAppSelector(getCurrentCategory);
-  const currentType = useAppSelector(getCurrentType);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <fieldset className="catalog-filter__block">
@@ -21,12 +15,17 @@ function FilterCategory (): JSX.Element {
             <input type="checkbox"
               name={item.name}
               onChange={() => {
-                (currentCategory === null)
-                  ? dispatch(changeCurrentCategory({type: item.type}))
-                  : dispatch(changeCurrentCategory({type: null}));
+                (searchParams.get(QueryParam.Category) === item.type)
+                  ? searchParams.delete(QueryParam.Category)
+                  : searchParams.append(QueryParam.Category, item.type);
+
+                setSearchParams(searchParams);
               }}
-              disabled={checkDisable(currentCategory, currentType, item.disable)}
-              checked={currentCategory === item.type}
+              checked={searchParams.get(QueryParam.Category) === item.type}
+              // disabled={checkDisable(searchParams, item.disable)}
+              // checked={currentCatalogPagePath.search?.includes(`${QueryParam.Category}=${item.type}`)}
+              // disabled={currentCatalogPagePath.search?.includes(`${QueryParam.Category}=${item.disable}`)}
+              // disabled={item.disable.includes(`${currentCatalogPagePath.search?.get()}`)}
             /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">{item.title}</span>
           </label>
         </div>

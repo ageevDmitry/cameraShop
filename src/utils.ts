@@ -3,22 +3,33 @@ import {FilterCatalogName,
   FILTER_CATALOG_TYPE_DEFAULT,
   FILTER_CATALOG_LEVEL_DEFAULT} from './const';
 import {ChangeEvent} from 'react';
+// import { URLSearchParams } from 'url';
 
-export const checkDisable = (currentCategory: string | null, currentType: string[] | null, itemDisable: string[]) => {
+// export const checkDisable = (currentCategory: string | null, currentType: string[] | null, itemDisable: string[]) => {
 
-  if (currentType !== null) {
-    for (const value of itemDisable) {
-      const foo = currentType.includes(value);
-      if (foo) {
-        return true;
-      }
-    }
-  } else if (currentCategory !== null && (itemDisable.includes(currentCategory))) {
-    return true;
-  } else {
-    return false;
-  }
-};
+//   if (currentType !== null) {
+//     for (const value of itemDisable) {
+//       const foo = currentType.includes(value);
+//       if (foo) {
+//         return true;
+//       }
+//     }
+//   } else if (currentCategory !== null && (itemDisable.includes(currentCategory))) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// };
+
+// export const checkDisable = (searchParams: URLSearchParams, itemDisable: string[]) => {
+
+//   for (const value of searchParams.values()) {
+//     if (itemDisable.includes(value)) {
+//       console.log(value);
+//       return true;
+//     }
+//   }
+// };
 
 export const getFilterArray = (array: string[] | null, type: string) => {
 
