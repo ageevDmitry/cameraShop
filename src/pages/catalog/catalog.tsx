@@ -38,8 +38,8 @@ function Catalog (): JSX.Element {
   const currentCatalogPage = Number(pageNumber);
   const currentSort = searchParams.get(QueryParam.Sort);
   const currentOrder = searchParams.get(QueryParam.Order);
-  const currentType = searchParams.get(QueryParam.Type);
   const currentCategory = searchParams.get(QueryParam.Category);
+  const currentType = searchParams.getAll(QueryParam.Type);
   const currentLevel = searchParams.get(QueryParam.Level);
   const currentMinPrice = searchParams.get(QueryParam.MinPrice);
   const currentMaxPrice = searchParams.get(QueryParam.MaxPrice);
@@ -71,7 +71,7 @@ function Catalog (): JSX.Element {
     searchParams,
     currentSort,
     currentOrder,
-    currentType,
+    // currentType,
     currentCategory,
     currentLevel,
     currentMinPrice,

@@ -1,24 +1,11 @@
-import {useAppDispatch} from '../../hooks/useAppDispatch';
-import {useAppSelector} from '../../hooks/useAppSelector';
-import {getFilterArray,
-  getCurrentTypeState} from '../../utils';
-import {getCurrentCategory,
-  getCurrentType} from '../../store/products-ui/selectors';
-import {changeCurrentType} from '../../store/products-ui/products-ui';
-import {FilterCatalogType,
-  FILTER_CATALOG_TYPE_DEFAULT} from '../../const';
-import {useState, useEffect} from 'react';
+
+import {checkDisable, checkFilter} from '../../utils';
+import {FilterCatalogType, QueryParam} from '../../const';
+import {useSearchParams} from 'react-router-dom';
 
 function FilterType (): JSX.Element {
 
-  const dispatch = useAppDispatch();
-  const currentCategory = useAppSelector(getCurrentCategory);
-  const currentType = useAppSelector(getCurrentType);
-  const [currentTypeState, setCurrentTypeState] = useState(FILTER_CATALOG_TYPE_DEFAULT);
-
-  useEffect(() => {
-    setCurrentTypeState(getCurrentTypeState(currentType));
-  }, [currentType]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <fieldset className="catalog-filter__block">
@@ -30,10 +17,11 @@ function FilterType (): JSX.Element {
               <input type="checkbox"
                 name={item.name}
                 onChange={() => {
-                  dispatch(changeCurrentType({type: getFilterArray(currentType, item.title)}));
+                  checkFilter(searchParams, QueryParam.Type, item.title);
+                  setSearchParams(searchParams);
                 }}
-                disabled={(currentCategory === item.disable)}
-                checked={currentTypeState[i]}
+                checked={Array.from(searchParams.values()).includes(item.title)}
+                disabled={checkDisable(searchParams, item.disable)}
               /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">{item.title}</span>
             </label>
           </div>

@@ -3,33 +3,48 @@ import {FilterCatalogName,
   FILTER_CATALOG_TYPE_DEFAULT,
   FILTER_CATALOG_LEVEL_DEFAULT} from './const';
 import {ChangeEvent} from 'react';
-// import { URLSearchParams } from 'url';
 
-// export const checkDisable = (currentCategory: string | null, currentType: string[] | null, itemDisable: string[]) => {
+export const checkDisable = (searchParams: URLSearchParams, itemDisable: string | string[]) => {
 
-//   if (currentType !== null) {
-//     for (const value of itemDisable) {
-//       const foo = currentType.includes(value);
-//       if (foo) {
-//         return true;
-//       }
-//     }
-//   } else if (currentCategory !== null && (itemDisable.includes(currentCategory))) {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// };
+  for (const value of searchParams.values()) {
+    if (itemDisable.includes(value)) {
+      return true;
+    }
+  }
+};
 
-// export const checkDisable = (searchParams: URLSearchParams, itemDisable: string[]) => {
+const deleteFilterType = (searchParams: URLSearchParams, queryParam: string, itemType: string) => {
 
-//   for (const value of searchParams.values()) {
-//     if (itemDisable.includes(value)) {
-//       console.log(value);
-//       return true;
-//     }
-//   }
-// };
+  const searchParamsValues = new Array(0);
+
+  searchParams.getAll(queryParam).forEach((value) => {
+    if (value === itemType) {
+      return;
+    }
+    searchParamsValues.push(value);
+  });
+
+  searchParams.delete(queryParam);
+
+  searchParamsValues.forEach((value: string) => {
+    searchParams.append(queryParam, value);
+  });
+
+  return searchParams;
+};
+
+export const checkFilter = (searchParams: URLSearchParams, queryParam: string, itemType: string) => {
+
+  const searchParamsValues = Array.from(searchParams.values());
+
+  if (searchParamsValues.includes(itemType)) {
+    deleteFilterType(searchParams, queryParam, itemType);
+  } else {
+    searchParams.append(queryParam, itemType);
+  }
+
+  return searchParams;
+};
 
 export const getFilterArray = (array: string[] | null, type: string) => {
 

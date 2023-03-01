@@ -1,6 +1,6 @@
 import {FilterCatalogCategory, QueryParam} from '../../const';
 import {useSearchParams} from 'react-router-dom';
-// import {checkDisable} from '../../utils';
+import {checkDisable} from '../../utils';
 
 function FilterCategory (): JSX.Element {
 
@@ -22,10 +22,7 @@ function FilterCategory (): JSX.Element {
                 setSearchParams(searchParams);
               }}
               checked={searchParams.get(QueryParam.Category) === item.type}
-              // disabled={checkDisable(searchParams, item.disable)}
-              // checked={currentCatalogPagePath.search?.includes(`${QueryParam.Category}=${item.type}`)}
-              // disabled={currentCatalogPagePath.search?.includes(`${QueryParam.Category}=${item.disable}`)}
-              // disabled={item.disable.includes(`${currentCatalogPagePath.search?.get()}`)}
+              disabled={checkDisable(searchParams, item.disable)}
             /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">{item.title}</span>
           </label>
         </div>
