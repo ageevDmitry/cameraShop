@@ -57,6 +57,26 @@ export const cleanUpFilter = (searchParams: URLSearchParams) => {
   return searchParams;
 };
 
+export const changeFilterPrice = (searchParams: URLSearchParams,
+  currentMinPrice: number | null,
+  currentMaxPrice: number | null
+) => {
+
+  if (currentMinPrice !== null) {
+    searchParams.set(QueryParam.MinPrice, String(currentMinPrice));
+  } else {
+    searchParams.delete(QueryParam.MinPrice);
+  }
+
+  if (currentMaxPrice !== null) {
+    searchParams.set(QueryParam.MaxPrice, String(currentMaxPrice));
+  } else {
+    searchParams.delete(QueryParam.MaxPrice);
+  }
+
+  return searchParams;
+};
+
 export const getFilterArray = (array: string[] | null, type: string) => {
 
   if (array === null) {

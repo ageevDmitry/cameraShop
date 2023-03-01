@@ -1,38 +1,47 @@
+import {useSearchParams} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/useAppSelector';
-import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {getMinProductsPrice, getMaxProductsPrice} from '../../store/products-data/selectors';
-import {useState, useEffect} from 'react';
-import {changeCurrentMinPrice, changeCurrentMaxPrice} from '../../store/products-ui/products-ui';
-import {getValidatedCurrentMinPrice,
+import {useState,
+  // useEffect
+} from 'react';
+import {
+  getValidatedCurrentMinPrice,
   getValidatedCurrentMaxPrice,
   getValidatedCurrentMaxPriceState,
   getValidatedCurrentPriceState,
-  getStringCurrentMinPriceState,
+  // getStringCurrentMinPriceState,
+  changeFilterPrice
 } from '../../utils';
-import {getCurrentMinPrice,
-  getCurrentMaxPrice} from '../../store/products-ui/selectors';
+import {
+// getCurrentMinPrice,
+// getCurrentMaxPrice
+} from '../../store/products-ui/selectors';
 import {useKeyDownFilterPrice} from '../../hooks/useKeyDownFilterPrice';
 import {useClickFilterPrice} from '../../hooks/useClickFilterPrice';
+// import {QueryParam} from '../../const';
 
 function FilterPrice (): JSX.Element {
 
-  const dispatch = useAppDispatch();
+  const [searchParams, setSearchParams] = useSearchParams();
   const minProductsPrice = useAppSelector(getMinProductsPrice);
   const maxProductsPrice = useAppSelector(getMaxProductsPrice);
-  const currentMinPrice = useAppSelector(getCurrentMinPrice);
-  const currentMaxPrice = useAppSelector(getCurrentMaxPrice);
+  // const currentMinPrice = useAppSelector(getCurrentMinPrice);
+  // const currentMaxPrice = useAppSelector(getCurrentMaxPrice);
 
   const [currentMinPriceState, setCurrentMinPriceState] = useState<string>('');
   const [currentMaxPriceState, setCurrentMaxPriceState] = useState<string>('');
 
-  useEffect(() => {
-    setCurrentMinPriceState(getStringCurrentMinPriceState(currentMinPrice));
-    setCurrentMaxPriceState(getStringCurrentMinPriceState(currentMaxPrice));
-  }, [currentMinPrice, currentMaxPrice]);
+  // useEffect(() => {
+  //   setCurrentMinPriceState(getStringCurrentMinPriceState(currentMinPrice));
+  //   setCurrentMaxPriceState(getStringCurrentMinPriceState(currentMaxPrice));
+  // }, [currentMinPrice, currentMaxPrice]);
 
   const handleChangeFilterPrice = () => {
-    dispatch(changeCurrentMinPrice({type: getValidatedCurrentMinPrice(currentMinPriceState, minProductsPrice)}));
-    dispatch(changeCurrentMaxPrice({type: getValidatedCurrentMaxPrice(currentMaxPriceState, maxProductsPrice, currentMinPriceState)}));
+    const validatedCurrentMinPrice = getValidatedCurrentMinPrice(currentMinPriceState, minProductsPrice);
+    const validatedCurrentMaxPrice = getValidatedCurrentMaxPrice(currentMaxPriceState, maxProductsPrice, currentMinPriceState);
+    changeFilterPrice(searchParams, validatedCurrentMinPrice, validatedCurrentMaxPrice);
+
+    setSearchParams(searchParams);
     setCurrentMaxPriceState(getValidatedCurrentMaxPriceState(currentMaxPriceState, currentMinPriceState));
   };
 
