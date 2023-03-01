@@ -1,7 +1,7 @@
 
 import {FilterCatalogName,
   FILTER_CATALOG_TYPE_DEFAULT,
-  FILTER_CATALOG_LEVEL_DEFAULT} from './const';
+  FILTER_CATALOG_LEVEL_DEFAULT, QueryParam} from './const';
 import {ChangeEvent} from 'react';
 
 export const checkDisable = (searchParams: URLSearchParams, itemDisable: string | string[]) => {
@@ -42,6 +42,17 @@ export const checkFilter = (searchParams: URLSearchParams, queryParam: string, i
   } else {
     searchParams.append(queryParam, itemType);
   }
+
+  return searchParams;
+};
+
+export const cleanUpFilter = (searchParams: URLSearchParams) => {
+
+  searchParams.delete(QueryParam.Category);
+  searchParams.delete(QueryParam.Type);
+  searchParams.delete(QueryParam.Level);
+  searchParams.delete(QueryParam.MaxPrice);
+  searchParams.delete(QueryParam.MinPrice);
 
   return searchParams;
 };

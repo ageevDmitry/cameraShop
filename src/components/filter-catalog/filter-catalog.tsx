@@ -1,25 +1,14 @@
-import {useAppDispatch} from '../../hooks/useAppDispatch';
-import {useAppSelector} from '../../hooks/useAppSelector';
-import {cleanUpFilter} from '../../store/products-ui/products-ui';
-import {getCurrentCategory,
-  getCurrentType,
-  getCurrentLevel,
-  getCurrentMinPrice,
-  getCurrentMaxPrice
-} from '../../store/products-ui/selectors';
+import {useSearchParams} from 'react-router-dom';
 import FilterPrice from '../filter-price/filter-price';
 import FilterCategory from '../filter-category/filter-category';
 import FilterType from '../filter-type/filter-type';
 import FilterLevel from '../filter-level/filter-level';
+import {cleanUpFilter} from '../../utils';
+import {QueryParam} from '../../const';
 
 function FilterCatalog (): JSX.Element {
 
-  const dispatch = useAppDispatch();
-  const currentType = useAppSelector(getCurrentType);
-  const currentCategory = useAppSelector(getCurrentCategory);
-  const currentLevel = useAppSelector(getCurrentLevel);
-  const currentMinPrice = useAppSelector(getCurrentMinPrice);
-  const currentMaxPrice = useAppSelector(getCurrentMaxPrice);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   return (
     <div className="catalog-filter">
@@ -31,13 +20,14 @@ function FilterCatalog (): JSX.Element {
         <FilterLevel/>
         <button className="btn catalog-filter__reset-btn" type="reset"
           onClick={() => {
-            dispatch(cleanUpFilter());
+            cleanUpFilter(searchParams);
+            setSearchParams(searchParams);
           }}
-          disabled={(currentType === null
-            && currentCategory === null
-            && currentLevel === null
-            && currentMinPrice === null
-            && currentMaxPrice === null)}
+          disabled={(!searchParams.has(QueryParam.Category) &&
+            !searchParams.has(QueryParam.Type) &&
+            !searchParams.has(QueryParam.Level) &&
+            !searchParams.has(QueryParam.MaxPrice) &&
+            !searchParams.has(QueryParam.MinPrice))}
         >Сбросить фильтры
         </button>
       </form>
