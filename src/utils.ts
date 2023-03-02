@@ -4,6 +4,14 @@ import {FilterCatalogName,
   FILTER_CATALOG_LEVEL_DEFAULT, QueryParam} from './const';
 import {ChangeEvent} from 'react';
 
+export const setPrice = (price: number | null) => {
+  if (price !== null) {
+    return String(price);
+  } else {
+    return ('');
+  }
+};
+
 export const checkDisable = (searchParams: URLSearchParams, itemDisable: string | string[]) => {
 
   for (const value of searchParams.values()) {

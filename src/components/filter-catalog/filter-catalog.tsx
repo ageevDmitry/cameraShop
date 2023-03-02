@@ -1,3 +1,4 @@
+import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useSearchParams} from 'react-router-dom';
 import FilterPrice from '../filter-price/filter-price';
 import FilterCategory from '../filter-category/filter-category';
@@ -5,10 +6,12 @@ import FilterType from '../filter-type/filter-type';
 import FilterLevel from '../filter-level/filter-level';
 import {cleanUpFilter} from '../../utils';
 import {QueryParam} from '../../const';
+import {cleanUpFilter1} from '../../store/products-ui/products-ui';
 
 function FilterCatalog (): JSX.Element {
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useAppDispatch();
 
   return (
     <div className="catalog-filter">
@@ -22,6 +25,7 @@ function FilterCatalog (): JSX.Element {
           onClick={() => {
             cleanUpFilter(searchParams);
             setSearchParams(searchParams);
+            dispatch(cleanUpFilter1());
           }}
           disabled={(!searchParams.has(QueryParam.Category) &&
             !searchParams.has(QueryParam.Type) &&

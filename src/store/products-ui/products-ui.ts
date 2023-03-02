@@ -44,11 +44,7 @@ export const productsUI = createSlice({
     changeCurrentMaxPrice: (state, action: PayloadAction<{type: number | null}>) => {
       state.currentMaxPrice = action.payload.type;
     },
-    cleanUpFilter: (state) => {
-      state.currentOrder = null;
-      state.currentType = null;
-      state.currentCategory = null;
-      state.currentLevel = null;
+    cleanUpFilter1: (state) => {
       state.currentMinPrice = null;
       state.currentMaxPrice = null;
     },
@@ -63,4 +59,4 @@ export const {changeCurrentCatalogPagePath,
   changeCurrentLevel,
   changeCurrentMinPrice,
   changeCurrentMaxPrice,
-  cleanUpFilter} = productsUI.actions;
+  cleanUpFilter1} = productsUI.actions;

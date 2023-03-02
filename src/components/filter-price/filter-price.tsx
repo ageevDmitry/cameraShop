@@ -1,5 +1,6 @@
 import {useSearchParams} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/useAppSelector';
+import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {getMinProductsPrice, getMaxProductsPrice} from '../../store/products-data/selectors';
 import {useState,
   useEffect
@@ -10,18 +11,28 @@ import {
   getValidatedCurrentMaxPriceState,
   getValidatedCurrentPriceState,
   getCurrentPriceState,
-  changeFilterPrice
+  changeFilterPrice,
+  setPrice
 } from '../../utils';
 import {useKeyDownFilterPrice} from '../../hooks/useKeyDownFilterPrice';
 import {useClickFilterPrice} from '../../hooks/useClickFilterPrice';
+import {getCurrentMinPrice,
+  // getCurrentMaxPrice
+} from '../../store/products-ui/selectors';
+import {
+  changeCurrentMinPrice,
+  //  changeCurrentMaxPrice
+} from '../../store/products-ui/products-ui';
 
 function FilterPrice (): JSX.Element {
 
+  const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const minProductsPrice = useAppSelector(getMinProductsPrice);
   const maxProductsPrice = useAppSelector(getMaxProductsPrice);
+  const currentMinPrice = useAppSelector(getCurrentMinPrice);
 
-  const [currentMinPriceState, setCurrentMinPriceState] = useState<string>('');
+  const [currentMinPriceState, setCurrentMinPriceState] = useState<string>(setPrice(currentMinPrice));
   const [currentMaxPriceState, setCurrentMaxPriceState] = useState<string>('');
 
   useEffect(() => {
@@ -34,9 +45,9 @@ function FilterPrice (): JSX.Element {
     const validatedCurrentMinPrice = getValidatedCurrentMinPrice(currentMinPriceState, minProductsPrice);
     const validatedCurrentMaxPrice = getValidatedCurrentMaxPrice(currentMaxPriceState, maxProductsPrice, currentMinPriceState);
     changeFilterPrice(searchParams, validatedCurrentMinPrice, validatedCurrentMaxPrice);
-
-    setSearchParams(searchParams);
     setCurrentMaxPriceState(getValidatedCurrentMaxPriceState(currentMaxPriceState, currentMinPriceState));
+    setSearchParams(searchParams);
+    dispatch(changeCurrentMinPrice({type: validatedCurrentMinPrice}));
   };
 
   useKeyDownFilterPrice(handleChangeFilterPrice);
