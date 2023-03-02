@@ -1,30 +1,22 @@
-// import {useAppSelector} from '../../hooks/useAppSelector';
-import {
-  // SortCatalogType,
-  QueryParam
-} from '../../const';
-// import {getCurrentCatalogPagePath} from '../../store/products-ui/selectors';
+import {SortCatalogType, QueryParam} from '../../const';
 import {useSearchParams} from 'react-router-dom';
-import {ChangeEvent,
-  // useEffect
-} from 'react';
+import {ChangeEvent, useEffect} from 'react';
 
 function SortCatalog (): JSX.Element {
 
-  // const currentCatalogPagePath = useAppSelector(getCurrentCatalogPagePath);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // useEffect(() => {
-  //   if (searchParams.has(QueryParam.Sort) && !searchParams.has(QueryParam.Order)) {
-  //     searchParams.set(QueryParam.Order, SortCatalogType.Asc);
-  //     setSearchParams(searchParams);
-  //   }
+  useEffect(() => {
+    if (searchParams.has(QueryParam.Sort) && !searchParams.has(QueryParam.Order)) {
+      searchParams.set(QueryParam.Order, SortCatalogType.Asc);
+      setSearchParams(searchParams);
+    }
 
-  //   if (!searchParams.has(QueryParam.Sort) && searchParams.has(QueryParam.Order)) {
-  //     searchParams.set(QueryParam.Sort, SortCatalogType.Desc);
-  //     setSearchParams(searchParams);
-  //   }
-  // }, [searchParams, setSearchParams]);
+    if (!searchParams.has(QueryParam.Sort) && searchParams.has(QueryParam.Order)) {
+      searchParams.set(QueryParam.Sort, SortCatalogType.Desc);
+      setSearchParams(searchParams);
+    }
+  }, [searchParams, setSearchParams]);
 
   return (
     <div className="catalog-sort">
@@ -37,13 +29,13 @@ function SortCatalog (): JSX.Element {
                 type="radio"
                 id="sortPrice"
                 name="sort"
-                // value="price"
-                // checked={currentCatalogPagePath.search?.includes(`${QueryParam.Sort}=${SortCatalogType.Price}`)}
-                // onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-                //   const {value} = evt.target;
-                //   searchParams.set(QueryParam.Sort, value);
-                //   setSearchParams(searchParams);
-                // }}
+                value="price"
+                defaultChecked
+                onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+                  const {value} = evt.target;
+                  searchParams.set(QueryParam.Sort, value);
+                  setSearchParams(searchParams);
+                }}
               />
               <label htmlFor="sortPrice">по цене</label>
             </div>
@@ -51,13 +43,12 @@ function SortCatalog (): JSX.Element {
               <input type="radio"
                 id="sortPopular"
                 name="sort"
-                // value="rating"
-                // checked={currentCatalogPagePath.search?.includes(`${QueryParam.Sort}=${SortCatalogType.Rating}`)}
-                // onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-                //   const {value} = evt.target;
-                //   searchParams.set(QueryParam.Sort, value);
-                //   setSearchParams(searchParams);
-                // }}
+                value="rating"
+                onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+                  const {value} = evt.target;
+                  searchParams.set(QueryParam.Sort, value);
+                  setSearchParams(searchParams);
+                }}
               />
               <label htmlFor="sortPopular">по популярности</label>
             </div>
@@ -69,7 +60,7 @@ function SortCatalog (): JSX.Element {
                 name="sort-icon"
                 value="asc"
                 aria-label="По возрастанию"
-                // checked={currentCatalogPagePath.search?.includes(`${QueryParam.Order}=${SortCatalogType.Asc}`)}
+                defaultChecked
                 onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                   const {value} = evt.target;
                   searchParams.set(QueryParam.Order, value);
@@ -86,14 +77,13 @@ function SortCatalog (): JSX.Element {
               <input type="radio"
                 id="down"
                 name="sort-icon"
-                // value="desc"
+                value="desc"
                 aria-label="По убыванию"
-                // checked={currentCatalogPagePath.search?.includes(`${QueryParam.Order}=${SortCatalogType.Desc}`)}
-                // onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-                //   const {value} = evt.target;
-                //   searchParams.set(QueryParam.Order, value);
-                //   setSearchParams(searchParams);
-                // }}
+                onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+                  const {value} = evt.target;
+                  searchParams.set(QueryParam.Order, value);
+                  setSearchParams(searchParams);
+                }}
               />
               <label htmlFor="down">
                 <svg width={16} height={14} aria-hidden="true">
