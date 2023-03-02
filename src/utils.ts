@@ -13,6 +13,31 @@ export const checkDisable = (searchParams: URLSearchParams, itemDisable: string 
   }
 };
 
+export const getCurrentPriceState = (searchParams: URLSearchParams,
+  setCurrentMinPriceState: (currentMinPriceState: string) => void,
+  setCurrentMaxPriceState: (currentMaxPriceState: string) => void) => {
+
+  if (!searchParams.get(QueryParam.MinPrice)) {
+    setCurrentMinPriceState('');
+  }
+
+  if (!searchParams.get(QueryParam.MaxPrice)) {
+    setCurrentMaxPriceState('');
+  }
+
+  for (const [key, value] of searchParams.entries()) {
+    if (key === QueryParam.MinPrice) {
+      setCurrentMinPriceState(value);
+    }
+  }
+
+  for (const [key, value] of searchParams.entries()) {
+    if (key === QueryParam.MaxPrice) {
+      setCurrentMaxPriceState(value);
+    }
+  }
+};
+
 const deleteFilterType = (searchParams: URLSearchParams, queryParam: string, itemType: string) => {
 
   const searchParamsValues = new Array(0);
@@ -167,16 +192,6 @@ export const getValidatedCurrentPriceState = (evt: ChangeEvent<HTMLInputElement>
     setCurrentMaxPriceState('');
   }
 };
-
-export const getStringCurrentMinPriceState = (currentPrice: number | null) => {
-
-  if (currentPrice === null) {
-    return '';
-  } else {
-    return String(currentPrice);
-  }
-};
-
 
 export const getCurrentTypeState = (currentType: string[] | null) => {
 
