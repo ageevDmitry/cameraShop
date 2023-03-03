@@ -4,8 +4,7 @@ import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
-import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG, ProductTab} from '../../const';
-import {redirectToRoute} from '../../store/action';
+import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG} from '../../const';
 import {cleanUpProductDetail} from '../../store/products-data/products-data';
 import Header from '../../components/header/header';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
@@ -26,17 +25,15 @@ function Product(): JSX.Element {
   const reviews = useAppSelector(getReviews);
   const productsSimilar = useAppSelector(getProductsSimilar);
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG];
-  const [currentTabControl, setCurrentTabControl] = useState(ProductTab.Description);
   const [isModalReview, setStateModalReview] = useState(false);
   const [isModalReviewSuccess, setStateModalReviewSuccess] = useState(false);
 
   useEffect(() => {
     if (id) {
-      dispatch(redirectToRoute(`/product/${id}#${currentTabControl}`));
       dispatch(fetchProductDetailAction(id));
       dispatch(fetchProductsSimilarAction(id));
     }
-  }, [id, dispatch, currentTabControl]);
+  }, [id, dispatch]);
 
   useEffect(() => {
     dispatch(cleanUpProductDetail());
@@ -59,8 +56,6 @@ function Product(): JSX.Element {
           />
           <ProductInfo
             product={product}
-            currentTabControl={currentTabControl}
-            onClickCurrentTabControl={setCurrentTabControl}
           />
           {
             productsSimilar &&

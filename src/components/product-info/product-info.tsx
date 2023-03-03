@@ -1,16 +1,29 @@
+import {useEffect, useState} from 'react';
+import {useLocation} from 'react-router-dom';
 import {Product} from '../../types/product';
 import Rating from '../rating/rating';
 import ProductCharacteristics from '../product-characteristics/product-characteristics';
 import ProductDescription from '../product-description/product-description';
 import {ProductTab, ComponentType} from '../../const';
+import browserHistory from '../../browser-history';
 
 type ProductProps = {
   product: Product;
-  currentTabControl: string;
-  onClickCurrentTabControl: (tabControl: ProductTab) => void;
 }
 
-function ProductInfo ({product, currentTabControl, onClickCurrentTabControl}: ProductProps): JSX.Element {
+function ProductInfo ({product}: ProductProps): JSX.Element {
+
+  const {hash} = useLocation();
+
+  const [currentTabControl, setCurrentTabControl] = useState(hash);
+
+  useEffect(() => {
+    if (!hash) {
+      browserHistory.push({hash: ProductTab.Description});
+      setCurrentTabControl(ProductTab.Description);
+    }
+  }, [hash]);
+
 
   const {name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, vendorCode, category, type, level, description} = product;
 
@@ -29,7 +42,6 @@ function ProductInfo ({product, currentTabControl, onClickCurrentTabControl}: Pr
               rating = {rating}
               reviewCount = {reviewCount}
               componentType = {ComponentType.ProductCardRating}
-
             />
             <p className="product__price"><span className="visually-hidden">Цена:</span>{price}</p>
             <button className="btn btn--purple" type="button">
@@ -40,11 +52,17 @@ function ProductInfo ({product, currentTabControl, onClickCurrentTabControl}: Pr
             <div className="tabs product__tabs">
               <div className="tabs__controls product__tabs-controls">
                 <button className={`tabs__control ${(currentTabControl === ProductTab.Characteristics) ? 'is-active' : ''}`} type="button"
-                  onClick = {() => onClickCurrentTabControl(ProductTab.Characteristics)}
+                  onClick = {() => {
+                    browserHistory.replace({hash: ProductTab.Characteristics});
+                    setCurrentTabControl(ProductTab.Characteristics);
+                  }}
                 >Характеристики
                 </button>
                 <button className={`tabs__control ${(currentTabControl === ProductTab.Description) ? 'is-active' : ''}`} type="button"
-                  onClick = {() => onClickCurrentTabControl(ProductTab.Description)}
+                  onClick = {() => {
+                    browserHistory.replace({hash: ProductTab.Description});
+                    setCurrentTabControl(ProductTab.Description);
+                  }}
                 >Описание
                 </button>
               </div>

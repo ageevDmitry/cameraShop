@@ -105,8 +105,8 @@ export const enum PaginationUI {
 }
 
 export const enum ProductTab {
-  Characteristics = 'characteristics',
-  Description = 'description'
+  Characteristics = '#characteristics',
+  Description = '#description'
 }
 
 export const enum ComponentType {
