@@ -2,6 +2,7 @@ import {Product} from '../../types/product';
 import {Link} from 'react-router-dom';
 import Rating from '../rating/rating';
 import {ComponentType} from '../../const';
+import styles from './product-card.module.css';
 
 type ProductCardProps = {
   product: Product;
@@ -30,7 +31,7 @@ function ProductCard ({product, componentType}: ProductCardProps): JSX.Element {
         />
         <p className="product-card__title">{name}</p>
         <p className="product-card__price"><span className="visually-hidden">Цена:</span>{`${price} ₽`}</p>
-        <p className="product-card__type">{type}</p>
+        <p className={styles.productCard}>{type}</p>
       </div>
       <div className="product-card__buttons">
         <button className="btn btn--purple product-card__btn" type="button">Купить
