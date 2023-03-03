@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-operators */
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useParams, useSearchParams} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
@@ -7,7 +7,8 @@ import {PaginationUI, NAV_BREADCRUMB_MAIN, QueryParam} from '../../const';
 import {getProducts,
   getProductsTotalCount,
   getPromo,
-  getIsDataLoading} from '../../store/products-data/selectors';
+  getIsCatalogPage
+} from '../../store/products-data/selectors';
 import {fetchProductsAction,
   fetchPromoAction,
   fetchMinPriceProductsAction,
@@ -42,8 +43,7 @@ function Catalog (): JSX.Element {
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN];
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
-  const isDataLoading = useAppSelector(getIsDataLoading);
-  const [isPageLoaded, setIsPageLoading] = useState(false);
+  const isCatalogPage = useAppSelector(getIsCatalogPage);
 
   useEffect(() => {
     if(currentCatalogPage) {
@@ -94,14 +94,14 @@ function Catalog (): JSX.Element {
     dispatch(fetchPromoAction());
   }, [dispatch]);
 
-  if (isDataLoading && !isPageLoaded) {
+  useEffect(() => {
+    dispatch(fetchPromoAction());
+  }, [dispatch]);
+
+  if (!isCatalogPage) {
     return (
       <LoadingScreen />
     );
-  }
-
-  if (isDataLoading) {
-    setIsPageLoading(true);
   }
 
   return (

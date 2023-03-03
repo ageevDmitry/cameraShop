@@ -13,6 +13,8 @@ export type ProductsData = {
     productsSimilar?: Product[];
     productsSearch?: Product[];
     reviews?: Review[];
+    isCatalogPage: boolean;
+    isProductPage: boolean;
     isDataLoading: boolean;
     isSuccess: boolean;
 };
