@@ -1,6 +1,9 @@
+import {Product} from '../../types/product';
+import {useAppSelector} from '../../hooks/useAppSelector';
 import ProductCard from '../product-card/product-card';
 import Pagination from '../pagination/pagination';
-import {Product} from '../../types/product';
+import SpinnerComponent from '../spinner-component/spinner-component';
+import {getIsDataLoading} from '../../store/products-data/selectors';
 
 type ProductCardListProps = {
     products: Product[];
@@ -8,6 +11,12 @@ type ProductCardListProps = {
   }
 
 function ProductCardList ({products, paginationCount}: ProductCardListProps): JSX.Element {
+
+  const isLoading = useAppSelector(getIsDataLoading);
+
+  if (isLoading) {
+    return <SpinnerComponent/>;
+  }
 
   return (
     <>

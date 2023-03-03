@@ -15,7 +15,7 @@ import UpButton from '../../components/up-button/up-button';
 import Footer from '../../components/footer/footer';
 import ModalReview from '../../components/modal-review/modal-review';
 import ModalReviewSuccess from '../../components/modal-review-success/modal-review-success';
-import LoadingScreen from '../../components/loading-screen/loading-screen';
+import SpinnerPage from '../../components/spinner-page/spinner-page';
 
 function Product(): JSX.Element {
 
@@ -41,7 +41,7 @@ function Product(): JSX.Element {
 
   if (!product) {
     return (
-      <LoadingScreen />
+      <SpinnerPage />
     );
   }
 

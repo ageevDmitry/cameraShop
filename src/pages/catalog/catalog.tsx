@@ -23,7 +23,7 @@ import SortCatalog from '../../components/sort-catalog/sort-catalog';
 import FilterCatalog from '../../components/filter-catalog/filter-catalog';
 import ProductCardList from '../../components/product-card-list/product-card-list';
 import Footer from '../../components/footer/footer';
-import LoadingScreen from '../../components/loading-screen/loading-screen';
+import SpinnerPage from '../../components/spinner-page/spinner-page';
 
 function Catalog (): JSX.Element {
 
@@ -100,7 +100,7 @@ function Catalog (): JSX.Element {
 
   if (!isCatalogPage) {
     return (
-      <LoadingScreen />
+      <SpinnerPage />
     );
   }
 

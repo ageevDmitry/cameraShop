@@ -1,15 +1,15 @@
 import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
 import HistoryRouter from '../history-route/history-route';
-import LoadingScreen from './loading-screen';
+import SpinnerComponent from './spinner-component';
 
 const history = createMemoryHistory();
 
-describe('Component: LoadingScreen', () => {
+describe('Component: SpinnerPage', () => {
   it('should render correctly', () => {
     render(
       <HistoryRouter history={history}>
-        <LoadingScreen/>
+        <SpinnerComponent/>
       </HistoryRouter>
     );
 
