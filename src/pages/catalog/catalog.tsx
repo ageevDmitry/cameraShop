@@ -1,26 +1,13 @@
 /* eslint-disable no-mixed-operators */
-import Header from '../../components/header/header';
-import Banner from '../../components/banner/banner';
-import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
-import FilterCatalog from '../../components/filter-catalog/filter-catalog';
-import SortCatalog from '../../components/sort-catalog/sort-catalog';
-import ProductCardList from '../../components/product-card-list/product-card-list';
-import Footer from '../../components/footer/footer';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
+import {useParams, useSearchParams} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
+import {PaginationUI, NAV_BREADCRUMB_MAIN, QueryParam} from '../../const';
 import {getProducts,
   getProductsTotalCount,
-  getPromo} from '../../store/products-data/selectors';
-// import {
-//   getCurrentSort,
-//   getCurrentOrder,
-//   getCurrentType,
-//   getCurrentCategory,
-//   getCurrentLevel,
-//   getCurrentMinPrice,
-//   getCurrentMaxPrice} from '../../store/products-ui/selectors';
-import {PaginationUI, NAV_BREADCRUMB_MAIN, QueryParam} from '../../const';
+  getPromo,
+  getIsDataLoading} from '../../store/products-data/selectors';
 import {fetchProductsAction,
   fetchPromoAction,
   fetchMinPriceProductsAction,
@@ -28,7 +15,14 @@ import {fetchProductsAction,
 } from '../../store/api-action';
 import {changeCurrentCatalogPagePath} from '../../store/products-ui/products-ui';
 import styles from './catalog.module.css';
-import {useParams, useSearchParams} from 'react-router-dom';
+import Header from '../../components/header/header';
+import Banner from '../../components/banner/banner';
+import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
+import SortCatalog from '../../components/sort-catalog/sort-catalog';
+import FilterCatalog from '../../components/filter-catalog/filter-catalog';
+import ProductCardList from '../../components/product-card-list/product-card-list';
+import Footer from '../../components/footer/footer';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 function Catalog (): JSX.Element {
 
@@ -48,6 +42,8 @@ function Catalog (): JSX.Element {
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN];
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
+  const isDataLoading = useAppSelector(getIsDataLoading);
+  const [isPageLoaded, setIsPageLoading] = useState(false);
 
   useEffect(() => {
     if(currentCatalogPage) {
@@ -98,11 +94,23 @@ function Catalog (): JSX.Element {
     dispatch(fetchPromoAction());
   }, [dispatch]);
 
+  if (isDataLoading && !isPageLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
+  if (isDataLoading) {
+    setIsPageLoading(true);
+  }
+
   return (
     <div className="wrapper">
       <Header/>
       <main>
-        <Banner promo = {promo}/>
+        {
+          (promo) && <Banner promo = {promo}/>
+        }
         <div className="page-content">
           <Breadcrumbs
             navBreadcrumbs = {navBreadcrumbs}

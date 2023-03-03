@@ -1,18 +1,11 @@
 import {Promo} from '../../types/product';
-import LoadingScreen from '../../components/loading-screen/loading-screen';
 import {Link} from 'react-router-dom';
 
 type PromoProps = {
-  promo?: Promo;
+  promo: Promo;
 }
 
 function Banner ({promo}: PromoProps): JSX.Element {
-
-  if (!promo) {
-    return (
-      <LoadingScreen />
-    );
-  }
 
   const {id, name, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = promo;
 
