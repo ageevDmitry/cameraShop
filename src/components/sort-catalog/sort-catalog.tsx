@@ -1,10 +1,14 @@
 import {SortCatalogType, QueryParam} from '../../const';
 import {useSearchParams} from 'react-router-dom';
-import {ChangeEvent, useEffect} from 'react';
+import {ChangeEvent, useEffect, useState} from 'react';
 
 function SortCatalog (): JSX.Element {
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const [currentPriceState, setCurrentPriceState] = useState<boolean>(false);
+  const [currentRatingState, setCurrentRatingState] = useState<boolean>(false);
+  const [currentAscState, setCurrentAscState] = useState<boolean>(false);
+  const [currentDescState, setCurrentDescState] = useState<boolean>(false);
 
   useEffect(() => {
     if (searchParams.has(QueryParam.Sort) && !searchParams.has(QueryParam.Order)) {
@@ -16,6 +20,13 @@ function SortCatalog (): JSX.Element {
       searchParams.set(QueryParam.Sort, SortCatalogType.Desc);
       setSearchParams(searchParams);
     }
+  }, [searchParams, setSearchParams]);
+
+  useEffect(() => {
+    setCurrentPriceState(Array.from(searchParams.values()).includes(SortCatalogType.Price));
+    setCurrentRatingState(Array.from(searchParams.values()).includes(SortCatalogType.Rating));
+    setCurrentAscState(Array.from(searchParams.values()).includes(SortCatalogType.Asc));
+    setCurrentDescState(Array.from(searchParams.values()).includes(SortCatalogType.Desc));
   }, [searchParams, setSearchParams]);
 
   return (
@@ -30,7 +41,7 @@ function SortCatalog (): JSX.Element {
                 id="sortPrice"
                 name="sort"
                 value="price"
-                defaultChecked
+                checked={currentPriceState}
                 onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                   const {value} = evt.target;
                   searchParams.set(QueryParam.Sort, value);
@@ -44,6 +55,7 @@ function SortCatalog (): JSX.Element {
                 id="sortPopular"
                 name="sort"
                 value="rating"
+                checked={currentRatingState}
                 onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                   const {value} = evt.target;
                   searchParams.set(QueryParam.Sort, value);
@@ -60,7 +72,7 @@ function SortCatalog (): JSX.Element {
                 name="sort-icon"
                 value="asc"
                 aria-label="По возрастанию"
-                defaultChecked
+                checked={currentAscState}
                 onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                   const {value} = evt.target;
                   searchParams.set(QueryParam.Order, value);
@@ -79,6 +91,7 @@ function SortCatalog (): JSX.Element {
                 name="sort-icon"
                 value="desc"
                 aria-label="По убыванию"
+                checked={currentDescState}
                 onChange={(evt: ChangeEvent<HTMLInputElement>) => {
                   const {value} = evt.target;
                   searchParams.set(QueryParam.Order, value);
