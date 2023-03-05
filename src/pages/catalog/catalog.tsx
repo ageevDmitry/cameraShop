@@ -14,6 +14,7 @@ import {fetchProductsAction,
   fetchMinPriceProductsAction,
   fetchMaxPriceProductsAction
 } from '../../store/api-action';
+import {setIsNotCatalogPage} from '../../store/products-data/products-data';
 import {changeCurrentCatalogPagePath} from '../../store/products-ui/products-ui';
 import styles from './catalog.module.css';
 import Header from '../../components/header/header';
@@ -92,10 +93,10 @@ function Catalog (): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchPromoAction());
-  }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(fetchPromoAction());
+    return () => {
+      dispatch(setIsNotCatalogPage());
+    };
   }, [dispatch]);
 
   if (!isCatalogPage) {

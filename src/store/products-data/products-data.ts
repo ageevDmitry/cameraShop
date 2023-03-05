@@ -32,6 +32,9 @@ export const productsData = createSlice({
     },
     cleanUpProductsSearch: (state) => {
       state.productsSearch = undefined;
+    },
+    setIsNotCatalogPage: (state) => {
+      state.isCatalogPage = false;
     }
   },
   extraReducers(builder) {
@@ -162,4 +165,4 @@ export const productsData = createSlice({
   }
 });
 
-export const {cleanUpProductDetail, cleanUpProductsSearch} = productsData.actions;
+export const {cleanUpProductDetail, cleanUpProductsSearch, setIsNotCatalogPage} = productsData.actions;
