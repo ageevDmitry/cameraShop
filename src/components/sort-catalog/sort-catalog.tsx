@@ -11,18 +11,6 @@ function SortCatalog (): JSX.Element {
   const [currentDescState, setCurrentDescState] = useState<boolean>(false);
 
   useEffect(() => {
-    if (searchParams.has(QueryParam.Sort) && !searchParams.has(QueryParam.Order)) {
-      searchParams.set(QueryParam.Order, SortCatalogType.Asc);
-      setSearchParams(searchParams);
-    }
-
-    if (!searchParams.has(QueryParam.Sort) && searchParams.has(QueryParam.Order)) {
-      searchParams.set(QueryParam.Sort, SortCatalogType.Desc);
-      setSearchParams(searchParams);
-    }
-  }, [searchParams, setSearchParams]);
-
-  useEffect(() => {
     setCurrentPriceState(Array.from(searchParams.values()).includes(SortCatalogType.Price));
     setCurrentRatingState(Array.from(searchParams.values()).includes(SortCatalogType.Rating));
     setCurrentAscState(Array.from(searchParams.values()).includes(SortCatalogType.Asc));
@@ -46,6 +34,12 @@ function SortCatalog (): JSX.Element {
                   const {value} = evt.target;
                   searchParams.set(QueryParam.Sort, value);
                   setSearchParams(searchParams);
+
+                  if (!Array.from(searchParams.values()).includes(SortCatalogType.Asc) &&
+                  !Array.from(searchParams.values()).includes(SortCatalogType.Desc)) {
+                    searchParams.set(QueryParam.Order, SortCatalogType.Asc);
+                    setSearchParams(searchParams);
+                  }
                 }}
               />
               <label htmlFor="sortPrice">по цене</label>
@@ -60,6 +54,12 @@ function SortCatalog (): JSX.Element {
                   const {value} = evt.target;
                   searchParams.set(QueryParam.Sort, value);
                   setSearchParams(searchParams);
+
+                  if (!Array.from(searchParams.values()).includes(SortCatalogType.Asc) &&
+                  !Array.from(searchParams.values()).includes(SortCatalogType.Desc)) {
+                    searchParams.set(QueryParam.Order, SortCatalogType.Asc);
+                    setSearchParams(searchParams);
+                  }
                 }}
               />
               <label htmlFor="sortPopular">по популярности</label>
@@ -77,6 +77,12 @@ function SortCatalog (): JSX.Element {
                   const {value} = evt.target;
                   searchParams.set(QueryParam.Order, value);
                   setSearchParams(searchParams);
+
+                  if (!Array.from(searchParams.values()).includes(SortCatalogType.Price) &&
+                  !Array.from(searchParams.values()).includes(SortCatalogType.Rating)) {
+                    searchParams.set(QueryParam.Sort, SortCatalogType.Price);
+                    setSearchParams(searchParams);
+                  }
                 }}
               />
               <label htmlFor="up">
@@ -96,6 +102,12 @@ function SortCatalog (): JSX.Element {
                   const {value} = evt.target;
                   searchParams.set(QueryParam.Order, value);
                   setSearchParams(searchParams);
+
+                  if (!Array.from(searchParams.values()).includes(SortCatalogType.Price) &&
+                  !Array.from(searchParams.values()).includes(SortCatalogType.Rating)) {
+                    searchParams.set(QueryParam.Sort, SortCatalogType.Price);
+                    setSearchParams(searchParams);
+                  }
                 }}
               />
               <label htmlFor="down">
