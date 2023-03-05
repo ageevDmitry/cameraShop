@@ -1,4 +1,4 @@
-import {AxiosInstance} from 'axios';
+import axios, {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
 import {Product,
@@ -12,6 +12,7 @@ import {APIRoute,
   SortCatalogType,
   DefaultMinMaxPriceItem
 } from '../const';
+import {toast} from 'react-toastify';
 
 export const fetchProductsAction = createAsyncThunk<ProductsReturnedData, ProductsFetchParams,{
     dispatch: AppDispatch;
@@ -28,23 +29,33 @@ export const fetchProductsAction = createAsyncThunk<ProductsReturnedData, Produc
       level,
       minPrice,
       maxPrice}, {extra: api}) => {
-      const response = await api.get<Product[]>(APIRoute.Products, {
-        params: {
-          [QueryParam.StartItem]: startItem,
-          [QueryParam.EndItem]: endItem,
-          [QueryParam.Sort]: sort,
-          [QueryParam.Order]: order,
-          [QueryParam.Category]: category,
-          [QueryParam.Type]: type,
-          [QueryParam.Level]: level,
-          [QueryParam.MinPrice]: minPrice,
-          [QueryParam.MaxPrice]: maxPrice,
+
+      try {
+        const response = await api.get<Product[]>(APIRoute.Products, {
+          params: {
+            [QueryParam.StartItem]: startItem,
+            [QueryParam.EndItem]: endItem,
+            [QueryParam.Sort]: sort,
+            [QueryParam.Order]: order,
+            [QueryParam.Category]: category,
+            [QueryParam.Type]: type,
+            [QueryParam.Level]: level,
+            [QueryParam.MinPrice]: minPrice,
+            [QueryParam.MaxPrice]: maxPrice,
+          }
+        });
+        return {
+          data: response.data,
+          dataTotalCount: Number(response.headers['x-total-count'])
+        };
+      }
+
+      catch (err) {
+        if (axios.isAxiosError(err)) {
+          toast.warn('Ошибка при загрузке Товаров каталога');
         }
-      });
-      return {
-        data: response.data,
-        dataTotalCount: Number(response.headers['x-total-count'])
-      };
+        throw err;
+      }
     }
   );
 
@@ -58,18 +69,28 @@ export const fetchMinPriceProductsAction = createAsyncThunk<number, ProductsMinP
       type,
       level,
     }, {extra: api}) => {
-      const response = await api.get<Product[]>(APIRoute.Products, {
-        params: {
-          [QueryParam.StartItem]: DefaultMinMaxPriceItem.StartItem,
-          [QueryParam.EndItem]: DefaultMinMaxPriceItem.EndItem,
-          [QueryParam.Sort]: SortCatalogType.Price,
-          [QueryParam.Order]: SortCatalogType.Asc,
-          [QueryParam.Category]: category,
-          [QueryParam.Type]: type,
-          [QueryParam.Level]: level,
+
+      try {
+        const response = await api.get<Product[]>(APIRoute.Products, {
+          params: {
+            [QueryParam.StartItem]: DefaultMinMaxPriceItem.StartItem,
+            [QueryParam.EndItem]: DefaultMinMaxPriceItem.EndItem,
+            [QueryParam.Sort]: SortCatalogType.Price,
+            [QueryParam.Order]: SortCatalogType.Asc,
+            [QueryParam.Category]: category,
+            [QueryParam.Type]: type,
+            [QueryParam.Level]: level,
+          }
+        });
+        return response.data[0].price;
+      }
+
+      catch (err) {
+        if (axios.isAxiosError(err)) {
+          toast.warn('Ошибка при загрузке минимальной цены каталога');
         }
-      });
-      return response.data[0].price;
+        throw err;
+      }
     }
   );
 
@@ -83,18 +104,27 @@ export const fetchMaxPriceProductsAction = createAsyncThunk<number, ProductsMinP
       type,
       level,
     }, {extra: api}) => {
-      const response = await api.get<Product[]>(APIRoute.Products, {
-        params: {
-          [QueryParam.StartItem]: DefaultMinMaxPriceItem.StartItem,
-          [QueryParam.EndItem]: DefaultMinMaxPriceItem.EndItem,
-          [QueryParam.Sort]: SortCatalogType.Price,
-          [QueryParam.Order]: SortCatalogType.Desc,
-          [QueryParam.Category]: category,
-          [QueryParam.Type]: type,
-          [QueryParam.Level]: level,
+
+      try {
+        const response = await api.get<Product[]>(APIRoute.Products, {
+          params: {
+            [QueryParam.StartItem]: DefaultMinMaxPriceItem.StartItem,
+            [QueryParam.EndItem]: DefaultMinMaxPriceItem.EndItem,
+            [QueryParam.Sort]: SortCatalogType.Price,
+            [QueryParam.Order]: SortCatalogType.Desc,
+            [QueryParam.Category]: category,
+            [QueryParam.Type]: type,
+            [QueryParam.Level]: level,
+          }
+        });
+        return response.data[0].price;
+      }
+      catch (err) {
+        if (axios.isAxiosError(err)) {
+          toast.warn('Ошибка при загрузке максимальной цены каталога');
         }
-      });
-      return response.data[0].price;
+        throw err;
+      }
     }
   );
 
@@ -105,8 +135,17 @@ export const fetchPromoAction = createAsyncThunk<Promo, undefined, {
   }>(
     'data/fetchPromo',
     async (_arg, {extra: api}) => {
-      const {data} = await api.get<Promo>(APIRoute.Promo);
-      return data;
+
+      try {
+        const {data} = await api.get<Promo>(APIRoute.Promo);
+
+        return data;
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          toast.warn('Ошибка при загрузке Специального предложения');
+        }
+        throw err;
+      }
     },
   );
 
@@ -117,8 +156,16 @@ export const fetchProductDetailAction = createAsyncThunk<Product, string, {
   }>(
     'data/fetchProductDetail',
     async (id, {extra: api}) => {
-      const {data} = await api.get<Product>(`${APIRoute.Products}/${id}?_embed=reviews`);
-      return data;
+
+      try {
+        const {data} = await api.get<Product>(`${APIRoute.Products}/${id}?_embed=reviews`);
+        return data;
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          toast.warn('Ошибка при загрузке Камеры');
+        }
+        throw err;
+      }
     },
   );
 
@@ -129,8 +176,16 @@ export const fetchProductsSimilarAction = createAsyncThunk<Product[], string, {
   }>(
     'data/fetchProductsSimilar',
     async (id, {extra: api}) => {
-      const {data} = await api.get<Product[]>(`${APIRoute.Products}/${id}/similar`);
-      return data;
+
+      try {
+        const {data} = await api.get<Product[]>(`${APIRoute.Products}/${id}/similar`);
+        return data;
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          toast.warn('Ошибка при загрузке Похожих товаров');
+        }
+        throw err;
+      }
     },
   );
 
@@ -141,12 +196,20 @@ export const fetchProductsSearchAction = createAsyncThunk<Product[], string, {
 }>(
   'cameras/fetchProductsSearch',
   async (input, {extra: api}) => {
-    const {data} = await api.get<Product[]>(APIRoute.Products, {
-      params: {
-        [QueryParam.NameLike]: input
+
+    try {
+      const {data} = await api.get<Product[]>(APIRoute.Products, {
+        params: {
+          [QueryParam.NameLike]: input
+        }
+      });
+      return data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        toast.warn('Ошибка при загрузке Поиска');
       }
-    });
-    return data;
+      throw err;
+    }
   }
 );
 
@@ -157,8 +220,16 @@ export const fetchReviewsAction = createAsyncThunk<Review[], string, {
   }>(
     'data/fetchReviews',
     async (id, {extra: api}) => {
-      const {data} = await api.get<Review[]>(`${APIRoute.Products}/${id}/reviews`);
-      return data;
+
+      try {
+        const {data} = await api.get<Review[]>(`${APIRoute.Products}/${id}/reviews`);
+        return data;
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          toast.warn('Ошибка при загрузке Отзывов');
+        }
+        throw err;
+      }
     },
   );
 
@@ -169,8 +240,16 @@ export const sendNewReviewAction = createAsyncThunk<Review, ReviewPost, {
   }>(
     'data/sendReview',
     async (userReview, {dispatch, extra: api}) => {
-      const {data} = await api.post<Review>(APIRoute.Reviews, userReview);
-      dispatch(fetchReviewsAction(String(userReview.cameraId)));
-      return data;
+
+      try {
+        const {data} = await api.post<Review>(APIRoute.Reviews, userReview);
+        dispatch(fetchReviewsAction(String(userReview.cameraId)));
+        return data;
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          toast.warn('Ошибка при отправке Отзыва');
+        }
+        throw err;
+      }
     },
   );
