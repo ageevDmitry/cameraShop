@@ -1,8 +1,11 @@
-import {Review} from '../../types/review';
-import ReviewCard from '../review-card/review-card';
-import {useState} from 'react';
-import {DefaultReviewsView, STEP_REVIEWS_VIEW} from '../../const';
 import dayjs from 'dayjs';
+import {useState} from 'react';
+import {useAppSelector} from '../../hooks/useAppSelector';
+import {Review} from '../../types/review';
+import {DefaultReviewsView, STEP_REVIEWS_VIEW} from '../../const';
+import {getIsDataLoading} from '../../store/products-data/selectors';
+import ReviewCard from '../review-card/review-card';
+import SpinnerComponent from '../../components/spinner-component/spinner-component';
 
 type ReviewBlockType = {
   reviews: Review[];
@@ -11,9 +14,16 @@ type ReviewBlockType = {
 
 function ReviewBlock ({reviews, onClickOpenModalReview}: ReviewBlockType): JSX.Element {
 
+  const isLoading = useAppSelector(getIsDataLoading);
   const [currentReviewsView, setCurrentReviewsView] = useState<[number, number]>([DefaultReviewsView.StartItem, DefaultReviewsView.EndItem]);
   const sortedReviews = reviews.slice().sort((a, b) => dayjs(b.createAt).diff(dayjs(a.createAt)));
   const currentReviews = sortedReviews.slice(currentReviewsView[0], currentReviewsView[1]);
+
+  if (isLoading) {
+    return (
+      <SpinnerComponent/>
+    );
+  }
 
   return (
     <div className="page-content__section">
