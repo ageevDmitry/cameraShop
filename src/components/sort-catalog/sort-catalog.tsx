@@ -10,12 +10,35 @@ function SortCatalog (): JSX.Element {
   const [currentAscState, setCurrentAscState] = useState<boolean>(false);
   const [currentDescState, setCurrentDescState] = useState<boolean>(false);
 
+  const checkSort = () => {
+    if (!Array.from(searchParams.values()).includes(SortCatalogType.Asc)
+    && !Array.from(searchParams.values()).includes(SortCatalogType.Desc)) {
+      searchParams.set(QueryParam.Order, SortCatalogType.Asc);
+      setSearchParams(searchParams);
+    }
+  };
+
+  const checkOrder = () => {
+    if (!Array.from(searchParams.values()).includes(SortCatalogType.Price)
+    && !Array.from(searchParams.values()).includes(SortCatalogType.Rating)) {
+      searchParams.set(QueryParam.Sort, SortCatalogType.Price);
+      setSearchParams(searchParams);
+    }
+  };
+
+  const setSortCatalog = (evt: ChangeEvent<HTMLInputElement>, sortType: string) => {
+    const {value} = evt.target;
+    searchParams.set(sortType, value);
+    setSearchParams(searchParams);
+  };
+
   useEffect(() => {
     setCurrentPriceState(Array.from(searchParams.values()).includes(SortCatalogType.Price));
     setCurrentRatingState(Array.from(searchParams.values()).includes(SortCatalogType.Rating));
     setCurrentAscState(Array.from(searchParams.values()).includes(SortCatalogType.Asc));
     setCurrentDescState(Array.from(searchParams.values()).includes(SortCatalogType.Desc));
   }, [searchParams, setSearchParams]);
+
 
   return (
     <div className="catalog-sort">
@@ -31,15 +54,9 @@ function SortCatalog (): JSX.Element {
                 value="price"
                 checked={currentPriceState}
                 onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-                  const {value} = evt.target;
-                  searchParams.set(QueryParam.Sort, value);
+                  setSortCatalog(evt, QueryParam.Sort);
                   setSearchParams(searchParams);
-
-                  if (!Array.from(searchParams.values()).includes(SortCatalogType.Asc) &&
-                  !Array.from(searchParams.values()).includes(SortCatalogType.Desc)) {
-                    searchParams.set(QueryParam.Order, SortCatalogType.Asc);
-                    setSearchParams(searchParams);
-                  }
+                  checkSort();
                 }}
               />
               <label htmlFor="sortPrice">по цене</label>
@@ -51,15 +68,8 @@ function SortCatalog (): JSX.Element {
                 value="rating"
                 checked={currentRatingState}
                 onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-                  const {value} = evt.target;
-                  searchParams.set(QueryParam.Sort, value);
-                  setSearchParams(searchParams);
-
-                  if (!Array.from(searchParams.values()).includes(SortCatalogType.Asc) &&
-                  !Array.from(searchParams.values()).includes(SortCatalogType.Desc)) {
-                    searchParams.set(QueryParam.Order, SortCatalogType.Asc);
-                    setSearchParams(searchParams);
-                  }
+                  setSortCatalog(evt, QueryParam.Sort);
+                  checkSort();
                 }}
               />
               <label htmlFor="sortPopular">по популярности</label>
@@ -74,15 +84,8 @@ function SortCatalog (): JSX.Element {
                 aria-label="По возрастанию"
                 checked={currentAscState}
                 onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-                  const {value} = evt.target;
-                  searchParams.set(QueryParam.Order, value);
-                  setSearchParams(searchParams);
-
-                  if (!Array.from(searchParams.values()).includes(SortCatalogType.Price) &&
-                  !Array.from(searchParams.values()).includes(SortCatalogType.Rating)) {
-                    searchParams.set(QueryParam.Sort, SortCatalogType.Price);
-                    setSearchParams(searchParams);
-                  }
+                  setSortCatalog(evt, QueryParam.Order);
+                  checkOrder();
                 }}
               />
               <label htmlFor="up">
@@ -99,15 +102,8 @@ function SortCatalog (): JSX.Element {
                 aria-label="По убыванию"
                 checked={currentDescState}
                 onChange={(evt: ChangeEvent<HTMLInputElement>) => {
-                  const {value} = evt.target;
-                  searchParams.set(QueryParam.Order, value);
-                  setSearchParams(searchParams);
-
-                  if (!Array.from(searchParams.values()).includes(SortCatalogType.Price) &&
-                  !Array.from(searchParams.values()).includes(SortCatalogType.Rating)) {
-                    searchParams.set(QueryParam.Sort, SortCatalogType.Price);
-                    setSearchParams(searchParams);
-                  }
+                  setSortCatalog(evt, QueryParam.Order);
+                  checkOrder();
                 }}
               />
               <label htmlFor="down">
