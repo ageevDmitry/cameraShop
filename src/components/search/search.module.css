@@ -57,3 +57,7 @@
   scrollbar-color: #b4b4d7 #fff;
   scrollbar-width: thin;
 }
+
+.selected {
+  background-color: #f4f4fc;
+}
