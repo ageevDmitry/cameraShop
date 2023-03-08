@@ -2,7 +2,7 @@ import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {fetchProductsSearchAction} from '../../store/api-action';
 import {getProductsSearch} from '../../store/products-data/selectors';
-import {useState, ChangeEvent, KeyboardEvent} from 'react';
+import {useState, useRef, ChangeEvent, KeyboardEvent} from 'react';
 import {nanoid} from 'nanoid';
 import {DEFAULT_SEARCH_VALUE} from '../../const';
 import {cleanUpProductsSearch} from '../../store/products-data/products-data';
@@ -15,6 +15,9 @@ function Search (): JSX.Element {
   const productsSearch = useAppSelector(getProductsSearch);
   const [searchData, setSearchData] = useState(DEFAULT_SEARCH_VALUE);
   const [selectedItem, setSelectedItem] = useState(0);
+  const [currentScroll, setCurrentScroll] = useState(160);
+  const [limitScroll, setLimitScroll] = useState(2);
+  const listRef = useRef<HTMLUListElement>(null);
 
   const handleFormChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {value} = evt.target;
@@ -22,13 +25,50 @@ function Search (): JSX.Element {
     dispatch(fetchProductsSearchAction(value));
   };
 
+  const handleScrollToDown = () => {
+    if (listRef.current) {
+      const foo = currentScroll + 160;
+      setCurrentScroll(foo);
+      listRef.current.scrollTop = currentScroll;
+    }
+  };
+
+  const handleScrollToUp = () => {
+    if (listRef.current) {
+      const foo = currentScroll - 160;
+      setCurrentScroll(foo);
+      listRef.current.scrollTop = currentScroll;
+    }
+  };
+
+
   const handleKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
 
     if (productsSearch ) {
+
       if (evt.key === 'ArrowUp') {
-        setSelectedItem(selectedItem === 0 ? productsSearch.length - 1 : selectedItem - 1);
+        if (selectedItem !== 0) {
+
+          setSelectedItem(selectedItem - 1);
+
+          if (selectedItem < limitScroll) {
+            handleScrollToUp();
+            const foo = limitScroll - 4;
+            setLimitScroll(foo);
+          }
+        }
       } else if (evt.key === 'ArrowDown') {
-        setSelectedItem(selectedItem + 1);
+
+        if (selectedItem !== productsSearch.length - 1) {
+
+          setSelectedItem(selectedItem + 1);
+
+          if (selectedItem > limitScroll) {
+            handleScrollToDown();
+            const foo = limitScroll + 4;
+            setLimitScroll(foo);
+          }
+        }
       }
     }
   };
@@ -50,7 +90,7 @@ function Search (): JSX.Element {
           />
         </label>
         {(searchData !== DEFAULT_SEARCH_VALUE) &&
-          <ul className={`${styles.selectList} ${styles.scroller}`}>
+          <ul ref={listRef} className={`${styles.selectList} ${styles.scroller}`}>
             {productsSearch?.map((item, i) => (
               <li key={nanoid()} className={`form-search__select-item ${(selectedItem === i) ? styles.selected : '' }`} tabIndex={0}
                 onClick={() => {

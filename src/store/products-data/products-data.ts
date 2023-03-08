@@ -124,10 +124,10 @@ export const productsData = createSlice({
         state.isDataLoading = false;
         state.isSuccess = false;
       })
-      .addCase(fetchProductsSearchAction.pending, (state) => {
-        state.isDataLoading = true;
-        state.isSuccess = false;
-      })
+      // .addCase(fetchProductsSearchAction.pending, (state) => {
+      //   state.isDataLoading = true;
+      //   state.isSuccess = false;
+      // })
       .addCase(fetchProductsSearchAction.fulfilled, (state, action) => {
         state.productsSearch = action.payload;
         state.isDataLoading = false;
