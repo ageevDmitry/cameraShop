@@ -101,7 +101,7 @@ function Search (): JSX.Element {
             // onKeyDown={handleKeyDown}
           />
         </label>
-        {(searchData !== DEFAULT_SEARCH_VALUE) &&
+        {(searchData !== DEFAULT_SEARCH_VALUE && productsSearch?.length !== 0) &&
           <ul ref={listRef} className={`${styles.selectList} ${styles.scroller}`}>
             {productsSearch?.map((item, i) => (
               // <li key={nanoid()} className={`form-search__select-item ${(selectedItem === i) ? styles.selected : '' }`} tabIndex={0}
