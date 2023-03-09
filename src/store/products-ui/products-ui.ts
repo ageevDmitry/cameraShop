@@ -7,11 +7,6 @@ import type {PayloadAction} from '@reduxjs/toolkit';
 
 const initialState: ProductsUI = {
   currentCatalogPagePath: {} as currentCatalogPagePath,
-  currentSort: null,
-  currentOrder: null,
-  currentType: null,
-  currentCategory: null,
-  currentLevel: null,
   currentMinPrice: null,
   currentMaxPrice: null,
 };
@@ -22,9 +17,6 @@ export const productsUI = createSlice({
   reducers: {
     changeCurrentCatalogPagePath: (state, action: PayloadAction<currentCatalogPagePath>) => {
       state.currentCatalogPagePath = action.payload;
-    },
-    changeCurrentType: (state, action: PayloadAction<{type: string[] | null}>) => {
-      state.currentType = action.payload.type;
     },
     changeCurrentMinPrice: (state, action: PayloadAction<{type: number | null}>) => {
       state.currentMinPrice = action.payload.type;
@@ -40,7 +32,6 @@ export const productsUI = createSlice({
 });
 
 export const {changeCurrentCatalogPagePath,
-  changeCurrentType,
   changeCurrentMinPrice,
   changeCurrentMaxPrice,
   cleanUpPrice} = productsUI.actions;

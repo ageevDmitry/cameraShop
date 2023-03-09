@@ -2,10 +2,12 @@ import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {fetchProductsSearchAction} from '../../store/api-action';
 import {getProductsSearch} from '../../store/products-data/selectors';
-import {useState, useRef, ChangeEvent,
+import {useState,
+  // useRef,
+  ChangeEvent,
   // KeyboardEvent,
   FormEvent} from 'react';
-import {nanoid} from 'nanoid';
+// import {nanoid} from 'nanoid';
 import {DEFAULT_SEARCH_VALUE} from '../../const';
 import {cleanUpProductsSearch} from '../../store/products-data/products-data';
 import {redirectToRoute} from '../../store/action';
@@ -20,7 +22,7 @@ function Search (): JSX.Element {
   // const [selectedItem, setSelectedItem] = useState(0);
   // const [currentScroll, setCurrentScroll] = useState(160);
   // const [limitScroll, setLimitScroll] = useState(2);
-  const listRef = useRef<HTMLUListElement>(null);
+  // const listRef = useRef<HTMLUListElement>(null);
 
   const handleFormChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {value} = evt.target;
@@ -101,7 +103,7 @@ function Search (): JSX.Element {
             // onKeyDown={handleKeyDown}
           />
         </label>
-        {(searchData !== DEFAULT_SEARCH_VALUE && productsSearch?.length !== 0) &&
+        {/* {(searchData !== DEFAULT_SEARCH_VALUE && productsSearch?.length !== 0) &&
           <ul ref={listRef} className={`${styles.selectList} ${styles.scroller}`}>
             {productsSearch?.map((item, i) => (
               // <li key={nanoid()} className={`form-search__select-item ${(selectedItem === i) ? styles.selected : '' }`} tabIndex={0}
@@ -119,7 +121,7 @@ function Search (): JSX.Element {
               >{item.name}
               </li>
             ))}
-          </ul>}
+          </ul>} */}
       </form>
       <button className={(searchData === DEFAULT_SEARCH_VALUE) ? 'form-search__reset' : `${styles.resetButton}`} type="reset"
         onClick={() => {

@@ -20,11 +20,6 @@ export type ProductsData = {
 
 export type ProductsUI = {
     currentCatalogPagePath: currentCatalogPagePath;
-    currentSort: string | null;
-    currentOrder: string | null;
-    currentCategory: string | null;
-    currentType: string[] | null;
-    currentLevel: string[] | null;
     currentMinPrice: number | null;
     currentMaxPrice: number | null;
 };
