@@ -77,7 +77,7 @@ export const checkFilter = (searchParams: URLSearchParams, queryParam: string, i
   return searchParams;
 };
 
-export const cleanUpFilter = (searchParams: URLSearchParams) => {
+export const cleanUpSearchParams = (searchParams: URLSearchParams) => {
 
   searchParams.delete(QueryParam.Category);
   searchParams.delete(QueryParam.Type);

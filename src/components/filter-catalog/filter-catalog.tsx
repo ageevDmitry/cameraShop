@@ -4,9 +4,9 @@ import FilterPrice from '../filter-price/filter-price';
 import FilterCategory from '../filter-category/filter-category';
 import FilterType from '../filter-type/filter-type';
 import FilterLevel from '../filter-level/filter-level';
-import {cleanUpFilter} from '../../utils';
+import {cleanUpSearchParams} from '../../utils';
 import {QueryParam} from '../../const';
-import {cleanUpFilter1} from '../../store/products-ui/products-ui';
+import {cleanUpPrice} from '../../store/products-ui/products-ui';
 
 function FilterCatalog (): JSX.Element {
 
@@ -23,9 +23,9 @@ function FilterCatalog (): JSX.Element {
         <FilterLevel/>
         <button className="btn catalog-filter__reset-btn" type="reset"
           onClick={() => {
-            cleanUpFilter(searchParams);
+            cleanUpSearchParams(searchParams);
             setSearchParams(searchParams);
-            dispatch(cleanUpFilter1());
+            dispatch(cleanUpPrice());
           }}
           disabled={(!searchParams.has(QueryParam.Category) &&
             !searchParams.has(QueryParam.Type) &&

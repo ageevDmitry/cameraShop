@@ -18,7 +18,6 @@ const initialState: ProductsData = {
   maxPrice: null,
   productsTotalCount: 0,
   isCatalogPage: false,
-  isProductPage: false,
   isDataLoading: false,
   isSuccess: false,
 };
@@ -101,7 +100,6 @@ export const productsData = createSlice({
         state.isSuccess = false;
       })
       .addCase(fetchProductDetailAction.fulfilled, (state, action) => {
-        state.isProductPage = true;
         state.productDetail = action.payload;
         state.reviews = action.payload.reviews;
         state.isDataLoading = false;
@@ -124,10 +122,6 @@ export const productsData = createSlice({
         state.isDataLoading = false;
         state.isSuccess = false;
       })
-      // .addCase(fetchProductsSearchAction.pending, (state) => {
-      //   state.isDataLoading = true;
-      //   state.isSuccess = false;
-      // })
       .addCase(fetchProductsSearchAction.fulfilled, (state, action) => {
         state.productsSearch = action.payload;
         state.isDataLoading = false;

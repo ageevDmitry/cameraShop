@@ -13,6 +13,4 @@ export const getProductsSimilar = (state: State): Product[] | undefined => state
 export const getProductsSearch = (state: State): Product[] | undefined => state[NameSpace.ProductsData].productsSearch;
 export const getReviews = (state: State): Review[] | undefined => state[NameSpace.ProductsData].reviews;
 export const getIsCatalogPage = (state: State): boolean => state[NameSpace.ProductsData].isCatalogPage;
-export const getIsProductPage = (state: State): boolean => state[NameSpace.ProductsData].isProductPage;
-export const getIsSuccess = (state: State): boolean => state[NameSpace.ProductsData].isSuccess;
 export const getIsDataLoading = (state: State): boolean => state[NameSpace.ProductsData].isDataLoading;

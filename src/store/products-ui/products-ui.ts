@@ -23,20 +23,8 @@ export const productsUI = createSlice({
     changeCurrentCatalogPagePath: (state, action: PayloadAction<currentCatalogPagePath>) => {
       state.currentCatalogPagePath = action.payload;
     },
-    changeCurrentSort: (state, action: PayloadAction<{type: string}>) => {
-      state.currentSort = action.payload.type;
-    },
-    changeCurrentOrder: (state, action: PayloadAction<{type: string}>) => {
-      state.currentOrder = action.payload.type;
-    },
-    changeCurrentCategory: (state, action: PayloadAction<{type: string | null}>) => {
-      state.currentCategory = action.payload.type;
-    },
     changeCurrentType: (state, action: PayloadAction<{type: string[] | null}>) => {
       state.currentType = action.payload.type;
-    },
-    changeCurrentLevel: (state, action: PayloadAction<{type: string[] | null}>) => {
-      state.currentLevel = action.payload.type;
     },
     changeCurrentMinPrice: (state, action: PayloadAction<{type: number | null}>) => {
       state.currentMinPrice = action.payload.type;
@@ -44,7 +32,7 @@ export const productsUI = createSlice({
     changeCurrentMaxPrice: (state, action: PayloadAction<{type: number | null}>) => {
       state.currentMaxPrice = action.payload.type;
     },
-    cleanUpFilter1: (state) => {
+    cleanUpPrice: (state) => {
       state.currentMinPrice = null;
       state.currentMaxPrice = null;
     },
@@ -52,11 +40,7 @@ export const productsUI = createSlice({
 });
 
 export const {changeCurrentCatalogPagePath,
-  changeCurrentSort,
-  changeCurrentOrder,
   changeCurrentType,
-  changeCurrentCategory,
-  changeCurrentLevel,
   changeCurrentMinPrice,
   changeCurrentMaxPrice,
-  cleanUpFilter1} = productsUI.actions;
+  cleanUpPrice} = productsUI.actions;
