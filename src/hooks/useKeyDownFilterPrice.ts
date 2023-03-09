@@ -6,7 +6,8 @@ export function useKeyDownFilterPrice(handleChangeFilterPrice: () => void) {
     function handleKeyDown(evt: KeyboardEvent) {
       if (evt.key === 'Enter') {
         const target = evt.target as HTMLElement;
-        if (!target.classList.contains('catalog-filter__reset-btn')) {
+        if (!target.classList.contains('catalog-filter__reset-btn')
+        || !target.classList.contains('form-class-submit')) {
           handleChangeFilterPrice();
         }
       }

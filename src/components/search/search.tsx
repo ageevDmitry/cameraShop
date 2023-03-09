@@ -2,21 +2,24 @@ import {useAppDispatch} from '../../hooks/useAppDispatch';
 import {useAppSelector} from '../../hooks/useAppSelector';
 import {fetchProductsSearchAction} from '../../store/api-action';
 import {getProductsSearch} from '../../store/products-data/selectors';
-import {useState, useRef, ChangeEvent, KeyboardEvent} from 'react';
+import {useState, useRef, ChangeEvent,
+  // KeyboardEvent,
+  FormEvent} from 'react';
 import {nanoid} from 'nanoid';
 import {DEFAULT_SEARCH_VALUE} from '../../const';
 import {cleanUpProductsSearch} from '../../store/products-data/products-data';
 import {redirectToRoute} from '../../store/action';
 import styles from './search.module.css';
+// import {AppRoute} from '../../const';
 
 function Search (): JSX.Element {
 
   const dispatch = useAppDispatch();
   const productsSearch = useAppSelector(getProductsSearch);
   const [searchData, setSearchData] = useState(DEFAULT_SEARCH_VALUE);
-  const [selectedItem, setSelectedItem] = useState(0);
-  const [currentScroll, setCurrentScroll] = useState(160);
-  const [limitScroll, setLimitScroll] = useState(2);
+  // const [selectedItem, setSelectedItem] = useState(0);
+  // const [currentScroll, setCurrentScroll] = useState(160);
+  // const [limitScroll, setLimitScroll] = useState(2);
   const listRef = useRef<HTMLUListElement>(null);
 
   const handleFormChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -25,57 +28,66 @@ function Search (): JSX.Element {
     dispatch(fetchProductsSearchAction(value));
   };
 
-  const handleScrollToDown = () => {
-    if (listRef.current) {
-      const foo = currentScroll + 160;
-      setCurrentScroll(foo);
-      listRef.current.scrollTop = currentScroll;
+  // const handleScrollToDown = () => {
+  //   if (listRef.current) {
+  //     const foo = currentScroll + 160;
+  //     setCurrentScroll(foo);
+  //     listRef.current.scrollTop = currentScroll;
+  //   }
+  // };
+
+  // const handleScrollToUp = () => {
+  //   if (listRef.current) {
+  //     const foo = currentScroll - 160;
+  //     setCurrentScroll(foo);
+  //     listRef.current.scrollTop = currentScroll;
+  //   }
+  // };
+
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (productsSearch && productsSearch?.length !== 0) {
+      const result = productsSearch.filter((item) => item.name === searchData);
+      dispatch(redirectToRoute(`/product/${result[0].id}`));
+      // console.log(result[0].id);
     }
   };
 
-  const handleScrollToUp = () => {
-    if (listRef.current) {
-      const foo = currentScroll - 160;
-      setCurrentScroll(foo);
-      listRef.current.scrollTop = currentScroll;
-    }
-  };
+  // const handleKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
 
+  //   if (productsSearch ) {
 
-  const handleKeyDown = (evt: KeyboardEvent<HTMLInputElement>) => {
+  //     if (evt.key === 'ArrowUp') {
+  //       if (selectedItem !== 0) {
 
-    if (productsSearch ) {
+  //         setSelectedItem(selectedItem - 1);
 
-      if (evt.key === 'ArrowUp') {
-        if (selectedItem !== 0) {
+  //         if (selectedItem < limitScroll) {
+  //           handleScrollToUp();
+  //           const foo = limitScroll - 4;
+  //           setLimitScroll(foo);
+  //         }
+  //       }
+  //     } else if (evt.key === 'ArrowDown') {
 
-          setSelectedItem(selectedItem - 1);
+  //       if (selectedItem !== productsSearch.length - 1) {
 
-          if (selectedItem < limitScroll) {
-            handleScrollToUp();
-            const foo = limitScroll - 4;
-            setLimitScroll(foo);
-          }
-        }
-      } else if (evt.key === 'ArrowDown') {
+  //         setSelectedItem(selectedItem + 1);
 
-        if (selectedItem !== productsSearch.length - 1) {
-
-          setSelectedItem(selectedItem + 1);
-
-          if (selectedItem > limitScroll) {
-            handleScrollToDown();
-            const foo = limitScroll + 4;
-            setLimitScroll(foo);
-          }
-        }
-      }
-    }
-  };
+  //         if (selectedItem > limitScroll) {
+  //           handleScrollToDown();
+  //           const foo = limitScroll + 4;
+  //           setLimitScroll(foo);
+  //         }
+  //       }
+  //     }
+  //   }
+  // };
 
   return (
     <div className="form-search">
-      <form>
+      <form className="form-class-submit" onSubmit={handleFormSubmit}>
         <label>
           <svg className="form-search__icon" width={16} height={16} aria-hidden="true">
             <use xlinkHref="#icon-lens" />
@@ -86,13 +98,14 @@ function Search (): JSX.Element {
             type="text" autoComplete="off"
             value={searchData}
             placeholder="Поиск по сайту"
-            onKeyDown={handleKeyDown}
+            // onKeyDown={handleKeyDown}
           />
         </label>
         {(searchData !== DEFAULT_SEARCH_VALUE) &&
           <ul ref={listRef} className={`${styles.selectList} ${styles.scroller}`}>
             {productsSearch?.map((item, i) => (
-              <li key={nanoid()} className={`form-search__select-item ${(selectedItem === i) ? styles.selected : '' }`} tabIndex={0}
+              // <li key={nanoid()} className={`form-search__select-item ${(selectedItem === i) ? styles.selected : '' }`} tabIndex={0}
+              <li key={nanoid()} className='form-search__select-item' tabIndex={0}
                 onClick={() => {
                   setSearchData(DEFAULT_SEARCH_VALUE);
                   dispatch(redirectToRoute(`/product/${item.id}`));
