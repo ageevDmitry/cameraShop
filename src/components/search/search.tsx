@@ -88,7 +88,7 @@ function Search (): JSX.Element {
   // };
 
   return (
-    <div className="form-search">
+    <div className="form-search" data-testid="search">
       <form className="form-class-submit" onSubmit={handleFormSubmit}>
         <label>
           <svg className="form-search__icon" width={16} height={16} aria-hidden="true">
