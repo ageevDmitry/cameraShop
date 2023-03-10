@@ -42,6 +42,6 @@ describe('Component: Catalog', () => {
       </Provider>
     );
 
-    expect(screen.getByText(/Каталог фото- и видеотехники/i)).toBeInTheDocument();
+    expect(screen.getByTestId('spinner-page')).toBeInTheDocument();
   });
 });

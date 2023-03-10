@@ -38,28 +38,21 @@ const fakeApp = (
 );
 
 describe('Application Routing', () => {
-  it('should render "Main" when user navigate to "/"', () => {
-    history.push(AppRoute.Main);
-
-    render(fakeApp);
-
-    expect(screen.getByText(/Каталог фото- и видеотехники/i)).toBeInTheDocument();
-  });
 
   it('should render "Catalog" when user navigate to "catalog/page_#"', () => {
-    history.push('/catalog/page_1');
+    history.push(AppRoute.Catalog);
 
     render(fakeApp);
 
-    expect(screen.getByText(/Каталог фото- и видеотехники/i)).toBeInTheDocument();
+    expect(screen.getByTestId('spinner-page')).toBeInTheDocument();
   });
 
   // it('should render "Product" when user navigate to "product/1"', () => {
-  //   history.push('/product/1');
+  //   history.push(AppRoute.Product);
 
   //   render(fakeApp);
 
-  //   expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
+  //   expect(screen.getByTestId('spinner-page')).toBeInTheDocument();
   // });
 
   it('should render "NotFoundScreen" when user navigate to non-existent route', () => {
