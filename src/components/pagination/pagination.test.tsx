@@ -4,9 +4,29 @@ import HistoryRouter from '../history-route/history-route';
 import Pagination from './pagination';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';
+import {createAPI} from '../../services/api';
+import thunk, {ThunkDispatch} from 'redux-thunk';
+import {State} from '../../types/state';
+import {Action} from 'redux';
+import {NameSpace} from '../../const';
+import {currentCatalogPagePath} from '../../types/ui';
 
-const mockStore = configureMockStore();
-const store = mockStore();
+const api = createAPI();
+const middlewares = [thunk.withExtraArgument(api)];
+
+const mockStore = configureMockStore<
+State,
+Action<string>,
+ThunkDispatch<State, typeof api, Action>
+>(middlewares);
+
+const store = mockStore({
+  [NameSpace.ProductsUI]: {
+    currentCatalogPagePath: {} as currentCatalogPagePath,
+    currentMinPrice: null,
+    currentMaxPrice: null,
+  },
+});
 
 const history = createMemoryHistory();
 describe('Component: Pagination', () => {
