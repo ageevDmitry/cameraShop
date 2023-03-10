@@ -13,6 +13,6 @@ describe('Component: SpinnerPage', () => {
       </HistoryRouter>
     );
 
-    expect(screen.getByText(/Loading .../i)).toBeInTheDocument();
+    expect(screen.getByTestId('spinner-page')).toBeInTheDocument();
   });
 });
