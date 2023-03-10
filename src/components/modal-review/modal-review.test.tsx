@@ -7,10 +7,16 @@ import {Provider} from 'react-redux';
 import {NameSpace} from '../../const';
 import {product} from '../../mocks/mocks';
 import userEvent from '@testing-library/user-event';
+import {currentCatalogPagePath} from '../../types/ui';
 
 const mockStore = configureMockStore();
 
 const store = mockStore({
+  [NameSpace.ProductsUI]: {
+    currentCatalogPagePath: {} as currentCatalogPagePath,
+    currentMinPrice: null,
+    currentMaxPrice: null,
+  },
   [NameSpace.ProductsData]: {
     products: [],
     productDetail: product,

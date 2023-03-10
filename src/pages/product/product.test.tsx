@@ -11,6 +11,7 @@ import {Action} from 'redux';
 import {NameSpace} from '../../const';
 import {product, products, reviews} from '../../mocks/mocks';
 import userEvent from '@testing-library/user-event';
+import {currentCatalogPagePath} from '../../types/ui';
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -28,6 +29,11 @@ const store = mockStore({
     reviews: reviews,
     isDataLoading: false,
     isSuccess: false,
+  },
+  [NameSpace.ProductsUI]: {
+    currentCatalogPagePath: {} as currentCatalogPagePath,
+    currentMinPrice: null,
+    currentMaxPrice: null,
   },
 });
 
