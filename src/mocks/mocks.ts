@@ -153,8 +153,13 @@ export const productsReturnedData: ProductsReturnedData = {
 export const productsFetchParams = {
   startItem: 0,
   endItem: 9,
-  sortType: null,
-  orderType: null,
+  sort: null,
+  order: null,
+  type: null,
+  category: null,
+  level: null,
+  minPrice: null,
+  maxPrice: null,
 };
 
 export const promo: Promo = {

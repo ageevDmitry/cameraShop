@@ -2,10 +2,15 @@ import {productsData,
   cleanUpProductDetail
 } from './products-data';
 import {
-  products, product, productsReturnedData, promo, reviews
+  products,
+  product,
+  productsReturnedData,
+  promo,
+  reviews
 } from '../../mocks/mocks';
 import {
   fetchProductsAction,
+  fetchMinPriceProductsAction,
   fetchPromoAction,
   fetchProductDetailAction,
   fetchProductsSimilarAction,
@@ -94,6 +99,51 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isSuccess: false,
       });
+  });
+
+  it('should fetch minPriceProducts', () => {
+    const state = {
+      products: [],
+      minPrice: null,
+      maxPrice: null,
+      productsTotalCount: 0,
+      isCatalogPage: false,
+      isDataLoading: false,
+      isSuccess: false,
+    };
+
+    expect(productsData.reducer(state, {type: fetchMinPriceProductsAction.pending.type}))
+      .toEqual({
+        products: [],
+        minPrice: null,
+        maxPrice: null,
+        productsTotalCount: 0,
+        isCatalogPage: false,
+        isDataLoading: true,
+        isSuccess: false,
+      });
+
+    // expect(productsData.reducer(state, {type: fetchMinPriceProductsAction.fulfilled.type, payload: products}))
+    //   .toEqual({
+    //     products: [],
+    //     minPrice: product.price,
+    //     maxPrice: null,
+    //     productsTotalCount: 73450,
+    //     isCatalogPage: false,
+    //     isDataLoading: false,
+    //     isSuccess: true,
+    //   });
+
+    // expect(productsData.reducer(state, {type: fetchProductsAction.rejected.type, payload: productsReturnedData}))
+    //   .toEqual({
+    //     products: [],
+    //     minPrice: null,
+    //     maxPrice: null,
+    //     productsTotalCount: productsReturnedData.dataTotalCount,
+    //     isCatalogPage: false,
+    //     isDataLoading: false,
+    //     isSuccess: false,
+    //   });
   });
 
   it('should fetch promo', () => {

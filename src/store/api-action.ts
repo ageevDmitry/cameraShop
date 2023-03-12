@@ -22,26 +22,27 @@ export const fetchProductsAction = createAsyncThunk<ProductsReturnedData, Produc
     'data/fetchProducts',
     async ({startItem,
       endItem,
-      sort,
-      order,
-      category,
-      type,
-      level,
-      minPrice,
-      maxPrice}, {extra: api}) => {
+      // sort,
+      // order,
+      // category,
+      // type,
+      // level,
+      // minPrice,
+      // maxPrice
+    }, {extra: api}) => {
 
       try {
         const response = await api.get<Product[]>(APIRoute.Products, {
           params: {
             [QueryParam.StartItem]: startItem,
             [QueryParam.EndItem]: endItem,
-            [QueryParam.Sort]: sort,
-            [QueryParam.Order]: order,
-            [QueryParam.Category]: category,
-            [QueryParam.Type]: type,
-            [QueryParam.Level]: level,
-            [QueryParam.MinPrice]: minPrice,
-            [QueryParam.MaxPrice]: maxPrice,
+            // [QueryParam.Sort]: sort,
+            // [QueryParam.Order]: order,
+            // [QueryParam.Category]: category,
+            // [QueryParam.Type]: type,
+            // [QueryParam.Level]: level,
+            // [QueryParam.MinPrice]: minPrice,
+            // [QueryParam.MaxPrice]: maxPrice,
           }
         });
         return {

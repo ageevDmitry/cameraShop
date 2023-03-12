@@ -3,17 +3,24 @@ import thunk, {ThunkDispatch} from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createAPI} from '../services/api';
-// import {fetchProductsAction,
 import {
+  // fetchProductsAction,
   fetchPromoAction,
   fetchProductDetailAction,
   fetchProductsSimilarAction,
   fetchReviewsAction,
   sendNewReviewAction} from './api-action';
-import {APIRoute} from '../const';
+import {APIRoute,
+  // QueryParam
+} from '../const';
 import {State} from '../types/state';
-// import {product, products, promo, reviews, reviewPost, productsFetchParams} from '../mocks/mocks';
-import {product, products, promo, reviews, reviewPost} from '../mocks/mocks';
+import {product,
+  products,
+  promo,
+  reviews,
+  reviewPost,
+  // productsFetchParams
+} from '../mocks/mocks';
 
 describe('Async actions', () => {
   const api = createAPI();
@@ -29,7 +36,19 @@ describe('Async actions', () => {
   // it('should dispatch Load_Products when GET /cameras', async () => {
   //   const mockProducts = products;
   //   mockAPI
-  //     .onGet(`${APIRoute.Products}?_start=${productsFetchParams.startItem}&_end=${productsFetchParams.endItem}`)
+  //     .onGet(APIRoute.Products, {
+  //       params: {
+  //         [QueryParam.StartItem]: productsFetchParams.startItem,
+  //         [QueryParam.EndItem]: productsFetchParams.endItem,
+  //         [QueryParam.Sort]: null,
+  //         [QueryParam.Order]: null,
+  //         [QueryParam.Category]: null,
+  //         [QueryParam.Type]: null,
+  //         [QueryParam.Level]: null,
+  //         [QueryParam.MinPrice]: null,
+  //         [QueryParam.MaxPrice]: null,
+  //       }
+  //     })
   //     .reply(200, mockProducts, {
   //       'x-total-count': 10
   //     });
