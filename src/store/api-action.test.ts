@@ -4,14 +4,15 @@ import MockAdapter from 'axios-mock-adapter';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createAPI} from '../services/api';
 import {
-  // fetchProductsAction,
+  fetchProductsAction,
   fetchPromoAction,
+  fetchMinPriceProductsAction,
   fetchProductDetailAction,
   fetchProductsSimilarAction,
   fetchReviewsAction,
   sendNewReviewAction} from './api-action';
 import {APIRoute,
-  // QueryParam
+  QueryParam
 } from '../const';
 import {State} from '../types/state';
 import {product,
@@ -19,7 +20,8 @@ import {product,
   promo,
   reviews,
   reviewPost,
-  // productsFetchParams
+  productsFetchParams,
+  productsMinMaxFetchParams
 } from '../mocks/mocks';
 
 describe('Async actions', () => {
@@ -33,37 +35,66 @@ describe('Async actions', () => {
       ThunkDispatch<State, typeof api, Action>
     >(middlewares);
 
-  // it('should dispatch Load_Products when GET /cameras', async () => {
-  //   const mockProducts = products;
-  //   mockAPI
-  //     .onGet(APIRoute.Products, {
-  //       params: {
-  //         [QueryParam.StartItem]: productsFetchParams.startItem,
-  //         [QueryParam.EndItem]: productsFetchParams.endItem,
-  //         [QueryParam.Sort]: null,
-  //         [QueryParam.Order]: null,
-  //         [QueryParam.Category]: null,
-  //         [QueryParam.Type]: null,
-  //         [QueryParam.Level]: null,
-  //         [QueryParam.MinPrice]: null,
-  //         [QueryParam.MaxPrice]: null,
-  //       }
-  //     })
-  //     .reply(200, mockProducts, {
-  //       'x-total-count': 10
-  //     });
+  it('should dispatch Load_Products when GET /cameras', async () => {
+    const mockProducts = products;
+    mockAPI
+      .onGet(APIRoute.Products, {
+        params: {
+          [QueryParam.StartItem]: productsFetchParams.startItem,
+          [QueryParam.EndItem]: productsFetchParams.endItem,
+          [QueryParam.Sort]: null,
+          [QueryParam.Order]: null,
+          [QueryParam.Category]: null,
+          [QueryParam.Type]: null,
+          [QueryParam.Level]: null,
+          [QueryParam.MinPrice]: null,
+          [QueryParam.MaxPrice]: null,
+        }
+      })
+      .reply(200, mockProducts, {
+        'x-total-count': 10
+      });
 
-  //   const store = mockStore();
+    const store = mockStore();
 
-  //   await store.dispatch(fetchProductsAction(productsFetchParams));
+    await store.dispatch(fetchProductsAction(productsFetchParams));
 
-  //   const actions = store.getActions().map(({type}) => type);
+    const actions = store.getActions().map(({type}) => type);
 
-  //   expect(actions).toEqual([
-  //     fetchProductsAction.pending.type,
-  //     fetchProductsAction.fulfilled.type
-  //   ]);
-  // });
+    expect(actions).toEqual([
+      fetchProductsAction.pending.type,
+      fetchProductsAction.fulfilled.type
+    ]);
+  });
+
+  it('should dispatch Load_MinPriceProducts when GET /cameras', async () => {
+    const mockProducts = products;
+    mockAPI
+      .onGet(APIRoute.Products, {
+        params: {
+          [QueryParam.StartItem]: productsFetchParams.startItem,
+          [QueryParam.EndItem]: productsFetchParams.endItem,
+          [QueryParam.Sort]: null,
+          [QueryParam.Order]: null,
+          [QueryParam.Category]: null,
+          [QueryParam.Type]: null,
+          [QueryParam.Level]: null,
+        }
+      })
+      .reply(200, mockProducts[0].price);
+
+    const store = mockStore();
+
+    await store.dispatch(fetchMinPriceProductsAction(productsMinMaxFetchParams));
+
+    const actions = store.getActions().map(({type}) => type);
+
+    expect(actions).toEqual([
+      fetchMinPriceProductsAction.pending.type,
+      fetchMinPriceProductsAction.fulfilled.type
+    ]);
+  });
+
 
   it('should dispatch Load_Promo when GET /promo', async () => {
     const mockPromo = promo;

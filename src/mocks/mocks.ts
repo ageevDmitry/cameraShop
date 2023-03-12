@@ -162,6 +162,16 @@ export const productsFetchParams = {
   maxPrice: null,
 };
 
+export const productsMinMaxFetchParams = {
+  startItem: 0,
+  endItem: 9,
+  sort: null,
+  order: null,
+  type: null,
+  category: null,
+  level: null,
+};
+
 export const promo: Promo = {
   id: 1,
   name: 'Ретрокамера Dus Auge lV',

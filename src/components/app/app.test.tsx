@@ -47,13 +47,13 @@ describe('Application Routing', () => {
     expect(screen.getByTestId('spinner-page')).toBeInTheDocument();
   });
 
-  // it('should render "Product" when user navigate to "product/1"', () => {
-  //   history.push(AppRoute.Product);
+  it('should render "Product" when user navigate to "product/1"', () => {
+    history.push(AppRoute.Product);
 
-  //   render(fakeApp);
+    render(fakeApp);
 
-  //   expect(screen.getByTestId('spinner-page')).toBeInTheDocument();
-  // });
+    expect(screen.getByTestId('spinner-page')).toBeInTheDocument();
+  });
 
   it('should render "NotFoundScreen" when user navigate to non-existent route', () => {
     history.push('/non-existent-route');
