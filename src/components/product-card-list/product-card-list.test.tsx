@@ -1,16 +1,16 @@
 import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
 import HistoryRouter from '../history-route/history-route';
-import Header from './header';
+import ProductCardList from './product-card-list';
 import {createAPI} from '../../services/api';
 import thunk, {ThunkDispatch} from 'redux-thunk';
-import {Action} from 'redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {State} from '../../types/state';
+import {Action} from 'redux';
 import {NameSpace} from '../../const';
 import {Provider} from 'react-redux';
-import {currentCatalogPagePath} from '../../types/ui';
 import {product, products, reviews} from '../../mocks/mocks';
+import {currentCatalogPagePath} from '../../types/ui';
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -22,6 +22,11 @@ ThunkDispatch<State, typeof api, Action>
 >(middlewares);
 
 const store = mockStore({
+  [NameSpace.ProductsUI]: {
+    currentCatalogPagePath: {} as currentCatalogPagePath,
+    currentMinPrice: null,
+    currentMaxPrice: null,
+  },
   [NameSpace.ProductsData]: {
     productDetail: product,
     productsSimilar: products,
@@ -29,25 +34,25 @@ const store = mockStore({
     isDataLoading: false,
     isSuccess: false,
   },
-  [NameSpace.ProductsUI]: {
-    currentCatalogPagePath: {} as currentCatalogPagePath,
-    currentMinPrice: null,
-    currentMaxPrice: null,
-  },
 });
 
 const history = createMemoryHistory();
 
-describe('Component: Header', () => {
+const paginationCount = 5;
+
+describe('Component: ProductCardList', () => {
   it('should render correctly', () => {
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>
-          <Header/>
+          <ProductCardList
+            products={products}
+            paginationCount={paginationCount}
+          />
         </HistoryRouter>
       </Provider>
     );
 
-    expect(screen.getByTestId('header')).toBeInTheDocument();
+    expect(screen.getByTestId('product-card-list')).toBeInTheDocument();
   });
 });

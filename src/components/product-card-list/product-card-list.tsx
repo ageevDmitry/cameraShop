@@ -20,7 +20,7 @@ function ProductCardList ({products, paginationCount}: ProductCardListProps): JS
 
   return (
     <>
-      <div className="cards catalog__cards">
+      <div className="cards catalog__cards" data-testid="product-card-list">
         {
           products.map((product) => (
             <ProductCard

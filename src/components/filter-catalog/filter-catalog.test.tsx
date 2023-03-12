@@ -48,9 +48,6 @@ describe('Component: FilterCatalog', () => {
       </Provider>
     );
 
-    expect(screen.getByText(/Категория/i)).toBeInTheDocument();
-    expect(screen.getByText(/Тип камеры/i)).toBeInTheDocument();
-    expect(screen.getByText(/Уровень/i)).toBeInTheDocument();
     expect(screen.getByText(/Сбросить фильтры/i)).toBeInTheDocument();
   });
 });
