@@ -48,7 +48,7 @@ describe('Application Routing', () => {
   });
 
   it('should render "Product" when user navigate to "product/1"', () => {
-    history.push(AppRoute.Product);
+    history.push('/product/1');
 
     render(fakeApp);
 

@@ -83,6 +83,7 @@ export const fetchMinPriceProductsAction = createAsyncThunk<number, ProductsMinP
             [QueryParam.Level]: level,
           }
         });
+
         return response.data[0].price;
       }
 

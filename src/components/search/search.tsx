@@ -6,7 +6,6 @@ import {useState,
   useRef,
   ChangeEvent,
   FormEvent} from 'react';
-// import {nanoid} from 'nanoid';
 import {DEFAULT_SEARCH_VALUE} from '../../const';
 import {cleanUpProductsSearch} from '../../store/products-data/products-data';
 import {redirectToRoute} from '../../store/action';

@@ -69,6 +69,7 @@ describe('Async actions', () => {
 
   it('should dispatch Load_MinPriceProducts when GET /cameras', async () => {
     const mockProducts = products;
+
     mockAPI
       .onGet(APIRoute.Products, {
         params: {
@@ -81,7 +82,7 @@ describe('Async actions', () => {
           [QueryParam.Level]: null,
         }
       })
-      .reply(200, mockProducts[0].price);
+      .reply(200, mockProducts);
 
     const store = mockStore();
 
