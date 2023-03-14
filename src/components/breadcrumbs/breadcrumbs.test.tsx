@@ -58,7 +58,7 @@ describe('Component: Breadcrumbs', () => {
         <HistoryRouter history={history}>
           <Routes>
             <Route
-              path="/"
+              path="catalog/page_1"
               element={<h1>This is main page</h1>}
             />
             <Route
