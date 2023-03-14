@@ -6,7 +6,7 @@ import {useState,
   useRef,
   ChangeEvent,
   FormEvent} from 'react';
-import {nanoid} from 'nanoid';
+// import {nanoid} from 'nanoid';
 import {DEFAULT_SEARCH_VALUE} from '../../const';
 import {cleanUpProductsSearch} from '../../store/products-data/products-data';
 import {redirectToRoute} from '../../store/action';
@@ -49,6 +49,7 @@ function Search (): JSX.Element {
             placeholder="Поиск по сайту"
             onKeyDown={(evt) => {
               if (evt.key === 'ArrowDown') {
+                evt.preventDefault();
                 listRef.current?.focus();
               }}}
           />
@@ -56,7 +57,8 @@ function Search (): JSX.Element {
         {(searchData !== DEFAULT_SEARCH_VALUE && productsSearch?.length !== 0) &&
           <ul className={`${styles.selectList} ${styles.scroller}`}>
             {productsSearch?.map((item, i) => (
-              <li key={nanoid()}
+              <li key={item.name}
+                tabIndex={0}
                 ref={(i === 0) ? listRef : undefined}
                 className='form-search__select-item'
                 onClick={() => {
