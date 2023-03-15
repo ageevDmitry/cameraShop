@@ -7,8 +7,10 @@ import {
   fetchProductsAction,
   fetchPromoAction,
   fetchMinPriceProductsAction,
+  fetchMaxPriceProductsAction,
   fetchProductDetailAction,
   fetchProductsSimilarAction,
+  fetchProductsSearchAction,
   fetchReviewsAction,
   sendNewReviewAction} from './api-action';
 import {APIRoute,
@@ -73,10 +75,10 @@ describe('Async actions', () => {
     mockAPI
       .onGet(APIRoute.Products, {
         params: {
-          [QueryParam.StartItem]: productsFetchParams.startItem,
-          [QueryParam.EndItem]: productsFetchParams.endItem,
-          [QueryParam.Sort]: null,
-          [QueryParam.Order]: null,
+          [QueryParam.StartItem]: 0,
+          [QueryParam.EndItem]: 1,
+          [QueryParam.Sort]: 'price',
+          [QueryParam.Order]: 'asc',
           [QueryParam.Category]: null,
           [QueryParam.Type]: null,
           [QueryParam.Level]: null,
@@ -96,6 +98,34 @@ describe('Async actions', () => {
     ]);
   });
 
+  it('should dispatch Load_MaxPriceProducts when GET /cameras', async () => {
+    const mockProducts = products;
+
+    mockAPI
+      .onGet(APIRoute.Products, {
+        params: {
+          [QueryParam.StartItem]: 0,
+          [QueryParam.EndItem]: 1,
+          [QueryParam.Sort]: 'price',
+          [QueryParam.Order]: 'desc',
+          [QueryParam.Category]: null,
+          [QueryParam.Type]: null,
+          [QueryParam.Level]: null,
+        }
+      })
+      .reply(200, mockProducts);
+
+    const store = mockStore();
+
+    await store.dispatch(fetchMaxPriceProductsAction(productsMinMaxFetchParams));
+
+    const actions = store.getActions().map(({type}) => type);
+
+    expect(actions).toEqual([
+      fetchMaxPriceProductsAction.pending.type,
+      fetchMaxPriceProductsAction.fulfilled.type
+    ]);
+  });
 
   it('should dispatch Load_Promo when GET /promo', async () => {
     const mockPromo = promo;
@@ -154,6 +184,30 @@ describe('Async actions', () => {
       fetchProductsSimilarAction.fulfilled.type
     ]);
   });
+
+  it('should dispatch Load_SearchProducts when GET /cameras', async () => {
+    const mockProducts = products;
+
+    mockAPI
+      .onGet(APIRoute.Products, {
+        params: {
+          [QueryParam.NameLike]: 'Pro',
+        }
+      })
+      .reply(200, mockProducts);
+
+    const store = mockStore();
+
+    await store.dispatch(fetchProductsSearchAction('Pro'));
+
+    const actions = store.getActions().map(({type}) => type);
+
+    expect(actions).toEqual([
+      fetchProductsSearchAction.pending.type,
+      fetchProductsSearchAction.fulfilled.type
+    ]);
+  });
+
 
   it('should dispatch Load_Reviews when GET /cameras/:id/reviews', async () => {
     const mockReviews = reviews;

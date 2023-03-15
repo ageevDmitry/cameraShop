@@ -4,6 +4,7 @@ import {fetchProductsSearchAction} from '../../store/api-action';
 import {getProductsSearch} from '../../store/products-data/selectors';
 import {useState,
   useRef,
+  useEffect,
   ChangeEvent,
   FormEvent} from 'react';
 import {DEFAULT_SEARCH_VALUE} from '../../const';
@@ -16,7 +17,8 @@ function Search (): JSX.Element {
   const dispatch = useAppDispatch();
   const productsSearch = useAppSelector(getProductsSearch);
   const [searchData, setSearchData] = useState(DEFAULT_SEARCH_VALUE);
-  const listRef = useRef<HTMLLIElement>(null);
+  const [searchIndexData, setSearchIndexData] = useState(0);
+  const listRef = useRef<HTMLUListElement>(null);
 
   const handleFormChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const {value} = evt.target;
@@ -33,6 +35,12 @@ function Search (): JSX.Element {
     }
   };
 
+  useEffect(() => {
+    if (listRef.current?.children[1]) {
+      listRef.current?.children[searchIndexData].focus();
+    }
+  }, [searchIndexData]);
+
   return (
     <div className="form-search" data-testid="search">
       <form className="form-class-submit" onSubmit={handleFormSubmit}>
@@ -47,27 +55,40 @@ function Search (): JSX.Element {
             value={searchData}
             placeholder="Поиск по сайту"
             onKeyDown={(evt) => {
-              if (evt.key === 'ArrowDown') {
+              if (evt.key === 'ArrowDown' || evt.key === 'ArrowUp') {
                 evt.preventDefault();
-                listRef.current?.focus();
-              }}}
+                setSearchIndexData(0);
+                if (listRef.current?.children[0]) {
+                  listRef.current?.children[0].focus();
+                }
+              }
+            }}
           />
         </label>
         {(searchData !== DEFAULT_SEARCH_VALUE && productsSearch?.length !== 0) &&
-          <ul className={`${styles.selectList} ${styles.scroller}`}>
+          <ul ref={listRef} className={`${styles.selectList} ${styles.scroll}`}>
             {productsSearch?.map((item, i) => (
               <li key={item.name}
                 tabIndex={0}
-                ref={(i === 0) ? listRef : undefined}
                 className='form-search__select-item'
                 onClick={() => {
                   setSearchData(DEFAULT_SEARCH_VALUE);
                   dispatch(redirectToRoute(`/product/${item.id}`));
                 }}
                 onKeyDown={(evt) => {
-                  if (evt.key === 'Enter' || evt.key === ' ') {
-                    setSearchData(DEFAULT_SEARCH_VALUE);
-                    dispatch(redirectToRoute(`/product/${item.id}`));
+                  if (listRef.current) {
+                    if (evt.key === 'Enter' || evt.key === ' ') {
+                      setSearchData(DEFAULT_SEARCH_VALUE);
+                      dispatch(redirectToRoute(`/product/${item.id}`));
+                    }
+                    if (evt.key === 'ArrowUp' && searchIndexData !== 0) {
+                      evt.preventDefault();
+                      setSearchIndexData(searchIndexData - 1);
+                    }
+                    if (evt.key === 'ArrowDown' && searchIndexData !== listRef.current?.children.length - 1) {
+                      evt.preventDefault();
+                      setSearchIndexData(searchIndexData + 1);
+                    }
                   }
                 }}
               >{item.name}
