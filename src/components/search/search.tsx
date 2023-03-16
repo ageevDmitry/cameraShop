@@ -36,8 +36,9 @@ function Search (): JSX.Element {
   };
 
   useEffect(() => {
-    if (listRef.current?.children[1]) {
-      listRef.current?.children[searchIndexData].focus();
+    if (listRef.current) {
+      const listRefChildren = listRef.current.children[searchIndexData] as HTMLLIElement;
+      listRefChildren.focus();
     }
   }, [searchIndexData]);
 
@@ -58,8 +59,9 @@ function Search (): JSX.Element {
               if (evt.key === 'ArrowDown' || evt.key === 'ArrowUp') {
                 evt.preventDefault();
                 setSearchIndexData(0);
-                if (listRef.current?.children[0]) {
-                  listRef.current?.children[0].focus();
+                if (listRef.current) {
+                  const listRefChildren = listRef.current.children[0] as HTMLLIElement;
+                  listRefChildren.focus();
                 }
               }
             }}
