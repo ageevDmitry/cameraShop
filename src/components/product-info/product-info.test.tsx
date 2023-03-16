@@ -8,7 +8,6 @@ const history = createMemoryHistory();
 
 describe('Component: ProductInfo', () => {
 
-  // const setCurrentTabControl = jest.fn();
   it('should render correctly', () => {
     render(
       <HistoryRouter history={history}>
