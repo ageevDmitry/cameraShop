@@ -35,9 +35,7 @@ export const getCurrentPriceState = (searchParams: URLSearchParams,
     if (key === QueryParam.MinPrice) {
       setCurrentMinPriceState(value);
     }
-  }
 
-  for (const [key, value] of searchParams.entries()) {
     if (key === QueryParam.MaxPrice) {
       setCurrentMaxPriceState(value);
     }
