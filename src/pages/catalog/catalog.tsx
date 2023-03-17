@@ -1,4 +1,3 @@
-/* eslint-disable no-mixed-operators */
 import {useEffect} from 'react';
 import {useParams, useSearchParams} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks/useAppDispatch';

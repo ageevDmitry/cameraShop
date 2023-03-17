@@ -113,17 +113,19 @@ export const getValidatedCurrentMinPrice = (currentPrice: string,
 
   if (currentPrice === '') {
     return null;
-  } else {
-    const inputCurrentPrice = parseFloat(currentPrice);
-
-    if (minProductsPrice === null) {
-      return inputCurrentPrice;
-    } else if (inputCurrentPrice < minProductsPrice) {
-      return minProductsPrice;
-    } else {
-      return inputCurrentPrice;
-    }
   }
+
+  const inputCurrentPrice = parseFloat(currentPrice);
+
+  if (minProductsPrice === null) {
+    return inputCurrentPrice;
+  }
+
+  if (inputCurrentPrice < minProductsPrice) {
+    return minProductsPrice;
+  }
+
+  return inputCurrentPrice;
 };
 
 export const getValidatedCurrentMaxPrice = (currentPrice: string,
@@ -132,20 +134,24 @@ export const getValidatedCurrentMaxPrice = (currentPrice: string,
 
   if (currentPrice === '') {
     return null;
-  } else {
-    const inputCurrentPrice = parseFloat(currentPrice);
-    const minCurrentPriceNumber = Number(minCurrentPrice);
-
-    if (maxProductsPrice === null) {
-      return inputCurrentPrice;
-    } else if (inputCurrentPrice > maxProductsPrice) {
-      return maxProductsPrice;
-    } else if (inputCurrentPrice < minCurrentPriceNumber) {
-      return minCurrentPriceNumber;
-    } else {
-      return inputCurrentPrice;
-    }
   }
+
+  const inputCurrentPrice = parseFloat(currentPrice);
+  const minCurrentPriceNumber = Number(minCurrentPrice);
+
+  if (maxProductsPrice === null) {
+    return inputCurrentPrice;
+  }
+
+  if (inputCurrentPrice > maxProductsPrice) {
+    return maxProductsPrice;
+  }
+
+  if (inputCurrentPrice < minCurrentPriceNumber) {
+    return minCurrentPriceNumber;
+  }
+
+  return inputCurrentPrice;
 };
 
 export const getValidatedCurrentMaxPriceState = (currentPrice: string,
@@ -153,16 +159,17 @@ export const getValidatedCurrentMaxPriceState = (currentPrice: string,
 
   if (currentPrice === '') {
     return '';
-  } else {
-    const inputCurrentPrice = parseFloat(currentPrice);
-    const minCurrentPriceNumber = Number(minCurrentPrice);
-
-    if (inputCurrentPrice < minCurrentPriceNumber) {
-      return String(minCurrentPriceNumber);
-    } else {
-      return String(inputCurrentPrice);
-    }
   }
+
+  const inputCurrentPrice = parseFloat(currentPrice);
+  const minCurrentPriceNumber = Number(minCurrentPrice);
+
+  if (inputCurrentPrice < minCurrentPriceNumber) {
+    return String(minCurrentPriceNumber);
+  }
+
+  return String(inputCurrentPrice);
+
 };
 
 export const getValidatedCurrentPriceState = (evt: ChangeEvent<HTMLInputElement>,
@@ -172,9 +179,9 @@ export const getValidatedCurrentPriceState = (evt: ChangeEvent<HTMLInputElement>
     const inputValue = parseFloat(evt.target.value);
     if (inputValue < 0) {
       setCurrentMaxPriceState('');
-    } else {
-      setCurrentMaxPriceState(String(inputValue));
     }
+    setCurrentMaxPriceState(String(inputValue));
+
   } else {
     setCurrentMaxPriceState('');
   }
