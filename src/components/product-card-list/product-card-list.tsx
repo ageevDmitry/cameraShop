@@ -1,5 +1,5 @@
 import {Product} from '../../types/product';
-import {useAppSelector} from '../../hooks/useAppSelector';
+import {useAppSelector} from '../../hooks/use-app-selector';
 import ProductCard from '../product-card/product-card';
 import Pagination from '../pagination/pagination';
 import SpinnerComponent from '../spinner-component/spinner-component';

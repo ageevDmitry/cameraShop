@@ -1,4 +1,4 @@
-import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {useSearchParams} from 'react-router-dom';
 import FilterPrice from '../filter-price/filter-price';
 import FilterCategory from '../filter-category/filter-category';

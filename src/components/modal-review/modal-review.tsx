@@ -1,10 +1,10 @@
 import {useForm} from 'react-hook-form';
 import {useState} from 'react';
-import {useModalClose} from '../../hooks/useModalClose';
+import {useModalClose} from '../../hooks/use-modal-close';
 import {ReviewPost} from '../../types/review';
 import {REVIEW_FORM_STATUSES, DEFAULT_RATING_REVIEW} from '../../const';
-import {useAppSelector} from '../../hooks/useAppSelector';
-import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {sendNewReviewAction} from '../../store/api-action';
 import {getProductDetail} from '../../store/products-data/selectors';
 import {Fragment} from 'react';

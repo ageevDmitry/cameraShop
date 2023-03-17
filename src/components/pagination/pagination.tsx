@@ -1,5 +1,5 @@
 import {Link, generatePath} from 'react-router-dom';
-import {useAppSelector} from '../../hooks/useAppSelector';
+import {useAppSelector} from '../../hooks/use-app-selector';
 import {getCurrentCatalogPagePath} from '../../store/products-ui/selectors';
 import styles from './pagination.module.css';
 import {AppRoute} from '../../const';

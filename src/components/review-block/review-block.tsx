@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import {useState} from 'react';
-import {useAppSelector} from '../../hooks/useAppSelector';
+import {useAppSelector} from '../../hooks/use-app-selector';
 import {Review} from '../../types/review';
 import {DefaultReviewsView, STEP_REVIEWS_VIEW} from '../../const';
 import {getIsDataLoading} from '../../store/products-data/selectors';

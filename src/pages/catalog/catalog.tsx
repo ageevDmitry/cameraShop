@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {useParams, useSearchParams} from 'react-router-dom';
-import {useAppDispatch} from '../../hooks/useAppDispatch';
-import {useAppSelector} from '../../hooks/useAppSelector';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {useAppSelector} from '../../hooks/use-app-selector';
 import {PaginationUI, NAV_BREADCRUMB_MAIN, QueryParam} from '../../const';
 import {getProducts,
   getProductsTotalCount,

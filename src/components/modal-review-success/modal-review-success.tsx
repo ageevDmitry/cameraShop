@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {Product} from '../../types/product';
-import {useModalClose} from '../../hooks/useModalClose';
+import {useModalClose} from '../../hooks/use-modal-close';
 import FocusTrap from 'focus-trap-react';
 
 type ModalReviewSuccessType = {

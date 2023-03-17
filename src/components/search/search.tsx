@@ -1,5 +1,5 @@
-import {useAppDispatch} from '../../hooks/useAppDispatch';
-import {useAppSelector} from '../../hooks/useAppSelector';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {useAppSelector} from '../../hooks/use-app-selector';
 import {fetchProductsSearchAction} from '../../store/api-action';
 import {getProductsSearch} from '../../store/products-data/selectors';
 import {useState,

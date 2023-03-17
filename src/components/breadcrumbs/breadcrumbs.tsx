@@ -1,7 +1,7 @@
 import {Link, generatePath} from 'react-router-dom';
 import {NavBreadcrumb} from '../../types/ui';
 import {AppRoute, DEFAULT_CATALOG_PAGE} from '../../const';
-import {useAppSelector} from '../../hooks/useAppSelector';
+import {useAppSelector} from '../../hooks/use-app-selector';
 import {getCurrentCatalogPagePath} from '../../store/products-ui/selectors';
 
 type BreadcrumbsProps = {

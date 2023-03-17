@@ -1,6 +1,6 @@
 import {useSearchParams} from 'react-router-dom';
-import {useAppSelector} from '../../hooks/useAppSelector';
-import {useAppDispatch} from '../../hooks/useAppDispatch';
+import {useAppSelector} from '../../hooks/use-app-selector';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {getMinProductsPrice,
   getMaxProductsPrice} from '../../store/products-data/selectors';
 import {useState, useEffect} from 'react';
@@ -13,8 +13,8 @@ import {
   changeFilterPrice,
   getCurrentPriceString
 } from '../../utils';
-import {useKeyDownFilterPrice} from '../../hooks/useKeyDownFilterPrice';
-import {useClickFilterPrice} from '../../hooks/useClickFilterPrice';
+import {useKeyDownFilterPrice} from '../../hooks/use-key-down-filter-price';
+import {useClickFilterPrice} from '../../hooks/use-click-filter-price';
 import {getCurrentMinPrice,
   getCurrentMaxPrice} from '../../store/products-ui/selectors';
 import {changeCurrentMinPrice,
