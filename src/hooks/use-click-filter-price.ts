@@ -1,11 +1,11 @@
 import {useEffect} from 'react';
 
-export function useClickFilterPrice(handleChangeFilterPrice: () => void) {
+export function useClickFilterPrice(handleChangeFilterPrice: () => void, component: string) {
 
   useEffect(() => {
     function handleClick(evt: MouseEvent) {
       const target = evt.target as HTMLElement;
-      if (!target.classList.contains('catalog-filter__reset-btn')) {
+      if (!target.classList.contains(component)) {
         handleChangeFilterPrice();
       }
     }
@@ -15,5 +15,5 @@ export function useClickFilterPrice(handleChangeFilterPrice: () => void) {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [handleChangeFilterPrice]);
+  }, [handleChangeFilterPrice, component]);
 }

@@ -13,6 +13,7 @@ import {
   changeFilterPrice,
   getCurrentPriceString
 } from '../../utils';
+import {BUTTON_RESET_CLASS, FORM_SUBMIT_CLASS} from '../../const';
 import {useKeyDownFilterPrice} from '../../hooks/use-key-down-filter-price';
 import {useClickFilterPrice} from '../../hooks/use-click-filter-price';
 import {getCurrentMinPrice,
@@ -50,8 +51,8 @@ function FilterPrice (): JSX.Element {
     dispatch(changeCurrentMaxPrice({type: validatedCurrentMaxPrice}));
   };
 
-  useKeyDownFilterPrice(handleChangeFilterPrice);
-  useClickFilterPrice(handleChangeFilterPrice);
+  useKeyDownFilterPrice(handleChangeFilterPrice, BUTTON_RESET_CLASS, FORM_SUBMIT_CLASS);
+  useClickFilterPrice(handleChangeFilterPrice, BUTTON_RESET_CLASS);
 
   return (
     <fieldset className="catalog-filter__block">

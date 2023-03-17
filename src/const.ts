@@ -247,3 +247,7 @@ export const FILTER_CATALOG_TYPE_DEFAULT = [false, false, false, false];
 export const FILTER_CATALOG_LEVEL_DEFAULT = [false, false, false];
 
 export const DEFAULT_CATALOG_PAGE = '1';
+
+export const BUTTON_RESET_CLASS = 'catalog-filter__reset-btn';
+
+export const FORM_SUBMIT_CLASS = 'form-class-submit';
