@@ -126,11 +126,7 @@ function Catalog (): JSX.Element {
                 <div className="catalog__content">
                   <SortCatalog/>
                   {
-                    (products.length === 0 && currentType ||
-                      products.length === 0 && currentCategory ||
-                      products.length === 0 && currentLevel ||
-                      products.length === 0 && currentMinPrice ||
-                      products.length === 0 && currentMaxPrice)
+                    (products.length === 0)
                       ?
                       <div className ={styles.notFoundCard}>
                         по вашему запросу ничего не найдено
