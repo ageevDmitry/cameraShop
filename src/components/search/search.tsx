@@ -68,7 +68,7 @@ function Search (): JSX.Element {
           />
         </label>
         {(searchData !== DEFAULT_SEARCH_VALUE && productsSearch?.length !== 0) &&
-          <ul ref={listRef} className={`${styles.selectList} ${styles.scroll}`}>
+          <ul ref={listRef} className={`${styles.selectList} scroller`}>
             {productsSearch?.map((item, i) => (
               <li key={item.name}
                 tabIndex={0}
