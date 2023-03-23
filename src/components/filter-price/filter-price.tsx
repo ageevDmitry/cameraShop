@@ -38,8 +38,10 @@ function FilterPrice (): JSX.Element {
   useEffect(() => {
     getCurrentPriceState(searchParams,
       setCurrentMinPriceState,
-      setCurrentMaxPriceState);
-  }, [searchParams]);
+      setCurrentMaxPriceState,
+      minProductsPrice,
+      maxProductsPrice);
+  }, [searchParams, minProductsPrice, maxProductsPrice]);
 
   const handleChangeFilterPrice = () => {
     const validatedCurrentMinPrice = getValidatedCurrentMinPrice(currentMinPriceState, minProductsPrice);

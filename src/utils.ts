@@ -21,7 +21,9 @@ export const checkDisable = (searchParams: URLSearchParams, itemDisable: string 
 
 export const getCurrentPriceState = (searchParams: URLSearchParams,
   setCurrentMinPriceState: (currentMinPriceState: string) => void,
-  setCurrentMaxPriceState: (currentMaxPriceState: string) => void) => {
+  setCurrentMaxPriceState: (currentMaxPriceState: string) => void,
+  minProductsPrice: number | null,
+  maxProductsPrice: number | null) => {
 
   if (!searchParams.get(QueryParam.MinPrice)) {
     setCurrentMinPriceState('');
@@ -33,11 +35,19 @@ export const getCurrentPriceState = (searchParams: URLSearchParams,
 
   for (const [key, value] of searchParams.entries()) {
     if (key === QueryParam.MinPrice) {
-      setCurrentMinPriceState(value);
+      if (minProductsPrice !== null && Number(value) < minProductsPrice) {
+        setCurrentMinPriceState(String(minProductsPrice));
+      } else {
+        setCurrentMinPriceState(value);
+      }
     }
 
     if (key === QueryParam.MaxPrice) {
-      setCurrentMaxPriceState(value);
+      if(maxProductsPrice !== null && Number(value) > maxProductsPrice) {
+        setCurrentMaxPriceState(String(maxProductsPrice));
+      } else {
+        setCurrentMaxPriceState(value);
+      }
     }
   }
 };
