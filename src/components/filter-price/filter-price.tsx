@@ -1,4 +1,4 @@
-import {useSearchParams} from 'react-router-dom';
+import {useSearchParams, useNavigate, generatePath} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {getMinProductsPrice,
@@ -20,6 +20,7 @@ import {getCurrentMinPrice,
   getCurrentMaxPrice} from '../../store/products-ui/selectors';
 import {changeCurrentMinPrice,
   changeCurrentMaxPrice} from '../../store/products-ui/products-ui';
+import {AppRoute, DEFAULT_CATALOG_PAGE} from '../../const';
 
 function FilterPrice (): JSX.Element {
 
@@ -31,6 +32,7 @@ function FilterPrice (): JSX.Element {
   const currentMaxPrice = useAppSelector(getCurrentMaxPrice);
   const currentMinPriceString = getCurrentPriceString(currentMinPrice);
   const currentMaxPriceString = getCurrentPriceString(currentMaxPrice);
+  const navigate = useNavigate();
 
   const [currentMinPriceState, setCurrentMinPriceState] = useState<string>(currentMinPriceString);
   const [currentMaxPriceState, setCurrentMaxPriceState] = useState<string>(currentMaxPriceString);
@@ -51,6 +53,10 @@ function FilterPrice (): JSX.Element {
     setSearchParams(searchParams);
     dispatch(changeCurrentMinPrice({type: validatedCurrentMinPrice}));
     dispatch(changeCurrentMaxPrice({type: validatedCurrentMaxPrice}));
+    navigate({
+      pathname: generatePath(AppRoute.Catalog, {pageNumber: DEFAULT_CATALOG_PAGE}),
+      search: decodeURI(searchParams.toString())
+    });
   };
 
   useKeyDownFilterPrice(handleChangeFilterPrice, BUTTON_RESET_CLASS, FORM_SUBMIT_CLASS);
