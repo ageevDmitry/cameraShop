@@ -1,11 +1,12 @@
 
-import {useSearchParams} from 'react-router-dom';
-import {FilterCatalogLevel, QueryParam} from '../../const';
+import {useSearchParams, useNavigate, generatePath} from 'react-router-dom';
+import {FilterCatalogLevel, QueryParam, AppRoute, DEFAULT_CATALOG_PAGE} from '../../const';
 import {checkFilter} from '../../utils';
 
 function FilterLevel (): JSX.Element {
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   return (
     <fieldset className="catalog-filter__block">
@@ -18,6 +19,10 @@ function FilterLevel (): JSX.Element {
               onChange={() => {
                 checkFilter(searchParams, QueryParam.Level, item.title);
                 setSearchParams(searchParams);
+                navigate({
+                  pathname: generatePath(AppRoute.Catalog, {pageNumber: DEFAULT_CATALOG_PAGE}),
+                  search: decodeURI(searchParams.toString())
+                });
               }}
               checked={Array.from(searchParams.values()).includes(item.title)}
             /><span className="custom-checkbox__icon" /><span className="custom-checkbox__label">{item.title}</span>
