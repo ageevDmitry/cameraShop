@@ -2,7 +2,6 @@ import {Product} from '../../types/product';
 import {Link} from 'react-router-dom';
 import Rating from '../rating/rating';
 import {ComponentType} from '../../const';
-import styles from './product-card.module.css';
 
 type ProductCardProps = {
   product: Product;
@@ -11,7 +10,7 @@ type ProductCardProps = {
 
 function ProductCard ({product, componentType}: ProductCardProps): JSX.Element {
 
-  const {id, name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, type} = product;
+  const {id, name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
 
   const productId = `/product/${id}`;
 
@@ -31,7 +30,6 @@ function ProductCard ({product, componentType}: ProductCardProps): JSX.Element {
         />
         <p className="product-card__title">{name}</p>
         <p className="product-card__price"><span className="visually-hidden">Цена:</span>{`${price} ₽`}</p>
-        <p className={styles.productCard}>{type}</p>
       </div>
       <div className="product-card__buttons">
         <button className="btn btn--purple product-card__btn" type="button">Купить
