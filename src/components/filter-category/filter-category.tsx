@@ -1,10 +1,12 @@
-import {FilterCatalogCategory, QueryParam} from '../../const';
-import {useSearchParams} from 'react-router-dom';
+import {FilterCatalogCategory, QueryParam, } from '../../const';
+import {useSearchParams, useNavigate, generatePath} from 'react-router-dom';
 import {checkDisable} from '../../utils';
+import {AppRoute, DEFAULT_CATALOG_PAGE} from '../../const';
 
 function FilterCategory (): JSX.Element {
 
   const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   return (
     <fieldset className="catalog-filter__block">
@@ -20,6 +22,10 @@ function FilterCategory (): JSX.Element {
                   : searchParams.append(QueryParam.Category, item.type);
 
                 setSearchParams(searchParams);
+                navigate({
+                  pathname: generatePath(AppRoute.Catalog, {pageNumber: DEFAULT_CATALOG_PAGE}),
+                  search: decodeURI(searchParams.toString())
+                });
               }}
               checked={searchParams.get(QueryParam.Category) === item.type}
               disabled={checkDisable(searchParams, item.disable)}
