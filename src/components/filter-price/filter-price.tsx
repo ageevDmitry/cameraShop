@@ -13,14 +13,18 @@ import {
   changeFilterPrice,
   getCurrentPriceString
 } from '../../utils';
-import {BUTTON_RESET_CLASS, FORM_SUBMIT_CLASS} from '../../const';
+import {BUTTON_RESET_CLASS,
+  FORM_SUBMIT_CLASS,
+  PAGINATION_LINK_CLASS,
+  AppRoute,
+  DEFAULT_CATALOG_PAGE
+} from '../../const';
 import {useKeyDownFilterPrice} from '../../hooks/use-key-down-filter-price';
 import {useClickFilterPrice} from '../../hooks/use-click-filter-price';
 import {getCurrentMinPrice,
   getCurrentMaxPrice} from '../../store/products-ui/selectors';
 import {changeCurrentMinPrice,
   changeCurrentMaxPrice} from '../../store/products-ui/products-ui';
-import {AppRoute, DEFAULT_CATALOG_PAGE} from '../../const';
 
 function FilterPrice (): JSX.Element {
 
@@ -60,7 +64,7 @@ function FilterPrice (): JSX.Element {
   };
 
   useKeyDownFilterPrice(handleChangeFilterPrice, BUTTON_RESET_CLASS, FORM_SUBMIT_CLASS);
-  useClickFilterPrice(handleChangeFilterPrice, BUTTON_RESET_CLASS);
+  useClickFilterPrice(handleChangeFilterPrice, BUTTON_RESET_CLASS, PAGINATION_LINK_CLASS);
 
   return (
     <fieldset className="catalog-filter__block">

@@ -251,3 +251,5 @@ export const DEFAULT_CATALOG_PAGE = '1';
 export const BUTTON_RESET_CLASS = 'catalog-filter__reset-btn';
 
 export const FORM_SUBMIT_CLASS = 'form-class-submit';
+
+export const PAGINATION_LINK_CLASS = 'pagination__link';

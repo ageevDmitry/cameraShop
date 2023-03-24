@@ -7,7 +7,7 @@ export function useKeyDownFilterPrice(handleChangeFilterPrice: () => void, ...co
       if (evt.key === 'Enter') {
         const target = evt.target as HTMLElement;
         if (!target.classList.contains(component[0])
-        || !target.classList.contains(component[1])) {
+        && !target.classList.contains(component[1])) {
           handleChangeFilterPrice();
         }
       }
