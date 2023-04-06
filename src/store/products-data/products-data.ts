@@ -11,9 +11,11 @@ import {fetchProductsAction,
   fetchReviewsAction,
   sendNewReviewAction,
 } from '../api-action';
+import type {PayloadAction} from '@reduxjs/toolkit';
 
 const initialState: ProductsData = {
   products: [],
+  productsCartIds: [],
   minPrice: null,
   maxPrice: null,
   productsTotalCount: 0,
@@ -34,7 +36,10 @@ export const productsData = createSlice({
     },
     setIsNotCatalogPage: (state) => {
       state.isCatalogPage = false;
-    }
+    },
+    addProductToCart: (state, action: PayloadAction<number>) => {
+      state.productsCartIds.push(action.payload);
+    },
   },
   extraReducers(builder) {
     builder
@@ -159,4 +164,8 @@ export const productsData = createSlice({
   }
 });
 
-export const {cleanUpProductDetail, cleanUpProductsSearch, setIsNotCatalogPage} = productsData.actions;
+export const {cleanUpProductDetail,
+  cleanUpProductsSearch,
+  setIsNotCatalogPage,
+  addProductToCart
+} = productsData.actions;

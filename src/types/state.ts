@@ -5,6 +5,7 @@ import {currentCatalogPagePath} from './ui';
 
 export type ProductsData = {
     products: Product[];
+    productsCartIds: number[];
     minPrice: number | null;
     maxPrice: number | null;
     productsTotalCount: number;
