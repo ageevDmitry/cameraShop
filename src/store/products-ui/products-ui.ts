@@ -9,6 +9,7 @@ const initialState: ProductsUI = {
   currentCatalogPagePath: {} as currentCatalogPagePath,
   currentMinPrice: null,
   currentMaxPrice: null,
+  isModalAddCart: false,
 };
 
 export const productsUI = createSlice({
@@ -28,10 +29,15 @@ export const productsUI = createSlice({
       state.currentMinPrice = null;
       state.currentMaxPrice = null;
     },
+    changeIsModalAdd: (state, action: PayloadAction<boolean>) => {
+      state.isModalAddCart = action.payload;
+    }
   },
 });
 
 export const {changeCurrentCatalogPagePath,
   changeCurrentMinPrice,
   changeCurrentMaxPrice,
-  cleanUpPrice} = productsUI.actions;
+  cleanUpPrice,
+  changeIsModalAdd
+} = productsUI.actions;

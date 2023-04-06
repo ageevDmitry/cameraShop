@@ -5,6 +5,7 @@ import {currentCatalogPagePath} from './ui';
 
 export type ProductsData = {
     products: Product[];
+    currentProductCart?: Product;
     productsCartIds: number[];
     minPrice: number | null;
     maxPrice: number | null;
@@ -23,6 +24,7 @@ export type ProductsUI = {
     currentCatalogPagePath: currentCatalogPagePath;
     currentMinPrice: number | null;
     currentMaxPrice: number | null;
+    isModalAddCart: boolean;
 };
 
 export type State = ReturnType<typeof store.getState>;

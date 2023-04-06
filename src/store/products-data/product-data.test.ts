@@ -27,6 +27,7 @@ describe('Reducer:productsData', () => {
     expect(productsData.reducer(void 0, { type: 'UNKNOWN_ACTION' }))
       .toEqual({
         products: [],
+        productsCartIds: [],
         minPrice: null,
         maxPrice: null,
         productsTotalCount: 0,
@@ -39,6 +40,7 @@ describe('Reducer:productsData', () => {
   it('should cleanup productDetail', () => {
     const state = {
       products: [],
+      productsCartIds: [],
       minPrice: null,
       maxPrice: null,
       productsTotalCount: 0,
@@ -50,6 +52,7 @@ describe('Reducer:productsData', () => {
     expect(productsData.reducer(state, cleanUpProductDetail()))
       .toEqual({
         products: [],
+        productsCartIds: [],
         minPrice: null,
         maxPrice: null,
         productsTotalCount: 0,
@@ -63,6 +66,7 @@ describe('Reducer:productsData', () => {
   it('should cleanup productSearch', () => {
     const state = {
       products: [],
+      productsCartIds: [],
       minPrice: null,
       maxPrice: null,
       productsTotalCount: 0,
@@ -88,6 +92,7 @@ describe('Reducer:productsData', () => {
   it('should set isNotCatalogPage', () => {
     const state = {
       products: [],
+      productsCartIds: [],
       minPrice: null,
       maxPrice: null,
       productsTotalCount: 0,
@@ -111,6 +116,7 @@ describe('Reducer:productsData', () => {
   it('should fetch products', () => {
     const state = {
       products: [],
+      productsCartIds: [],
       minPrice: null,
       maxPrice: null,
       productsTotalCount: productsReturnedData.dataTotalCount,
@@ -122,6 +128,7 @@ describe('Reducer:productsData', () => {
     expect(productsData.reducer(state, {type: fetchProductsAction.pending.type }))
       .toEqual({
         products: [],
+        productsCartIds: [],
         minPrice: null,
         maxPrice: null,
         productsTotalCount: productsReturnedData.dataTotalCount,
@@ -156,6 +163,7 @@ describe('Reducer:productsData', () => {
   it('should fetch minPriceProducts', () => {
     const state = {
       products: [],
+      productsCartIds: [],
       minPrice: null,
       maxPrice: null,
       productsTotalCount: 0,
@@ -201,6 +209,7 @@ describe('Reducer:productsData', () => {
   it('should fetch maxPriceProducts', () => {
     const state = {
       products: [],
+      productsCartIds: [],
       minPrice: null,
       maxPrice: null,
       productsTotalCount: 0,
@@ -246,6 +255,7 @@ describe('Reducer:productsData', () => {
   it('should fetch promo', () => {
     const state = {
       products: [],
+      productsCartIds: [],
       minPrice: null,
       maxPrice: null,
       productsTotalCount: 0,
@@ -292,6 +302,7 @@ describe('Reducer:productsData', () => {
   it('should fetch productDetail', () => {
     const state = {
       products: [],
+      productsCartIds: [],
       minPrice: null,
       maxPrice: null,
       productsTotalCount: 0,
@@ -339,6 +350,7 @@ describe('Reducer:productsData', () => {
   it('should fetch productSimilar', () => {
     const state = {
       products: [],
+      productsCartIds: [],
       minPrice: null,
       maxPrice: null,
       productsTotalCount: 0,
@@ -385,6 +397,7 @@ describe('Reducer:productsData', () => {
   it('should fetch productsSearch', () => {
     const state = {
       products: [],
+      productsCartIds: [],
       minPrice: null,
       maxPrice: null,
       productsTotalCount: 0,
@@ -420,6 +433,7 @@ describe('Reducer:productsData', () => {
   it('should fetch reviews', () => {
     const state = {
       products: [],
+      productsCartIds: [],
       minPrice: null,
       maxPrice: null,
       productsTotalCount: 0,
@@ -466,6 +480,7 @@ describe('Reducer:productsData', () => {
   it('should send new review', () => {
     const state = {
       products: [],
+      productsCartIds: [],
       minPrice: null,
       maxPrice: null,
       productsTotalCount: 0,

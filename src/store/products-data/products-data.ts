@@ -12,6 +12,7 @@ import {fetchProductsAction,
   sendNewReviewAction,
 } from '../api-action';
 import type {PayloadAction} from '@reduxjs/toolkit';
+import {Product} from '../../types/product';
 
 const initialState: ProductsData = {
   products: [],
@@ -37,7 +38,10 @@ export const productsData = createSlice({
     setIsNotCatalogPage: (state) => {
       state.isCatalogPage = false;
     },
-    addProductToCart: (state, action: PayloadAction<number>) => {
+    addCurrentProductCart: (state, action: PayloadAction<Product>) => {
+      state.currentProductCart = action.payload;
+    },
+    addProductCartIds: (state, action: PayloadAction<number>) => {
       state.productsCartIds.push(action.payload);
     },
   },
@@ -167,5 +171,5 @@ export const productsData = createSlice({
 export const {cleanUpProductDetail,
   cleanUpProductsSearch,
   setIsNotCatalogPage,
-  addProductToCart
+  addProductCartIds
 } = productsData.actions;

@@ -8,6 +8,7 @@ import {getProducts,
   getPromo,
   getIsCatalogPage
 } from '../../store/products-data/selectors';
+import {getIsModalAddCart} from '../../store/products-ui/selectors';
 import {fetchProductsAction,
   fetchPromoAction,
   fetchMinPriceProductsAction,
@@ -24,6 +25,7 @@ import FilterCatalog from '../../components/filter-catalog/filter-catalog';
 import ProductCardList from '../../components/product-card-list/product-card-list';
 import Footer from '../../components/footer/footer';
 import SpinnerPage from '../../components/spinner-page/spinner-page';
+import ModalAddCart from '../../components/modal-add-cart/modal-add-cart';
 
 function Catalog (): JSX.Element {
 
@@ -44,6 +46,7 @@ function Catalog (): JSX.Element {
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
   const isCatalogPage = useAppSelector(getIsCatalogPage);
+  const isModalAddCart = useAppSelector(getIsModalAddCart);
 
   useEffect(() => {
     if(currentCatalogPage) {
@@ -142,6 +145,10 @@ function Catalog (): JSX.Element {
             </div>
           </section>
         </div>
+        {
+          isModalAddCart &&
+          <ModalAddCart/>
+        }
       </main>
       <Footer/>
     </div>

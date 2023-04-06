@@ -25,6 +25,7 @@ describe('Reducer:productsUI', () => {
       currentCatalogPagePath: {} as currentCatalogPagePath,
       currentMinPrice: null,
       currentMaxPrice: null,
+      isModalAddCart: false,
     };
 
     expect(productsUI.reducer(state, changeCurrentCatalogPagePath({
@@ -44,6 +45,7 @@ describe('Reducer:productsUI', () => {
       currentCatalogPagePath: {} as currentCatalogPagePath,
       currentMinPrice: null,
       currentMaxPrice: null,
+      isModalAddCart: false,
     };
 
     expect(productsUI.reducer(state, changeCurrentMinPrice({
@@ -61,6 +63,7 @@ describe('Reducer:productsUI', () => {
       currentCatalogPagePath: {} as currentCatalogPagePath,
       currentMinPrice: null,
       currentMaxPrice: null,
+      isModalAddCart: false,
     };
 
     expect(productsUI.reducer(state, changeCurrentMaxPrice({
@@ -78,6 +81,7 @@ describe('Reducer:productsUI', () => {
       currentCatalogPagePath: {} as currentCatalogPagePath,
       currentMinPrice: mockCurrentPrice,
       currentMaxPrice: mockCurrentPrice,
+      isModalAddCart: false,
     };
 
     expect(productsUI.reducer(state, cleanUpPrice()))
