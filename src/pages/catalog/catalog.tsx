@@ -6,7 +6,8 @@ import {PaginationUI, NAV_BREADCRUMB_MAIN, QueryParam} from '../../const';
 import {getProducts,
   getProductsTotalCount,
   getPromo,
-  getIsCatalogPage
+  getIsCatalogPage,
+  getCurrentProductCart
 } from '../../store/products-data/selectors';
 import {getIsModalAddCart} from '../../store/products-ui/selectors';
 import {fetchProductsAction,
@@ -47,6 +48,7 @@ function Catalog (): JSX.Element {
   const promo = useAppSelector(getPromo);
   const isCatalogPage = useAppSelector(getIsCatalogPage);
   const isModalAddCart = useAppSelector(getIsModalAddCart);
+  const currentProductCart = useAppSelector(getCurrentProductCart);
 
   useEffect(() => {
     if(currentCatalogPage) {
@@ -146,8 +148,10 @@ function Catalog (): JSX.Element {
           </section>
         </div>
         {
-          isModalAddCart &&
-          <ModalAddCart/>
+          (isModalAddCart && currentProductCart) ?
+            <ModalAddCart
+              product = {currentProductCart}
+            /> : ''
         }
       </main>
       <Footer/>

@@ -171,5 +171,6 @@ export const productsData = createSlice({
 export const {cleanUpProductDetail,
   cleanUpProductsSearch,
   setIsNotCatalogPage,
+  addCurrentProductCart,
   addProductCartIds
 } = productsData.actions;

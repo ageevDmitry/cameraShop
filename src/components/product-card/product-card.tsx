@@ -2,6 +2,9 @@ import {Product} from '../../types/product';
 import {Link} from 'react-router-dom';
 import Rating from '../rating/rating';
 import {ComponentType} from '../../const';
+import {addCurrentProductCart} from '../../store/products-data/products-data';
+import {changeIsModalAdd} from '../../store/products-ui/products-ui';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
 
 type ProductCardProps = {
   product: Product;
@@ -10,8 +13,8 @@ type ProductCardProps = {
 
 function ProductCard ({product, componentType}: ProductCardProps): JSX.Element {
 
+  const dispatch = useAppDispatch();
   const {id, name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
-
   const productId = `/product/${id}`;
 
   return (
@@ -32,7 +35,12 @@ function ProductCard ({product, componentType}: ProductCardProps): JSX.Element {
         <p className="product-card__price"><span className="visually-hidden">Цена:</span>{`${price} ₽`}</p>
       </div>
       <div className="product-card__buttons">
-        <button className="btn btn--purple product-card__btn" type="button">Купить
+        <button className="btn btn--purple product-card__btn" type="button"
+          onClick={() =>{
+            dispatch(addCurrentProductCart(product));
+            dispatch(changeIsModalAdd({type: true}));
+          }}
+        >Купить
         </button>
         <Link to={productId} className="btn btn--transparent">Подробнее
         </Link>

@@ -14,3 +14,4 @@ export const getProductsSearch = (state: State): Product[] | undefined => state[
 export const getReviews = (state: State): Review[] | undefined => state[NameSpace.ProductsData].reviews;
 export const getIsCatalogPage = (state: State): boolean => state[NameSpace.ProductsData].isCatalogPage;
 export const getIsDataLoading = (state: State): boolean => state[NameSpace.ProductsData].isDataLoading;
+export const getCurrentProductCart = (state: State): Product | undefined => state[NameSpace.ProductsData].currentProductCart;

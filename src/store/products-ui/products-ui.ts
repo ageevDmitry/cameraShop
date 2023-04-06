@@ -29,8 +29,8 @@ export const productsUI = createSlice({
       state.currentMinPrice = null;
       state.currentMaxPrice = null;
     },
-    changeIsModalAdd: (state, action: PayloadAction<boolean>) => {
-      state.isModalAddCart = action.payload;
+    changeIsModalAdd: (state, action: PayloadAction<{type: boolean}>) => {
+      state.isModalAddCart = action.payload.type;
     }
   },
 });

@@ -1,5 +1,14 @@
+import {Product} from '../../types/product';
 
-function ModalAddCart (): JSX.Element {
+type ModalAddCartProps = {
+  product: Product;
+}
+
+function ModalAddCart ({product}: ModalAddCartProps): JSX.Element {
+
+  const {name, level, type, category, vendorCode, price, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
+
+  const categoryLowerCase = category.toLowerCase();
 
   return (
     <div className="modal is-active">
@@ -10,18 +19,18 @@ function ModalAddCart (): JSX.Element {
           <div className="basket-item basket-item--short">
             <div className="basket-item__img">
               <picture>
-                <source type="image/webp" srcSet="img/content/img9.webp, img/content/img9@2x.webp 2x" /><img src="img/content/img9.jpg" srcSet="img/content/img9@2x.jpg 2x" alt="Фотоаппарат «Орлёнок»" width={140} height={120} />
+                <source type="image/webp" srcSet={`/${previewImgWebp}, /${previewImgWebp2x} 2x`} /><img src={previewImg} srcSet={`${previewImg2x} 2x`} alt={name} width={140} height={120} />
               </picture>
             </div>
             <div className="basket-item__description">
-              <p className="basket-item__title">Фотоаппарат «Орлёнок»</p>
+              <p className="basket-item__title">{name}</p>
               <ul className="basket-item__list">
-                <li className="basket-item__list-item"><span className="basket-item__article">Артикул:</span> <span className="basket-item__number">O78DFGSD832</span>
+                <li className="basket-item__list-item"><span className="basket-item__article">Артикул:</span> <span className="basket-item__number">{vendorCode}</span>
                 </li>
-                <li className="basket-item__list-item">Плёночная фотокамера</li>
-                <li className="basket-item__list-item">Любительский уровень</li>
+                <li className="basket-item__list-item">{`${type} ${categoryLowerCase}`}</li>
+                <li className="basket-item__list-item">{level}</li>
               </ul>
-              <p className="basket-item__price"><span className="visually-hidden">Цена:</span>18 970 ₽</p>
+              <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{`${price} ₽`}</p>
             </div>
           </div>
           <div className="modal__buttons">
