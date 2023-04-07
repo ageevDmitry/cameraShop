@@ -1,11 +1,8 @@
 import {Product} from '../../types/product';
 import {useModalClose} from '../../hooks/use-modal-close';
 import {addProductCart} from '../../store/products-data/products-data';
-import {getProductsCart} from '../../store/products-data/selectors';
 import FocusTrap from 'focus-trap-react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {useAppSelector} from '../../hooks/use-app-selector';
-import {checkProductsCart} from '../../utils';
 
 type ModalAddCartProps = {
   product: Product;
@@ -17,7 +14,6 @@ function ModalAddCart ({product, setIsModalAddCart}: ModalAddCartProps): JSX.Ele
   const {name, level, type, category, vendorCode, price, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
   const categoryLowerCase = category.toLowerCase();
   const dispatch = useAppDispatch();
-  const productsCart = useAppSelector(getProductsCart);
 
   useModalClose(setIsModalAddCart);
 
@@ -52,7 +48,7 @@ function ModalAddCart ({product, setIsModalAddCart}: ModalAddCartProps): JSX.Ele
             <div className="modal__buttons">
               <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button"
                 onClick={() =>{
-                  dispatch(addProductCart(checkProductsCart(productsCart, product)));
+                  dispatch(addProductCart(product));
                 }}
               >
                 <svg width={24} height={16} aria-hidden="true">

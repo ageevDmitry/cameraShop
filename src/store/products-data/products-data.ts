@@ -12,7 +12,10 @@ import {fetchProductsAction,
   sendNewReviewAction,
 } from '../api-action';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import {Product, ProductCart} from '../../types/product';
+import {Product,
+  // ProductCart
+} from '../../types/product';
+import {checkProductsCart} from '../../utils';
 
 const initialState: ProductsData = {
   products: [],
@@ -41,8 +44,8 @@ export const productsData = createSlice({
     addCurrentProductCart: (state, action: PayloadAction<Product>) => {
       state.currentProductCart = action.payload;
     },
-    addProductCart: (state, action: PayloadAction<ProductCart[]>) => {
-      state.productsCart = action.payload;
+    addProductCart: (state, action: PayloadAction<Product>) => {
+      state.productsCart = checkProductsCart(state.productsCart, action.payload);
     },
   },
   extraReducers(builder) {
