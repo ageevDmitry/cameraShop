@@ -9,7 +9,6 @@ import {getProducts,
   getIsCatalogPage,
   getCurrentProductCart
 } from '../../store/products-data/selectors';
-// import {getIsModalAddCart} from '../../store/products-ui/selectors';
 import {fetchProductsAction,
   fetchPromoAction,
   fetchMinPriceProductsAction,
@@ -47,7 +46,6 @@ function Catalog (): JSX.Element {
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
   const isCatalogPage = useAppSelector(getIsCatalogPage);
-  // const isModalAddCart = useAppSelector(getIsModalAddCart);
   const currentProductCart = useAppSelector(getCurrentProductCart);
   const [isModalAddCart, setIsModalAddCart] = useState(false);
 

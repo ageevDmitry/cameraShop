@@ -49,3 +49,8 @@ export type ProductsMinPriceFetchParams = {
     type: string | string[] | null;
     level: string | string[] | null;
 }
+
+export type ProductCart = {
+    product: Product;
+    count: number;
+}

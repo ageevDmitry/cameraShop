@@ -12,11 +12,11 @@ import {fetchProductsAction,
   sendNewReviewAction,
 } from '../api-action';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import {Product} from '../../types/product';
+import {Product, ProductCart} from '../../types/product';
 
 const initialState: ProductsData = {
   products: [],
-  productsCartIds: [],
+  productsCart: [],
   minPrice: null,
   maxPrice: null,
   productsTotalCount: 0,
@@ -41,8 +41,8 @@ export const productsData = createSlice({
     addCurrentProductCart: (state, action: PayloadAction<Product>) => {
       state.currentProductCart = action.payload;
     },
-    addProductCartIds: (state, action: PayloadAction<number>) => {
-      state.productsCartIds.push(action.payload);
+    addProductCart: (state, action: PayloadAction<ProductCart[]>) => {
+      state.productsCart = action.payload;
     },
   },
   extraReducers(builder) {
@@ -172,5 +172,5 @@ export const {cleanUpProductDetail,
   cleanUpProductsSearch,
   setIsNotCatalogPage,
   addCurrentProductCart,
-  addProductCartIds
+  addProductCart
 } = productsData.actions;

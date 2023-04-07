@@ -1,6 +1,7 @@
 
 import {QueryParam} from './const';
 import {ChangeEvent} from 'react';
+import {ProductCart} from './types/product';
 
 export const getCurrentPriceString = (price: number | null) => {
   if (price !== null) {
@@ -193,4 +194,12 @@ export const getValidatedCurrentPriceState = (evt: ChangeEvent<HTMLInputElement>
   } else {
     setCurrentMaxPriceState('');
   }
+};
+
+export const checkProductsCart = (productsCart: ProductCart[], currentProductCart: ProductCart) => {
+
+  console.log(currentProductCart);
+  console.log(productsCart);
+
+  return productsCart;
 };
