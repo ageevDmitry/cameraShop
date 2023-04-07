@@ -52,9 +52,7 @@ function ModalAddCart ({product, setIsModalAddCart}: ModalAddCartProps): JSX.Ele
             <div className="modal__buttons">
               <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button"
                 onClick={() =>{
-                  dispatch(addProductCart(checkProductsCart(productsCart,
-                    {product: product,
-                      count: 1} )));
+                  dispatch(addProductCart(checkProductsCart(productsCart, product)));
                 }}
               >
                 <svg width={24} height={16} aria-hidden="true">

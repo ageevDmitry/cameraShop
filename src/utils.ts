@@ -1,7 +1,7 @@
 
 import {QueryParam} from './const';
 import {ChangeEvent} from 'react';
-import {ProductCart} from './types/product';
+import {Product, ProductCart} from './types/product';
 
 export const getCurrentPriceString = (price: number | null) => {
   if (price !== null) {
@@ -196,10 +196,15 @@ export const getValidatedCurrentPriceState = (evt: ChangeEvent<HTMLInputElement>
   }
 };
 
-export const checkProductsCart = (productsCart: ProductCart[], currentProductCart: ProductCart) => {
+export const checkProductsCart = (productsCart: ProductCart[], product: Product) => {
 
-  console.log(currentProductCart);
-  console.log(productsCart);
+  if (productsCart.length === 0) {
+    const newProductsCart = [{
+      product: product,
+      count: 1
+    }];
 
+    return newProductsCart;
+  }
   return productsCart;
 };
