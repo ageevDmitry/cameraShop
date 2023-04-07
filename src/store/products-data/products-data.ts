@@ -12,9 +12,7 @@ import {fetchProductsAction,
   sendNewReviewAction,
 } from '../api-action';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import {Product,
-  // ProductCart
-} from '../../types/product';
+import {Product} from '../../types/product';
 import {checkProductsCart} from '../../utils';
 
 const initialState: ProductsData = {

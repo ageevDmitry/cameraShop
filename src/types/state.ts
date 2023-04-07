@@ -1,6 +1,4 @@
-import {Product, Promo,
-// ProductCart
-} from './product';
+import {Product, Promo, ProductCart} from './product';
 import {Review} from './review';
 import {store} from '../store';
 import {currentCatalogPagePath} from './ui';
@@ -8,7 +6,7 @@ import {currentCatalogPagePath} from './ui';
 export type ProductsData = {
     products: Product[];
     currentProductCart?: Product;
-    productsCart: Product[];
+    productsCart: ProductCart[];
     minPrice: number | null;
     maxPrice: number | null;
     productsTotalCount: number;
