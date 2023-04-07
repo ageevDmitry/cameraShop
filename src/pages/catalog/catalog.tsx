@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useParams, useSearchParams} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {useAppSelector} from '../../hooks/use-app-selector';
@@ -9,7 +9,7 @@ import {getProducts,
   getIsCatalogPage,
   getCurrentProductCart
 } from '../../store/products-data/selectors';
-import {getIsModalAddCart} from '../../store/products-ui/selectors';
+// import {getIsModalAddCart} from '../../store/products-ui/selectors';
 import {fetchProductsAction,
   fetchPromoAction,
   fetchMinPriceProductsAction,
@@ -47,8 +47,9 @@ function Catalog (): JSX.Element {
   const products = useAppSelector(getProducts);
   const promo = useAppSelector(getPromo);
   const isCatalogPage = useAppSelector(getIsCatalogPage);
-  const isModalAddCart = useAppSelector(getIsModalAddCart);
+  // const isModalAddCart = useAppSelector(getIsModalAddCart);
   const currentProductCart = useAppSelector(getCurrentProductCart);
+  const [isModalAddCart, setIsModalAddCart] = useState(false);
 
   useEffect(() => {
     if(currentCatalogPage) {
@@ -140,6 +141,7 @@ function Catalog (): JSX.Element {
                       <ProductCardList
                         products = {products}
                         paginationCount = {paginationCount}
+                        setIsModalAddCart = {setIsModalAddCart}
                       />
                   }
                 </div>
@@ -147,12 +149,12 @@ function Catalog (): JSX.Element {
             </div>
           </section>
         </div>
-        {
-          (isModalAddCart && currentProductCart) ?
-            <ModalAddCart
-              product = {currentProductCart}
-            /> : ''
-        }
+        {(isModalAddCart && currentProductCart) ?
+          <ModalAddCart
+            product = {currentProductCart}
+            setIsModalAddCart = {setIsModalAddCart}
+          /> :
+          ''}
       </main>
       <Footer/>
     </div>

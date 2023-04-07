@@ -9,11 +9,14 @@ import {product} from '../../mocks/mocks';
 const history = createMemoryHistory();
 
 describe('Component: ProductCard', () => {
+
+  const setIsModalAddCart = jest.fn();
   it('should render correctly', () => {
     render(
       <HistoryRouter history={history}>
         <ProductCard
           product={product}
+          setIsModalAddCart={setIsModalAddCart}
         />
       </HistoryRouter>
     );
@@ -38,6 +41,7 @@ describe('Component: ProductCard', () => {
             element={
               <ProductCard
                 product={product}
+                setIsModalAddCart={setIsModalAddCart}
               />
             }
           />

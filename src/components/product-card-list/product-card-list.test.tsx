@@ -41,12 +41,15 @@ const history = createMemoryHistory();
 const paginationCount = 5;
 
 describe('Component: ProductCardList', () => {
+
+  const setIsModalAddCart = jest.fn();
   it('should render correctly', () => {
     render(
       <Provider store={store}>
         <HistoryRouter history={history}>
           <ProductCardList
             products={products}
+            setIsModalAddCart={setIsModalAddCart}
             paginationCount={paginationCount}
           />
         </HistoryRouter>

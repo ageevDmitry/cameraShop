@@ -3,15 +3,15 @@ import {Link} from 'react-router-dom';
 import Rating from '../rating/rating';
 import {ComponentType} from '../../const';
 import {addCurrentProductCart} from '../../store/products-data/products-data';
-import {changeIsModalAdd} from '../../store/products-ui/products-ui';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 
 type ProductCardProps = {
   product: Product;
   componentType?: ComponentType;
+  setIsModalAddCart?: (isModalReview: boolean) => void;
 }
 
-function ProductCard ({product, componentType}: ProductCardProps): JSX.Element {
+function ProductCard ({product, componentType, setIsModalAddCart}: ProductCardProps): JSX.Element {
 
   const dispatch = useAppDispatch();
   const {id, name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
@@ -38,7 +38,9 @@ function ProductCard ({product, componentType}: ProductCardProps): JSX.Element {
         <button className="btn btn--purple product-card__btn" type="button"
           onClick={() =>{
             dispatch(addCurrentProductCart(product));
-            dispatch(changeIsModalAdd({type: true}));
+            if (setIsModalAddCart) {
+              setIsModalAddCart(true);
+            }
           }}
         >Купить
         </button>

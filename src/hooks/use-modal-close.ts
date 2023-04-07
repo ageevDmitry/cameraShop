@@ -14,7 +14,7 @@ export function useModalClose(closeModalReview: (flag: boolean) => void) {
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
+      document.body.style.overflow = 'auto';
     };
   }, [closeModalReview]);
 }

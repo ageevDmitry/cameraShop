@@ -4,7 +4,6 @@ import HistoryRouter from '../history-route/history-route';
 import {products} from '../../mocks/mocks';
 import ProductSimilar from './products-similar';
 
-
 const history = createMemoryHistory();
 
 describe('Component: ProductSimilar', () => {

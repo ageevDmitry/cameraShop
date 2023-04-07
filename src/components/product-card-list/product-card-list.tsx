@@ -8,9 +8,10 @@ import {getIsDataLoading} from '../../store/products-data/selectors';
 type ProductCardListProps = {
     products: Product[];
     paginationCount: number;
+    setIsModalAddCart: (isModalReview: boolean) => void;
   }
 
-function ProductCardList ({products, paginationCount}: ProductCardListProps): JSX.Element {
+function ProductCardList ({products, paginationCount, setIsModalAddCart}: ProductCardListProps): JSX.Element {
 
   const isLoading = useAppSelector(getIsDataLoading);
 
@@ -26,6 +27,7 @@ function ProductCardList ({products, paginationCount}: ProductCardListProps): JS
             <ProductCard
               key = {product.id}
               product = {product}
+              setIsModalAddCart = {setIsModalAddCart}
             />)
           )
         }
