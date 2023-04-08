@@ -196,7 +196,7 @@ export const getValidatedCurrentPriceState = (evt: ChangeEvent<HTMLInputElement>
   }
 };
 
-export const checkProductsCart = (productsCart: ProductCart[], product: Product) => {
+export const checkAddProductsCart = (productsCart: ProductCart[], product: Product) => {
 
   const foo = {
     product: product,
@@ -226,4 +226,15 @@ export const checkProductsCart = (productsCart: ProductCart[], product: Product)
   }
 
   return productsCart;
+};
+
+export const checkProductInCart = (productsCart: ProductCart[], product: Product) => {
+
+  for (const item of productsCart) {
+
+    if (item.product.id === product.id) {
+      return true;
+    }
+  }
+  return false;
 };

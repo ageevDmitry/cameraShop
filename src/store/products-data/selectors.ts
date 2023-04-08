@@ -1,6 +1,6 @@
 import {NameSpace} from '../../const';
 import {State} from '../../types/state';
-import {Product, Promo} from '../../types/product';
+import {Product, ProductCart, Promo} from '../../types/product';
 import {Review} from '../../types/review';
 
 export const getProducts = (state: State): Product[] => state[NameSpace.ProductsData].products;
@@ -15,3 +15,4 @@ export const getReviews = (state: State): Review[] | undefined => state[NameSpac
 export const getIsCatalogPage = (state: State): boolean => state[NameSpace.ProductsData].isCatalogPage;
 export const getIsDataLoading = (state: State): boolean => state[NameSpace.ProductsData].isDataLoading;
 export const getCurrentProductCart = (state: State): Product | undefined => state[NameSpace.ProductsData].currentProductCart;
+export const getProductsCart = (state: State): ProductCart[] => state[NameSpace.ProductsData].productsCart;
