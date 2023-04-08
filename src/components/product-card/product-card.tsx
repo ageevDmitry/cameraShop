@@ -6,7 +6,6 @@ import {addCurrentProductCart} from '../../store/products-data/products-data';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getProductsCart} from '../../store/products-data/selectors';
-import {getCurrentCatalogPagePath} from '../../store/products-ui/selectors';
 import {checkProductInCart} from '../../utils';
 import {useEffect, useState} from 'react';
 import {AppRoute} from '../../const';
@@ -24,7 +23,6 @@ function ProductCard ({product, componentType, setIsModalAddCart}: ProductCardPr
   const productId = `/product/${id}`;
   const productsCart = useAppSelector(getProductsCart);
   const [isProductCart, setIsProductCart] = useState(false);
-  const {currentCatalogPage, search} = useAppSelector(getCurrentCatalogPagePath);
 
   useEffect(() => {
     setIsProductCart(checkProductInCart(productsCart, product));
@@ -52,8 +50,7 @@ function ProductCard ({product, componentType, setIsModalAddCart}: ProductCardPr
           (isProductCart) ?
             <Link className="btn btn--purple-border product-card__btn product-card__btn--in-cart" type="button"
               to={{
-                pathname: generatePath(AppRoute.Cart, {pageNumber: String(currentCatalogPage)}),
-                search
+                pathname: generatePath(AppRoute.Cart)
               }}
             >
               В корзине

@@ -6,15 +6,18 @@ import ProductCharacteristics from '../product-characteristics/product-character
 import ProductDescription from '../product-description/product-description';
 import {ProductTab, ComponentType} from '../../const';
 import browserHistory from '../../browser-history';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {addCurrentProductCart} from '../../store/products-data/products-data';
 
 type ProductProps = {
   product: Product;
+  setIsModalAddCart: (isModalReview: boolean) => void;
 }
 
-function ProductInfo ({product}: ProductProps): JSX.Element {
+function ProductInfo ({product, setIsModalAddCart}: ProductProps): JSX.Element {
 
   const {hash} = useLocation();
-
+  const dispatch = useAppDispatch();
   const [currentTabControl, setCurrentTabControl] = useState(hash);
 
   useEffect(() => {
@@ -44,7 +47,14 @@ function ProductInfo ({product}: ProductProps): JSX.Element {
               componentType = {ComponentType.ProductCardRating}
             />
             <p className="product__price"><span className="visually-hidden">Цена:</span>{price}</p>
-            <button className="btn btn--purple" type="button">
+            <button className="btn btn--purple" type="button"
+              onClick={() =>{
+                dispatch(addCurrentProductCart(product));
+                if (setIsModalAddCart) {
+                  setIsModalAddCart(true);
+                }
+              }}
+            >
               <svg width={24} height={16} aria-hidden="true">
                 <use xlinkHref="#icon-add-basket" />
               </svg>Добавить в корзину

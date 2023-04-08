@@ -29,17 +29,20 @@ function ModalAddCartSuccess ({setIsModalAddCartSuccess}: ModalAddCartProps): JS
               <use xlinkHref="#icon-success" />
             </svg>
             <div className="modal__buttons">
-              <button className="btn btn--transparent modal__btn"
+              <Link className="btn btn--transparent modal__btn"
                 onClick={() =>{
                   setIsModalAddCartSuccess(false);
                 }}
+                to={{
+                  pathname: generatePath(AppRoute.Catalog, {pageNumber: String(currentCatalogPage)}),
+                  search
+                }}
               >
                 Продолжить покупки
-              </button>
+              </Link>
               <Link className="btn btn--purple modal__btn modal__btn--fit-width"
                 to={{
-                  pathname: generatePath(AppRoute.Cart, {pageNumber: String(currentCatalogPage)}),
-                  search
+                  pathname: generatePath(AppRoute.Cart)
                 }}
               >
                 Перейти в корзину
