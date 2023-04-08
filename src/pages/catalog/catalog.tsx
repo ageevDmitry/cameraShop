@@ -26,6 +26,7 @@ import ProductCardList from '../../components/product-card-list/product-card-lis
 import Footer from '../../components/footer/footer';
 import SpinnerPage from '../../components/spinner-page/spinner-page';
 import ModalAddCart from '../../components/modal-add-cart/modal-add-cart';
+import ModalAddCartSuccess from '../../components/modal-add-cart-success/modal-add-cart-success';
 
 function Catalog (): JSX.Element {
 
@@ -48,6 +49,7 @@ function Catalog (): JSX.Element {
   const isCatalogPage = useAppSelector(getIsCatalogPage);
   const currentProductCart = useAppSelector(getCurrentProductCart);
   const [isModalAddCart, setIsModalAddCart] = useState(false);
+  const [isModalAddCartSuccess, setIsModalAddCartSuccess] = useState(false);
 
   useEffect(() => {
     if(currentCatalogPage) {
@@ -151,8 +153,13 @@ function Catalog (): JSX.Element {
           <ModalAddCart
             product = {currentProductCart}
             setIsModalAddCart = {setIsModalAddCart}
+            setIsModalAddCartSuccess = {setIsModalAddCartSuccess}
           /> :
           ''}
+        {(isModalAddCartSuccess) &&
+          <ModalAddCartSuccess
+            setIsModalAddCartSuccess = {setIsModalAddCartSuccess}
+          />}
       </main>
       <Footer/>
     </div>

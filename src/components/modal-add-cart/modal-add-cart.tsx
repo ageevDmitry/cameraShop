@@ -7,9 +7,10 @@ import {useAppDispatch} from '../../hooks/use-app-dispatch';
 type ModalAddCartProps = {
   product: Product;
   setIsModalAddCart: (isModalReview: boolean) => void;
+  setIsModalAddCartSuccess: (isModalReview: boolean) => void;
 }
 
-function ModalAddCart ({product, setIsModalAddCart}: ModalAddCartProps): JSX.Element {
+function ModalAddCart ({product, setIsModalAddCart, setIsModalAddCartSuccess}: ModalAddCartProps): JSX.Element {
 
   const {name, level, type, category, vendorCode, price, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
   const categoryLowerCase = category.toLowerCase();
@@ -49,6 +50,8 @@ function ModalAddCart ({product, setIsModalAddCart}: ModalAddCartProps): JSX.Ele
               <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button"
                 onClick={() =>{
                   dispatch(addProductCart(product));
+                  setIsModalAddCart(false);
+                  setIsModalAddCartSuccess(true);
                 }}
               >
                 <svg width={24} height={16} aria-hidden="true">
