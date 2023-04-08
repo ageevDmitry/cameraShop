@@ -38,7 +38,7 @@ function ModalAddCartSuccess ({setIsModalAddCartSuccess}: ModalAddCartProps): JS
               </button>
               <Link className="btn btn--purple modal__btn modal__btn--fit-width"
                 to={{
-                  pathname: generatePath(AppRoute.Catalog, {pageNumber: String(currentCatalogPage)}),
+                  pathname: generatePath(AppRoute.Cart, {pageNumber: String(currentCatalogPage)}),
                   search
                 }}
               >

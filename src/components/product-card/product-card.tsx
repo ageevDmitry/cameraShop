@@ -52,7 +52,7 @@ function ProductCard ({product, componentType, setIsModalAddCart}: ProductCardPr
           (isProductCart) ?
             <Link className="btn btn--purple-border product-card__btn product-card__btn--in-cart" type="button"
               to={{
-                pathname: generatePath(AppRoute.Catalog, {pageNumber: String(currentCatalogPage)}),
+                pathname: generatePath(AppRoute.Cart, {pageNumber: String(currentCatalogPage)}),
                 search
               }}
             >
