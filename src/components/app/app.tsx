@@ -3,6 +3,7 @@ import {AppRoute, DEFAULT_CATALOG_PAGE} from '../../const';
 import {HelmetProvider} from 'react-helmet-async';
 import Catalog from '../../pages/catalog/catalog';
 import Product from '../../pages/product/product';
+import Cart from '../../pages/cart/cart';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 
 function App(): JSX.Element {
@@ -26,6 +27,10 @@ function App(): JSX.Element {
         <Route
           path={AppRoute.Product}
           element={<Product/>}
+        />
+        <Route
+          path={AppRoute.Cart}
+          element={<Cart/>}
         />
         <Route
           path={AppRoute.NotFound}
