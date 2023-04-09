@@ -2,7 +2,7 @@ import {LogoType} from '../../const';
 import Logo from '../logo/logo';
 import NavigationMain from '../navigation-main/navigation-main';
 import Search from '../search/search';
-import Basket from '../basket/basket';
+import CartHeader from '../cart-header/cart-header';
 
 function Header (): JSX.Element {
 
@@ -12,7 +12,7 @@ function Header (): JSX.Element {
         <Logo typeComponent = {LogoType.Header}/>
         <NavigationMain/>
         <Search/>
-        <Basket/>
+        <CartHeader/>
       </div>
     </header>
   );

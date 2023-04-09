@@ -238,3 +238,18 @@ export const checkProductInCart = (productsCart: ProductCart[], product: Product
   }
   return false;
 };
+
+export const getCountProductsInCart = (productsCart: ProductCart[]) => {
+
+  if (productsCart.length === 0) {
+    return 0;
+  }
+
+  let count = 0;
+
+  for (const item of productsCart) {
+
+    count = count + item.count;
+  }
+  return count;
+};

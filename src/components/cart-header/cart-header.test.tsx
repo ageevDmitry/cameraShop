@@ -3,7 +3,7 @@ import {createMemoryHistory} from 'history';
 import {Routes, Route} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import HistoryRouter from '../history-route/history-route';
-import Basket from './basket';
+import CartHeader from './cart-header';
 
 const history = createMemoryHistory();
 
@@ -11,7 +11,7 @@ describe('Component: Basket', () => {
   it('should render correctly', () => {
     render(
       <HistoryRouter history={history}>
-        <Basket/>
+        <CartHeader/>
       </HistoryRouter>
     );
 
@@ -31,7 +31,7 @@ describe('Component: Basket', () => {
           <Route
             path='*'
             element={
-              <Basket/>
+              <CartHeader/>
             }
           />
         </Routes>
