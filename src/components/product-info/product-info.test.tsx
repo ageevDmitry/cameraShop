@@ -8,11 +8,13 @@ const history = createMemoryHistory();
 
 describe('Component: ProductInfo', () => {
 
+  const setIsModalAddCart = jest.fn();
   it('should render correctly', () => {
     render(
       <HistoryRouter history={history}>
         <ProductInfo
           product={product}
+          setIsModalAddCart={setIsModalAddCart}
         />
       </HistoryRouter>
     );
