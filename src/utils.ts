@@ -228,6 +228,22 @@ export const checkAddProductsCart = (productsCart: ProductCart[], product: Produ
   return productsCart;
 };
 
+export const checkDeleteProductsCart = (productsCart: ProductCart[], product: Product) => {
+
+  if (productsCart.length === 0) {
+
+    return productsCart;
+  }
+
+  productsCart.forEach((item, i) => {
+    if (item.product.id === product.id) {
+      productsCart.splice(i, 1);
+    }
+  });
+
+  return productsCart;
+};
+
 export const checkProductInCart = (productsCart: ProductCart[], product: Product) => {
 
   for (const item of productsCart) {

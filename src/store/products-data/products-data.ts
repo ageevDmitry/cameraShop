@@ -13,7 +13,9 @@ import {fetchProductsAction,
 } from '../api-action';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {Product} from '../../types/product';
-import {checkAddProductsCart} from '../../utils';
+import {checkAddProductsCart,
+  checkDeleteProductsCart
+} from '../../utils';
 
 const initialState: ProductsData = {
   products: [],
@@ -45,6 +47,9 @@ export const productsData = createSlice({
     addProductCart: (state, action: PayloadAction<Product>) => {
       state.productsCart = checkAddProductsCart(state.productsCart, action.payload);
     },
+    deleteProductCart: (state, action: PayloadAction<Product>) => {
+      state.productsCart = checkDeleteProductsCart(state.productsCart, action.payload);
+    }
   },
   extraReducers(builder) {
     builder
@@ -173,5 +178,6 @@ export const {cleanUpProductDetail,
   cleanUpProductsSearch,
   setIsNotCatalogPage,
   addCurrentProductCart,
-  addProductCart
+  addProductCart,
+  deleteProductCart
 } = productsData.actions;
