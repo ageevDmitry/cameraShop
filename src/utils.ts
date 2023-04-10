@@ -294,3 +294,13 @@ export const getValidatedCountProductCart = (count: number) => {
 
   return count;
 };
+
+export const checkCategoryDescription = (category: string) => {
+
+  const newCategory = category.toLowerCase();
+
+  if (newCategory === 'фотоаппарат') {
+    return 'фотокамера';
+  }
+  return newCategory;
+};

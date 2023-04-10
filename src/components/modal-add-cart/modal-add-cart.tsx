@@ -3,6 +3,7 @@ import {useModalClose} from '../../hooks/use-modal-close';
 import {addProductCart} from '../../store/products-data/products-data';
 import FocusTrap from 'focus-trap-react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {checkCategoryDescription} from '../../utils';
 
 type ModalAddCartProps = {
   product: Product;
@@ -13,7 +14,7 @@ type ModalAddCartProps = {
 function ModalAddCart ({product, setIsModalAddCart, setIsModalAddCartSuccess}: ModalAddCartProps): JSX.Element {
 
   const {name, level, type, category, vendorCode, price, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
-  const categoryLowerCase = category.toLowerCase();
+  const categoryDescription = checkCategoryDescription(category);
   const dispatch = useAppDispatch();
 
   useModalClose(setIsModalAddCart);
@@ -40,7 +41,7 @@ function ModalAddCart ({product, setIsModalAddCart, setIsModalAddCartSuccess}: M
                 <ul className="basket-item__list">
                   <li className="basket-item__list-item"><span className="basket-item__article">Артикул:</span> <span className="basket-item__number">{vendorCode}</span>
                   </li>
-                  <li className="basket-item__list-item">{`${type} ${categoryLowerCase}`}</li>
+                  <li className="basket-item__list-item">{`${type} ${categoryDescription}`}</li>
                   <li className="basket-item__list-item">{`${level} уровень`}</li>
                 </ul>
                 <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{`${price} ₽`}</p>
