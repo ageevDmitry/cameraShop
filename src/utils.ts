@@ -1,5 +1,5 @@
 
-import {QueryParam} from './const';
+import {QueryParam, MinMaxCountProductCart} from './const';
 import {ChangeEvent} from 'react';
 import {Product, ProductCart} from './types/product';
 
@@ -280,4 +280,17 @@ export const checkCountProductCart = (productsCart: ProductCart[], changedProduc
     }
   }
   return productsCart;
+};
+
+export const getValidatedCountProductCart = (count: number) => {
+
+  if (count < MinMaxCountProductCart.minCountProductCart) {
+    return MinMaxCountProductCart.minCountProductCart;
+  }
+
+  if (count > MinMaxCountProductCart.maxCountProductCart) {
+    return MinMaxCountProductCart.maxCountProductCart;
+  }
+
+  return count;
 };

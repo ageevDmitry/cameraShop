@@ -2,6 +2,8 @@ import {ProductCart} from '../../types/product';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {addCurrentProductCart, changeCountProductCart} from '../../store/products-data/products-data';
 import {useState, useEffect} from 'react';
+import {getValidatedCountProductCart} from '../../utils';
+import {MinMaxCountProductCart} from '../../const';
 
 type ProductCardCartProps = {
   product: ProductCart;
@@ -38,7 +40,7 @@ function ProductCardCart ({product, setIsModalRemoveCart}: ProductCardCartProps)
       </div>
       <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{`${price} ₽`}</p>
       <div className="quantity">
-        <button className="btn-icon btn-icon--prev" disabled = {(product.count === 1)} aria-label="уменьшить количество товара"
+        <button className="btn-icon btn-icon--prev" disabled = {(product.count === MinMaxCountProductCart.minCountProductCart)} aria-label="уменьшить количество товара"
           onClick={() => {
             dispatch(changeCountProductCart({
               product: product.product,
@@ -55,11 +57,16 @@ function ProductCardCart ({product, setIsModalRemoveCart}: ProductCardCartProps)
           type="number"
           id="counter2"
           value={productCountState}
-          defaultValue={1}
           min={1} max={99}
           aria-label="количество товара"
+          onChange={(evt) => {
+            dispatch(changeCountProductCart({
+              product: product.product,
+              count: getValidatedCountProductCart(Number(evt.target.value)),
+            }));
+          }}
         />
-        <button className="btn-icon btn-icon--next" disabled = {(product.count === 99)} aria-label="увеличить количество товара"
+        <button className="btn-icon btn-icon--next" disabled = {(product.count === MinMaxCountProductCart.maxCountProductCart)} aria-label="увеличить количество товара"
           onClick={() => {
             dispatch(changeCountProductCart({
               product: product.product,

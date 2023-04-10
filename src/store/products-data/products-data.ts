@@ -54,9 +54,6 @@ export const productsData = createSlice({
     changeCountProductCart: (state, action: PayloadAction<ProductCart>) => {
       state.productsCart = checkCountProductCart(state.productsCart, action.payload);
     },
-    cleanUpCurrentProductCart: (state) => {
-      state.currentProductCart = undefined;
-    }
   },
   extraReducers(builder) {
     builder
@@ -188,5 +185,4 @@ export const {cleanUpProductDetail,
   addProductCart,
   deleteProductCart,
   changeCountProductCart,
-  cleanUpCurrentProductCart
 } = productsData.actions;

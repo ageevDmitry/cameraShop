@@ -254,3 +254,8 @@ export const BUTTON_RESET_CLASS = 'catalog-filter__reset-btn';
 export const FORM_SUBMIT_CLASS = 'form-class-submit';
 
 export const PAGINATION_LINK_CLASS = 'pagination__link';
+
+export enum MinMaxCountProductCart {
+  minCountProductCart = 1,
+  maxCountProductCart = 99,
+}
