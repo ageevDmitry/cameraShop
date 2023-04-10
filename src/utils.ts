@@ -269,3 +269,15 @@ export const getCountProductsInCart = (productsCart: ProductCart[]) => {
   }
   return count;
 };
+
+export const checkCountProductCart = (productsCart: ProductCart[], changedProductCart: ProductCart) => {
+
+  for (const item of productsCart) {
+
+    if (item.product.id === changedProductCart.product.id) {
+
+      item.count = changedProductCart.count;
+    }
+  }
+  return productsCart;
+};

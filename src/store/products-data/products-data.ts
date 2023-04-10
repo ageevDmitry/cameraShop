@@ -12,9 +12,10 @@ import {fetchProductsAction,
   sendNewReviewAction,
 } from '../api-action';
 import type {PayloadAction} from '@reduxjs/toolkit';
-import {Product} from '../../types/product';
+import {Product, ProductCart} from '../../types/product';
 import {checkAddProductsCart,
-  checkDeleteProductsCart
+  checkDeleteProductsCart,
+  checkCountProductCart
 } from '../../utils';
 
 const initialState: ProductsData = {
@@ -44,14 +45,17 @@ export const productsData = createSlice({
     addCurrentProductCart: (state, action: PayloadAction<Product>) => {
       state.currentProductCart = action.payload;
     },
-    cleanUpCurrentProductCart: (state) => {
-      state.currentProductCart = undefined;
-    },
     addProductCart: (state, action: PayloadAction<Product>) => {
       state.productsCart = checkAddProductsCart(state.productsCart, action.payload);
     },
     deleteProductCart: (state, action: PayloadAction<Product>) => {
       state.productsCart = checkDeleteProductsCart(state.productsCart, action.payload);
+    },
+    changeCountProductCart: (state, action: PayloadAction<ProductCart>) => {
+      state.productsCart = checkCountProductCart(state.productsCart, action.payload);
+    },
+    cleanUpCurrentProductCart: (state) => {
+      state.currentProductCart = undefined;
     }
   },
   extraReducers(builder) {
@@ -183,5 +187,6 @@ export const {cleanUpProductDetail,
   addCurrentProductCart,
   addProductCart,
   deleteProductCart,
+  changeCountProductCart,
   cleanUpCurrentProductCart
 } = productsData.actions;
