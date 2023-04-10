@@ -1,34 +1,31 @@
+import FocusTrap from 'focus-trap-react';
 import {Product} from '../../types/product';
 import {useModalClose} from '../../hooks/use-modal-close';
-import {addProductCart} from '../../store/products-data/products-data';
-import FocusTrap from 'focus-trap-react';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {deleteProductCart} from '../../store/products-data/products-data';
+import {Link, generatePath} from 'react-router-dom';
+import {AppRoute} from '../../const';
 
-type ModalAddCartProps = {
+type ModalRemoveCartProps = {
   product: Product;
-  setIsModalAddCart: (isModalReview: boolean) => void;
-  setIsModalAddCartSuccess: (isModalReview: boolean) => void;
+  setIsModalRemoveCart: (isModalReview: boolean) => void;
 }
 
-function ModalAddCart ({product, setIsModalAddCart, setIsModalAddCartSuccess}: ModalAddCartProps): JSX.Element {
+function ModalRemoveCart ({product, setIsModalRemoveCart}: ModalRemoveCartProps): JSX.Element {
 
-  const {name, level, type, category, vendorCode, price, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
+  const {name, level, type, category, vendorCode, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
   const categoryLowerCase = category.toLowerCase();
   const dispatch = useAppDispatch();
 
-  useModalClose(setIsModalAddCart);
+  useModalClose(setIsModalRemoveCart);
 
   return (
     <FocusTrap>
       <div className="modal is-active">
         <div className="modal__wrapper">
-          <div className="modal__overlay"
-            onClick={() => {
-              setIsModalAddCart(false);
-            }}
-          />
+          <div className="modal__overlay" />
           <div className="modal__content">
-            <p className="title title--h4">Добавить товар в корзину</p>
+            <p className="title title--h4">Удалить этот товар?</p>
             <div className="basket-item basket-item--short">
               <div className="basket-item__img">
                 <picture>
@@ -43,25 +40,29 @@ function ModalAddCart ({product, setIsModalAddCart, setIsModalAddCartSuccess}: M
                   <li className="basket-item__list-item">{`${type} ${categoryLowerCase}`}</li>
                   <li className="basket-item__list-item">{`${level} уровень`}</li>
                 </ul>
-                <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{`${price} ₽`}</p>
               </div>
             </div>
             <div className="modal__buttons">
-              <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button"
+              <button className="btn btn--purple modal__btn modal__btn--half-width" type="button"
                 onClick={() =>{
-                  dispatch(addProductCart(product));
-                  setIsModalAddCart(false);
-                  setIsModalAddCartSuccess(true);
+                  dispatch(deleteProductCart(product));
+                  setIsModalRemoveCart(false);
                 }}
-              >
-                <svg width={24} height={16} aria-hidden="true">
-                  <use xlinkHref="#icon-add-basket" />
-                </svg>Добавить в корзину
+              >Удалить
               </button>
+              <Link className="btn btn--transparent modal__btn modal__btn--half-width"
+                onClick={() =>{
+                  setIsModalRemoveCart(false);
+                }}
+                to={{
+                  pathname: generatePath(AppRoute.Cart)
+                }}
+              >Продолжить покупки
+              </Link>
             </div>
             <button className="cross-btn" type="button" aria-label="Закрыть попап"
               onClick={() =>{
-                setIsModalAddCart(false);
+                setIsModalRemoveCart(false);
               }}
             >
               <svg width={10} height={10} aria-hidden="true">
@@ -75,4 +76,4 @@ function ModalAddCart ({product, setIsModalAddCart, setIsModalAddCartSuccess}: M
   );
 }
 
-export default ModalAddCart;
+export default ModalRemoveCart;

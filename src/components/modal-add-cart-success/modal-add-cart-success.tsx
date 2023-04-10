@@ -4,6 +4,8 @@ import {Link, generatePath} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getCurrentCatalogPagePath} from '../../store/products-ui/selectors';
 import {AppRoute} from '../../const';
+import {cleanUpCurrentProductCart} from '../../store/products-data/products-data';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
 
 type ModalAddCartProps = {
   setIsModalAddCartSuccess: (isModalReview: boolean) => void;
@@ -13,6 +15,8 @@ function ModalAddCartSuccess ({setIsModalAddCartSuccess}: ModalAddCartProps): JS
 
   const {currentCatalogPage, search} = useAppSelector(getCurrentCatalogPagePath);
   useModalClose(setIsModalAddCartSuccess);
+  const dispatch = useAppDispatch();
+  dispatch(cleanUpCurrentProductCart());
 
   return (
     <FocusTrap>

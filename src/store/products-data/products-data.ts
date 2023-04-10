@@ -44,6 +44,9 @@ export const productsData = createSlice({
     addCurrentProductCart: (state, action: PayloadAction<Product>) => {
       state.currentProductCart = action.payload;
     },
+    cleanUpCurrentProductCart: (state) => {
+      state.currentProductCart = undefined;
+    },
     addProductCart: (state, action: PayloadAction<Product>) => {
       state.productsCart = checkAddProductsCart(state.productsCart, action.payload);
     },
@@ -179,5 +182,6 @@ export const {cleanUpProductDetail,
   setIsNotCatalogPage,
   addCurrentProductCart,
   addProductCart,
-  deleteProductCart
+  deleteProductCart,
+  cleanUpCurrentProductCart
 } = productsData.actions;

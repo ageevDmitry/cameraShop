@@ -1,12 +1,13 @@
 import {ProductCart} from '../../types/product';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {deleteProductCart} from '../../store/products-data/products-data';
+import {addCurrentProductCart} from '../../store/products-data/products-data';
 
 type ProductCardCartProps = {
   product: ProductCart;
+  setIsModalRemoveCart: (isModalReview: boolean) => void;
 }
 
-function ProductCardCart ({product}: ProductCardCartProps): JSX.Element {
+function ProductCardCart ({product, setIsModalRemoveCart}: ProductCardCartProps): JSX.Element {
 
   const dispatch = useAppDispatch();
   const {name, level, price, type, category, vendorCode, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product.product;
@@ -47,7 +48,10 @@ function ProductCardCart ({product}: ProductCardCartProps): JSX.Element {
       <div className="basket-item__total-price"><span className="visually-hidden">Общая цена:</span>{`${price} ₽`}</div>
       <button className="cross-btn" type="button" aria-label="Удалить товар"
         onClick={() =>{
-          dispatch(deleteProductCart(product.product));
+          dispatch(addCurrentProductCart(product.product));
+          if (setIsModalRemoveCart) {
+            setIsModalRemoveCart(true);
+          }
         }}
       >
         <svg width={10} height={10} aria-hidden="true">

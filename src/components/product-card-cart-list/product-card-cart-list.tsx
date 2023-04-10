@@ -1,10 +1,12 @@
-import {useAppSelector} from '../../hooks/use-app-selector';
-import {getProductsCart} from '../../store/products-data/selectors';
 import ProductCardCart from '../../components/product-card-cart/product-card-cart';
+import {ProductCart} from '../../types/product';
 
-function ProductCardCartList (): JSX.Element {
+type ProductCardCartListProps = {
+  productsCart: ProductCart[];
+  setIsModalRemoveCart: (isModalReview: boolean) => void;
+}
 
-  const productsCart = useAppSelector(getProductsCart);
+function ProductCardCartList ({productsCart, setIsModalRemoveCart}: ProductCardCartListProps): JSX.Element {
 
   return (
     <ul className="basket__list" data-testid="basket__list">
@@ -13,6 +15,7 @@ function ProductCardCartList (): JSX.Element {
           <ProductCardCart
             key = {product.product.id}
             product = {product}
+            setIsModalRemoveCart = {setIsModalRemoveCart}
           />)
         )
       }
