@@ -5,6 +5,7 @@ import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {deleteProductCart} from '../../store/products-data/products-data';
 import {Link, generatePath} from 'react-router-dom';
 import {AppRoute} from '../../const';
+import {checkCategoryDescription} from '../../utils';
 
 type ModalRemoveCartProps = {
   product: Product;
@@ -14,7 +15,7 @@ type ModalRemoveCartProps = {
 function ModalRemoveCart ({product, setIsModalRemoveCart}: ModalRemoveCartProps): JSX.Element {
 
   const {name, level, type, category, vendorCode, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
-  const categoryLowerCase = category.toLowerCase();
+  const categoryDescription = checkCategoryDescription(category);
   const dispatch = useAppDispatch();
 
   useModalClose(setIsModalRemoveCart);
@@ -37,7 +38,7 @@ function ModalRemoveCart ({product, setIsModalRemoveCart}: ModalRemoveCartProps)
                 <ul className="basket-item__list">
                   <li className="basket-item__list-item"><span className="basket-item__article">Артикул:</span> <span className="basket-item__number">{vendorCode}</span>
                   </li>
-                  <li className="basket-item__list-item">{`${type} ${categoryLowerCase}`}</li>
+                  <li className="basket-item__list-item">{`${type} ${categoryDescription}`}</li>
                   <li className="basket-item__list-item">{`${level} уровень`}</li>
                 </ul>
               </div>
