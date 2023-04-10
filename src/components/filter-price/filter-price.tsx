@@ -13,7 +13,7 @@ import {
   changeFilterPrice,
   getCurrentPriceString
 } from '../../utils';
-import {BUTTON_RESET_CLASS,
+import {BUTTON_CLASS,
   FORM_SUBMIT_CLASS,
   PAGINATION_LINK_CLASS,
   AppRoute,
@@ -63,8 +63,8 @@ function FilterPrice (): JSX.Element {
     });
   };
 
-  useKeyDownFilterPrice(handleChangeFilterPrice, BUTTON_RESET_CLASS, FORM_SUBMIT_CLASS);
-  useClickFilterPrice(handleChangeFilterPrice, BUTTON_RESET_CLASS, PAGINATION_LINK_CLASS);
+  useKeyDownFilterPrice(handleChangeFilterPrice, BUTTON_CLASS, FORM_SUBMIT_CLASS);
+  useClickFilterPrice(handleChangeFilterPrice, BUTTON_CLASS, PAGINATION_LINK_CLASS);
 
   return (
     <fieldset className="catalog-filter__block">
