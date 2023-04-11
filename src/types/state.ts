@@ -15,6 +15,7 @@ export type ProductsData = {
     productsSimilar?: Product[];
     productsSearch?: Product[];
     reviews?: Review[];
+    coupon?: number;
     isCatalogPage: boolean;
     isDataLoading: boolean;
     isSuccess: boolean;

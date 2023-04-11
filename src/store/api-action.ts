@@ -7,12 +7,14 @@ import {Product,
   ProductsFetchParams,
   ProductsMinPriceFetchParams} from '../types/product';
 import {Review, ReviewPost} from '../types/review';
+import {CouponPost} from '../types/coupon';
 import {APIRoute,
   QueryParam,
   SortCatalogType,
   DefaultMinMaxPriceItem
 } from '../const';
 import {toast} from 'react-toastify';
+import {StatusCodes} from 'http-status-codes';
 
 export const fetchProductsAction = createAsyncThunk<ProductsReturnedData, ProductsFetchParams,{
     dispatch: AppDispatch;
@@ -255,3 +257,23 @@ export const sendNewReviewAction = createAsyncThunk<Review, ReviewPost, {
       }
     },
   );
+
+export const sendCouponAction = createAsyncThunk<number, CouponPost, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/sendCoupon',
+  async (coupon, {extra: api}) => {
+
+    try {
+      const {data} = await api.post<number>(APIRoute.Coupons, coupon);
+      return data;
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response?.status === StatusCodes.NOT_FOUND) {
+        toast.warn('Купон не получилось проверить');
+      }
+      throw err;
+    }
+  },
+);

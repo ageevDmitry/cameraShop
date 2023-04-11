@@ -10,6 +10,7 @@ import {fetchProductsAction,
   fetchProductsSearchAction,
   fetchReviewsAction,
   sendNewReviewAction,
+  sendCouponAction
 } from '../api-action';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {Product, ProductCart} from '../../types/product';
@@ -174,6 +175,11 @@ export const productsData = createSlice({
       .addCase(sendNewReviewAction.rejected, (state) => {
         state.isDataLoading = false;
         state.isSuccess = false;
+      })
+      .addCase(sendCouponAction.fulfilled, (state, action) => {
+        state.coupon = action.payload;
+        state.isDataLoading = false;
+        state.isSuccess = true;
       });
   }
 });

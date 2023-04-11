@@ -4,11 +4,13 @@ import {getProductsCart,
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {useState, useEffect} from 'react';
 import {getTotal, getBill} from '../../utils';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
+import {sendCouponAction} from '../../store/api-action';
 
 function CartSummer (): JSX.Element {
 
+  const dispatch = useAppDispatch();
   const productsCart = useAppSelector(getProductsCart);
-
   const productsCartDiscount = 10;
   const [total, setTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
@@ -33,7 +35,13 @@ function CartSummer (): JSX.Element {
               <p className="custom-input__error">Промокод неверный</p>
               <p className="custom-input__success">Промокод принят!</p>
             </div>
-            <button className="btn" type="submit">Применить
+            <button className="btn" type="submit"
+              onClick={() =>{
+                dispatch(sendCouponAction({
+                  coupon: 'camera-6666'
+                }));
+              }}
+            >Применить
             </button>
           </form>
         </div>

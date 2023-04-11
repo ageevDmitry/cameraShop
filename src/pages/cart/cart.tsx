@@ -33,6 +33,7 @@ function Cart (): JSX.Element {
                 productsCart = {productsCart}
                 setIsModalRemoveCart = {setIsModalRemoveCart}
               />
+              <CartSummer/>
             </div>
           </section>
         </div>
@@ -42,7 +43,6 @@ function Cart (): JSX.Element {
             setIsModalRemoveCart = {setIsModalRemoveCart}
           /> :
           ''}
-        <CartSummer/>
       </main>
       <Footer/>
     </div>
