@@ -304,3 +304,28 @@ export const checkCategoryDescription = (category: string) => {
   }
   return newCategory;
 };
+
+export const getTotal = (productsCart: ProductCart[]) => {
+
+  let total = 0;
+
+  for (const item of productsCart) {
+
+    total = total + Number(item.product.price) * Number(item.count);
+  }
+  return total;
+};
+
+export const getBill = (productsCart: ProductCart[], productsCartDiscount: number) => {
+
+  let bill = 0;
+
+  for (const item of productsCart) {
+
+    bill = bill + Number(item.product.price) * Number(item.count);
+  }
+
+  const billDiscount = bill - productsCartDiscount;
+
+  return billDiscount;
+};

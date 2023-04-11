@@ -1,9 +1,10 @@
 import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
-import {NAV_BREADCRUMB_MAIN} from '../../const';
+import CartSummer from '../../components/cart-summer/cart-summer';
 import ProductCardCartList from '../../components/product-card-cart-list/product-card-cart-list';
 import ModalRemoveCart from '../../components/modal-remove-cart/modal-remove-cart';
+import {NAV_BREADCRUMB_MAIN} from '../../const';
 import {useState} from 'react';
 import {getCurrentProductCart} from '../../store/products-data/selectors';
 import {useAppSelector} from '../../hooks/use-app-selector';
@@ -41,6 +42,7 @@ function Cart (): JSX.Element {
             setIsModalRemoveCart = {setIsModalRemoveCart}
           /> :
           ''}
+        <CartSummer/>
       </main>
       <Footer/>
     </div>
