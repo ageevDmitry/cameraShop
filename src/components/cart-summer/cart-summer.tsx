@@ -8,8 +8,8 @@ import {getTotal, getBill} from '../../utils';
 function CartSummer (): JSX.Element {
 
   const productsCart = useAppSelector(getProductsCart);
-  //   const productsCartDiscount = useAppSelector(getProductsCartDiscount);
-  const productsCartDiscount = 1000;
+
+  const productsCartDiscount = 10;
   const [total, setTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [bill, setBill] = useState(0);
@@ -40,7 +40,7 @@ function CartSummer (): JSX.Element {
       </div>
       <div className="basket__summary-order">
         <p className="basket__summary-item"><span className="basket__summary-text">Всего:</span><span className="basket__summary-value">{`${total} ₽`}</span></p>
-        <p className="basket__summary-item"><span className="basket__summary-text">Скидка:</span><span className="basket__summary-value basket__summary-value--bonus">{`${discount} ₽`}</span></p>
+        <p className="basket__summary-item"><span className="basket__summary-text">Скидка:</span><span className={`basket__summary-value ${(productsCartDiscount > 0) ? 'basket__summary-value--bonus' : ''}`}>{`${discount} ₽`}</span></p>
         <p className="basket__summary-item"><span className="basket__summary-text basket__summary-text--total">К оплате:</span><span className="basket__summary-value basket__summary-value--total">{`${bill} ₽`}</span></p>
         <button className="btn btn--purple" type="submit">Оформить заказ
         </button>
