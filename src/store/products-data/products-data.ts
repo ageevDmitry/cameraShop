@@ -25,6 +25,7 @@ const initialState: ProductsData = {
   minPrice: null,
   maxPrice: null,
   productsTotalCount: 0,
+  discount: null,
   isCatalogPage: false,
   isDataLoading: false,
   isSuccess: false,
@@ -177,7 +178,7 @@ export const productsData = createSlice({
         state.isSuccess = false;
       })
       .addCase(sendCouponAction.fulfilled, (state, action) => {
-        state.coupon = action.payload;
+        state.discount = action.payload;
         state.isDataLoading = false;
         state.isSuccess = true;
       });

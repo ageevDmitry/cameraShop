@@ -316,6 +316,19 @@ export const getTotal = (productsCart: ProductCart[]) => {
   return total;
 };
 
+export const getDiscount = (productsCart: ProductCart[], discount: number | null) => {
+
+  if (productsCart.length === 0) {
+    return 0;
+  }
+
+  if (discount === null) {
+    return 0;
+  }
+
+  return discount;
+};
+
 export const getBill = (productsCart: ProductCart[], productsCartDiscount: number) => {
 
   let bill = 0;
