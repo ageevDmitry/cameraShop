@@ -17,3 +17,4 @@ export const getIsDataLoading = (state: State): boolean => state[NameSpace.Produ
 export const getCurrentProductCart = (state: State): Product | undefined => state[NameSpace.ProductsData].currentProductCart;
 export const getProductsCart = (state: State): ProductCart[] => state[NameSpace.ProductsData].productsCart;
 export const getProductsCartDiscount = (state: State): number | null => state[NameSpace.ProductsData].discount;
+export const getCoupon = (state: State): string | undefined => state[NameSpace.ProductsData].coupon;
