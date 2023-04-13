@@ -5,7 +5,9 @@ import {Product,
   Promo,
   ProductsReturnedData,
   ProductsFetchParams,
-  ProductsMinPriceFetchParams} from '../types/product';
+  ProductsMinPriceFetchParams,
+  OrdersPost
+} from '../types/product';
 import {Review, ReviewPost} from '../types/review';
 import {CouponPost} from '../types/coupon';
 import {APIRoute,
@@ -275,5 +277,16 @@ export const sendCouponAction = createAsyncThunk<number, CouponPost, {
       }
       throw err;
     }
+  },
+);
+
+export const sendOrdersAction = createAsyncThunk<void, OrdersPost, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/sendOrders',
+  async (orders, {extra: api}) => {
+    await api.post(APIRoute.Orders, orders);
   },
 );

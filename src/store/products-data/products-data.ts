@@ -10,7 +10,8 @@ import {fetchProductsAction,
   fetchProductsSearchAction,
   fetchReviewsAction,
   sendNewReviewAction,
-  sendCouponAction
+  sendCouponAction,
+  sendOrdersAction
 } from '../api-action';
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {Product, ProductCart} from '../../types/product';
@@ -190,6 +191,18 @@ export const productsData = createSlice({
       .addCase(sendCouponAction.rejected, (state) => {
         state.isCouponValid = false;
         state.discount = null;
+        state.isDataLoading = false;
+        state.isSuccess = false;
+      })
+      .addCase(sendOrdersAction.pending, (state) => {
+        state.isDataLoading = true;
+        state.isSuccess = false;
+      })
+      .addCase(sendOrdersAction.fulfilled, (state) => {
+        state.isDataLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(sendOrdersAction.rejected, (state) => {
         state.isDataLoading = false;
         state.isSuccess = false;
       });

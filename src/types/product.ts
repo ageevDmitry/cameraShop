@@ -54,3 +54,8 @@ export type ProductCart = {
     product: Product;
     count: number;
 }
+
+export type OrdersPost = {
+    camerasIds: number[];
+    coupon: string | null;
+}

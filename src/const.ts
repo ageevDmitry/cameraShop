@@ -97,7 +97,8 @@ export enum APIRoute {
   Products = 'cameras',
   Promo = 'promo',
   Reviews = 'reviews',
-  Coupons = 'coupons'
+  Coupons = 'coupons',
+  Orders = 'orders'
 }
 
 export const PRODUCT_RATING_COUNT = 5;

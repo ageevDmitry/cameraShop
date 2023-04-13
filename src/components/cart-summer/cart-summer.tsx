@@ -6,9 +6,13 @@ import {getProductsCart,
 import {addCoupon} from '../../store/products-data/products-data';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {useState, useEffect, FormEvent, ChangeEvent} from 'react';
-import {getTotal, getDiscount, getBill, getCouponState} from '../../utils';
+import {getTotal,
+  getDiscount,
+  getBill,
+  getCouponState,
+} from '../../utils';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
-import {sendCouponAction} from '../../store/api-action';
+import {sendCouponAction, sendOrdersAction} from '../../store/api-action';
 import styles from './cart-summer.module.css';
 
 function CartSummer (): JSX.Element {
@@ -93,7 +97,14 @@ function CartSummer (): JSX.Element {
         <p className="basket__summary-item"><span className="basket__summary-text">Всего:</span><span className="basket__summary-value">{`${total} ₽`}</span></p>
         <p className="basket__summary-item"><span className="basket__summary-text">Скидка:</span><span className={`basket__summary-value ${(discount > 0) ? 'basket__summary-value--bonus' : ''}`}>{`${discount} ₽`}</span></p>
         <p className="basket__summary-item"><span className="basket__summary-text basket__summary-text--total">К оплате:</span><span className="basket__summary-value basket__summary-value--total">{`${bill} ₽`}</span></p>
-        <button className="btn btn--purple" type="submit">Оформить заказ
+        <button className="btn btn--purple" type="submit"
+          onClick={() => {
+            dispatch(sendOrdersAction({
+              camerasIds: [1, 2, 3],
+              coupon: null
+            }));
+          }}
+        >Оформить заказ
         </button>
       </div>
     </div>
