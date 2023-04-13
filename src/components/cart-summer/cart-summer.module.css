@@ -1,0 +1,37 @@
+.promoError {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  margin: 0;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  color: #ed6041;
+  opacity: 100;
+  -webkit-transition: opacity 0.3s ease;
+  -o-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+
+.promoSuccess {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  margin: 0;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  color: #65cd54;
+  opacity: 100;
+  -webkit-transition: opacity 0.3s ease;
+  -o-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+
+.inputError {
+  border: 2px solid #ed6041;
+}
+
+.inputSuccess {
+  border: 2px solid #65cd54;
+}

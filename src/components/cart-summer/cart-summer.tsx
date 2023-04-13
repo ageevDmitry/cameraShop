@@ -9,6 +9,7 @@ import {useState, useEffect, FormEvent, ChangeEvent} from 'react';
 import {getTotal, getDiscount, getBill, getCouponState} from '../../utils';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {sendCouponAction} from '../../store/api-action';
+import styles from './cart-summer.module.css';
 
 function CartSummer (): JSX.Element {
 
@@ -21,6 +22,18 @@ function CartSummer (): JSX.Element {
   const [discount, setDiscount] = useState(0);
   const [bill, setBill] = useState(0);
   const [coupon, setCoupon] = useState(getCouponState(couponCart));
+
+  const getStyle = () => {
+    if (isCouponValid) {
+      return 'is-valid';
+    }
+
+    if (!isCouponValid && isCouponValid !== undefined) {
+      return 'is-invalid';
+    }
+
+    return '';
+  };
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
 
@@ -54,7 +67,7 @@ function CartSummer (): JSX.Element {
         <p className="title title--h4">Если у вас есть промокод на скидку, примените его в этом поле</p>
         <div className="basket-form">
           <form onSubmit={handleSubmit} method="post">
-            <div className="custom-input">
+            <div className={`custom-input ${getStyle()}`}>
               <label><span className="custom-input__label">Промокод</span>
                 <input type="text"
                   value={coupon}
@@ -63,10 +76,12 @@ function CartSummer (): JSX.Element {
                 />
               </label>
               {
-                (isCouponValid) ?
-                  <p className="custom-input__success">Промокод принят!</p>
-                  :
-                  <p className="custom-input__error">Промокод неверный</p>
+                (isCouponValid) &&
+                <p className={styles.promoSuccess}>Промокод принят!</p>
+              }
+              {
+                (!isCouponValid && isCouponValid !== undefined) &&
+                  <p className={styles.promoError}>Промокод неверный</p>
               }
             </div>
             <button className="btn" type="submit">Применить
