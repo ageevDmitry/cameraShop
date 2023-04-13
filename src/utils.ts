@@ -342,3 +342,12 @@ export const getBill = (productsCart: ProductCart[], productsCartDiscount: numbe
 
   return billDiscount;
 };
+
+export const getCouponState = (coupon: string | undefined) => {
+
+  if (coupon === undefined) {
+    return '';
+  }
+
+  return coupon;
+};

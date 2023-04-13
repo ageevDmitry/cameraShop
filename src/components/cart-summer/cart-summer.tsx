@@ -1,4 +1,3 @@
-import {useForm} from 'react-hook-form';
 import {getProductsCart,
   getProductsCartDiscount,
   getCoupon,
@@ -6,30 +5,41 @@ import {getProductsCart,
 } from '../../store/products-data/selectors';
 import {addCoupon} from '../../store/products-data/products-data';
 import {useAppSelector} from '../../hooks/use-app-selector';
-import {useState, useEffect} from 'react';
-import {getTotal, getDiscount, getBill} from '../../utils';
+import {useState, useEffect, FormEvent, ChangeEvent} from 'react';
+import {getTotal, getDiscount, getBill, getCouponState} from '../../utils';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {sendCouponAction} from '../../store/api-action';
-import {CouponPost} from '../../types/coupon';
 
 function CartSummer (): JSX.Element {
 
   const dispatch = useAppDispatch();
   const productsCart = useAppSelector(getProductsCart);
   const discountCart = useAppSelector(getProductsCartDiscount);
-  const coupon = useAppSelector(getCoupon);
+  const couponCart = useAppSelector(getCoupon);
   const isCouponValid = useAppSelector(getIsCouponValid);
   const [total, setTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [bill, setBill] = useState(0);
-  const {register, handleSubmit} = useForm<CouponPost>();
+  const [coupon, setCoupon] = useState(getCouponState(couponCart));
 
-  const onSubmit = (data: CouponPost) => {
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+
+    evt.preventDefault();
+
     dispatch(sendCouponAction({
-      coupon: data.coupon
+      coupon: coupon
     }));
 
-    dispatch(addCoupon((data.coupon)));
+    dispatch(addCoupon((coupon)));
+  };
+
+  const handleInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
+
+    if (evt.target.value.includes(' ')) {
+      return;
+    }
+
+    setCoupon(evt.target.value);
   };
 
   useEffect(() => {
@@ -43,13 +53,13 @@ function CartSummer (): JSX.Element {
       <div className="basket__promo">
         <p className="title title--h4">Если у вас есть промокод на скидку, примените его в этом поле</p>
         <div className="basket-form">
-          <form onSubmit={(...args) => void handleSubmit(onSubmit)(...args)} method="post">
+          <form onSubmit={handleSubmit} method="post">
             <div className="custom-input">
               <label><span className="custom-input__label">Промокод</span>
                 <input type="text"
-                  defaultValue={coupon}
+                  value={coupon}
                   placeholder="Введите промокод"
-                  {...register('coupon')}
+                  onChange={handleInputChange}
                 />
               </label>
               {
