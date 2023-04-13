@@ -1,7 +1,8 @@
 import {useForm} from 'react-hook-form';
 import {getProductsCart,
   getProductsCartDiscount,
-  getCoupon
+  getCoupon,
+  getIsCouponValid
 } from '../../store/products-data/selectors';
 import {addCoupon} from '../../store/products-data/products-data';
 import {useAppSelector} from '../../hooks/use-app-selector';
@@ -17,6 +18,7 @@ function CartSummer (): JSX.Element {
   const productsCart = useAppSelector(getProductsCart);
   const discountCart = useAppSelector(getProductsCartDiscount);
   const coupon = useAppSelector(getCoupon);
+  const isCouponValid = useAppSelector(getIsCouponValid);
   const [total, setTotal] = useState(0);
   const [discount, setDiscount] = useState(0);
   const [bill, setBill] = useState(0);
@@ -50,8 +52,12 @@ function CartSummer (): JSX.Element {
                   {...register('coupon')}
                 />
               </label>
-              <p className="custom-input__error">Промокод неверный</p>
-              <p className="custom-input__success">Промокод принят!</p>
+              {
+                (isCouponValid) ?
+                  <p className="custom-input__success">Промокод принят!</p>
+                  :
+                  <p className="custom-input__error">Промокод неверный</p>
+              }
             </div>
             <button className="btn" type="submit">Применить
             </button>

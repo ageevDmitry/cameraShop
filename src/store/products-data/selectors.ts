@@ -18,3 +18,4 @@ export const getCurrentProductCart = (state: State): Product | undefined => stat
 export const getProductsCart = (state: State): ProductCart[] => state[NameSpace.ProductsData].productsCart;
 export const getProductsCartDiscount = (state: State): number | null => state[NameSpace.ProductsData].discount;
 export const getCoupon = (state: State): string | undefined => state[NameSpace.ProductsData].coupon;
+export const getIsCouponValid = (state: State): boolean | undefined => state[NameSpace.ProductsData].isCouponValid;

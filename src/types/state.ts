@@ -20,6 +20,7 @@ export type ProductsData = {
     isCatalogPage: boolean;
     isDataLoading: boolean;
     isSuccess: boolean;
+    isCouponValid: boolean | undefined;
 };
 
 export type ProductsUI = {

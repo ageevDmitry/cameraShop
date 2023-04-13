@@ -29,6 +29,7 @@ const initialState: ProductsData = {
   isCatalogPage: false,
   isDataLoading: false,
   isSuccess: false,
+  isCouponValid: undefined,
 };
 
 export const productsData = createSlice({
@@ -182,8 +183,15 @@ export const productsData = createSlice({
       })
       .addCase(sendCouponAction.fulfilled, (state, action) => {
         state.discount = action.payload;
+        state.isCouponValid = true;
         state.isDataLoading = false;
         state.isSuccess = true;
+      })
+      .addCase(sendCouponAction.rejected, (state) => {
+        state.isCouponValid = false;
+        state.discount = null;
+        state.isDataLoading = false;
+        state.isSuccess = false;
       });
   }
 });
