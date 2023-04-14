@@ -1,15 +1,16 @@
 import {Link, generatePath} from 'react-router-dom';
 import {NavBreadcrumb} from '../../types/ui';
-import {AppRoute, DEFAULT_CATALOG_PAGE} from '../../const';
+import {DEFAULT_CATALOG_PAGE} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getCurrentCatalogPagePath} from '../../store/products-ui/selectors';
 
 type BreadcrumbsProps = {
   currentBreadCrumb?: string;
-  navBreadcrumbs:NavBreadcrumb[];
+  navBreadcrumbsMain: NavBreadcrumb[];
+  navBreadcrumbsCatalog?: NavBreadcrumb[];
 }
 
-function Breadcrumbs ({navBreadcrumbs, currentBreadCrumb}: BreadcrumbsProps): JSX.Element {
+function Breadcrumbs ({navBreadcrumbsMain, navBreadcrumbsCatalog, currentBreadCrumb}: BreadcrumbsProps): JSX.Element {
 
   const currentCatalogPagePath = useAppSelector(getCurrentCatalogPagePath);
   const search = currentCatalogPagePath.search;
@@ -19,11 +20,32 @@ function Breadcrumbs ({navBreadcrumbs, currentBreadCrumb}: BreadcrumbsProps): JS
       <div className="container">
         <ul className="breadcrumbs__list">
           {
-            navBreadcrumbs.map((item) => (
+            navBreadcrumbsMain.map((item) => (
               <li key={item.title} className="breadcrumbs__item">
                 <Link to={{
                   pathname: generatePath(
-                    AppRoute.Catalog,
+                    item.href,
+                    {pageNumber: (currentCatalogPagePath.currentCatalogPage)
+                      ? String(currentCatalogPagePath.currentCatalogPage) : DEFAULT_CATALOG_PAGE}
+                  ),
+                  search
+                }}
+                className="breadcrumbs__link"
+                >{item.title}
+                  <svg width={5} height={8} aria-hidden="true">
+                    <use xlinkHref="#icon-arrow-mini" />
+                  </svg>
+                </Link>
+              </li>
+            ))
+          }
+          {
+            (navBreadcrumbsCatalog) &&
+            navBreadcrumbsCatalog.map((item) => (
+              <li key={item.title} className="breadcrumbs__item">
+                <Link to={{
+                  pathname: generatePath(
+                    item.href,
                     {pageNumber: (currentCatalogPagePath.currentCatalogPage)
                       ? String(currentCatalogPagePath.currentCatalogPage) : DEFAULT_CATALOG_PAGE}
                   ),

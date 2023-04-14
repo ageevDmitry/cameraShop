@@ -57,7 +57,7 @@ function Product(): JSX.Element {
       <main>
         <div className="page-content">
           <Breadcrumbs
-            navBreadcrumbs={navBreadcrumbs}
+            navBreadcrumbsMain={navBreadcrumbs}
             currentBreadCrumb={product.name}
           />
           <ProductInfo

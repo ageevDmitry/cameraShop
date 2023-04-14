@@ -39,7 +39,7 @@ describe('Component: Breadcrumbs', () => {
       <Provider store={store}>
         <HistoryRouter history={history}>
           <Breadcrumbs
-            navBreadcrumbs={[NAV_BREADCRUMB_MAIN]}
+            navBreadcrumbsMain={[NAV_BREADCRUMB_MAIN]}
             currentBreadCrumb={'Каталог'}
           />
         </HistoryRouter>
@@ -65,7 +65,7 @@ describe('Component: Breadcrumbs', () => {
               path='*'
               element={
                 <Breadcrumbs
-                  navBreadcrumbs={[NAV_BREADCRUMB_MAIN]}
+                  navBreadcrumbsMain={[NAV_BREADCRUMB_MAIN]}
                   currentBreadCrumb={'Каталог'}
                 />
               }

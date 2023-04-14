@@ -119,7 +119,7 @@ function Catalog (): JSX.Element {
         }
         <div className="page-content">
           <Breadcrumbs
-            navBreadcrumbs = {navBreadcrumbs}
+            navBreadcrumbsMain = {navBreadcrumbs}
             currentBreadCrumb = {'Каталог'}
           />
           <section className="catalog">

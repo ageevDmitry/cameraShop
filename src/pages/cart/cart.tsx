@@ -5,7 +5,7 @@ import CartSummer from '../../components/cart-summer/cart-summer';
 import ProductCardCartList from '../../components/product-card-cart-list/product-card-cart-list';
 import ModalRemoveCart from '../../components/modal-remove-cart/modal-remove-cart';
 import ModalOrderSuccess from '../../components/modal-order-success/modal-order-success';
-import {NAV_BREADCRUMB_MAIN} from '../../const';
+import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG} from '../../const';
 import {useState, useEffect} from 'react';
 import {getCurrentProductCart, getIsOrderPost} from '../../store/products-data/selectors';
 import {useAppSelector} from '../../hooks/use-app-selector';
@@ -18,7 +18,8 @@ import {cleanUpIsOrderPost} from '../../store/products-data/products-data';
 function Cart (): JSX.Element {
 
   const dispatch = useAppDispatch();
-  const navBreadcrumbs = [NAV_BREADCRUMB_MAIN];
+  const navBreadcrumbsMain = [NAV_BREADCRUMB_MAIN];
+  const navBreadcrumbsCatalog = [NAV_BREADCRUMB_CATALOG];
   const [isModalRemoveCart, setIsModalRemoveCart] = useState(false);
   const [isModalOrderSuccess, setIsModalOrderSuccess] = useState(false);
   const currentProductCart = useAppSelector(getCurrentProductCart);
@@ -48,7 +49,8 @@ function Cart (): JSX.Element {
       <main>
         <div className="page-content">
           <Breadcrumbs
-            navBreadcrumbs = {navBreadcrumbs}
+            navBreadcrumbsMain = {navBreadcrumbsMain}
+            navBreadcrumbsCatalog = {navBreadcrumbsCatalog}
             currentBreadCrumb = {'Корзина'}
           />
           <section className="basket">
