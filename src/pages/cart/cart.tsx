@@ -6,18 +6,41 @@ import ProductCardCartList from '../../components/product-card-cart-list/product
 import ModalRemoveCart from '../../components/modal-remove-cart/modal-remove-cart';
 import ModalOrderSuccess from '../../components/modal-order-success/modal-order-success';
 import {NAV_BREADCRUMB_MAIN} from '../../const';
-import {useState} from 'react';
-import {getCurrentProductCart} from '../../store/products-data/selectors';
+import {useState, useEffect} from 'react';
+import {getCurrentProductCart, getIsOrderPost} from '../../store/products-data/selectors';
 import {useAppSelector} from '../../hooks/use-app-selector';
+import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {getProductsCart} from '../../store/products-data/selectors';
+import {useNavigate, generatePath} from 'react-router-dom';
+import {AppRoute} from '../../const';
+import {cleanUpIsOrderPost} from '../../store/products-data/products-data';
 
 function Cart (): JSX.Element {
 
+  const dispatch = useAppDispatch();
   const navBreadcrumbs = [NAV_BREADCRUMB_MAIN];
   const [isModalRemoveCart, setIsModalRemoveCart] = useState(false);
-  const [isModalOrderSuccess, setIsModalOrderSuccess] = useState(true);
+  const [isModalOrderSuccess, setIsModalOrderSuccess] = useState(false);
   const currentProductCart = useAppSelector(getCurrentProductCart);
+  const isOrderPost = useAppSelector(getIsOrderPost);
   const productsCart = useAppSelector(getProductsCart);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isOrderPost) {
+      setIsModalOrderSuccess(true);
+    }
+
+    if (isOrderPost === false) {
+      navigate({
+        pathname: generatePath(AppRoute.NotFound),
+      });
+    }
+
+    return () => {
+      dispatch(cleanUpIsOrderPost());
+    };
+  }, [isOrderPost, navigate, dispatch]);
 
   return (
     <div className="wrapper">

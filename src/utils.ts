@@ -351,3 +351,15 @@ export const getCouponState = (coupon: string | undefined) => {
 
   return coupon;
 };
+
+export const getCamerasIds = (productsCart: ProductCart[]) => {
+
+  const camerasIds = [];
+
+  for (const item of productsCart) {
+
+    camerasIds.push(item.product.id);
+  }
+
+  return camerasIds;
+};

@@ -49,6 +49,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
+      isOrderPost: undefined,
     };
 
     expect(productsData.reducer(state, cleanUpProductDetail()))
@@ -79,6 +80,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
+      isOrderPost: undefined,
     };
 
     expect(productsData.reducer(state, cleanUpProductsSearch()))
@@ -106,6 +108,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
+      isOrderPost: undefined,
     };
 
     expect(productsData.reducer(state, setIsNotCatalogPage()))
@@ -132,6 +135,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
+      isOrderPost: undefined,
     };
 
     expect(productsData.reducer(state, {type: fetchProductsAction.pending.type }))
@@ -181,6 +185,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
+      isOrderPost: undefined,
     };
 
     expect(productsData.reducer(state, {type: fetchMinPriceProductsAction.pending.type}))
@@ -229,6 +234,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
+      isOrderPost: undefined,
     };
 
     expect(productsData.reducer(state, {type: fetchMaxPriceProductsAction.pending.type}))
@@ -277,6 +283,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
+      isOrderPost: undefined,
     };
 
     expect(productsData.reducer(state, {type: fetchPromoAction.pending.type }))
@@ -326,6 +333,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
+      isOrderPost: undefined,
     };
 
     expect(productsData.reducer(state, {type: fetchProductDetailAction.pending.type }))
@@ -376,6 +384,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
+      isOrderPost: undefined,
     };
 
     expect(productsData.reducer(state, {type: fetchProductsSimilarAction.pending.type }))
@@ -425,6 +434,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
+      isOrderPost: undefined,
     };
 
     expect(productsData.reducer(state, {type: fetchProductsSearchAction.fulfilled.type, payload: products}))
@@ -463,6 +473,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
+      isOrderPost: undefined,
     };
 
     expect(productsData.reducer(state, {type: fetchReviewsAction.pending.type }))
@@ -512,6 +523,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
+      isOrderPost: undefined,
     };
 
     expect(productsData.reducer(state, {type: sendNewReviewAction.pending.type }))

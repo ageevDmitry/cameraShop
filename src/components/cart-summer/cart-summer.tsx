@@ -10,6 +10,7 @@ import {getTotal,
   getDiscount,
   getBill,
   getCouponState,
+  getCamerasIds
 } from '../../utils';
 import {useAppDispatch} from '../../hooks/use-app-dispatch';
 import {sendCouponAction, sendOrdersAction} from '../../store/api-action';
@@ -99,9 +100,12 @@ function CartSummer (): JSX.Element {
         <p className="basket__summary-item"><span className="basket__summary-text basket__summary-text--total">К оплате:</span><span className="basket__summary-value basket__summary-value--total">{`${bill} ₽`}</span></p>
         <button className="btn btn--purple" type="submit"
           onClick={() => {
+
+            const sendCoupon = (isCouponValid) ? coupon : null;
+
             dispatch(sendOrdersAction({
-              camerasIds: [1, 2, 3],
-              coupon: null
+              camerasIds: getCamerasIds(productsCart),
+              coupon: sendCoupon
             }));
           }}
         >Оформить заказ

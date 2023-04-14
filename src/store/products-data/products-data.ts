@@ -31,6 +31,7 @@ const initialState: ProductsData = {
   isDataLoading: false,
   isSuccess: false,
   isCouponValid: undefined,
+  isOrderPost: undefined,
 };
 
 export const productsData = createSlice({
@@ -61,6 +62,9 @@ export const productsData = createSlice({
     addCoupon: (state, action: PayloadAction<string>) => {
       state.coupon = action.payload;
     },
+    cleanUpIsOrderPost: (state) => {
+      state.isOrderPost = undefined;
+    }
   },
   extraReducers(builder) {
     builder
@@ -195,16 +199,13 @@ export const productsData = createSlice({
         state.isSuccess = false;
       })
       .addCase(sendOrdersAction.pending, (state) => {
-        state.isDataLoading = true;
-        state.isSuccess = false;
+        state.isOrderPost = undefined;
       })
       .addCase(sendOrdersAction.fulfilled, (state) => {
-        state.isDataLoading = false;
-        state.isSuccess = true;
+        state.isOrderPost = true;
       })
       .addCase(sendOrdersAction.rejected, (state) => {
-        state.isDataLoading = false;
-        state.isSuccess = false;
+        state.isOrderPost = false;
       });
   }
 });
@@ -216,5 +217,6 @@ export const {cleanUpProductDetail,
   addProductCart,
   deleteProductCart,
   changeCountProductCart,
-  addCoupon
+  addCoupon,
+  cleanUpIsOrderPost
 } = productsData.actions;
