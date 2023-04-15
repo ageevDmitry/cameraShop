@@ -2,7 +2,8 @@ import {productsUI,
   changeCurrentCatalogPagePath,
   changeCurrentMinPrice,
   changeCurrentMaxPrice,
-  cleanUpPrice
+  cleanUpPrice,
+  changeIsModalAdd
 } from './products-ui';
 import {currentCatalogPagePath,
 } from '../../types/ui';
@@ -94,6 +95,23 @@ describe('Reducer:productsUI', () => {
         currentMinPrice: null,
         currentMaxPrice: null,
         isModalAddCart: false,
+      });
+  });
+
+  it('should change isModalAdd', () => {
+    const state = {
+      currentCatalogPagePath: {} as currentCatalogPagePath,
+      currentMinPrice: null,
+      currentMaxPrice: null,
+      isModalAddCart: false,
+    };
+
+    expect(productsUI.reducer(state, changeIsModalAdd({type: true})))
+      .toEqual({
+        currentCatalogPagePath: {} as currentCatalogPagePath,
+        currentMinPrice: null,
+        currentMaxPrice: null,
+        isModalAddCart: true,
       });
   });
 });
