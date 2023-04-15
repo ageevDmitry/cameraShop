@@ -190,7 +190,7 @@ export const reviewPost: ReviewPost = {
   cameraId: 1,
 };
 
-export const productsCart = {
+export const productsCart = [{
   product: {
     id: 1,
     name: 'Ретрокамера Dus Auge lV',
@@ -209,4 +209,4 @@ export const productsCart = {
     reviews: reviews,
   },
   count: 1
-};
+}];

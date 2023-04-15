@@ -4,15 +4,44 @@ import {Routes, Route} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import HistoryRouter from '../history-route/history-route';
 import CartHeader from './cart-header';
+import {Provider} from 'react-redux';
+import {createAPI} from '../../services/api';
+import thunk, {ThunkDispatch} from 'redux-thunk';
+import {configureMockStore} from '@jedmao/redux-mock-store';
+import {State} from '../../types/state';
+import {Action} from 'redux';
+import {NameSpace} from '../../const';
+import {products, promo, productsCart} from '../../mocks/mocks';
 
 const history = createMemoryHistory();
 
-describe('Component: Basket', () => {
+const api = createAPI();
+const middlewares = [thunk.withExtraArgument(api)];
+
+const mockStore = configureMockStore<
+State,
+Action<string>,
+ThunkDispatch<State, typeof api, Action>
+>(middlewares);
+
+const store = mockStore({
+  [NameSpace.ProductsData]: {
+    products: products,
+    productsCart: productsCart,
+    promo: promo,
+    isDataLoading: false,
+    isSuccess: false,
+  },
+});
+
+describe('Component: CartHeader', () => {
   it('should render correctly', () => {
     render(
-      <HistoryRouter history={history}>
-        <CartHeader/>
-      </HistoryRouter>
+      <Provider store={store}>
+        <HistoryRouter history={history}>
+          <CartHeader/>
+        </HistoryRouter>
+      </Provider>
     );
 
     expect(screen.getByRole('link')).toBeInTheDocument();
@@ -22,20 +51,22 @@ describe('Component: Basket', () => {
     history.push('/fake');
 
     render(
-      <HistoryRouter history={history}>
-        <Routes>
-          <Route
-            path="/"
-            element={<h1>This is main page</h1>}
-          />
-          <Route
-            path='*'
-            element={
-              <CartHeader/>
-            }
-          />
-        </Routes>
-      </HistoryRouter>);
+      <Provider store={store}>
+        <HistoryRouter history={history}>
+          <Routes>
+            <Route
+              path="/"
+              element={<h1>This is main page</h1>}
+            />
+            <Route
+              path='*'
+              element={
+                <CartHeader/>
+              }
+            />
+          </Routes>
+        </HistoryRouter>
+      </Provider>);
 
     expect(screen.queryByText(/This is main page/i)).not.toBeInTheDocument();
 
