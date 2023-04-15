@@ -9,7 +9,7 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import {State} from '../../types/state';
 import {Action} from 'redux';
 import {NameSpace} from '../../const';
-import {product, products, reviews} from '../../mocks/mocks';
+import {product, products, reviews, productsCart,} from '../../mocks/mocks';
 import userEvent from '@testing-library/user-event';
 import {currentCatalogPagePath} from '../../types/ui';
 
@@ -26,6 +26,7 @@ const store = mockStore({
   [NameSpace.ProductsData]: {
     productDetail: product,
     productsSimilar: products,
+    productsCart: productsCart,
     reviews: reviews,
     isDataLoading: false,
     isSuccess: false,

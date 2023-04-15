@@ -17,6 +17,7 @@ describe('Reducer:productsUI', () => {
         currentCatalogPagePath: {} as currentCatalogPagePath,
         currentMinPrice: null,
         currentMaxPrice: null,
+        isModalAddCart: false,
       });
   });
 
@@ -37,6 +38,7 @@ describe('Reducer:productsUI', () => {
         },
         currentMinPrice: null,
         currentMaxPrice: null,
+        isModalAddCart: false,
       });
   });
 
@@ -55,6 +57,7 @@ describe('Reducer:productsUI', () => {
         currentCatalogPagePath: {} as currentCatalogPagePath,
         currentMinPrice: mockCurrentPrice,
         currentMaxPrice: null,
+        isModalAddCart: false,
       });
   });
 
@@ -73,6 +76,7 @@ describe('Reducer:productsUI', () => {
         currentCatalogPagePath: {} as currentCatalogPagePath,
         currentMinPrice: null,
         currentMaxPrice: mockCurrentPrice,
+        isModalAddCart: false,
       });
   });
 
@@ -89,6 +93,7 @@ describe('Reducer:productsUI', () => {
         currentCatalogPagePath: {} as currentCatalogPagePath,
         currentMinPrice: null,
         currentMaxPrice: null,
+        isModalAddCart: false,
       });
   });
 });
