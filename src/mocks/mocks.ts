@@ -214,3 +214,8 @@ export const productsCart = [{
 export const coupon = {
   coupon: 'camera-555'
 };
+
+export const orderPost = {
+  camerasIds: [1, 2, 3],
+  coupon: 'camera-555'
+};

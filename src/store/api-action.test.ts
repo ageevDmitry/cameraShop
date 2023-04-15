@@ -25,7 +25,8 @@ import {product,
   reviewPost,
   productsFetchParams,
   productsMinMaxFetchParams,
-  coupon
+  coupon,
+  orderPost
 } from '../mocks/mocks';
 
 describe('Async actions', () => {
@@ -262,6 +263,25 @@ describe('Async actions', () => {
     const store = mockStore();
 
     await store.dispatch(sendCouponAction(mockCoupon));
+
+    const actions = store.getActions().map(({type}) => type);
+
+    expect(actions).toEqual([
+      sendCouponAction.pending.type,
+      sendCouponAction.fulfilled.type
+    ]);
+  });
+
+  it('should dispatch Post_Orders when Post /orders', async () => {
+    const mockOrders = orderPost;
+
+    mockAPI
+      .onPost(APIRoute.Orders)
+      .reply(200);
+
+    const store = mockStore();
+
+    await store.dispatch(sendCouponAction(mockOrders));
 
     const actions = store.getActions().map(({type}) => type);
 
