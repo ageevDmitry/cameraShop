@@ -49,6 +49,7 @@ function ProductCard ({product, componentType, setIsModalAddCart}: ProductCardPr
         {
           (isProductCart) ?
             <Link className="btn btn--purple-border product-card__btn product-card__btn--in-cart" type="button"
+              data-testid="cart"
               to={{
                 pathname: generatePath(AppRoute.Cart)
               }}
@@ -66,7 +67,7 @@ function ProductCard ({product, componentType, setIsModalAddCart}: ProductCardPr
             >Купить
             </button>
         }
-        <Link to={productId} className="btn btn--transparent">Подробнее
+        <Link to={productId} className="btn btn--transparent" data-testid="productInfo">Подробнее
         </Link>
       </div>
     </div>
