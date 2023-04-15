@@ -210,3 +210,7 @@ export const productsCart = [{
   },
   count: 1
 }];
+
+export const coupon = {
+  coupon: 'camera-555'
+};

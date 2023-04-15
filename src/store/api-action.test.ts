@@ -12,7 +12,8 @@ import {
   fetchProductsSimilarAction,
   fetchProductsSearchAction,
   fetchReviewsAction,
-  sendNewReviewAction} from './api-action';
+  sendNewReviewAction,
+  sendCouponAction} from './api-action';
 import {APIRoute,
   QueryParam
 } from '../const';
@@ -23,7 +24,8 @@ import {product,
   reviews,
   reviewPost,
   productsFetchParams,
-  productsMinMaxFetchParams
+  productsMinMaxFetchParams,
+  coupon
 } from '../mocks/mocks';
 
 describe('Async actions', () => {
@@ -246,6 +248,26 @@ describe('Async actions', () => {
       sendNewReviewAction.pending.type,
       fetchReviewsAction.pending.type,
       sendNewReviewAction.fulfilled.type
+    ]);
+  });
+
+  it('should dispatch Post_Coupon when Post /coupons', async () => {
+    const mockCoupon = coupon;
+    const discount = 15;
+
+    mockAPI
+      .onPost(APIRoute.Coupons)
+      .reply(200, discount);
+
+    const store = mockStore();
+
+    await store.dispatch(sendCouponAction(mockCoupon));
+
+    const actions = store.getActions().map(({type}) => type);
+
+    expect(actions).toEqual([
+      sendCouponAction.pending.type,
+      sendCouponAction.fulfilled.type
     ]);
   });
 });
