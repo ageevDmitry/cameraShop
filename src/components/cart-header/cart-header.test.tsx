@@ -1,17 +1,18 @@
 import {render, screen} from '@testing-library/react';
-import {createMemoryHistory} from 'history';
 import {Routes, Route} from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import HistoryRouter from '../history-route/history-route';
 import CartHeader from './cart-header';
 import {Provider} from 'react-redux';
-import {createAPI} from '../../services/api';
 import thunk, {ThunkDispatch} from 'redux-thunk';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {State} from '../../types/state';
 import {Action} from 'redux';
 import {NameSpace} from '../../const';
 import {products, promo, productsCart} from '../../mocks/mocks';
+import {createMemoryHistory} from 'history';
+import {createAPI} from '../../services/api';
+
 
 const history = createMemoryHistory();
 
@@ -55,7 +56,7 @@ describe('Component: CartHeader', () => {
         <HistoryRouter history={history}>
           <Routes>
             <Route
-              path="/"
+              path="/cart"
               element={<h1>This is main page</h1>}
             />
             <Route
