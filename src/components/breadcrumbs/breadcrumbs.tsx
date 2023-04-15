@@ -3,6 +3,7 @@ import {NavBreadcrumb} from '../../types/ui';
 import {DEFAULT_CATALOG_PAGE} from '../../const';
 import {useAppSelector} from '../../hooks/use-app-selector';
 import {getCurrentCatalogPagePath} from '../../store/products-ui/selectors';
+import {AppRoute} from '../../const';
 
 type BreadcrumbsProps = {
   currentBreadCrumb?: string;
@@ -24,7 +25,7 @@ function Breadcrumbs ({navBreadcrumbsMain, navBreadcrumbsCatalog, currentBreadCr
               <li key={item.title} className="breadcrumbs__item">
                 <Link to={{
                   pathname: generatePath(
-                    item.href,
+                    AppRoute.Catalog,
                     {pageNumber: (currentCatalogPagePath.currentCatalogPage)
                       ? String(currentCatalogPagePath.currentCatalogPage) : DEFAULT_CATALOG_PAGE}
                   ),
@@ -45,7 +46,7 @@ function Breadcrumbs ({navBreadcrumbsMain, navBreadcrumbsCatalog, currentBreadCr
               <li key={item.title} className="breadcrumbs__item">
                 <Link to={{
                   pathname: generatePath(
-                    item.href,
+                    AppRoute.Catalog,
                     {pageNumber: (currentCatalogPagePath.currentCatalogPage)
                       ? String(currentCatalogPagePath.currentCatalogPage) : DEFAULT_CATALOG_PAGE}
                   ),
