@@ -31,9 +31,12 @@ describe('Reducer:productsData', () => {
         minPrice: null,
         maxPrice: null,
         productsTotalCount: 0,
+        discount: null,
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: false,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
       });
   });
 
@@ -58,12 +61,14 @@ describe('Reducer:productsData', () => {
         productsCart: [],
         minPrice: null,
         maxPrice: null,
-        discount: null,
         productsTotalCount: 0,
-        productDetail: undefined,
+        discount: null,
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: false,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productDetail: undefined,
       });
   });
 
@@ -75,7 +80,6 @@ describe('Reducer:productsData', () => {
       maxPrice: null,
       productsTotalCount: 0,
       discount: null,
-      productsSearch: products,
       isCatalogPage: false,
       isDataLoading: false,
       isSuccess: false,
@@ -86,13 +90,17 @@ describe('Reducer:productsData', () => {
     expect(productsData.reducer(state, cleanUpProductsSearch()))
       .toEqual({
         products: [],
+        productsCart: [],
         minPrice: null,
         maxPrice: null,
         productsTotalCount: 0,
-        productsSearch: undefined,
+        discount: null,
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: false,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsSearch: undefined,
       });
   });
 
@@ -102,9 +110,9 @@ describe('Reducer:productsData', () => {
       productsCart: [],
       minPrice: null,
       maxPrice: null,
-      discount: null,
       productsTotalCount: 0,
-      isCatalogPage: true,
+      discount: null,
+      isCatalogPage: false,
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
@@ -114,12 +122,16 @@ describe('Reducer:productsData', () => {
     expect(productsData.reducer(state, setIsNotCatalogPage()))
       .toEqual({
         products: [],
+        productsCart: [],
         minPrice: null,
         maxPrice: null,
         productsTotalCount: 0,
+        discount: null,
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: false,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
       });
   });
 
@@ -129,8 +141,8 @@ describe('Reducer:productsData', () => {
       productsCart: [],
       minPrice: null,
       maxPrice: null,
-      discount: null,
       productsTotalCount: productsReturnedData.dataTotalCount,
+      discount: null,
       isCatalogPage: false,
       isDataLoading: false,
       isSuccess: false,
@@ -148,6 +160,9 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: true,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
       });
 
     expect(productsData.reducer(state, {type: fetchProductsAction.fulfilled.type, payload: productsReturnedData}))
@@ -159,6 +174,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: true,
         isDataLoading: false,
         isSuccess: true,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchProductsAction.rejected.type, payload: productsReturnedData}))
@@ -170,6 +189,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
   });
 
@@ -197,6 +220,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: true,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchMinPriceProductsAction.fulfilled.type, payload: product.price}))
@@ -208,6 +235,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: true,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchMinPriceProductsAction.rejected.type}))
@@ -219,6 +250,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
   });
 
@@ -246,6 +281,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: true,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchMaxPriceProductsAction.fulfilled.type, payload: product.price}))
@@ -257,6 +296,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: true,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchMaxPriceProductsAction.rejected.type}))
@@ -268,6 +311,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
   });
 
@@ -295,6 +342,10 @@ describe('Reducer:productsData', () => {
         isDataLoading: true,
         isCatalogPage: false,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchPromoAction.fulfilled.type, payload: promo}))
@@ -307,6 +358,10 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isCatalogPage: false,
         isSuccess: true,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchPromoAction.rejected.type}))
@@ -318,6 +373,10 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isCatalogPage: false,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
   });
 
@@ -345,6 +404,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: true,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchProductDetailAction.fulfilled.type, payload: product}))
@@ -358,6 +421,10 @@ describe('Reducer:productsData', () => {
         productDetail: product,
         isDataLoading: false,
         isSuccess: true,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchProductDetailAction.rejected.type}))
@@ -369,6 +436,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
   });
 
@@ -396,6 +467,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: true,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchProductsSimilarAction.fulfilled.type, payload: products}))
@@ -408,6 +483,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: true,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchProductsSimilarAction.rejected.type}))
@@ -419,6 +498,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
   });
 
@@ -447,6 +530,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: true,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchProductsAction.rejected.type, payload: products}))
@@ -458,6 +545,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
   });
 
@@ -485,6 +576,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: true,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchReviewsAction.fulfilled.type, payload: reviews}))
@@ -497,6 +592,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: true,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: fetchReviewsAction.rejected.type}))
@@ -508,6 +607,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
   });
 
@@ -535,6 +638,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: true,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: sendNewReviewAction.fulfilled.type}))
@@ -546,6 +653,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: true,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
 
     expect(productsData.reducer(state, {type: sendNewReviewAction.rejected.type}))
@@ -557,6 +668,10 @@ describe('Reducer:productsData', () => {
         isCatalogPage: false,
         isDataLoading: false,
         isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
       });
   });
 });

@@ -22,16 +22,16 @@ import {checkAddProductsCart,
 
 const initialState: ProductsData = {
   products: [],
-  productsCart: [],
   minPrice: null,
   maxPrice: null,
   productsTotalCount: 0,
-  discount: null,
   isCatalogPage: false,
   isDataLoading: false,
   isSuccess: false,
+  discount: null,
   isCouponValid: undefined,
   isOrderPost: undefined,
+  productsCart: [],
 };
 
 export const productsData = createSlice({
