@@ -1,14 +1,22 @@
 import {productsData,
   cleanUpProductDetail,
   cleanUpProductsSearch,
-  setIsNotCatalogPage
+  setIsNotCatalogPage,
+  addCurrentProductCart,
+  addProductCart,
+  deleteProductCart,
+  changeCountProductCart,
+  addCoupon,
+  cleanUpIsOrderPost
 } from './products-data';
 import {
   products,
   product,
   productsReturnedData,
   promo,
-  reviews
+  reviews,
+  productCart,
+  productsCart,
 } from '../../mocks/mocks';
 import {
   fetchProductsAction,
@@ -19,7 +27,9 @@ import {
   fetchProductsSimilarAction,
   fetchProductsSearchAction,
   fetchReviewsAction,
-  sendNewReviewAction
+  sendNewReviewAction,
+  sendCouponAction,
+  sendOrdersAction
 } from '../api-action';
 
 describe('Reducer:productsData', () => {
@@ -132,6 +142,195 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         isCouponValid: undefined,
         isOrderPost: undefined,
+      });
+  });
+
+  it('should set currentProductCart', () => {
+    const state = {
+      products: [],
+      productsCart: [],
+      minPrice: null,
+      maxPrice: null,
+      productsTotalCount: 0,
+      discount: null,
+      isCatalogPage: false,
+      isDataLoading: false,
+      isSuccess: false,
+      isCouponValid: undefined,
+      isOrderPost: undefined,
+    };
+
+    expect(productsData.reducer(state, addCurrentProductCart(product)))
+      .toEqual({
+        products: [],
+        productsCart: [],
+        minPrice: null,
+        maxPrice: null,
+        productsTotalCount: 0,
+        discount: null,
+        isCatalogPage: false,
+        isDataLoading: false,
+        isSuccess: false,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        currentProductCart: product
+      });
+  });
+
+  it('should set productCart', () => {
+    const state = {
+      products: [],
+      productsCart: [],
+      minPrice: null,
+      maxPrice: null,
+      productsTotalCount: 0,
+      discount: null,
+      isCatalogPage: false,
+      isDataLoading: false,
+      isSuccess: false,
+      isCouponValid: undefined,
+      isOrderPost: undefined,
+    };
+
+    expect(productsData.reducer(state, addProductCart(product)))
+      .toEqual({
+        products: [],
+        productsCart: productsCart,
+        minPrice: null,
+        maxPrice: null,
+        productsTotalCount: 0,
+        discount: null,
+        isCatalogPage: false,
+        isDataLoading: false,
+        isSuccess: false,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+      });
+  });
+
+  it('should delete productCart', () => {
+    const state = {
+      products: [],
+      productsCart: productsCart,
+      minPrice: null,
+      maxPrice: null,
+      productsTotalCount: 0,
+      discount: null,
+      isCatalogPage: false,
+      isDataLoading: false,
+      isSuccess: false,
+      isCouponValid: undefined,
+      isOrderPost: undefined,
+    };
+
+    expect(productsData.reducer(state, deleteProductCart(product)))
+      .toEqual({
+        products: [],
+        productsCart: [],
+        minPrice: null,
+        maxPrice: null,
+        productsTotalCount: 0,
+        discount: null,
+        isCatalogPage: false,
+        isDataLoading: false,
+        isSuccess: false,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+      });
+  });
+
+  it('should change productCart', () => {
+    const state = {
+      products: [],
+      productsCart: productsCart,
+      minPrice: null,
+      maxPrice: null,
+      productsTotalCount: 0,
+      discount: null,
+      isCatalogPage: false,
+      isDataLoading: false,
+      isSuccess: false,
+      isCouponValid: undefined,
+      isOrderPost: undefined,
+    };
+
+    expect(productsData.reducer(state, changeCountProductCart(productCart)))
+      .toEqual({
+        products: [],
+        productsCart: productsCart,
+        minPrice: null,
+        maxPrice: null,
+        productsTotalCount: 0,
+        discount: null,
+        isCatalogPage: false,
+        isDataLoading: false,
+        isSuccess: false,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+      });
+  });
+
+  it('should set coupon', () => {
+    const state = {
+      products: [],
+      productsCart: [],
+      minPrice: null,
+      maxPrice: null,
+      productsTotalCount: 0,
+      discount: null,
+      isCatalogPage: false,
+      isDataLoading: false,
+      isSuccess: false,
+      isCouponValid: undefined,
+      isOrderPost: undefined,
+    };
+
+    expect(productsData.reducer(state, addCoupon('camera-555')))
+      .toEqual({
+        products: [],
+        productsCart: [],
+        minPrice: null,
+        maxPrice: null,
+        productsTotalCount: 0,
+        discount: null,
+        isCatalogPage: false,
+        isDataLoading: false,
+        isSuccess: false,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        coupon: 'camera-555',
+      });
+  });
+
+  it('should cleanup isOrderPost', () => {
+    const state = {
+      products: [],
+      productsCart: [],
+      minPrice: null,
+      maxPrice: null,
+      productsTotalCount: 0,
+      discount: null,
+      isCatalogPage: false,
+      isDataLoading: false,
+      isSuccess: false,
+      isCouponValid: undefined,
+      isOrderPost: true,
+    };
+
+    expect(productsData.reducer(state, cleanUpIsOrderPost()))
+      .toEqual({
+        products: [],
+        productsCart: [],
+        minPrice: null,
+        maxPrice: null,
+        productsTotalCount: 0,
+        discount: null,
+        isCatalogPage: false,
+        isDataLoading: false,
+        isSuccess: false,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsSearch: undefined,
       });
   });
 
@@ -674,4 +873,112 @@ describe('Reducer:productsData', () => {
         productsCart: [],
       });
   });
+
+  it('should send coupon', () => {
+    const state = {
+      products: [],
+      productsCart: [],
+      minPrice: null,
+      maxPrice: null,
+      discount: null,
+      productsTotalCount: 0,
+      isCatalogPage: false,
+      isDataLoading: false,
+      isSuccess: false,
+      isCouponValid: undefined,
+      isOrderPost: undefined,
+    };
+
+    expect(productsData.reducer(state, {type: sendCouponAction.fulfilled.type}))
+      .toEqual({
+        products: [],
+        minPrice: null,
+        maxPrice: null,
+        productsTotalCount: 0,
+        isCatalogPage: false,
+        isDataLoading: false,
+        isSuccess: true,
+        discount: undefined,
+        isCouponValid: true,
+        isOrderPost: undefined,
+        productsCart: [],
+      });
+
+    expect(productsData.reducer(state, {type: sendCouponAction.rejected.type}))
+      .toEqual({
+        products: [],
+        minPrice: null,
+        maxPrice: null,
+        productsTotalCount: 0,
+        isCatalogPage: false,
+        isDataLoading: false,
+        isSuccess: false,
+        discount: null,
+        isCouponValid: false,
+        isOrderPost: undefined,
+        productsCart: [],
+      });
+  });
+
+  it('should send orders', () => {
+    const state = {
+      products: [],
+      productsCart: [],
+      minPrice: null,
+      maxPrice: null,
+      discount: null,
+      productsTotalCount: 0,
+      isCatalogPage: false,
+      isDataLoading: false,
+      isSuccess: false,
+      isCouponValid: undefined,
+      isOrderPost: undefined,
+    };
+
+    expect(productsData.reducer(state, {type: sendOrdersAction.pending.type }))
+      .toEqual({
+        products: [],
+        minPrice: null,
+        maxPrice: null,
+        productsTotalCount: 0,
+        isCatalogPage: false,
+        isDataLoading: false,
+        isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: undefined,
+        productsCart: [],
+      });
+
+    expect(productsData.reducer(state, {type: sendOrdersAction.fulfilled.type}))
+      .toEqual({
+        products: [],
+        minPrice: null,
+        maxPrice: null,
+        productsTotalCount: 0,
+        isCatalogPage: false,
+        isDataLoading: false,
+        isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: true,
+        productsCart: [],
+      });
+
+    expect(productsData.reducer(state, {type: sendOrdersAction.rejected.type}))
+      .toEqual({
+        products: [],
+        minPrice: null,
+        maxPrice: null,
+        productsTotalCount: 0,
+        isCatalogPage: false,
+        isDataLoading: false,
+        isSuccess: false,
+        discount: null,
+        isCouponValid: undefined,
+        isOrderPost: false,
+        productsCart: [],
+      });
+  });
 });
+
