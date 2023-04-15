@@ -10,7 +10,7 @@ import {State} from '../../types/state';
 import {NameSpace} from '../../const';
 import {Provider} from 'react-redux';
 import {currentCatalogPagePath} from '../../types/ui';
-import {product, products, reviews} from '../../mocks/mocks';
+import {product, products, reviews, productsCart} from '../../mocks/mocks';
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
@@ -25,6 +25,7 @@ const store = mockStore({
   [NameSpace.ProductsData]: {
     productDetail: product,
     productsSimilar: products,
+    productsCart: productsCart,
     reviews: reviews,
     isDataLoading: false,
     isSuccess: false,
