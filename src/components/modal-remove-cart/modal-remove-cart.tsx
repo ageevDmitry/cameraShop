@@ -48,7 +48,7 @@ function ModalRemoveCart ({product, setIsModalRemoveCart}: ModalRemoveCartProps)
               </div>
             </div>
             <div className="modal__buttons">
-              <button className="btn btn--purple modal__btn modal__btn--half-width" type="button"
+              <button className="btn btn--purple modal__btn modal__btn--half-width" type="button" data-testid="deleteProductCart"
                 onClick={() =>{
                   dispatch(deleteProductCart(product));
                   setIsModalRemoveCart(false);

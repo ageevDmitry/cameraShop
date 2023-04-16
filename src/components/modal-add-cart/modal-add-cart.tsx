@@ -21,7 +21,7 @@ function ModalAddCart ({product, setIsModalAddCart, setIsModalAddCartSuccess}: M
 
   return (
     <FocusTrap>
-      <div className="modal is-active">
+      <div className="modal is-active" data-testid="modalAddCart">
         <div className="modal__wrapper">
           <div className="modal__overlay"
             onClick={() => {

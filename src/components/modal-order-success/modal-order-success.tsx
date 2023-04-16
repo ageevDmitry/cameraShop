@@ -16,7 +16,7 @@ function ModalOrderSuccess ({setIsModalOrderSuccess}: ModalOrderProps): JSX.Elem
 
   return (
     <FocusTrap>
-      <div className="modal is-active modal--narrow">
+      <div className="modal is-active modal--narrow" data-testid="modalOrderSuccess">
         <div className="modal__wrapper">
           <div className="modal__overlay"
             onClick={() =>{
