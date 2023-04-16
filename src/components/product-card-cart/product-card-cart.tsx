@@ -22,7 +22,7 @@ function ProductCardCart ({product, setIsModalRemoveCart}: ProductCardCartProps)
   }, [product]);
 
   return (
-    <li className="basket-item">
+    <li className="basket-item" data-testid="product-card-cart">
       <div className="basket-item__img">
         <picture>
           <source type="image/webp" srcSet={`/${previewImgWebp}, /${previewImgWebp2x} 2x`} />

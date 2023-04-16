@@ -22,7 +22,7 @@ function ModalRemoveCart ({product, setIsModalRemoveCart}: ModalRemoveCartProps)
 
   return (
     <FocusTrap>
-      <div className="modal is-active">
+      <div className="modal is-active" data-testid="modalOrderSuccess">
         <div className="modal__wrapper">
           <div className="modal__overlay"
             onClick={() => {

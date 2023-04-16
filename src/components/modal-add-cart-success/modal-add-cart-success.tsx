@@ -16,7 +16,7 @@ function ModalAddCartSuccess ({setIsModalAddCartSuccess}: ModalAddCartProps): JS
 
   return (
     <FocusTrap>
-      <div className="modal is-active modal--narrow">
+      <div className="modal is-active modal--narrow" data-testid="modalAddCartSuccess">
         <div className="modal__wrapper">
           <div className="modal__overlay"
             onClick={() =>{
