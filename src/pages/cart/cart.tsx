@@ -55,7 +55,7 @@ function Cart (): JSX.Element {
           />
           <section className="basket">
             <div className="container">
-              <h1 className="title title--h2">Корзина</h1>
+              <h1 className="title title--h2" data-testid="cart">Корзина</h1>
               <ProductCardCartList
                 productsCart = {productsCart}
                 setIsModalRemoveCart = {setIsModalRemoveCart}
