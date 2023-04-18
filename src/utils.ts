@@ -198,14 +198,14 @@ export const getValidatedCurrentPriceState = (evt: ChangeEvent<HTMLInputElement>
 
 export const checkAddProductsCart = (productsCart: ProductCart[], product: Product) => {
 
-  const foo = {
+  const newProductCart = {
     product: product,
     count: 1,
   };
 
   if (productsCart.length === 0) {
 
-    productsCart.push(foo);
+    productsCart.push(newProductCart);
 
     return productsCart;
   }
@@ -222,7 +222,7 @@ export const checkAddProductsCart = (productsCart: ProductCart[], product: Produ
   }
 
   if (!productsCardIds.includes(product.id)) {
-    productsCart.push(foo);
+    productsCart.push(newProductCart);
   }
 
   return productsCart;

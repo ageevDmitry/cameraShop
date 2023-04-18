@@ -32,7 +32,7 @@ function Cart (): JSX.Element {
       setIsModalOrderSuccess(true);
     }
 
-    if (isOrderPost === false) {
+    if (!isOrderPost && isOrderPost !== undefined) {
       navigate({
         pathname: generatePath(AppRoute.NotFound),
       });

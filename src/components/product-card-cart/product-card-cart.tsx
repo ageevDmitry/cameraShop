@@ -57,7 +57,7 @@ function ProductCardCart ({product, setIsModalRemoveCart}: ProductCardCartProps)
           type="number"
           id="counter2"
           value={productCountState}
-          min={1} max={99}
+          min={MinMaxCountProductCart.minCountProductCart} max={MinMaxCountProductCart.maxCountProductCart}
           aria-label="количество товара"
           onChange={(evt) => {
             dispatch(changeCountProductCart({
