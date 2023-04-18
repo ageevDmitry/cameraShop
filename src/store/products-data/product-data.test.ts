@@ -31,6 +31,7 @@ import {
   sendCouponAction,
   sendOrdersAction
 } from '../api-action';
+import {isOrderPostStatus} from '../../const';
 
 describe('Reducer:productsData', () => {
   it('without additional parameters should return initial state', () => {
@@ -46,7 +47,7 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isSuccess: false,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
       });
   });
 
@@ -62,7 +63,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, cleanUpProductDetail()))
@@ -77,7 +78,7 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isSuccess: false,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productDetail: undefined,
       });
   });
@@ -94,7 +95,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, cleanUpProductsSearch()))
@@ -109,7 +110,7 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isSuccess: false,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsSearch: undefined,
       });
   });
@@ -126,7 +127,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, setIsNotCatalogPage()))
@@ -141,7 +142,7 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isSuccess: false,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
       });
   });
 
@@ -157,7 +158,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, addCurrentProductCart(product)))
@@ -172,7 +173,7 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isSuccess: false,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         currentProductCart: product
       });
   });
@@ -189,7 +190,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, addProductCart(product)))
@@ -204,7 +205,7 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isSuccess: false,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
       });
   });
 
@@ -220,7 +221,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, deleteProductCart(product)))
@@ -235,7 +236,7 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isSuccess: false,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
       });
   });
 
@@ -251,7 +252,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, changeCountProductCart(productCart)))
@@ -266,7 +267,7 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isSuccess: false,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
       });
   });
 
@@ -282,7 +283,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, addCoupon('camera-555')))
@@ -297,7 +298,7 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isSuccess: false,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         coupon: 'camera-555',
       });
   });
@@ -314,7 +315,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: true,
+      isOrderPost: isOrderPostStatus.orderPostFulfilled,
     };
 
     expect(productsData.reducer(state, cleanUpIsOrderPost()))
@@ -329,7 +330,7 @@ describe('Reducer:productsData', () => {
         isDataLoading: false,
         isSuccess: false,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsSearch: undefined,
       });
   });
@@ -346,7 +347,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, {type: fetchProductsAction.pending.type }))
@@ -361,7 +362,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
       });
 
     expect(productsData.reducer(state, {type: fetchProductsAction.fulfilled.type, payload: productsReturnedData}))
@@ -375,7 +376,7 @@ describe('Reducer:productsData', () => {
         isSuccess: true,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -390,7 +391,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
   });
@@ -407,7 +408,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, {type: fetchMinPriceProductsAction.pending.type}))
@@ -421,7 +422,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -436,7 +437,7 @@ describe('Reducer:productsData', () => {
         isSuccess: true,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -451,7 +452,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
   });
@@ -468,7 +469,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, {type: fetchMaxPriceProductsAction.pending.type}))
@@ -482,7 +483,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -497,7 +498,7 @@ describe('Reducer:productsData', () => {
         isSuccess: true,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -512,7 +513,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
   });
@@ -529,7 +530,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, {type: fetchPromoAction.pending.type }))
@@ -543,7 +544,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -559,7 +560,7 @@ describe('Reducer:productsData', () => {
         isSuccess: true,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -574,7 +575,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
   });
@@ -591,7 +592,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, {type: fetchProductDetailAction.pending.type }))
@@ -605,7 +606,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -622,7 +623,7 @@ describe('Reducer:productsData', () => {
         isSuccess: true,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -637,7 +638,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
   });
@@ -654,7 +655,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, {type: fetchProductsSimilarAction.pending.type }))
@@ -668,7 +669,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -684,7 +685,7 @@ describe('Reducer:productsData', () => {
         isSuccess: true,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -699,7 +700,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
   });
@@ -716,7 +717,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, {type: fetchProductsSearchAction.fulfilled.type, payload: products}))
@@ -731,7 +732,7 @@ describe('Reducer:productsData', () => {
         isSuccess: true,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -746,7 +747,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
   });
@@ -763,7 +764,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, {type: fetchReviewsAction.pending.type }))
@@ -777,7 +778,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -793,7 +794,7 @@ describe('Reducer:productsData', () => {
         isSuccess: true,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -808,7 +809,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
   });
@@ -825,7 +826,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, {type: sendNewReviewAction.pending.type }))
@@ -839,7 +840,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -854,7 +855,7 @@ describe('Reducer:productsData', () => {
         isSuccess: true,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -869,7 +870,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
   });
@@ -886,7 +887,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, {type: sendCouponAction.fulfilled.type}))
@@ -900,7 +901,7 @@ describe('Reducer:productsData', () => {
         isSuccess: true,
         discount: undefined,
         isCouponValid: true,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -915,7 +916,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: false,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
   });
@@ -932,7 +933,7 @@ describe('Reducer:productsData', () => {
       isDataLoading: false,
       isSuccess: false,
       isCouponValid: undefined,
-      isOrderPost: undefined,
+      isOrderPost: isOrderPostStatus.orderNotPost,
     };
 
     expect(productsData.reducer(state, {type: sendOrdersAction.pending.type }))
@@ -946,7 +947,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: undefined,
+        isOrderPost: isOrderPostStatus.orderNotPost,
         productsCart: [],
       });
 
@@ -961,7 +962,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: true,
+        isOrderPost: isOrderPostStatus.orderPostFulfilled,
         productsCart: [],
       });
 
@@ -976,7 +977,7 @@ describe('Reducer:productsData', () => {
         isSuccess: false,
         discount: null,
         isCouponValid: undefined,
-        isOrderPost: false,
+        isOrderPost: isOrderPostStatus.orderPostRejected,
         productsCart: [],
       });
   });

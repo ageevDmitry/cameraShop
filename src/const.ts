@@ -261,3 +261,9 @@ export enum MinMaxCountProductCart {
   minCountProductCart = 1,
   maxCountProductCart = 99,
 }
+
+export enum isOrderPostStatus {
+  orderNotPost = 'orderNotPost',
+  orderPostFulfilled = 'orderPostFulfilled',
+  orderPostRejected = 'orderPostRejected'
+}

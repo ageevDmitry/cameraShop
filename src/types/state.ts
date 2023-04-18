@@ -21,7 +21,7 @@ export type ProductsData = {
     isDataLoading: boolean;
     isSuccess: boolean;
     isCouponValid: boolean | undefined;
-    isOrderPost: boolean | undefined;
+    isOrderPost: string;
 };
 
 export type ProductsUI = {

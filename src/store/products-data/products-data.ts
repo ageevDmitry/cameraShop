@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {NameSpace} from '../../const';
+import {NameSpace, isOrderPostStatus} from '../../const';
 import {ProductsData} from '../../types/state';
 import {fetchProductsAction,
   fetchMinPriceProductsAction,
@@ -30,7 +30,7 @@ const initialState: ProductsData = {
   isSuccess: false,
   discount: null,
   isCouponValid: undefined,
-  isOrderPost: undefined,
+  isOrderPost: isOrderPostStatus.orderNotPost,
   productsCart: [],
 };
 
@@ -63,7 +63,7 @@ export const productsData = createSlice({
       state.coupon = action.payload;
     },
     cleanUpIsOrderPost: (state) => {
-      state.isOrderPost = undefined;
+      state.isOrderPost = isOrderPostStatus.orderNotPost;
     }
   },
   extraReducers(builder) {
@@ -199,13 +199,13 @@ export const productsData = createSlice({
         state.isSuccess = false;
       })
       .addCase(sendOrdersAction.pending, (state) => {
-        state.isOrderPost = undefined;
+        state.isOrderPost = isOrderPostStatus.orderNotPost;
       })
       .addCase(sendOrdersAction.fulfilled, (state) => {
-        state.isOrderPost = true;
+        state.isOrderPost = isOrderPostStatus.orderPostFulfilled;
       })
       .addCase(sendOrdersAction.rejected, (state) => {
-        state.isOrderPost = false;
+        state.isOrderPost = isOrderPostStatus.orderPostRejected;
       });
   }
 });

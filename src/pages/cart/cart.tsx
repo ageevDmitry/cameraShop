@@ -5,7 +5,7 @@ import CartSummer from '../../components/cart-summer/cart-summer';
 import ProductCardCartList from '../../components/product-card-cart-list/product-card-cart-list';
 import ModalRemoveCart from '../../components/modal-remove-cart/modal-remove-cart';
 import ModalOrderSuccess from '../../components/modal-order-success/modal-order-success';
-import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG} from '../../const';
+import {NAV_BREADCRUMB_MAIN, NAV_BREADCRUMB_CATALOG, isOrderPostStatus} from '../../const';
 import {useState, useEffect} from 'react';
 import {getCurrentProductCart, getIsOrderPost} from '../../store/products-data/selectors';
 import {useAppSelector} from '../../hooks/use-app-selector';
@@ -28,11 +28,11 @@ function Cart (): JSX.Element {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isOrderPost) {
+    if (isOrderPost === isOrderPostStatus.orderPostFulfilled) {
       setIsModalOrderSuccess(true);
     }
 
-    if (!isOrderPost && isOrderPost !== undefined) {
+    if (isOrderPost === isOrderPostStatus.orderPostRejected) {
       navigate({
         pathname: generatePath(AppRoute.NotFound),
       });
