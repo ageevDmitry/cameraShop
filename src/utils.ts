@@ -284,10 +284,6 @@ export const checkCountProductCart = (productsCart: ProductCart[], changedProduc
 
 export const getValidatedCountProductCart = (count: number) => {
 
-  if (count < MinMaxCountProductCart.minCountProductCart) {
-    return MinMaxCountProductCart.minCountProductCart;
-  }
-
   if (count > MinMaxCountProductCart.maxCountProductCart) {
     return MinMaxCountProductCart.maxCountProductCart;
   }

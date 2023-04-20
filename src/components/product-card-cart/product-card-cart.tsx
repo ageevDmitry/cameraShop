@@ -40,7 +40,7 @@ function ProductCardCart ({product, setIsModalRemoveCart}: ProductCardCartProps)
       </div>
       <p className="basket-item__price"><span className="visually-hidden">Цена:</span>{`${price} ₽`}</p>
       <div className="quantity">
-        <button className="btn-icon btn-icon--prev" disabled = {(product.count === MinMaxCountProductCart.minCountProductCart)} aria-label="уменьшить количество товара"
+        <button className="btn-icon btn-icon--prev" disabled = {(product.count < MinMaxCountProductCart.minCountProductCart)} aria-label="уменьшить количество товара"
           onClick={() => {
             dispatch(changeCountProductCart({
               product: product.product,
