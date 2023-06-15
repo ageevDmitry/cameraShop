@@ -19,7 +19,9 @@ type ProductCardProps = {
 function ProductCard ({product, componentType, setIsModalAddCart}: ProductCardProps): JSX.Element {
 
   const dispatch = useAppDispatch();
-  const {id, name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
+  const {id, name, price, reviewCount, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
+
+  const rating = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
   const productId = `/product/${id}`;
   const productsCart = useAppSelector(getProductsCart);
   const [isProductCart, setIsProductCart] = useState(false);

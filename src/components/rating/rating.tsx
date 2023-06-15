@@ -25,6 +25,7 @@ function Rating ({rating, reviewCount, componentType}: CardProps): JSX.Element {
   }
 
   const productRating: boolean[] = [...Array<number>(PRODUCT_RATING_COUNT)].map((_, i) => i < rating);
+
   const ratingDescription = getRatingDescription(componentType);
 
   return (

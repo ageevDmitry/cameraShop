@@ -28,7 +28,9 @@ function ProductInfo ({product, setIsModalAddCart}: ProductProps): JSX.Element {
   }, [hash]);
 
 
-  const {name, price, reviewCount, rating, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, vendorCode, category, type, level, description} = product;
+  const {name, price, reviewCount, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, vendorCode, category, type, level, description} = product;
+
+  const rating = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
 
   return (
     <div className="page-content__section">
