@@ -6,7 +6,7 @@
 На странице каталога разработаны такие элементы интерфейса как поиск товара, фильтр и сортировка.
 
 Стек технологий: 
-- Create Reaact App
+- Create React App
 - TypeScript
 - React
 - React Router
