@@ -1,4 +1,4 @@
-# Интернет-магазин фотоаппаратов и видеокамер CameraShop.
+# Интернет-магазин фотоаппаратов и видеокамер cameraShop.
 
 Проект разрабатывался в рамках прохождения 2 этапа стажировки в HTML-Academy после обучения профессии React. [https://htmlacademy.ru/profession/react](https://htmlacademy.ru/profession/react)
 
